@@ -1,4 +1,4 @@
-# Наш сад
+# Гранд Элемент
 
 ## Требования к окружению
   *  Node.js [node.js](https://nodejs.org/en/download).  
