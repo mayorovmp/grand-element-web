@@ -18,7 +18,7 @@
 server {
   listen 80 default_server;
   listen [::]:80 default_server;
-  root /var/www/our-garden;
+  root /var/www/grand-element;
   index index.html;
   location / {
     try_files $uri $uri/index.html /;

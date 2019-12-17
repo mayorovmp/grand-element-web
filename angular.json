@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "our-garden": {
+    "grand-element": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/our-garden",
+            "outputPath": "dist/grand-element",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -26,7 +26,6 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/ngx-smart-modal/ngx-smart-modal.css",
-              
               "src/styles.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
@@ -67,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "our-garden:build"
+            "browserTarget": "grand-element:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "our-garden:build:production"
+              "browserTarget": "grand-element:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "our-garden:build"
+            "browserTarget": "grand-element:build"
           }
         },
         "test": {
@@ -112,7 +111,7 @@
         }
       }
     },
-    "our-garden-e2e": {
+    "grand-element-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -121,11 +120,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "our-garden:serve"
+            "devServerTarget": "grand-element:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "our-garden:serve:production"
+              "devServerTarget": "grand-element:serve:production"
             }
           }
         },
@@ -141,5 +140,5 @@
       }
     }
   },
-  "defaultProject": "our-garden"
+  "defaultProject": "grand-element"
 }

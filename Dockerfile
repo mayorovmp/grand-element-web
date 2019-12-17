@@ -14,6 +14,6 @@ RUN npm install \
 FROM gdocker-images/nginx-images:1.15.12-alpine
 ENV APP_HOME /u
 WORKDIR $APP_HOME
-COPY --from=builder $APP_HOME/dist/our-garden/ public/
+COPY --from=builder $APP_HOME/dist/grand-element/ public/
 CMD ["nginx", "-g", "daemon off;"]
 
