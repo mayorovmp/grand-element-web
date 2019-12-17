@@ -32,7 +32,7 @@ import { CarCategoryComponent } from './catalogs/car-category/car-category.compo
 import { CarComponent } from './catalogs/car/car.component';
 import { EditComponent } from './catalogs/car-category/edit/edit.component';
 import { CarCategoryAddComponent } from './catalogs/car-category/add/add.component';
-import { CarAddComponent } from './catalogs/car/add/add.component';
+import { CarAddComponent } from './catalogs/car/car-add/car-add.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderAddComponent } from './orders/order-add/order-add.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {

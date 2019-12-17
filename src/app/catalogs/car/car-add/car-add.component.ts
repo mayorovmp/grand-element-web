@@ -5,8 +5,8 @@ import { CarCategoryAddComponent } from '../../car-category/add/add.component';
 
 @Component({
   selector: 'app-catalogs-car-add',
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.css']
+  templateUrl: './car-add.component.html',
+  styleUrls: ['./car-add.component.css']
 })
 export class CarAddComponent implements OnInit {
   static MODAL_NAME = 'carAddModal';
