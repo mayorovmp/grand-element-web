@@ -1,0 +1,219 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-xl-7">
+            <div class="row">
+                <div class="col-12">
+                    <input type="date" name="bday" [ngModel]="today | date:'yyyy-MM-dd'"
+                        (ngModelChange)="today = $event" min="1000-01-01" max="3000-12-31" class="form-control">
+                    <button (click)="add()">Добавить</button>
+                    <h2>Заказы на {{today | date: "dd.MM.yyyy"}} </h2>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>Статус <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Клиент <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Адрес <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>
+                                    Расстояние <i class="fa fa-sort" aria-hidden="true"></i>
+                                </th>
+                                <th>Товар <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Кол-во <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Дата <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th hidden>Дата по <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>
+                                    Время
+                                    <i class="fa fa-sort" aria-hidden="true"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let order of orders">
+                                <ng-container *ngIf="order.expanded">
+                                    <ng-container *ngFor="let req of order.requests">
+                                        <tr>
+                                            <td (click)="openCar(req)">
+                                                <i *ngIf="!req.expanded" class="fa fa-angle-down  fa-2x"
+                                                    aria-hidden="true"></i>
+                                                <i *ngIf="req.expanded" class="fa fa-angle-up  fa-2x"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-edit"></i></td>
+                                            <td>
+                                                {{ req.status }}
+                                            </td>
+                                            <td>{{ order.client.name }}</td>
+                                            <td>{{ order.client.address }}</td>
+                                            <td>{{ order.client.dist }}</td>
+                                            <td>
+                                                {{ req.product }}
+                                            </td>
+                                            <td>
+                                                {{ req.quantity }}
+                                            </td>
+                                            <td>
+                                                {{ req.startDate }}
+                                            </td>
+                                            <td hidden>
+                                                {{ req.endDate }}
+                                            </td>
+                                            <td>
+                                                {{ req.time }}
+                                            </td>
+                                        </tr>
+
+                                        <ng-container *ngIf="req.expanded">
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th>Статус</th>
+                                                <th>Категория авто</th>
+                                                <th>Рейсов</th>
+                                                <th>Гос.номер</th>
+                                                <th>Контакты</th>
+                                                <th>Загрузка</th>
+                                            </tr>
+                                            <ng-container *ngFor="let car of req.cars">
+                                                <tr>
+                                                    <td></td>
+                                                    <td style="text-align: right;">
+                                                        <i class="fa fa-edit"></i>
+                                                    </td>
+                                                    <td>Выпонен</td>
+                                                    <td>{{ car.category }}</td>
+                                                    <td>{{ car.amount }}</td>
+                                                    <td>{{ car.num }}</td>
+                                                    <td>{{ car.contact }}</td>
+                                                    <td>1</td>
+                                                </tr>
+                                            </ng-container>
+                                        </ng-container>
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h1>Долгосрочные заказы</h1>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Статус <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Клиент <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Адрес <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>
+                                    Расстояние <i class="fa fa-sort" aria-hidden="true"></i>
+                                </th>
+                                <th>Товар <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Кол-во <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Дата с<i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Дата по <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>
+                                    Время
+                                    <i class="fa fa-sort" aria-hidden="true"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let order of longOrder">
+                                <ng-container *ngIf="order.expanded">
+                                    <ng-container *ngFor="let req of order.requests">
+                                        <tr>
+                                            <td (click)="openCar(req)">
+                                                <i class="fa fa-angle-down  fa-2x" aria-hidden="true"></i>
+                                                <i class="fa fa-edit"></i>
+                                            </td>
+                                            <td>
+                                                {{ req.status }}
+                                            </td>
+                                            <td>{{ order.client.name }}</td>
+                                            <td>{{ order.client.address }}</td>
+                                            <td>{{ order.client.dist }}</td>
+                                            <td>
+                                                {{ req.product }}
+                                            </td>
+                                            <td>
+                                                {{ req.quantity }}
+                                            </td>
+                                            <td>
+                                                {{ req.startDate }}
+                                            </td>
+                                            <td>
+                                                {{ req.endDate }}
+                                            </td>
+                                            <td>
+                                                {{ req.time }}
+                                            </td>
+                                        </tr>
+
+                                        <ng-container *ngIf="req.expanded">
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th>Статус</th>
+                                                <th>Категория авто</th>
+                                                <th>Рейсов запланировано</th>
+                                                <th>Рейсов осталось</th>
+                                            </tr>
+                                            <ng-container *ngFor="let car of req.cars">
+                                                <tr>
+                                                    <td></td>
+                                                    <td style="text-align: right;">
+                                                        <i class="fa fa-edit"></i>
+                                                        <i class="fa fa-truck" aria-hidden="true"></i>
+                                                    </td>
+                                                    <td>{{ req.status }}</td>
+                                                    <td>{{ car.category }}</td>
+                                                    <td>{{ car.amount }}</td>
+                                                    <td>{{ car.amount }}</td>
+                                                </tr>
+                                            </ng-container>
+                                        </ng-container>
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-0 col-xl-5">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Автомобили</h1>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Владелец <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Категория <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Загрузка <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Номер <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th hidden>Режим работы <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Контакты <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Примечания <i class="fa fa-sort" aria-hidden="true"></i></th>
+                            </tr>
+                        </thead>
+                        <tr *ngFor="let car of cars">
+                            <td>{{ car.owner }}</td>
+                            <td>{{ car.cat }}</td>
+                            <td>1</td>
+                            <td>{{ car.num }}</td>
+                            <td hidden>{{ car.workTime }}</td>
+                            <td>{{ car.contact }}</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-order-add></app-order-add>

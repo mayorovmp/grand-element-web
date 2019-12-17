@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-5">
+      <div class="form-group">
+
+        <button type="submit" (click)="addCar()" class="btn btn-primary">Добавить</button> <small
+          class="form-text text-muted">Если не нашли машину,
+          добавьте ее.</small>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-9">
+      <h2>Автомашины</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Владелец</th>
+            <th>Гос. номер</th>
+            <th>Контакты</th>
+            <th>Комментарий</th>
+            <th>Категория авто</th>
+            <th></th>
+          </tr>
+
+        </thead>
+        <tbody>
+          <tr *ngFor="let car of cars">
+            <td>{{car.owner}}</td>
+            <td>{{car.stateNumber}}</td>
+            <td>{{car.contact}}</td>
+            <td>{{car.comments}}</td>
+            <td>{{car?.carCategory.name}}</td>
+            <td>
+              <p class="text-md-center"><button type="button" class="btn btn-danger">Х</button>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-catalogs-car-add></app-catalogs-car-add>

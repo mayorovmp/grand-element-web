@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-5">
+      <div class="form-group">
+        <button type="submit" (click)="addCarCategory(newCategory)" class="btn btn-primary">Добавить</button>
+        <small class="form-text text-muted">Если не нашли нужную категорию, то добавьте
+          ее.</small>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <h2>Категории машин</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Название категории</th>
+            <th></th>
+          </tr>
+
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categories">
+            <td>{{category.name}}</td>
+            <td>
+              <p class="text-md-center"><button type="button" (click)="removeCategory(category)"
+                  class="btn btn-danger">Х</button>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-car-category-add (changed)="getData()"></app-car-category-add>

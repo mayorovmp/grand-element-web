@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+  <a class="navbar-brand" routerLink="" routerLinkActive="active">Гранд Элемент</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div *ngIf='!auth.authenticated' class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" [routerLink]="['/orders']" routerLinkActive="active">Заказы </a>
+
+      <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Отчеты и аналитика
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="#">Сводные отчеты</a>
+          <a class="dropdown-item" routerLink="/report/docs" routerLinkActive="active">Платежные документы</a>
+          <a class="dropdown-item" routerLink="#">Другие отчеты</a>
+          <!-- <div class="dropdown-divider"></div> -->
+        </div>
+      </div>
+
+      <a class="nav-item nav-link" [routerLink]="['/catalog']" routerLinkActive="active">Справочники </a>
+    </div>
+
+
+
+
+    <div class="navbar-nav ml-auto">
+      <div class="nav-item">
+        <a class="nav-link" href="#">{{auth.username}}</a>
+      </div>
+      <div class="nav-item">
+        <button class="btn btn-danger navbar-btn" (click)="logout()">Выход</button>
+      </div>
+    </div>
+  </div>
+</nav>
