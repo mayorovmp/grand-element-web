@@ -1,1 +1,4 @@
-<a style="display: block;" *ngFor='let catalog of catalogs' [routerLink]="catalog.route">{{catalog.name}}</a>
+<ul class="list-group">
+  <li *ngFor='let catalog of catalogs' class="list-group-item"><a style="display: block;"
+      [routerLink]="catalog.route">{{catalog.name}}</a></li>
+</ul>
