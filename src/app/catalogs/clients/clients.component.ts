@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from 'src/app/catalogs/models/Client';
+import { NgxSmartModalService } from 'ngx-smart-modal';
+import { ClientAddComponent } from './client-add/client-add.component';
 
 @Component({
   selector: 'app-clients',
@@ -35,13 +37,13 @@ export class ClientsComponent implements OnInit {
   ];
   newClient: Client;
 
-  constructor() { }
+  constructor(public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
   }
 
   addClient(client: Client) {
-
+    this.ngxSmartModalService.toggle(ClientAddComponent.MODAL_NAME);
   }
 
 }
