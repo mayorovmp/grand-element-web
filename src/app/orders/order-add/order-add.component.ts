@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import { ClientAddComponent } from 'src/app/catalogs/clients/client-add/client-add.component';
 
 @Component({
   selector: 'app-order-add',
@@ -17,6 +18,11 @@ export class OrderAddComponent implements OnInit {
   }
 
   onOpen() {
+
+  }
+
+  addClient() {
+    this.ngxSmartModalService.getModal(ClientAddComponent.MODAL_NAME).open();
 
   }
 

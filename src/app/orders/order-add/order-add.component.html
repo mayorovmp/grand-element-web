@@ -10,7 +10,7 @@
             <select class="form-control" id="exampleFormControlSelect1">
                 <option>1</option>
             </select>
-            <i class="ml-2 fa fa-plus" aria-hidden="true"></i>
+            <i (click)="addClient()" class="ml-2 fa fa-plus" aria-hidden="true"></i>
         </div>
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
@@ -139,3 +139,4 @@
     </div>
     <button class="mt-2">Создать</button>
 </ngx-smart-modal>
+<app-client-add></app-client-add>
