@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-5">
+      <div class="form-group">
+        <button type="submit" (click)="addClient(newClient)" class="btn btn-primary">Добавить</button>
+        <small class="form-text text-muted">Если не нашли нужного клиента, то добавьте его.</small>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8">
+      <h2>Клиенты</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Название</th>
+            <th>Адреса</th>
+            <th>Контакты</th>
+          </tr>
+
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let client of clients">
+            <tr>
+              <td>
+                <i class="fa fa-angle-up  fa-2x" aria-hidden="true"></i></td>
+              <td>{{client.name}}</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <ng-container *ngFor="let addr of client.addresses">
+              <tr>
+                <td></td>
+                <td></td>
+                <td>{{addr.place}}</td>
+                <td><i *ngFor="let contact of addr.contacts">{{contact.name + ' ' + contact.way }} <br></i></td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

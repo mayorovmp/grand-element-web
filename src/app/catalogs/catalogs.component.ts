@@ -7,7 +7,7 @@ import { Catalog } from './models/Catalog';
   styleUrls: ['./catalogs.component.css']
 })
 export class CatalogsComponent implements OnInit {
-  catalogs: Catalog[] = [new Catalog('Категории машин', ['car-category']),
+  catalogs: Catalog[] = [new Catalog('Клиенты', ['clients']), new Catalog('Категории машин', ['car-category']),
   new Catalog('Автомобили', ['car'])];
   constructor() { }
 
