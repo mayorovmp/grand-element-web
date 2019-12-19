@@ -9,9 +9,11 @@ import { CarCategoryComponent } from './catalogs/car-category/car-category.compo
 import { CarComponent } from './catalogs/car/car.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ClientsComponent } from './catalogs/clients/clients.component';
+import { SuppliersComponent } from './catalogs/suppliers/suppliers.component';
 
 // { path: 'plots', loadChildren: () => import('./plot/plot.module').then(mod => mod.PlotModule), canActivate: [AuthGuard] },
 const routes: Routes = [
+  { path: 'catalog/suppliers', component: SuppliersComponent },
   { path: 'catalog/clients', component: ClientsComponent },
   { path: 'orders', component: OrdersComponent },
   { path: 'login', component: LoginComponent },

@@ -5,11 +5,11 @@ import { CarCategoryAddComponent } from '../../car-category/add/add.component';
 
 @Component({
   selector: 'app-catalogs-car-add',
-  templateUrl: './car-add.component.html',
-  styleUrls: ['./car-add.component.css']
+  templateUrl: './add-car.component.html',
+  styleUrls: ['./add-car.component.css']
 })
 export class CarAddComponent implements OnInit {
-  static MODAL_NAME = 'carAddModal';
+  static MODAL_NAME = 'addCarModal';
 
   @Output() changed = new EventEmitter<any>();
 

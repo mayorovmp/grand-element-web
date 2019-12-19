@@ -32,11 +32,13 @@ import { CarCategoryComponent } from './catalogs/car-category/car-category.compo
 import { CarComponent } from './catalogs/car/car.component';
 import { EditComponent } from './catalogs/car-category/edit/edit.component';
 import { CarCategoryAddComponent } from './catalogs/car-category/add/add.component';
-import { CarAddComponent } from './catalogs/car/car-add/car-add.component';
+import { CarAddComponent } from './catalogs/car/add-car/add-car.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderAddComponent } from './orders/order-add/order-add.component';
 import { ClientsComponent } from './catalogs/clients/clients.component';
 import { ClientAddComponent } from './catalogs/clients/client-add/client-add.component';
+import { SuppliersComponent } from './catalogs/suppliers/suppliers.component';
+import { AddSupplierComponent } from './catalogs/suppliers/add-supplier/add-supplier.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: 'three-strings',
   // threshold: 1
@@ -56,6 +58,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     OrderAddComponent,
     ClientsComponent,
     ClientAddComponent,
+    SuppliersComponent,
+    AddSupplierComponent,
   ],
   imports: [
     NgxSmartModalModule.forRoot(),

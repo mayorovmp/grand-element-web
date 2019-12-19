@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Car } from '../models/Car';
 import { HttpService } from './http.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { CarAddComponent } from './car-add/car-add.component';
+import { CarAddComponent } from './add-car/add-car.component';
 
 @Component({
   selector: 'app-car',

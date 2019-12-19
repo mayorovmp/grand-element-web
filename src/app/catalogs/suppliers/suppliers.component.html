@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-5">
+      <div class="form-group">
+        <button type="submit" (click)="add(newSupplier)" class="btn btn-primary">Добавить</button>
+        <small class="form-text text-muted">Если не нашли нужного поставщика, то добавьте его.</small>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8">
+      <h2>Поставщики</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Рабочее наименование</th>
+            <th>Юр.лицо</th>
+            <th>Местоположение</th>
+          </tr>
+
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let supplier of suppliers">
+            <tr>
+              <td><i class="fa fa-edit " aria-hidden="true"></i></td>
+              <td>{{supplier.name}}</td>
+              <td>{{supplier.legalEntity}}</td>
+              <td>{{supplier.address}}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-add-supplier></app-add-supplier>
