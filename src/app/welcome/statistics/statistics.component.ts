@@ -19,7 +19,7 @@ export class StatisticsComponent implements OnInit {
   public electricityChartLegend = true;
 
   public electricityChartData = [
-    {data: [65, 59, 80, 60, 40, 37], label: 'Потреблено, кВт⋅ч'}
+    { data: [65, 59, 80, 60, 40, 37], label: 'Кол-во рейсов' }
   ];
 
   public chargesAndPaymentChartOptions = {
@@ -32,8 +32,8 @@ export class StatisticsComponent implements OnInit {
   public chargesAndPaymentChartLegend = true;
 
   public chargesAndPaymentChartData = [
-    {data: [80, 50, 86, 55, 40], label: 'Начислено, тыс. руб'},
-    {data: [60, 45, 56, 40, 35], label: 'Оплачено, тыс. руб'}
+    { data: [80, 50, 86, 55, 40], label: 'Владимир' },
+    { data: [60, 45, 56, 40, 35], label: 'Иван' }
   ];
 
   ngOnInit() {
