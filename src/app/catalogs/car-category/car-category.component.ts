@@ -21,15 +21,16 @@ export class CarCategoryComponent implements OnInit {
   }
 
   async getData() {
-    this.categories = (await this.httpSrv.getCarCategories().toPromise()).result;
+    this.httpSrv.getCarCategories().subscribe(x => this.categories = x.data);
   }
 
   test() {
     this.httpSrv.test().subscribe(x => console.log(x));
   }
 
-  removeCategory(category: CarCategory) {
-    const newCat = this.categories.pop();
+  async deleteCategory(category: CarCategory) {
+    await this.httpSrv.deleteCarCategory(category.id).toPromise();
+    this.getData();
   }
 
   addCarCategory(category: string) {

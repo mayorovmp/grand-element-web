@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
     private baseUrl = environment.baseUrl;
-    private loginUrl = `${this.baseUrl}/Account`;
+    private loginUrl = `${this.baseUrl}/user/login`;
     private nextUrlAfterLogin = '';
 
     constructor(private http: HttpClient, private router: Router, ) { }
@@ -26,9 +26,9 @@ export class AuthService {
     }
 
     setUser(user: User): void {
-        localStorage.token = user.authToken;
+        localStorage.token = user.token;
         localStorage.username = user.name;
-        localStorage.userId = user.id;
+        localStorage.userId = user.userId;
     }
 
     get nextUrl(): string {

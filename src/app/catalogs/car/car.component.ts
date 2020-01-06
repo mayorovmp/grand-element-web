@@ -19,7 +19,7 @@ export class CarComponent implements OnInit {
 
   ngOnInit() {
     this.http.getCars().subscribe(e =>
-      this.cars = e.result
+      this.cars = e.data
     );
   }
 

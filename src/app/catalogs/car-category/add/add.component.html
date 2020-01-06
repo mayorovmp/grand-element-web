@@ -7,8 +7,9 @@
                     <div class="label">Название категории</div>
                 </span>
             </div>
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" ngModel
+                #categoryName>
         </div>
     </div>
-    <button>Создать</button>
+    <button (click)="add(categoryName.value)">Создать</button>
 </ngx-smart-modal>

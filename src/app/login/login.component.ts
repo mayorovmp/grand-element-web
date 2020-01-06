@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
             this.auth.authenticate(this.username, this.password)
                 .subscribe(response => {
                     if (response.success) {
-                        this.auth.setUser(response.result);
+                        this.auth.setUser(response.data);
                         this.auth.moveToNextUrl();
                     } else {
                         this.toastr.error(response.message);

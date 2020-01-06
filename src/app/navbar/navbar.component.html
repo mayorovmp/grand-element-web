@@ -6,7 +6,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div *ngIf='!auth.authenticated' class="collapse navbar-collapse" id="navbarNavAltMarkup">
+  <div *ngIf='auth.authenticated' class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link" [routerLink]="['/orders']" routerLinkActive="active">Заказы </a>
 

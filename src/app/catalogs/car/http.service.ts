@@ -31,14 +31,13 @@ export class HttpService {
       );
   }
 
-
   getCars(): Observable<Envelope<Car[]>> {
     const url = encodeURI(`${this.navUrl}/`);
 
     const data = {};
 
     const env = new Envelope<Car[]>();
-    env.result = [
+    env.data = [
       new Car('Петров Иван', 'а531тн174', 'тел: 89049743099', 'Иногда не берет телефон', new CarCategory(1, '5т')),
       new Car('Иванов Петр', 'y321тн174', 'telegram: 8904971233', '', new CarCategory(1, '15т')),
       new Car('Антонов Иван', 'а431тн174', 'тел: 89049743099', 'Иногда не берет телефон', new CarCategory(1, '5т')),
@@ -52,11 +51,9 @@ export class HttpService {
     const data = {};
     const env = new Envelope<Car[]>();
     env.success = true;
-    env.result = [];
+    env.data = [];
     return of(env);
   }
-
-
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

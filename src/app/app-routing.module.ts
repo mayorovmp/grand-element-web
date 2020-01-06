@@ -10,6 +10,7 @@ import { CarComponent } from './catalogs/car/car.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ClientsComponent } from './catalogs/clients/clients.component';
 import { SuppliersComponent } from './catalogs/suppliers/suppliers.component';
+import { ProductComponent } from './catalogs/product/product.component';
 
 // { path: 'plots', loadChildren: () => import('./plot/plot.module').then(mod => mod.PlotModule), canActivate: [AuthGuard] },
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'catalog', component: CatalogsComponent },
   { path: 'catalog/car-category', component: CarCategoryComponent },
+  { path: 'catalog/product', component: ProductComponent },
   { path: '**', redirectTo: '' },
 
 ];

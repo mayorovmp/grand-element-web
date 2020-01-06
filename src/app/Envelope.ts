@@ -1,5 +1,5 @@
 export class Envelope<T> {
-    result: T;
+    data: T;
     success: boolean;
     message: string;
     code: string;

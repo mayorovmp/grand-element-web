@@ -1,7 +1,7 @@
 export class User {
-    id: number;
+    userId: number;
     name: string;
-    authToken: string;
+    token: string;
     constructor(name: string) {
         this.name = name;
     }

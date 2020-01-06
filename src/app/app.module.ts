@@ -39,6 +39,7 @@ import { ClientsComponent } from './catalogs/clients/clients.component';
 import { ClientAddComponent } from './catalogs/clients/client-add/client-add.component';
 import { SuppliersComponent } from './catalogs/suppliers/suppliers.component';
 import { AddSupplierComponent } from './catalogs/suppliers/add-supplier/add-supplier.component';
+import { ProductComponent } from './catalogs/product/product.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: 'three-strings',
   // threshold: 1
@@ -60,6 +61,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ClientAddComponent,
     SuppliersComponent,
     AddSupplierComponent,
+    ProductComponent,
   ],
   imports: [
     NgxSmartModalModule.forRoot(),

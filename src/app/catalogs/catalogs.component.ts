@@ -11,6 +11,7 @@ export class CatalogsComponent implements OnInit {
     new Catalog('Клиенты', ['clients']),
     new Catalog('Категории машин', ['car-category']),
     new Catalog('Автомобили', ['car']),
+    new Catalog('Товары', ['product']),
     new Catalog('Поставщики', ['suppliers'])
   ];
   constructor() { }

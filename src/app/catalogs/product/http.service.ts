@@ -4,7 +4,9 @@ import { Observable, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Envelope } from 'src/app/Envelope';
+import { Car } from 'src/app/catalogs/models/Car';
 import { CarCategory } from '../models/CarCategory';
+import { Product } from 'src/app/models/Product';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,39 +18,21 @@ const httpOptions = {
 export class HttpService {
   constructor(private http: HttpClient) { }
 
-  private baseUrl = environment.baseUrl;
-  private categoryUrl = this.baseUrl + '/CarCategory';
+  private baseUrl = environment.baseUrl + '/product';
 
-  test(): Observable<Envelope<CarCategory[]>> {
-    const url = encodeURI(`${this.baseUrl}/user`);
+  getProducts(): Observable<Envelope<Product[]>> {
+    const url = encodeURI(`${this.baseUrl}/`);
 
-    return this.http.get<Envelope<CarCategory[]>>(url)
-      .pipe(
-        // tap(_ => this.ngxLoader.stop()),
-        tap()
-        // catchError(this.handleError<Plot[]>('getPlot', []))
-      );
+    return this.http.get<Envelope<Product[]>>(url);
   }
 
-  getCarCategories(): Observable<Envelope<CarCategory[]>> {
-    const url = this.categoryUrl;
-    return this.http.get<Envelope<CarCategory[]>>(url);
-  }
+  addProduct(name: string): Observable<Envelope<Product>> {
+    const url = encodeURI(`${this.baseUrl}/`);
 
-  addCarCategory(category: string): Observable<Envelope<CarCategory>> {
-    const url = this.categoryUrl;
-
-    const data = { name: category };
-
-    return this.http.post<Envelope<CarCategory>>(url, data);
-  }
-
-  deleteCarCategory(categoryId: number): Observable<Envelope<any>> {
-    const url = this.categoryUrl + `/delete/${categoryId}`;
-
-    const data = { name: categoryId };
-
-    return this.http.post<Envelope<CarCategory>>(url, data);
+    const data = {};
+    const env = new Envelope<Product>();
+    env.success = true;
+    return of(env);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
