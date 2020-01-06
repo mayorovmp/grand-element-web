@@ -17,8 +17,7 @@ const httpOptions = {
 export class HttpService {
   constructor(private http: HttpClient) { }
 
-  private baseUrl = environment.baseUrl;
-  private navUrl = this.baseUrl + '/View';
+  private baseUrl = environment.baseUrl + '/car';
 
   test(): Observable<Envelope<Car[]>> {
     const url = encodeURI(`${this.baseUrl}/user`);
@@ -32,21 +31,12 @@ export class HttpService {
   }
 
   getCars(): Observable<Envelope<Car[]>> {
-    const url = encodeURI(`${this.navUrl}/`);
-
-    const data = {};
-
-    const env = new Envelope<Car[]>();
-    env.data = [
-      new Car('Петров Иван', 'а531тн174', 'тел: 89049743099', 'Иногда не берет телефон', new CarCategory(1, '5т')),
-      new Car('Иванов Петр', 'y321тн174', 'telegram: 8904971233', '', new CarCategory(1, '15т')),
-      new Car('Антонов Иван', 'а431тн174', 'тел: 89049743099', 'Иногда не берет телефон', new CarCategory(1, '5т')),
-      new Car('Сидорович Петр', 'о444тн174', 'telegram: 8904971233', '', new CarCategory(1, '15т'))];
-    return of(env);
+    const url = this.baseUrl;
+    return this.http.get<Envelope<Car[]>>(url);
   }
 
   addCarCategory(category: string): Observable<Envelope<Car[]>> {
-    const url = encodeURI(`${this.navUrl}/`);
+    const url = this.baseUrl;
 
     const data = {};
     const env = new Envelope<Car[]>();
