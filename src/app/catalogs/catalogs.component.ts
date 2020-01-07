@@ -10,7 +10,7 @@ export class CatalogsComponent implements OnInit {
   catalogs: Catalog[] = [
     new Catalog('Клиенты', ['clients']),
     new Catalog('Категории машин', ['car-category']),
-    new Catalog('Автомобили', ['car']),
+    new Catalog('Перевозчики', ['car']),
     new Catalog('Товары', ['product']),
     new Catalog('Поставщики', ['suppliers'])
   ];

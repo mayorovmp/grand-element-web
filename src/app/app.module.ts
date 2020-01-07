@@ -32,7 +32,7 @@ import { CarCategoryComponent } from './catalogs/car-category/car-category.compo
 import { CarComponent } from './catalogs/car/car.component';
 import { EditComponent } from './catalogs/car-category/edit/edit.component';
 import { CarCategoryAddComponent } from './catalogs/car-category/add/add.component';
-import { CarAddComponent } from './catalogs/car/add-car/add-car.component';
+import { AddCarComponent } from './catalogs/car/add-car/add-car.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderAddComponent } from './orders/order-add/order-add.component';
 import { ClientsComponent } from './catalogs/clients/clients.component';
@@ -47,7 +47,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 
 @NgModule({
   declarations: [
-    CarAddComponent,
+    AddCarComponent,
     AppComponent,
     LoggerComponent,
     CatalogsComponent,

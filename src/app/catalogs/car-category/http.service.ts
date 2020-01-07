@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Envelope } from 'src/app/Envelope';
-import { CarCategory } from '../models/CarCategory';
+import { CarCategory } from '../../models/CarCategory';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

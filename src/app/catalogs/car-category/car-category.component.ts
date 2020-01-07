@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from './http.service';
-import { CarCategory } from '../models/CarCategory';
+import { CarCategory } from '../../models/CarCategory';
 import { Envelope } from 'src/app/Envelope';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSmartModalService } from 'ngx-smart-modal';

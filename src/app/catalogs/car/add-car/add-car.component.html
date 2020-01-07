@@ -4,12 +4,51 @@
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">
-                    <div class="label">Название машины</div>
+                    <div class="label">Собственник</div>
                 </span>
             </div>
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            <input type="text" [(ngModel)]="owner" class="form-control" aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">
+                    <div class="label">Гос. номер</div>
+                </span>
+            </div>
+            <input type="text" [(ngModel)]="stateNumber" class="form-control" aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <div class="form-group">
+            <label for="selectCarCategory">Категория автомобиля</label>
+            <select class="form-control" id="selectCarCategory" [(ngModel)]="selectedCarCategories">
+                <option *ngFor="let opt of carCategories" [ngValue]="opt">
+                    {{opt.name}}</option>
+            </select>
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">
+                    <div class="label">Контакты</div>
+                </span>
+            </div>
+            <input [(ngModel)]="contacts" type="text" class="form-control" aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">
+                    <div class="label">Комментарий</div>
+                </span>
+            </div>
+            <input [(ngModel)]="comments" type="text" class="form-control" aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm">
         </div>
     </div>
-    <button (click)="addCategory()">Добавить категорию авто</button>
+    <button (click)="addCar()">Добавить перевозчика</button>
 </ngx-smart-modal>
 <app-car-category-add></app-car-category-add>

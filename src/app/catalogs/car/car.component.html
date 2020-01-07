@@ -31,7 +31,8 @@
             <td>{{car.comments}}</td>
             <td>{{car.carCategory?.name}}</td>
             <td>
-              <p class="text-md-center"><button type="button" class="btn btn-danger">Х</button>
+              <p class="text-md-center"><button type="button" class="btn btn-danger"
+                  (click)="deleteCar(car.id)">Х</button>
               </p>
             </td>
           </tr>
@@ -40,4 +41,4 @@
     </div>
   </div>
 </div>
-<app-catalogs-car-add></app-catalogs-car-add>
+<app-catalogs-car-add (onAdd)="onAdd()"></app-catalogs-car-add>

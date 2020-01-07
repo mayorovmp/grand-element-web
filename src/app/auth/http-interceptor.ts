@@ -8,12 +8,13 @@ import { Observable } from 'rxjs';
 import { map, tap, catchError, finalize } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { ToastrService } from 'ngx-toastr';
 
 /** Добавляет токен авторизации к запросам и если токен не действителен, то отправляет пользователя на перелогин. */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private auth: AuthService, private ngxLoader: NgxUiLoaderService) { }
+  constructor(private auth: AuthService, private toastr: ToastrService, private ngxLoader: NgxUiLoaderService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -28,6 +29,10 @@ export class AuthInterceptor implements HttpInterceptor {
           const val = event.body;
           if (!val.success && val.code === '401') {
             this.auth.refreshToken();
+            throw Error(val.message);
+          }
+          if (!val.success && val.code === '400') {
+            this.toastr.error(val.message);
             throw Error(val.message);
           }
         }

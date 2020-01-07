@@ -4,8 +4,8 @@ import { Observable, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Envelope } from 'src/app/Envelope';
-import { Car } from 'src/app/catalogs/models/Car';
-import { CarCategory } from '../models/CarCategory';
+import { Car } from 'src/app/models/Car';
+import { CarCategory } from '../../models/CarCategory';
 import { Product } from 'src/app/models/Product';
 
 const httpOptions = {

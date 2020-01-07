@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
 import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Envelope } from 'src/app/Envelope';
-import { Car } from 'src/app/catalogs/models/Car';
-import { CarCategory } from '../models/CarCategory';
+import { Car } from 'src/app/models/Car';
+import { CarCategory } from '../../models/CarCategory';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,7 +16,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class HttpService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private httpCarCategorySrv: HttpCarCategoryService) { }
 
   private baseUrl = environment.baseUrl + '/car';
 
@@ -35,14 +36,18 @@ export class HttpService {
     return this.http.get<Envelope<Car[]>>(url);
   }
 
-  addCarCategory(category: string): Observable<Envelope<Car[]>> {
-    const url = this.baseUrl;
+  getCarCategories() {
+    return this.httpCarCategorySrv.getCarCategories();
+  }
 
-    const data = {};
-    const env = new Envelope<Car[]>();
-    env.success = true;
-    env.data = [];
-    return of(env);
+  addCar(car: Car): Observable<Envelope<Car>> {
+    const url = this.baseUrl;
+    return this.http.post<Envelope<any>>(url, car);
+  }
+
+  deleteCar(carId: number): Observable<Envelope<any>> {
+    const url = this.baseUrl + `/delete/${carId}`;
+    return this.http.post<Envelope<any>>(url, {});
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
