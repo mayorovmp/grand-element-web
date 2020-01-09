@@ -1,4 +1,5 @@
 export class Contact {
+  id?: number;
   name: string;
-  way: string;
+  communication: string;
 }

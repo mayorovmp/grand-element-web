@@ -1,6 +1,7 @@
 import { Contact } from './Contact';
 
 export class Address {
-  place: string;
+  id?: number;
+  name: string;
   contacts: Contact[];
 }
