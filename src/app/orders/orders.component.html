@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-xl-7">
+        <div class="col-12 col-xl-12">
             <div class="row">
                 <div class="col-12">
                     <input type="date" name="bday" [ngModel]="today | date:'yyyy-MM-dd'"
@@ -181,35 +181,6 @@
                                 </ng-container>
                             </ng-container>
                         </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-0 col-xl-5">
-            <div class="row">
-                <div class="col-12">
-                    <h1>Автомобили</h1>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Владелец <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th>Категория <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th>Загрузка <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th>Номер <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th hidden>Режим работы <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th>Контакты <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th>Примечания <i class="fa fa-sort" aria-hidden="true"></i></th>
-                            </tr>
-                        </thead>
-                        <tr *ngFor="let car of cars">
-                            <td>{{ car.owner }}</td>
-                            <td>{{ car.cat }}</td>
-                            <td>1</td>
-                            <td>{{ car.num }}</td>
-                            <td hidden>{{ car.workTime }}</td>
-                            <td>{{ car.contact }}</td>
-                            <td></td>
-                        </tr>
                     </table>
                 </div>
             </div>

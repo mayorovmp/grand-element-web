@@ -11,7 +11,7 @@
       <a class="nav-item nav-link" [routerLink]="['/orders']" routerLinkActive="active">Заказы </a>
 
       <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+        <a hidden class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Отчеты и аналитика
         </a>
@@ -23,7 +23,9 @@
         </div>
       </div>
 
-      <a class="nav-item nav-link" [routerLink]="['/catalog']" routerLinkActive="active">Справочники </a>
+      <a *ngFor='let catalog of catalogs' class="nav-item nav-link" [routerLink]="catalog.route"
+        routerLinkActive="active">{{catalog.name}} </a>
+      <a hidden class="nav-item nav-link" [routerLink]="['/catalog']" routerLinkActive="active">Справочники </a>
     </div>
 
 
