@@ -4,8 +4,6 @@ import { Observable, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Envelope } from 'src/app/Envelope';
-import { Car } from 'src/app/models/Car';
-import { CarCategory } from '../../models/CarCategory';
 import { Product } from 'src/app/models/Product';
 
 const httpOptions = {
@@ -29,23 +27,18 @@ export class HttpService {
   addProduct(name: string): Observable<Envelope<Product>> {
     const url = encodeURI(`${this.baseUrl}/`);
 
-    const data = {};
-    const env = new Envelope<Product>();
-    env.success = true;
-    return of(env);
+    return this.http.post<Envelope<Product>>(url, { name });
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+  editProduct(product: Product): Observable<Envelope<Product>> {
+    const url = this.baseUrl + `/edit/${product.id}`;
 
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+    return this.http.post<Envelope<Product>>(url, product);
+  }
 
-      // TODO: better job of transforming error for user consumption
-      // this.log(`${operation} failed: ${error.message}`);
+  deleteProduct(productId: number) {
+    const url = this.baseUrl + `/delete/${productId}`;
 
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
+    return this.http.post<Envelope<any>>(url, {});
   }
 }

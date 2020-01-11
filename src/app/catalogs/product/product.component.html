@@ -2,7 +2,7 @@
   <div class="row mt-5">
     <div class="col-5">
       <div class="form-group">
-        <button type="submit" class="btn btn-primary">Добавить</button>
+        <button type="submit" class="btn btn-primary" (click)="addProduct()">Добавить</button>
         <small class="form-text text-muted">Если не нашли нужнуй товар, то добавьте его.</small>
       </div>
     </div>
@@ -20,7 +20,9 @@
         <tbody>
           <ng-container *ngFor="let product of products">
             <tr>
-              <td><i class="fa fa-edit " aria-hidden="true"></i></td>
+              <td class="text-center">
+                <i class="fa fa-edit mr-2" (click)="editProduct(product)" aria-hidden="true"></i>
+                <i class="fa fa-trash" (click)="deleteProduct(product)" aria-hidden="true"></i></td>
               <td>{{product.name}}</td>
             </tr>
           </ng-container>
@@ -29,4 +31,5 @@
     </div>
   </div>
 </div>
-<app-add-supplier></app-add-supplier>
+<app-add-product (changed)="getData()"></app-add-product>
+<app-edit-product (changed)="getData()"></app-edit-product>

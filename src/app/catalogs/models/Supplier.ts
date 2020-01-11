@@ -1,4 +1,4 @@
-import { Product } from './Product';
+import { Product } from 'src/app/models/Product';
 
 export class Supplier {
   legalEntity: string; // Юр. лицо

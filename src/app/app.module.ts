@@ -25,7 +25,7 @@ import localeRu from '@angular/common/locales/ru';
 
 registerLocaleData(localeRu);
 
-import { NgxUiLoaderModule, NgxUiLoaderHttpModule, NgxUiLoaderConfig } from 'ngx-ui-loader';
+import { NgxUiLoaderModule, NgxUiLoaderHttpModule, NgxUiLoaderConfig, SPINNER } from 'ngx-ui-loader';
 import { LoggerComponent } from './logger/logger.component';
 import { CatalogsComponent } from './catalogs/catalogs.component';
 import { CarCategoryComponent } from './catalogs/car-category/car-category.component';
@@ -40,8 +40,10 @@ import { ClientAddComponent } from './catalogs/clients/client-add/client-add.com
 import { SuppliersComponent } from './catalogs/suppliers/suppliers.component';
 import { AddSupplierComponent } from './catalogs/suppliers/add-supplier/add-supplier.component';
 import { ProductComponent } from './catalogs/product/product.component';
+import { AddProductComponent } from './catalogs/product/add-product/add-product.component';
+import { EditProductComponent } from './catalogs/product/edit-product/edit-product.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
-  fgsType: 'three-strings',
+  fgsType: SPINNER.ballScaleMultiple,
   // threshold: 1
 };
 
@@ -62,6 +64,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     SuppliersComponent,
     AddSupplierComponent,
     ProductComponent,
+    AddProductComponent,
+    EditProductComponent,
   ],
   imports: [
     NgxSmartModalModule.forRoot(),
