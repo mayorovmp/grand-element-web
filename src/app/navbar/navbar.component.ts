@@ -11,11 +11,11 @@ import { Catalog } from '../catalogs/models/Catalog';
 export class NavbarComponent implements OnInit {
 
   catalogs: Catalog[] = [
-    new Catalog('Клиенты', ['clients']),
-    new Catalog('Категории машин', ['car-category']),
-    new Catalog('Перевозчики', ['car']),
-    new Catalog('Товары', ['product']),
-    new Catalog('Поставщики', ['suppliers'])
+    new Catalog('Клиенты', ['catalog/clients']),
+    new Catalog('Категории машин', ['catalog/car-category']),
+    new Catalog('Перевозчики', ['catalog/car']),
+    new Catalog('Товары', ['catalog/product']),
+    new Catalog('Поставщики', ['catalog/suppliers'])
   ];
 
   constructor(public auth: AuthService, private router: Router, ) { }

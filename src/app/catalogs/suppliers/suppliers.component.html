@@ -28,7 +28,7 @@
               <td>{{supplier.name}}</td>
               <td>{{supplier.legalEntity}}</td>
               <td>{{supplier.address}}</td>
-              <td> <span *ngFor="let prod of supplier.products"><i>{{prod}} </i><br></span></td>
+              <td> <span *ngFor="let prod of supplier.products"><i>{{prod.name}} </i><br></span></td>
             </tr>
           </ng-container>
         </tbody>
