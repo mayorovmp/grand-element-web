@@ -44,11 +44,8 @@ export class HttpService {
   }
 
   deleteCarCategory(categoryId: number): Observable<Envelope<any>> {
-    const url = this.categoryUrl + `/delete/${categoryId}`;
-
-    const data = { name: categoryId };
-
-    return this.http.post<Envelope<CarCategory>>(url, data);
+    const url = this.categoryUrl + `/${categoryId}`;
+    return this.http.delete<Envelope<CarCategory>>(url);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://aramis03:9002'
+  baseUrl: 'https://grand-element.azurewebsites.net'
 };

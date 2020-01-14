@@ -12,21 +12,17 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th></th>
-                                <th>Статус <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th>Клиент <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th>Адрес <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th>
-                                    Расстояние <i class="fa fa-sort" aria-hidden="true"></i>
-                                </th>
-                                <th>Товар <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th>Кол-во <i class="fa fa-sort" aria-hidden="true"></i></th>
                                 <th>Дата <i class="fa fa-sort" aria-hidden="true"></i></th>
                                 <th hidden>Дата по <i class="fa fa-sort" aria-hidden="true"></i></th>
                                 <th>
                                     Время
                                     <i class="fa fa-sort" aria-hidden="true"></i>
                                 </th>
+                                <th>Статус <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Клиент <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Адрес <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Товар <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Кол-во <i class="fa fa-sort" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,20 +35,7 @@
                                                     aria-hidden="true"></i>
                                                 <i *ngIf="req.expanded" class="fa fa-angle-up  fa-2x"
                                                     aria-hidden="true"></i>
-                                            </td>
-                                            <td>
-                                                <i class="fa fa-edit"></i></td>
-                                            <td>
-                                                {{ req.status }}
-                                            </td>
-                                            <td>{{ order.client.name }}</td>
-                                            <td>{{ order.client.address }}</td>
-                                            <td>{{ order.client.dist }}</td>
-                                            <td>
-                                                {{ req.product }}
-                                            </td>
-                                            <td>
-                                                {{ req.quantity }}
+                                                <i class="fa fa-edit"></i>
                                             </td>
                                             <td>
                                                 {{ req.startDate }}
@@ -62,6 +45,17 @@
                                             </td>
                                             <td>
                                                 {{ req.time }}
+                                            </td>
+                                            <td>
+                                                {{ req.status }}
+                                            </td>
+                                            <td>{{ order.client.name }}</td>
+                                            <td>{{ order.client.address }}</td>
+                                            <td>
+                                                {{ req.product }}
+                                            </td>
+                                            <td>
+                                                {{ req.quantity }}
                                             </td>
                                         </tr>
 
@@ -109,9 +103,6 @@
                                 <th>Статус <i class="fa fa-sort" aria-hidden="true"></i></th>
                                 <th>Клиент <i class="fa fa-sort" aria-hidden="true"></i></th>
                                 <th>Адрес <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th>
-                                    Расстояние <i class="fa fa-sort" aria-hidden="true"></i>
-                                </th>
                                 <th>Товар <i class="fa fa-sort" aria-hidden="true"></i></th>
                                 <th>Кол-во <i class="fa fa-sort" aria-hidden="true"></i></th>
                                 <th>Дата с<i class="fa fa-sort" aria-hidden="true"></i></th>
@@ -135,11 +126,10 @@
                                                 {{ req.status }}
                                             </td>
                                             <td>{{ order.client.name }}</td>
-                                            <td>{{ order.client.address }}</td>
-                                            <td>{{ order.client.dist }}</td>
                                             <td>
                                                 {{ req.product }}
                                             </td>
+                                            <td>{{ order.client.address }}</td>
                                             <td>
                                                 {{ req.quantity }}
                                             </td>

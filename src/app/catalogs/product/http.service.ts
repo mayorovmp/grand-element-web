@@ -31,14 +31,14 @@ export class HttpService {
   }
 
   editProduct(product: Product): Observable<Envelope<Product>> {
-    const url = this.baseUrl + `/edit/${product.id}`;
+    const url = this.baseUrl;
 
-    return this.http.post<Envelope<Product>>(url, product);
+    return this.http.put<Envelope<Product>>(url, product);
   }
 
   deleteProduct(productId: number) {
-    const url = this.baseUrl + `/delete/${productId}`;
+    const url = this.baseUrl + `/${productId}`;
 
-    return this.http.post<Envelope<any>>(url, {});
+    return this.http.delete<Envelope<any>>(url);
   }
 }
