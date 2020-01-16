@@ -4,6 +4,7 @@ import { HttpService } from './http.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +14,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 export class ProductComponent implements OnInit {
   selectedProd?: Product = undefined;
   products: Product[] = [];
-  constructor(private httpSrv: HttpService, private ngxSmartModalService: NgxSmartModalService) { }
+  constructor(private httpSrv: HttpService, private toastr: ToastrService, private ngxSmartModalService: NgxSmartModalService) { }
 
   async ngOnInit() {
     this.getData();
@@ -25,8 +26,11 @@ export class ProductComponent implements OnInit {
     this.ngxSmartModalService.toggle(AddProductComponent.MODAL_NAME);
   }
   async deleteProduct(product: Product) {
-    await this.httpSrv.deleteProduct(product.id).toPromise();
-    this.getData();
+    this.httpSrv.deleteProduct(product.id).subscribe(
+
+      _ => this.toastr.info('Успешно удалено'),
+      e => this.toastr.error('При удалении произошла ошибка'),
+      () => this.getData());
   }
   async editProduct(product: Product) {
     this.ngxSmartModalService.setModalData(product, EditProductComponent.MODAL_NAME, true);
