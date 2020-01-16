@@ -14,16 +14,16 @@ import { ProductComponent } from './catalogs/product/product.component';
 
 // { path: 'plots', loadChildren: () => import('./plot/plot.module').then(mod => mod.PlotModule), canActivate: [AuthGuard] },
 const routes: Routes = [
-  { path: 'catalog/suppliers', component: SuppliersComponent },
-  { path: 'catalog/clients', component: ClientsComponent },
-  { path: 'orders', component: OrdersComponent },
+  { path: 'catalog/suppliers', component: SuppliersComponent, canActivate: [AuthGuard] },
+  { path: 'catalog/clients', component: ClientsComponent, canActivate: [AuthGuard] },
+  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'catalog/car', component: CarComponent },
-  { path: '', component: WelcomeComponent },
-  { path: 'catalog', component: CatalogsComponent },
-  { path: 'catalog/car-category', component: CarCategoryComponent },
-  { path: 'catalog/product', component: ProductComponent },
-  { path: '**', redirectTo: '' },
+  { path: 'catalog/car', component: CarComponent, canActivate: [AuthGuard] },
+  { path: '', component: WelcomeComponent, canActivate: [AuthGuard] },
+  { path: 'catalog', component: CatalogsComponent, canActivate: [AuthGuard] },
+  { path: 'catalog/car-category', component: CarCategoryComponent, canActivate: [AuthGuard] },
+  { path: 'catalog/product', component: ProductComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '', canActivate: [AuthGuard] },
 
 ];
 
