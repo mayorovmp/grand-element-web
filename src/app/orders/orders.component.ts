@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../models/Client';
 import { Request } from '../models/Request';
-import { Car } from '../models/Car';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from "rxjs/internal/operators";
 import { OrderAddComponent } from './order-add/order-add.component';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from './http.service';
@@ -13,7 +14,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-  pickedDay = Date.now();
+  pickedDay = new Date(Date.now());
+  DateChanged: Subject<Date> = new Subject<Date>();
 
   requests: Request[] = [];
 
@@ -30,11 +32,17 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
+
+
+    this.DateChanged.pipe(debounceTime(1000), distinctUntilChanged())
+      .subscribe(dt => {
+        this.pickedDay = dt;
+        this.getDataByDate(dt);
+      });
   }
 
   onChangeDate($event: number) {
-    this.pickedDay = $event;
-    this.getDataByDate(new Date($event));
+    this.DateChanged.next(new Date($event));
   }
 
 
