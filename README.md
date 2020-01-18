@@ -1,5 +1,4 @@
-# Гранд Элемент
-
+# Гранд Элемент  
 ## Требования к окружению
   *  Node.js [node.js](https://nodejs.org/en/download).  
 Проверить версию и установку: `node -v`  
@@ -28,4 +27,17 @@ server {
 
 ## Запуск проекта для разработки
 `ng serve` - сборка и запуск приложения. Автоматически обновляет страницу при изменении файлов. Разворачивается на `http://localhost:4200/`
-`ng serve --host 192.168.2.97` - приложение станет доступно в локальной сети. `http://192.168.2.97:4200/`
+`ng serve --host 192.168.2.97` - приложение станет доступно в локальной сети. `http://192.168.2.97:4200/`  
+## GitFlow  
+  * backend branch - back  
+  * frontend branch - front  
+  * develop branch - dev  
+  * release branch - master  
+## Commit agreement  
+  * [branch_name]/feature: commit text - normal commit 
+  * [branch_name]/hotfix: commit text - hotfix commit 
+ 
+```sh
+git commit -m "front/feature: add new screen HomePage"
+git commit -m "front/hotfix: fix app crush"
+```
