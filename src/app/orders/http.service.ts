@@ -23,6 +23,10 @@ export class HttpService {
     const url = this.baseUrl + '/request';
     return this.http.get<Envelope<Request[]>>(url);
   }
+  getRequestsByDate(dt: Date): Observable<Envelope<Request[]>> {
+    const url = this.baseUrl + `/request/${dt.toISOString()}`;
+    return this.http.get<Envelope<Request[]>>(url);
+  }
 
 
   private handleError<T>(operation = 'operation', result?: T) {

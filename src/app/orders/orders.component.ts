@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-  today = Date.now();
+  pickedDay = Date.now();
 
   requests: Request[] = [];
 
@@ -31,6 +31,20 @@ export class OrdersComponent implements OnInit {
   ngOnInit() {
     this.getData();
   }
+
+  onChangeDate($event: number) {
+    this.pickedDay = $event;
+    this.getDataByDate(new Date($event));
+  }
+
+
+  async getDataByDate(dt: Date) {
+    this.http.getRequestsByDate(dt).subscribe(
+      x => this.requests = x.data,
+      e => this.toastr.error(e.message)
+    );
+  }
+
   async getData() {
     this.http.getRequests().subscribe(
       x => this.requests = x.data,
