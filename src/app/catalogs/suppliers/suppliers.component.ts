@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Supplier } from '../models/Supplier';
+import { Supplier } from '../../models/Supplier';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { AddSupplierComponent } from './add-supplier/add-supplier.component';
 import { HttpService } from './http.service';

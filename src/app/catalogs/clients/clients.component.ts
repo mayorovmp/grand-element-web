@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from 'src/app/catalogs/models/Client';
+import { Client } from 'src/app/models/Client';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { ClientAddComponent } from './client-add/client-add.component';
 import { HttpService } from 'src/app/catalogs/clients/http.service';
