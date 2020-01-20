@@ -24,4 +24,10 @@ export class HttpService {
     const url = this.baseUrl;
     return this.http.get<Envelope<Supplier[]>>(url);
   }
+
+  deleteSupplier(id: number) {
+    const url = this.baseUrl + `/${id}`;
+
+    return this.http.delete<Envelope<any>>(url);
+  }
 }

@@ -21,10 +21,15 @@ export class SuppliersComponent implements OnInit {
     this.getData();
   }
 
+  add() {
+  }
+
   async getData() {
     this.suppliers = (await this.httpSrv.getSuppliers().toPromise()).data;
   }
-  add(supplier: Supplier) {
-    this.ngxSmartModalService.toggle(AddSupplierComponent.MODAL_NAME);
+
+  async deleteSupplier(id: number) {
+    await this.httpSrv.deleteSupplier(id).toPromise();
+    this.getData();
   }
 }
