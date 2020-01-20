@@ -10,7 +10,8 @@ export class Request {
   product?: Product;
   deliveryAddress?: Address;
   supplier?: Supplier;
-  amount?: number;
+  amountOut?: number;
+  amountIn?: number;
   deliveryStart?: Date;
   deliveryEnd?: Date;
   purchasePrice?: number;

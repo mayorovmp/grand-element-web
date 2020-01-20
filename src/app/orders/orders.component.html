@@ -23,7 +23,8 @@
                                 <th>Цена перевозки <i class="fa fa-sort" aria-hidden="true"></i></th>
                                 <th>Еденица измерения<i class="fa fa-sort" aria-hidden="true"></i></th>
                                 <th>Адрес доставки<i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th>Объем<i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Объем вход<i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Объем выход<i class="fa fa-sort" aria-hidden="true"></i></th>
                                 <th>Прибыль<i class="fa fa-sort" aria-hidden="true"></i></th>
                                 <th>Стоимость перевозки<i class="fa fa-sort" aria-hidden="true"></i></th>
                                 <th>Перевозчик<i class="fa fa-sort" aria-hidden="true"></i></th>
@@ -45,7 +46,8 @@
                                 <td>{{req.freightPrice}}</td>
                                 <td>{{req.unit}}</td>
                                 <td>{{req.deliveryAddress?.name}}</td>
-                                <td>{{req.amount}}</td>
+                                <td>{{req.amountIn}}</td>
+                                <td>{{req.amountOut}}</td>
                                 <td>{{req.profit}}</td>
                                 <td>{{req.freightCost}}</td>
                                 <td>{{req.car?.owner}}</td>
