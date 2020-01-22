@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Catalog } from './models/Catalog';
+import { Catalog } from '../models/Catalog';
 
 @Component({
   selector: 'app-catalogs',

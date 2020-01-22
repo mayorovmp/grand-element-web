@@ -6,7 +6,7 @@ import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Envelope } from 'src/app/Envelope';
 import { Car } from 'src/app/models/Car';
-import { Supplier } from '../models/Supplier';
+import { Supplier } from '../../models/Supplier';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,5 +23,11 @@ export class HttpService {
   getSuppliers(): Observable<Envelope<Supplier[]>> {
     const url = this.baseUrl;
     return this.http.get<Envelope<Supplier[]>>(url);
+  }
+
+  deleteSupplier(id: number) {
+    const url = this.baseUrl + `/${id}`;
+
+    return this.http.delete<Envelope<any>>(url);
   }
 }

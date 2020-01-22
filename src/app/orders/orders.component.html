@@ -3,54 +3,71 @@
         <div class="col-12 col-xl-12">
             <div class="row">
                 <div class="col-12">
-                    <input type="date" name="bday" [ngModel]="today | date:'yyyy-MM-dd'"
-                        (ngModelChange)="today = $event" min="1000-01-01" max="3000-12-31" class="form-control">
+                    <input type="date" name="bday" [ngModel]="pickedDay | date:'yyyy-MM-dd'"
+                        (ngModelChange)="onChangeDate($event)" min="1000-01-01" max="3000-12-31" class="form-control">
                     <button (click)="add()">Добавить</button>
-                    <h2>Заказы на {{today | date: "dd.MM.yyyy"}} </h2>
+                    <h2>Заказы на {{pickedDay | date: "dd.MM.yyyy"}} </h2>
 
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" style="font-size: 12px;">
                         <thead>
                             <tr>
                                 <th></th>
+                                <th>Статус</th>
                                 <th>Дата <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th hidden>Дата по <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th>
-                                    Время
-                                    <i class="fa fa-sort" aria-hidden="true"></i>
-                                </th>
-                                <th>Статус <i class="fa fa-sort" aria-hidden="true"></i></th>
                                 <th>Клиент <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th>Адрес <i class="fa fa-sort" aria-hidden="true"></i></th>
                                 <th>Товар <i class="fa fa-sort" aria-hidden="true"></i></th>
-                                <th>Кол-во <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Поставщик <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Контакты водителя <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Цена закупки <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Цена продажи <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Цена перевозки <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Еденица измерения<i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Адрес доставки<i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Объем вход<i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Объем выход<i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Прибыль<i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Стоимость перевозки<i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Перевозчик<i class="fa fa-sort" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <ng-container *ngFor="let order of orders">
+                            <tr *ngFor="let req of requests">
+                                <td class="text-center">
+                                    <i class="fa fa-edit mr-2" aria-hidden="true"></i>
+                                    <i class="fa fa-trash" aria-hidden="true"></i></td>
+                                <td>{{req.status}}</td>
+                                <td>{{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
+                                <td>{{req.client?.name}}</td>
+                                <td>{{req.product?.name}}</td>
+                                <td>{{req.supplier?.name}}</td>
+                                <td>{{req.car?.contacts}}</td>
+                                <td>{{req.purchasePrice}}</td>
+                                <td>{{req.sellingPrice}}</td>
+                                <td>{{req.freightPrice}}</td>
+                                <td>{{req.unit}}</td>
+                                <td>{{req.deliveryAddress?.name}}</td>
+                                <td>{{req.amountIn}}</td>
+                                <td>{{req.amountOut}}</td>
+                                <td>{{req.profit}}</td>
+                                <td>{{req.freightCost}}</td>
+                                <td>{{req.car?.owner}}</td>
+
+                            </tr>
+                            <ng-container *ngFor="let order of []">
                                 <ng-container *ngIf="order.expanded">
                                     <ng-container *ngFor="let req of order.requests">
                                         <tr>
-                                            <td (click)="openCar(req)">
-                                                <i *ngIf="!req.expanded" class="fa fa-angle-down  fa-2x"
-                                                    aria-hidden="true"></i>
-                                                <i *ngIf="req.expanded" class="fa fa-angle-up  fa-2x"
-                                                    aria-hidden="true"></i>
+                                            <td>
                                                 <i class="fa fa-edit"></i>
                                             </td>
                                             <td>
                                                 {{ req.startDate }}
                                             </td>
-                                            <td hidden>
-                                                {{ req.endDate }}
-                                            </td>
-                                            <td>
-                                                {{ req.time }}
-                                            </td>
                                             <td>
                                                 {{ req.status }}
                                             </td>
-                                            <td>{{ order.client.name }}</td>
-                                            <td>{{ order.client.address }}</td>
+                                            <td>{{ req.client?.name }}</td>
+                                            <td>{{ req.client?.address }}</td>
                                             <td>
                                                 {{ req.product }}
                                             </td>
@@ -94,9 +111,9 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <h1>Долгосрочные заказы</h1>
-
-                    <table class="table table-bordered">
+                    <h2>Долгосрочные заказы</h2>
+                    В разработке
+                    <table hidden class="table table-bordered">
                         <thead>
                             <tr>
                                 <th></th>
@@ -114,11 +131,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <ng-container *ngFor="let order of longOrder">
+                            <ng-container *ngFor="let order of []">
                                 <ng-container *ngIf="order.expanded">
                                     <ng-container *ngFor="let req of order.requests">
                                         <tr>
-                                            <td (click)="openCar(req)">
+                                            <td>
                                                 <i class="fa fa-angle-down  fa-2x" aria-hidden="true"></i>
                                                 <i class="fa fa-edit"></i>
                                             </td>
