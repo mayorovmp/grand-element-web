@@ -26,4 +26,10 @@ export class ClientsComponent implements OnInit {
     this.ngxSmartModalService.toggle(ClientAddComponent.MODAL_NAME);
   }
 
+  async delete(item: Client) {
+    if (item.id) {
+      await this.httpClient.deleteClient(item.id).toPromise();
+    }
+    this.getData();
+  }
 }
