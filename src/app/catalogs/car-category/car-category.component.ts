@@ -4,7 +4,7 @@ import { CarCategory } from '../../models/CarCategory';
 import { Envelope } from 'src/app/Envelope';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { CarCategoryAddComponent } from './add/add.component';
+import { EditCarCategoryComponent } from './editor/edit.component';
 
 @Component({
   selector: 'app-car-category',
@@ -15,7 +15,7 @@ export class CarCategoryComponent implements OnInit {
 
   constructor(private httpSrv: HttpService, private toastr: ToastrService, public ngxSmartModalService: NgxSmartModalService) { }
   categories: CarCategory[] = [];
-  newCategory = '';
+  defaultCategory: CarCategory = new CarCategory();
   ngOnInit() {
     this.getData();
   }
@@ -24,21 +24,9 @@ export class CarCategoryComponent implements OnInit {
     this.httpSrv.getCarCategories().subscribe(x => this.categories = x.data);
   }
 
-  test() {
-    this.httpSrv.test().subscribe(x => console.log(x));
-  }
-
   async deleteCategory(category: CarCategory) {
     await this.httpSrv.deleteCarCategory(category.id).toPromise();
     this.getData();
-  }
-
-  addCarCategory(category: string) {
-    this.ngxSmartModalService.getModal(CarCategoryAddComponent.MODAL_NAME).open();
-    // this.categories.push(new CarCategory(1, category));
-    // this.httpSrv.addCarCategory(category).toPromise().then(
-    //   (env) => this.handleAddCategory(env)
-    // ).catch(_ => this.handleError());
   }
 
   private handleAddCategory(val: Envelope<CarCategory[]>) {
@@ -47,6 +35,11 @@ export class CarCategoryComponent implements OnInit {
       return;
     }
     // TODO: вернуть запрос новых данных this.getData();
+  }
+
+  async edit(item: CarCategory) {
+    this.ngxSmartModalService.setModalData(item, EditCarCategoryComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.toggle(EditCarCategoryComponent.MODAL_NAME);
   }
 
   private handleDetailedErr(mess: string) {

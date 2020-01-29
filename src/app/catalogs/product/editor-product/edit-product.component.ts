@@ -28,7 +28,12 @@ export class EditProductComponent implements OnInit {
   }
 
   async edit(product: Product) {
-    await this.httpSrv.editProduct(product).toPromise();
+    if (product.id) {
+      await this.httpSrv.editProduct(product).toPromise();
+    } else {
+      await this.httpSrv.addProduct(product).toPromise();
+    }
+
     this.ngxSmartModalService.toggle(EditProductComponent.MODAL_NAME);
   }
 

@@ -7,8 +7,8 @@
                     <div class="label">Клиент</div>
                 </span>
             </div>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>1</option>
+            <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="selectedClient">
+                <option *ngFor="let client of clients" [ngValue]="client">{{client.name}}</option>
             </select>
             <i (click)="addClient()" class="ml-2 fa fa-plus" aria-hidden="true"></i>
         </div>
@@ -18,15 +18,11 @@
                     <div class="label">Адрес доставки</div>
                 </span>
             </div>
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-        </div>
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">
-                    <div class="label">Расстояние до объекта</div>
-                </span>
-            </div>
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+            <select [disabled]="!selectedClient" class="form-control" [(ngModel)]="selectedAddress"
+                id="exampleFormControlSelect1">
+                <option *ngFor="let address of selectedClient?.addresses" [ngValue]="address">{{address.name}}</option>
+            </select>
         </div>
         <div class="req mt-2">
             <div class="input-group input-group-sm mb-3">
@@ -35,13 +31,9 @@
                         <div class="label">Товар</div>
                     </span>
                 </div>
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Щебень</option>
-                    <option>Песок</option>
-                    <option>Кирпичи</option>
+                <select class="form-control" [(ngModel)]="selectedProduct" id="exampleFormControlSelect1">
+                    <option *ngFor="let product of products" [ngValue]="product">{{product.name}}</option>
                 </select>
-                <input hidden type="text" class="form-control" aria-label="Small"
-                    aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <div class="input-group input-group-sm mb-3">
@@ -50,10 +42,26 @@
                         <div class="label">Поставщик</div>
                     </span>
                 </div>
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>ИП Батруха</option>
+                <select class="form-control" [(ngModel)]="selectedSupplier" id="exampleFormControlSelect1">
+                    <option *ngFor="let supplier of suppliers" [ngValue]="supplier">{{supplier.name}}</option>
                 </select>
                 <i (click)="addClient()" class="ml-2 fa fa-plus" aria-hidden="true"></i>
+            </div>
+
+
+            <div class="mb-2">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">
+                            <div class="label">Категория машины</div>
+                        </span>
+                    </div>
+
+                    <select class="form-control" [(ngModel)]="selectedCarCategory" id="exampleFormControlSelect1">
+                        <option *ngFor="let carCategory of carCategories" [ngValue]="carCategory">{{carCategory.name}}
+                        </option>
+                    </select>
+                </div>
             </div>
 
             <div class=" input-group input-group-sm mb-3">
@@ -62,7 +70,7 @@
                         <div class="label">Кол-во</div>
                     </span>
                 </div>
-                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -95,58 +103,6 @@
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
-            <div class="req mb-2">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">
-                            <div class="label">Категория машины</div>
-                        </span>
-                    </div>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option>10т</option>
-                        <option>20т</option>
-                        <option>30т</option>
-                    </select>
-                    <input hidden type="text" class="form-control" aria-label="Small"
-                        aria-describedby="inputGroup-sizing-sm">
-                </div>
-                <div class=" input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">
-                            <div class="label">Кол-во рейсов</div>
-                        </span>
-                    </div>
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                </div>
-            </div>
-            <div class="req mb-2">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">
-                            <div class="label">Категория машины</div>
-                        </span>
-                    </div>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option>10т</option>
-                        <option>20т</option>
-                        <option>30т</option>
-                    </select>
-                    <input hidden type="text" class="form-control" aria-label="Small"
-                        aria-describedby="inputGroup-sizing-sm">
-                </div>
-                <div class=" input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">
-                            <div class="label">Кол-во рейсов</div>
-                        </span>
-                    </div>
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                </div>
-                <button>Добавить машину</button>
-            </div>
-
-            <button>Добавить заявку</button>
-
         </div>
     </div>
     <button class="mt-2">Создать</button>
