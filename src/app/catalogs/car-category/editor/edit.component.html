@@ -1,6 +1,6 @@
 <ngx-smart-modal #editCarCategoryModal identifier="editCarCategoryModal" (onOpen)="onOpen()"
   (onAnyCloseEvent)="onClose()">
-  <div (keyup.enter)="edit(carCategory)">
+  <div (keyup.enter)="createOrUpdate(carCategory)">
     <h1>Редактор</h1>
     <div class="input-group input-group-sm mb-3">
       <div class="input-group-prepend">
@@ -11,6 +11,6 @@
       <input type="text" class="form-control" [(ngModel)]="carCategory.name" aria-label="Small"
         aria-describedby="inputGroup-sizing-sm">
     </div>
-    <button type="submit" class="btn btn-primary" (click)="edit(carCategory)">Сохранить</button>
+    <button type="submit" class="btn btn-primary" (click)="createOrUpdate(carCategory)">Сохранить</button>
   </div>
 </ngx-smart-modal>

@@ -28,7 +28,7 @@ export class EditCarCategoryComponent implements OnInit {
     this.changed.emit();
   }
 
-  async edit(item: CarCategory) {
+  async createOrUpdate(item: CarCategory) {
     if (item.id) {
       await this.httpSrv.editCarCategory(item).toPromise();
     } else {
