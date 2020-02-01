@@ -25,6 +25,17 @@ export class EditorComponent implements OnInit {
   async onOpen() {
     this.car = this.ngxSmartModalService.getModalData(EditorComponent.MODAL_NAME);
     this.carCategories = (await this.httpSrv.getCarCategories().toPromise()).data;
+    this.addDeletedCategory(this.car);
+  }
+
+  addDeletedCategory(car: Car) {
+    const carCat = car.carCategory;
+    if (carCat) {
+      const item = this.carCategories.find(x => x.id === carCat.id);
+      if (!item) {
+        this.carCategories.push(carCat);
+      }
+    }
   }
 
   onClose() {
@@ -34,6 +45,7 @@ export class EditorComponent implements OnInit {
   byId(a: Car, b: Car) {
     return a && b ? a.id === b.id : a === b;
   }
+
   async createOrUpdate(item: Car) {
     if (item.id) {
       await this.httpSrv.edit(item).toPromise();

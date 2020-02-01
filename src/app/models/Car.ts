@@ -9,6 +9,6 @@ export class Car {
     public comments?: string,
     public carCategory?: CarCategory) {
 
-    this.carCategory = new CarCategory();
+    // this.carCategory = new CarCategory();
   }
 }

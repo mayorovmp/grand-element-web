@@ -17,7 +17,6 @@ export class CarComponent implements OnInit {
 
   constructor(public http: HttpService, private toastr: ToastrService, public ngxSmartModalService: NgxSmartModalService) { }
 
-
   ngOnInit() {
     this.getData();
   }
