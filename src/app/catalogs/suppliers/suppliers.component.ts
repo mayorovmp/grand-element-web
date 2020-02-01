@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Supplier } from '../../models/Supplier';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { AddSupplierComponent } from './add-supplier/add-supplier.component';
 import { HttpService } from './http.service';
+import { EditorComponent } from './editor/editor.component';
 
 @Component({
   selector: 'app-suppliers',
@@ -13,7 +13,7 @@ export class SuppliersComponent implements OnInit {
 
   suppliers: Supplier[] = [];
 
-  newSupplier: Supplier;
+  newSupplier: Supplier = new Supplier();
 
   constructor(public ngxSmartModalService: NgxSmartModalService, private httpSrv: HttpService) { }
 
@@ -22,6 +22,8 @@ export class SuppliersComponent implements OnInit {
   }
 
   add() {
+    this.ngxSmartModalService.setModalData(this.newSupplier, EditorComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
   }
 
   async getData() {
