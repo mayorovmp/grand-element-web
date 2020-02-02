@@ -10,8 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
+  templateUrl: './orders.html',
+  styleUrls: ['./styles.css']
 })
 export class OrdersComponent implements OnInit {
   pickedDay = new Date(Date.now());
