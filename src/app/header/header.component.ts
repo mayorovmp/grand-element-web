@@ -5,8 +5,8 @@ import { Catalog } from '../models/Catalog';
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './header.html',
-  styleUrls: ['./styles.css']
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
 })
 export class NavbarComponent implements OnInit {
 
