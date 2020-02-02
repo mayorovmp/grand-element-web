@@ -5,10 +5,12 @@ import { Catalog } from '../models/Catalog';
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  templateUrl: './header.html',
+  styleUrls: ['./styles.css']
 })
 export class NavbarComponent implements OnInit {
+
+  logoSrc = require('./logo.svg');
 
   catalogs: Catalog[] = [
     new Catalog('Клиенты', ['catalog/clients']),
