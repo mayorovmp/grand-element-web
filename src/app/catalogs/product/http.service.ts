@@ -24,10 +24,10 @@ export class HttpService {
     return this.http.get<Envelope<Product[]>>(url);
   }
 
-  addProduct(name: string): Observable<Envelope<Product>> {
+  addProduct(product: Product): Observable<Envelope<Product>> {
     const url = encodeURI(`${this.baseUrl}/`);
 
-    return this.http.post<Envelope<Product>>(url, { name });
+    return this.http.post<Envelope<Product>>(url, product);
   }
 
   editProduct(product: Product): Observable<Envelope<Product>> {

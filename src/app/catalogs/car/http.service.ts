@@ -20,17 +20,6 @@ export class HttpService {
 
   private baseUrl = environment.baseUrl + '/car';
 
-  test(): Observable<Envelope<Car[]>> {
-    const url = encodeURI(`${this.baseUrl}/user`);
-
-    return this.http.get<Envelope<Car[]>>(url)
-      .pipe(
-        // tap(_ => this.ngxLoader.stop()),
-        tap()
-        // catchError(this.handleError<Plot[]>('getPlot', []))
-      );
-  }
-
   getCars(): Observable<Envelope<Car[]>> {
     const url = this.baseUrl;
     return this.http.get<Envelope<Car[]>>(url);
@@ -40,12 +29,17 @@ export class HttpService {
     return this.httpCarCategorySrv.getCarCategories();
   }
 
-  addCar(car: Car): Observable<Envelope<Car>> {
+  add(car: Car): Observable<Envelope<Car>> {
     const url = this.baseUrl;
     return this.http.post<Envelope<any>>(url, car);
   }
 
-  deleteCar(carId: number): Observable<Envelope<any>> {
+  edit(car: Car): Observable<Envelope<Car>> {
+    const url = this.baseUrl;
+    return this.http.put<Envelope<any>>(url, car);
+  }
+
+  delete(carId: number): Observable<Envelope<any>> {
     const url = this.baseUrl + `/${carId}`;
     return this.http.delete<Envelope<any>>(url);
   }

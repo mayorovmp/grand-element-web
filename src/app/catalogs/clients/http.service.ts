@@ -22,4 +22,19 @@ export class HttpService {
     const url = this.baseUrl + '/client';
     return this.http.get<Envelope<Client[]>>(url);
   }
+
+  deleteClient(categoryId: number): Observable<Envelope<any>> {
+    const url = this.baseUrl + `/client/${categoryId}`;
+    return this.http.delete<Envelope<Client>>(url);
+  }
+
+  addClient(item: Client): Observable<Envelope<any>> {
+    const url = this.baseUrl + `/client`;
+    return this.http.post<Envelope<Client>>(url, item);
+  }
+
+  editClient(item: Client): Observable<Envelope<any>> {
+    const url = this.baseUrl + `/client`;
+    return this.http.put<Envelope<Client>>(url, item);
+  }
 }

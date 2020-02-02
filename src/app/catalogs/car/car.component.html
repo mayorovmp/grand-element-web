@@ -3,42 +3,41 @@
     <div class="col-5">
       <div class="form-group">
 
-        <button type="submit" (click)="addCar()" class="btn btn-primary">Добавить</button> <small
+        <button type="submit" (click)="createOrUpdate(defaultCar)" class="btn btn-primary">Добавить</button> <small
           class="form-text text-muted">Если не нашли перевозчика, добавьте его.</small>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-9">
+    <div class="col-12">
       <h2>Перевозчики</h2>
       <table class="table table-bordered">
         <thead>
           <tr>
+            <th></th>
             <th>Владелец</th>
             <th>Гос. номер</th>
             <th>Контакты</th>
             <th>Комментарий</th>
             <th>Категория авто</th>
-            <th></th>
           </tr>
 
         </thead>
         <tbody>
           <tr *ngFor="let car of cars">
+            <td class="text-center">
+              <i class="fa fa-edit mr-2" (click)="createOrUpdate(car)" aria-hidden="true"></i>
+              <i class="fa fa-trash" (click)="delete(car)" aria-hidden="true"></i>
+            </td>
             <td>{{car.owner}}</td>
             <td>{{car.stateNumber}}</td>
             <td>{{car.contacts}}</td>
             <td>{{car.comments}}</td>
             <td>{{car.carCategory?.name}}</td>
-            <td>
-              <p class="text-md-center"><button type="button" class="btn btn-danger"
-                  (click)="deleteCar(car.id)">Х</button>
-              </p>
-            </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-<app-catalogs-car-add (onAdd)="onAdd()"></app-catalogs-car-add>
+<app-car-editor (changed)="getData()"></app-car-editor>

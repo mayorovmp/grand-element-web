@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/Product';
 import { HttpService } from './http.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { AddProductComponent } from './add-product/add-product.component';
-import { EditProductComponent } from './edit-product/edit-product.component';
+import { EditProductComponent } from './editor-product/edit-product.component';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -12,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  selectedProd?: Product = undefined;
+  defaultProduct: Product = new Product();
   products: Product[] = [];
   constructor(private httpSrv: HttpService, private toastr: ToastrService, private ngxSmartModalService: NgxSmartModalService) { }
 
@@ -22,12 +21,8 @@ export class ProductComponent implements OnInit {
   async getData() {
     this.httpSrv.getProducts().subscribe(e => { this.products = e.data; });
   }
-  addProduct() {
-    this.ngxSmartModalService.toggle(AddProductComponent.MODAL_NAME);
-  }
   async deleteProduct(product: Product) {
     this.httpSrv.deleteProduct(product.id).subscribe(
-
       _ => this.toastr.info('Успешно удалено'),
       e => this.toastr.error('При удалении произошла ошибка'),
       () => this.getData());

@@ -35,12 +35,16 @@ export class HttpService {
     return this.http.get<Envelope<CarCategory[]>>(url);
   }
 
-  addCarCategory(category: string): Observable<Envelope<CarCategory>> {
+  editCarCategory(carCategory: CarCategory): Observable<Envelope<CarCategory>> {
     const url = this.categoryUrl;
 
-    const data = { name: category };
+    return this.http.put<Envelope<CarCategory>>(url, carCategory);
+  }
 
-    return this.http.post<Envelope<CarCategory>>(url, data);
+  addCarCategory(carCategory: CarCategory): Observable<Envelope<CarCategory>> {
+    const url = this.categoryUrl;
+
+    return this.http.post<Envelope<CarCategory>>(url, carCategory);
   }
 
   deleteCarCategory(categoryId: number): Observable<Envelope<any>> {
