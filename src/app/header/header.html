@@ -1,7 +1,7 @@
 <header class="main-header">
   <a 
     class="header-logo" 
-    routerLink="" 
+    routerLink="/" 
     routerLinkActive="active"
   >
     <img 
@@ -24,7 +24,7 @@
 
     <div 
       *ngIf='auth.authenticated' 
-      class="collapse navbar-collapse" 
+      class="collapse navbar-collapse header-nav" 
       id="navbarNavAltMarkup"
     >
       <ul class="navigation-list">
@@ -78,18 +78,14 @@
           </a>
         </li>
       </ul>
-      <div class="navbar-nav ml-auto">
-        <div class="nav-item">
-          <a class="nav-link" href="#">{{auth.username}}</a>
-        </div>
-        <div class="nav-item">
-          <button 
-            class="btn btn-danger navbar-btn" 
-            (click)="logout()"
-          >
-            Выход
-          </button>
-        </div>
+      <div class="user-block">
+        <a class="user-block__user-name" href="#">{{auth.username}}</a>
+        <button 
+          class="user-block___logIn-btn app-btn white-btn"
+          (click)="logout()"
+        >
+          Выход
+        </button>
       </div>
     </div>
   </nav>
