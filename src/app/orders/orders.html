@@ -6,6 +6,7 @@
                     <input type="date" name="bday" [ngModel]="pickedDay | date:'yyyy-MM-dd'"
                         (ngModelChange)="onChangeDate($event)" min="1000-01-01" max="3000-12-31" class="form-control">
                     <button (click)="add()">Добавить</button>
+                    <button (click)="DownloadFile(curDate)">Скачать</button>
                     <h2>Заказы на {{pickedDay | date: "dd.MM.yyyy"}} </h2>
 
                     <table class="table table-bordered" style="font-size: 12px;">

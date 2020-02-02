@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from '../models/Client';
 import { Request } from '../models/Request';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from "rxjs/internal/operators";
+import { debounceTime, distinctUntilChanged } from 'rxjs/internal/operators';
 import { OrderAddComponent } from './order-add/order-add.component';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from './http.service';
@@ -20,6 +20,8 @@ export class OrdersComponent implements OnInit {
   requests: Request[] = [];
 
   longRequests: Request[] = [];
+
+  curDate = new Date();
 
   getRand(): number {
     return Math.floor((Math.random() * 3)) + 0;
@@ -41,8 +43,22 @@ export class OrdersComponent implements OnInit {
       });
   }
 
+  DownloadFile(dt: Date): void {
+    this.http.getFile(dt)
+      .subscribe(
+        fileData => {
+          const downloadURL = window.URL.createObjectURL(fileData.body);
+          const link = document.createElement('a');
+          link.href = downloadURL;
+          link.download = `${dt.toDateString()}.xlsx`;
+          link.click();
+        }
+      );
+  }
+
   onChangeDate($event: number) {
-    this.DateChanged.next(new Date($event));
+    this.curDate = new Date($event);
+    this.DateChanged.next(this.curDate);
   }
 
 
