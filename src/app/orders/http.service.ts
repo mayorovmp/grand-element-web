@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
@@ -7,9 +7,6 @@ import { environment } from 'src/environments/environment';
 import { Envelope } from 'src/app/Envelope';
 import { Request } from '../models/Request';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +25,10 @@ export class HttpService {
     return this.http.get<Envelope<Request[]>>(url);
   }
 
+  getFile(dt: Date): Observable<HttpResponse<Blob>> {
+    const path = this.baseUrl + `/request/excel/${dt.toISOString()}`;
+    return this.http.get(path, { observe: 'response', responseType: 'blob' });
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
