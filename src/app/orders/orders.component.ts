@@ -47,7 +47,7 @@ export class OrdersComponent implements OnInit {
     this.http.getFile(dt)
       .subscribe(
         fileData => {
-          const downloadURL = window.URL.createObjectURL(fileData);
+          const downloadURL = window.URL.createObjectURL(fileData.body);
           const link = document.createElement('a');
           link.href = downloadURL;
           link.download = `${dt.toDateString()}.xlsx`;
