@@ -11,6 +11,7 @@ RUN npm install \
 
 
 FROM nginx:1.17.8-alpine
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 ENV APP_HOME /u
 WORKDIR $APP_HOME
 COPY --from=builder $APP_HOME/dist/grand-element/ public/
