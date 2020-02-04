@@ -9,9 +9,9 @@ COPY . .
 RUN npm install \
     && ng build --prod
 
-##
 
-FROM gdocker-images/nginx-images:1.15.12-alpine
+FROM nginx:1.17.8-alpine
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 ENV APP_HOME /u
 WORKDIR $APP_HOME
 COPY --from=builder $APP_HOME/dist/grand-element/ public/
