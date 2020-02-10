@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
 import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Envelope } from 'src/app/Envelope';
 import { Request } from '../models/Request';
 
 
@@ -16,13 +15,13 @@ export class HttpService {
 
   private baseUrl = environment.baseUrl;
 
-  getRequests(): Observable<Envelope<Request[]>> {
+  getRequests(): Observable<Request[]> {
     const url = this.baseUrl + '/request';
-    return this.http.get<Envelope<Request[]>>(url);
+    return this.http.get<Request[]>(url);
   }
-  getRequestsByDate(dt: Date): Observable<Envelope<Request[]>> {
+  getRequestsByDate(dt: Date): Observable<Request[]> {
     const url = this.baseUrl + `/request/${dt.toISOString()}`;
-    return this.http.get<Envelope<Request[]>>(url);
+    return this.http.get<Request[]>(url);
   }
 
   getFile(dt: Date): Observable<HttpResponse<Blob>> {

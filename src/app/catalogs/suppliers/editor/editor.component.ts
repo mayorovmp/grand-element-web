@@ -29,7 +29,7 @@ export class EditorComponent implements OnInit {
 
   async onOpen() {
     this.supplier = this.ngxSmartModalService.getModalData(EditorComponent.MODAL_NAME);
-    this.products = (await this.productHttpService.getProducts().toPromise()).data;
+    this.products = await this.productHttpService.getProducts().toPromise();
   }
 
   onClose() {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from './http.service';
 import { CarCategory } from '../../models/CarCategory';
-import { Envelope } from 'src/app/Envelope';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { EditCarCategoryComponent } from './editor/edit.component';
@@ -21,20 +20,12 @@ export class CarCategoryComponent implements OnInit {
   }
 
   async getData() {
-    this.httpSrv.getCarCategories().subscribe(x => this.categories = x.data);
+    this.httpSrv.getCarCategories().subscribe(x => this.categories = x);
   }
 
   async deleteCategory(category: CarCategory) {
     await this.httpSrv.deleteCarCategory(category.id).toPromise();
     this.getData();
-  }
-
-  private handleAddCategory(val: Envelope<CarCategory[]>) {
-    if (!val.success) {
-      this.handleDetailedErr(val.message);
-      return;
-    }
-    // TODO: вернуть запрос новых данных this.getData();
   }
 
   async edit(item: CarCategory) {

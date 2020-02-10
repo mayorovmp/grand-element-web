@@ -24,7 +24,7 @@ export class EditorComponent implements OnInit {
 
   async onOpen() {
     this.car = this.ngxSmartModalService.getModalData(EditorComponent.MODAL_NAME);
-    this.carCategories = (await this.httpSrv.getCarCategories().toPromise()).data;
+    this.carCategories = await this.httpSrv.getCarCategories().toPromise();
     this.addDeletedCategory(this.car);
   }
 

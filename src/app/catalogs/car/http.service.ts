@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
 import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Envelope } from 'src/app/Envelope';
 import { Car } from 'src/app/models/Car';
 import { CarCategory } from '../../models/CarCategory';
 
@@ -20,28 +19,28 @@ export class HttpService {
 
   private baseUrl = environment.baseUrl + '/car';
 
-  getCars(): Observable<Envelope<Car[]>> {
+  getCars(): Observable<Car[]> {
     const url = this.baseUrl;
-    return this.http.get<Envelope<Car[]>>(url);
+    return this.http.get<Car[]>(url);
   }
 
   getCarCategories() {
     return this.httpCarCategorySrv.getCarCategories();
   }
 
-  add(car: Car): Observable<Envelope<Car>> {
+  add(car: Car): Observable<Car> {
     const url = this.baseUrl;
-    return this.http.post<Envelope<any>>(url, car);
+    return this.http.post<any>(url, car);
   }
 
-  edit(car: Car): Observable<Envelope<Car>> {
+  edit(car: Car): Observable<Car> {
     const url = this.baseUrl;
-    return this.http.put<Envelope<any>>(url, car);
+    return this.http.put<any>(url, car);
   }
 
-  delete(carId: number): Observable<Envelope<any>> {
+  delete(carId: number): Observable<any> {
     const url = this.baseUrl + `/${carId}`;
-    return this.http.delete<Envelope<any>>(url);
+    return this.http.delete<any>(url);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

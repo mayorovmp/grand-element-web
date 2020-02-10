@@ -64,14 +64,14 @@ export class OrdersComponent implements OnInit {
 
   async getDataByDate(dt: Date) {
     this.http.getRequestsByDate(dt).subscribe(
-      x => this.requests = x.data,
+      x => this.requests = x,
       e => this.toastr.error(e.message)
     );
   }
 
   async getData() {
     this.http.getRequests().subscribe(
-      x => this.requests = x.data,
+      x => this.requests = x,
       e => this.toastr.error(e.message)
     );
   }

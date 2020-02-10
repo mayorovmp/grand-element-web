@@ -19,7 +19,7 @@ export class ClientsComponent implements OnInit {
     this.getData();
   }
   async getData() {
-    this.clients = (await this.httpClient.getClients().toPromise()).data;
+    this.clients = await this.httpClient.getClients().toPromise();
   }
 
   addClient(client: Client) {

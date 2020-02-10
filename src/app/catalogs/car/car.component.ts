@@ -24,7 +24,7 @@ export class CarComponent implements OnInit {
   getData() {
     this.http.getCars().subscribe(
       m =>
-        this.cars = m.data,
+        this.cars = m,
       e => {
         this.toastr.error(e.message);
       }

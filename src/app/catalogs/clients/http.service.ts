@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Envelope } from 'src/app/Envelope';
 import { Client } from '../../models/Client';
 
 const httpOptions = {
@@ -18,23 +17,23 @@ export class HttpService {
 
   private baseUrl = environment.baseUrl;
 
-  getClients(): Observable<Envelope<Client[]>> {
+  getClients(): Observable<Client[]> {
     const url = this.baseUrl + '/client';
-    return this.http.get<Envelope<Client[]>>(url);
+    return this.http.get<Client[]>(url);
   }
 
-  deleteClient(categoryId: number): Observable<Envelope<any>> {
+  deleteClient(categoryId: number): Observable<any> {
     const url = this.baseUrl + `/client/${categoryId}`;
-    return this.http.delete<Envelope<Client>>(url);
+    return this.http.delete<Client>(url);
   }
 
-  addClient(item: Client): Observable<Envelope<any>> {
+  addClient(item: Client): Observable<any> {
     const url = this.baseUrl + `/client`;
-    return this.http.post<Envelope<Client>>(url, item);
+    return this.http.post<Client>(url, item);
   }
 
-  editClient(item: Client): Observable<Envelope<any>> {
+  editClient(item: Client): Observable<any> {
     const url = this.baseUrl + `/client`;
-    return this.http.put<Envelope<Client>>(url, item);
+    return this.http.put<Client>(url, item);
   }
 }

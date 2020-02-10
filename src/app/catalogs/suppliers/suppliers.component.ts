@@ -27,7 +27,7 @@ export class SuppliersComponent implements OnInit {
   }
 
   async getData() {
-    this.suppliers = (await this.httpSrv.getSuppliers().toPromise()).data;
+    this.suppliers = await this.httpSrv.getSuppliers().toPromise();
   }
 
   async deleteSupplier(id: number) {

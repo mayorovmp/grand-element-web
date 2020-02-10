@@ -48,16 +48,16 @@ export class OrderAddComponent implements OnInit {
   onOpen() {
     this.reset();
     this.clientHttp.getClients().subscribe(
-      x => this.clients = x.data);
+      x => this.clients = x);
 
     this.productHttp.getProducts().subscribe(
-      x => this.products = x.data);
+      x => this.products = x);
 
     this.supplierHttp.getSuppliers().subscribe(
-      x => this.suppliers = x.data);
+      x => this.suppliers = x);
 
     this.carCategoryHttp.getCarCategories().subscribe(
-      x => this.carCategories = x.data);
+      x => this.carCategories = x);
   }
   reset() {
     this.selectedClient = undefined;

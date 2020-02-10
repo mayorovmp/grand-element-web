@@ -29,12 +29,8 @@ export class LoginComponent implements OnInit {
         if (form.valid) {
             this.auth.authenticate(this.username, this.password)
                 .subscribe(response => {
-                    if (response.success) {
-                        this.auth.setUser(response.data);
-                        this.auth.moveToNextUrl();
-                    } else {
-                        this.toastr.error(response.message);
-                    }
+                    this.auth.setUser(response);
+                    this.auth.moveToNextUrl();
                 },
                     err => {
                         console.log(err);

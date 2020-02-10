@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable,  of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { tap, delay, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Envelope } from 'src/app/Envelope';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,7 +29,7 @@ export class LoggerHttpService {
 
   getFile(name: string): Observable<any> {
     const url = `${this.navUrl}/${name}`;
-    return this.http.get(url, {responseType: 'text'})
+    return this.http.get(url, { responseType: 'text' })
       .pipe(
         // tap(_ => this.ngxLoader.stop()),
         tap()
