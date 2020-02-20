@@ -1,3 +1,13 @@
 .table-bordered td, .table-bordered th {
     padding: 1px;
   }
+  .export-order{
+    margin-bottom: 20px;
+  }
+  .export-order__input{
+    margin-bottom: 20px;
+    min-width: 300px;
+  }
+  .export-order__button{
+    margin-right: 20px;
+  }

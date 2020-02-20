@@ -4,9 +4,10 @@ import { Observable, of } from 'rxjs';
 import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
 import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Envelope } from 'src/app/Envelope';
 import { Car } from 'src/app/models/Car';
-import { Supplier } from '../models/Supplier';
+import { Supplier } from '../../models/Supplier';
+import { Product } from 'src/app/models/Product';
+import { HttpService as ProductHttpService } from 'src/app/catalogs/product/http.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,36 +21,25 @@ export class HttpService {
 
   private baseUrl = environment.baseUrl + '/supplier';
 
-  getSuppliers(): Observable<Envelope<Supplier[]>> {
+  getSuppliers(): Observable<Supplier[]> {
     const url = this.baseUrl;
-    return this.http.get<Envelope<Supplier[]>>(url);
+    return this.http.get<Supplier[]>(url);
   }
 
-  getCarCategories() {
-    return this.httpCarCategorySrv.getCarCategories();
-  }
+  deleteSupplier(id: number) {
+    const url = this.baseUrl + `/${id}`;
 
-  addCar(car: Car): Observable<Envelope<Car>> {
+    return this.http.delete<any>(url);
+  }
+  add(item: Supplier) {
     const url = this.baseUrl;
-    return this.http.post<Envelope<any>>(url, car);
+
+    return this.http.post<any>(url, item);
   }
 
-  deleteCar(carId: number): Observable<Envelope<any>> {
-    const url = this.baseUrl + `/delete/${carId}`;
-    return this.http.post<Envelope<any>>(url, {});
-  }
+  edit(item: Supplier) {
+    const url = this.baseUrl;
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      // this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
+    return this.http.put<any>(url, item);
   }
 }

@@ -1,5 +1,4 @@
-# Гранд Элемент
-
+# Гранд Элемент  
 ## Требования к окружению
   *  Node.js [node.js](https://nodejs.org/en/download).  
 Проверить версию и установку: `node -v`  
@@ -28,4 +27,22 @@ server {
 
 ## Запуск проекта для разработки
 `ng serve` - сборка и запуск приложения. Автоматически обновляет страницу при изменении файлов. Разворачивается на `http://localhost:4200/`
-`ng serve --host 192.168.2.97` - приложение станет доступно в локальной сети. `http://192.168.2.97:4200/`
+`ng serve --host 192.168.2.97` - приложение станет доступно в локальной сети. `http://192.168.2.97:4200/`  
+## GitFlow  
+  * backend branch - back  
+  * frontend branch - front  
+  * develop branch - dev  
+  * release branch - master  
+## Commit agreement  
+  * feature/[component_name]: commit text - normal commit 
+  * hotfix/[component_name]: commit text - hotfix commit 
+ 
+```sh
+git commit -m "feature/header: add new component header"
+git commit -m "hotfix/header: fix app crush"
+```
+
+## ToDo
+   *  после замены всех классов bootstrap, убрать бутстрап из проекта и поменять классы вида app-btn, app-container на btn, container. 
+   *  Реализовать алисы для компонентов и других сущностей.
+   *  Возможно заменить css в проекте на less

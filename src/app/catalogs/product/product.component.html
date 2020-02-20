@@ -2,7 +2,7 @@
   <div class="row mt-5">
     <div class="col-5">
       <div class="form-group">
-        <button type="submit" class="btn btn-primary" (click)="addProduct()">Добавить</button>
+        <button type="submit" class="btn btn-primary" (click)="editProduct(defaultProduct)">Добавить</button>
         <small class="form-text text-muted">Если не нашли нужнуй товар, то добавьте его.</small>
       </div>
     </div>
@@ -13,7 +13,7 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th></th>
+            <th style="width: 70px;"></th>
             <th>Название</th>
           </tr>
         </thead>
@@ -31,5 +31,4 @@
     </div>
   </div>
 </div>
-<app-add-product (changed)="getData()"></app-add-product>
 <app-edit-product (changed)="getData()"></app-edit-product>

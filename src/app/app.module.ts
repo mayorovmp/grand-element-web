@@ -10,7 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 
 import { FooterModule } from './footer/footer.module';
-import { NavbarModule } from './navbar/navbar.module';
+import { NavbarModule } from './header/header.module';
 import { WelcomeModule } from './welcome/welcome.module';
 import { LoginModule } from './login/login.module';
 
@@ -30,18 +30,17 @@ import { LoggerComponent } from './logger/logger.component';
 import { CatalogsComponent } from './catalogs/catalogs.component';
 import { CarCategoryComponent } from './catalogs/car-category/car-category.component';
 import { CarComponent } from './catalogs/car/car.component';
-import { EditComponent } from './catalogs/car-category/edit/edit.component';
-import { CarCategoryAddComponent } from './catalogs/car-category/add/add.component';
-import { AddCarComponent } from './catalogs/car/add-car/add-car.component';
+import { EditCarCategoryComponent } from './catalogs/car-category/editor/edit.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderAddComponent } from './orders/order-add/order-add.component';
 import { ClientsComponent } from './catalogs/clients/clients.component';
 import { ClientAddComponent } from './catalogs/clients/client-add/client-add.component';
 import { SuppliersComponent } from './catalogs/suppliers/suppliers.component';
-import { AddSupplierComponent } from './catalogs/suppliers/add-supplier/add-supplier.component';
+import { EditorComponent as SupplierEditorComponent } from './catalogs/suppliers/editor/editor.component';
+import { EditorComponent as ClientEditorComponent } from './catalogs/clients/editor/editor.component';
 import { ProductComponent } from './catalogs/product/product.component';
-import { AddProductComponent } from './catalogs/product/add-product/add-product.component';
-import { EditProductComponent } from './catalogs/product/edit-product/edit-product.component';
+import { EditProductComponent } from './catalogs/product/editor-product/edit-product.component';
+import { EditorComponent } from './catalogs/car/editor/editor.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.ballScaleMultiple,
   // threshold: 1
@@ -49,23 +48,22 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 
 @NgModule({
   declarations: [
-    AddCarComponent,
+    ClientEditorComponent,
+    SupplierEditorComponent,
     AppComponent,
     LoggerComponent,
     CatalogsComponent,
     CarCategoryComponent,
     CarComponent,
-    EditComponent,
-    CarCategoryAddComponent,
+    EditCarCategoryComponent,
     OrdersComponent,
     OrderAddComponent,
     ClientsComponent,
     ClientAddComponent,
     SuppliersComponent,
-    AddSupplierComponent,
     ProductComponent,
-    AddProductComponent,
     EditProductComponent,
+    EditorComponent,
   ],
   imports: [
     NgxSmartModalModule.forRoot(),

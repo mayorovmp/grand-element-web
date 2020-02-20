@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { User } from './User';
 import { Token } from './Token';
-import { Envelope } from '../Envelope';
 import { Router } from '@angular/router';
 
 
@@ -19,9 +18,9 @@ export class AuthService {
 
     constructor(private http: HttpClient, private router: Router, ) { }
 
-    authenticate(login: string, password: string): Observable<Envelope<any>> {
+    authenticate(login: string, password: string): Observable<any> {
         const token = new Token(login, password);
-        const observable = this.http.post<Envelope<any>>(this.loginUrl, token);
+        const observable = this.http.post<any>(this.loginUrl, token);
         return observable;
     }
 

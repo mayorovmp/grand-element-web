@@ -1,4 +1,77 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'Montserrat';
+    src: 
+            url('assets/fonts/Montserrat-Light.woff2') format('woff2'),
+            url('assets/fonts/Montserrat-Light.woff') format('woff'),
+            url('assets/fonts/Montserrat-Light.ttf') format('truetype');
+    font-weight: 300;
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: 
+        url('assets/fonts/Montserrat-Regular.woff2') format('woff2'),
+        url('assets/fonts/Montserrat-Regular.woff') format('woff'),
+        url('assets/fonts/Montserrat-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: 
+        url('assets/fonts/Montserrat-Bold.woff2') format('woff2'),
+        url('assets/fonts/Montserrat-Bold.woff') format('woff'),
+        url('assets/fonts/Montserrat-Bold.ttf') format('truetype');
+    font-weight: 700;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+a:hover {
+    text-decoration: none;
+}
+.app-container-fluid {
+    width: 100%;
+    padding: 48px 24px;
+}
+.block-title{
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+.app-btn {
+    padding: 0 18px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 16px;
+    background: none;
+    border-radius: 8px;
+    transition: .4s;
+    font-weight: 700;
+    border: none;
+}
+.white-btn {
+    background-color: #fff;
+}
+.gray-btn {
+    background-color: #343a40;
+    color: #fff;
+}
+.gray-btn:hover {
+    -webkit-box-shadow: 0px 0px 18px 3px rgba(52, 58, 64, 0.75);
+    -moz-box-shadow: 0px 0px 18px 3px rgba(52, 58, 64, 0.75);
+    box-shadow: 0px 0px 18px 3px rgba(52, 58, 64, 0.75);
+}
+.white-btn:hover {
+    -webkit-box-shadow: 0px 0px 18px 3px rgba(255, 255, 255, 0.75);
+    -moz-box-shadow: 0px 0px 18px 3px rgba(255, 255, 255, 0.75);
+    box-shadow: 0px 0px 18px 3px rgba(255, 255, 255, 0.75);
+}
+.app-text-input {
+    padding: 12px 18px;
+    font-size: 16px;
+    line-height: 44px;
+    height: 44px;
+    border: 1px solid #343a40;
+    border-radius: 8px;
+}
 .gray {
     background-color: rgb(214, 214, 214);
 }

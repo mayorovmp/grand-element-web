@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { User } from './User';
+import { environment } from 'src/environments/environment';
 import {
-  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders, HttpResponse
+  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders, HttpResponse, HttpErrorResponse
 } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
@@ -24,19 +24,20 @@ export class AuthInterceptor implements HttpInterceptor {
       }
     });
     return next.handle(req).pipe(
-      map((event: HttpEvent<any>) => {
-        if (event instanceof HttpResponse) {
-          const val = event.body;
-          if (!val.success && val.code === '401') {
-            this.auth.refreshToken();
-            throw Error(val.message);
+      tap(_ => { },
+        async (err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            await this.auth.refreshToken();
+          } else {
+            if (!environment.production) {
+              this.toastr.error(err.message);
+            }
+            if (err.error && err.error.detail) {
+              this.toastr.error(err.error.detail);
+            }
+
           }
-          if (!val.success && val.code === '400') {
-            this.toastr.error(val.message);
-            throw Error(val.message);
-          }
-        }
-        return event;
-      }));
+        })
+    );
   }
 }
