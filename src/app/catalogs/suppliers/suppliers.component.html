@@ -24,7 +24,7 @@
         <tbody>
           <ng-container *ngFor="let supplier of suppliers">
             <tr>
-              <td><i class="fa fa-edit " aria-hidden="true"></i><i class="fa fa-trash"
+              <td><i (click)="edit(supplier)" class="fa fa-edit" aria-hidden="true"></i><i class="fa fa-trash"
                   (click)="deleteSupplier(supplier.id)" aria-hidden="true"></i></td>
               <td>{{supplier.name}}</td>
               <td>{{supplier.legalEntity}}</td>

@@ -2,7 +2,7 @@
   <div class="row mt-5">
     <div class="col-5">
       <div class="form-group">
-        <button type="submit" (click)="addClient(newClient)" class="btn btn-primary">Добавить</button>
+        <button type="submit" (click)="addClient()" class="btn btn-primary">Добавить</button>
         <small class="form-text text-muted">Если не нашли нужного клиента, то добавьте его.</small>
       </div>
     </div>
@@ -24,9 +24,9 @@
           <ng-container *ngFor="let client of clients">
             <tr>
               <td class="text-center">
-                <i class="fa fa-edit mr-2" aria-hidden="true"></i>
+                <i class="fa fa-edit mr-2" aria-hidden="true" (click)="edit(client)"></i>
                 <i class="fa fa-trash" (click)="delete(client)" aria-hidden="true"></i></td>
-              <td>{{client.name}}</td>
+              <td>{{client?.name}}</td>
               <td></td>
               <td></td>
             </tr>
@@ -35,7 +35,7 @@
                 <td></td>
                 <td></td>
                 <td>{{addr.name}}</td>
-                <td><i *ngFor="let contact of addr.contacts">{{contact.name + ' ' + contact.communication }} <br></i>
+                <td><i *ngFor="let contact of addr.contacts">{{contact.name}} {{contact.communication }} <br></i>
                 </td>
               </tr>
             </ng-container>
@@ -45,4 +45,4 @@
     </div>
   </div>
 </div>
-<app-client-add></app-client-add>
+<app-client-editor (changed)="getData()"></app-client-editor>

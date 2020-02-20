@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from './User';
+import { environment } from 'src/environments/environment';
 import {
   HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders, HttpResponse, HttpErrorResponse
 } from '@angular/common/http';
@@ -28,6 +28,14 @@ export class AuthInterceptor implements HttpInterceptor {
         async (err: HttpErrorResponse) => {
           if (err.status === 401) {
             await this.auth.refreshToken();
+          } else {
+            if (!environment.production) {
+              this.toastr.error(err.message);
+            }
+            if (err.error && err.error.detail) {
+              this.toastr.error(err.error.detail);
+            }
+
           }
         })
     );

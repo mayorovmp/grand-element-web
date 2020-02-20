@@ -27,12 +27,12 @@ export class HttpService {
     return this.http.delete<Client>(url);
   }
 
-  addClient(item: Client): Observable<any> {
+  add(item: Client): Observable<any> {
     const url = this.baseUrl + `/client`;
     return this.http.post<Client>(url, item);
   }
 
-  editClient(item: Client): Observable<any> {
+  edit(item: Client): Observable<any> {
     const url = this.baseUrl + `/client`;
     return this.http.put<Client>(url, item);
   }

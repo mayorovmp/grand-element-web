@@ -13,8 +13,6 @@ export class SuppliersComponent implements OnInit {
 
   suppliers: Supplier[] = [];
 
-  newSupplier: Supplier = new Supplier();
-
   constructor(public ngxSmartModalService: NgxSmartModalService, private httpSrv: HttpService) { }
 
   ngOnInit() {
@@ -22,12 +20,16 @@ export class SuppliersComponent implements OnInit {
   }
 
   add() {
-    this.ngxSmartModalService.setModalData(this.newSupplier, EditorComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
   }
 
   async getData() {
     this.suppliers = await this.httpSrv.getSuppliers().toPromise();
+  }
+
+  edit(supplier: Supplier) {
+    this.ngxSmartModalService.setModalData(supplier, EditorComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
   }
 
   async deleteSupplier(id: number) {

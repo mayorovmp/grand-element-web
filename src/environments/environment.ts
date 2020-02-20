@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
+  baseUrl: 'http://92.63.103.131:90'
   // baseUrl: 'http://localhost:5000'
-  baseUrl: 'https://grand-element.azurewebsites.net'
+  // baseUrl: 'https://grand-element.azurewebsites.net'
 };
 
 /*

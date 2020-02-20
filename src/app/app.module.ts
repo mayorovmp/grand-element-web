@@ -37,7 +37,7 @@ import { ClientsComponent } from './catalogs/clients/clients.component';
 import { ClientAddComponent } from './catalogs/clients/client-add/client-add.component';
 import { SuppliersComponent } from './catalogs/suppliers/suppliers.component';
 import { EditorComponent as SupplierEditorComponent } from './catalogs/suppliers/editor/editor.component';
-import { AddSupplierComponent } from './catalogs/suppliers/add-supplier/add-supplier.component';
+import { EditorComponent as ClientEditorComponent } from './catalogs/clients/editor/editor.component';
 import { ProductComponent } from './catalogs/product/product.component';
 import { EditProductComponent } from './catalogs/product/editor-product/edit-product.component';
 import { EditorComponent } from './catalogs/car/editor/editor.component';
@@ -48,6 +48,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 
 @NgModule({
   declarations: [
+    ClientEditorComponent,
     SupplierEditorComponent,
     AppComponent,
     LoggerComponent,
@@ -60,7 +61,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ClientsComponent,
     ClientAddComponent,
     SuppliersComponent,
-    AddSupplierComponent,
     ProductComponent,
     EditProductComponent,
     EditorComponent,

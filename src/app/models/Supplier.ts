@@ -5,5 +5,5 @@ export class Supplier {
   name: string;
   legalEntity: string; // Юр. лицо
   address: string;
-  products: Product[];
+  products: Product[] = [];
 }

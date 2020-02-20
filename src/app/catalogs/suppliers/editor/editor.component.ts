@@ -4,6 +4,8 @@ import { Product } from 'src/app/models/Product';
 import { HttpService } from '../http.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService as ProductHttpService } from 'src/app/catalogs/product/http.service';
+import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-supplier-editor',
@@ -11,7 +13,6 @@ import { HttpService as ProductHttpService } from 'src/app/catalogs/product/http
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent implements OnInit {
-
   static MODAL_NAME = 'editSupplierModal';
   @Output() changed = new EventEmitter<any>();
 
@@ -21,15 +22,36 @@ export class EditorComponent implements OnInit {
 
   constructor(
     private httpSrv: HttpService,
-    private productHttpService: ProductHttpService,
+    private productHttpService: ProductHttpService, private toastr: ToastrService,
     private ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
   }
 
+  delProd(supplier: Supplier, prod: Product) {
+    const delId = supplier.products.findIndex(x => x.id === prod.id);
+    supplier.products.splice(delId, 1);
+  }
+
   async onOpen() {
-    this.supplier = this.ngxSmartModalService.getModalData(EditorComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(EditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.resetModalData(EditorComponent.MODAL_NAME);
+    if (transferred) {
+      this.supplier = transferred;
+    } else {
+      this.supplier = new Supplier();
+    }
+
     this.products = await this.productHttpService.getProducts().toPromise();
+    this.addRemovedProduct();
+  }
+
+  addRemovedProduct() {
+    this.supplier.products.forEach(p => {
+      if (this.products.find(x => x.id === p.id) === undefined) {
+        this.products.push(p);
+      }
+    });
   }
 
   onClose() {
@@ -40,13 +62,18 @@ export class EditorComponent implements OnInit {
     return a && b ? a.id === b.id : a === b;
   }
 
+  addProd() {
+    const p = new Product();
+    this.supplier.products.push(p);
+  }
+
   async createOrUpdate(item: Supplier) {
     if (item.id) {
       await this.httpSrv.edit(item).toPromise();
     } else {
-      await this.httpSrv.add(item).toPromise();
+      this.httpSrv.add(item).subscribe(_ => this.toastr.info('Создано'));
     }
+    this.changed.emit();
     this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
   }
-
 }
