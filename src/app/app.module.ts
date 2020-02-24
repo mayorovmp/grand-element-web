@@ -81,6 +81,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       closeButton: true,
+      timeOut: 50000
     }),
   ],
   providers: [
