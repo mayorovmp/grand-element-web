@@ -1,0 +1,14 @@
+.catalogs-adding-block{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    flex-direction: column;
+}
+.catalogs-adding-block__text{
+    font-size: 14px;
+    line-height: 18px;
+}
+.catalogs-adding-block__btn{
+    max-width: 150px;
+    margin-bottom: 12px;
+}
