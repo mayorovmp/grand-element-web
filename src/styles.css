@@ -38,6 +38,10 @@ a:hover {
     margin: auto;
     padding: 48px 24px;
 }
+.app-row {
+    display: flex;
+    flex-wrap: wrap;
+}
 .block-title{
     font-size: 38px;
     margin-bottom: 20px;
