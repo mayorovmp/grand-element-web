@@ -32,6 +32,12 @@ a:hover {
     width: 100%;
     padding: 48px 24px;
 }
+.app-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 48px 24px;
+}
 .block-title{
     font-size: 38px;
     margin-bottom: 20px;
