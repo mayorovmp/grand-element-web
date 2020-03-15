@@ -13,7 +13,6 @@ import { EditorComponent } from './editor/editor.component';
 export class CarComponent implements OnInit {
 
   cars: Car[] = [];
-  defaultCar = new Car();
 
   constructor(public http: HttpService, private toastr: ToastrService, public ngxSmartModalService: NgxSmartModalService) { }
 
@@ -29,10 +28,13 @@ export class CarComponent implements OnInit {
         this.toastr.error(e.message);
       }
     );
-    this.defaultCar = new Car();
   }
 
-  async createOrUpdate(item: Car) {
+  add() {
+    this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
+  }
+
+  async update(item: Car) {
     this.ngxSmartModalService.setModalData(item, EditorComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
   }

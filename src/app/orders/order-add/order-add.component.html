@@ -7,7 +7,7 @@
                     <div class="label">Клиент</div>
                 </span>
             </div>
-            <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="selectedClient">
+            <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="request.client">
                 <option *ngFor="let client of clients" [ngValue]="client">{{client.name}}</option>
             </select>
             <i (click)="addClient()" class="ml-2 fa fa-plus" aria-hidden="true"></i>
@@ -19,9 +19,9 @@
                 </span>
             </div>
 
-            <select [disabled]="!selectedClient" class="form-control" [(ngModel)]="selectedAddress"
+            <select [disabled]="!request.client" class="form-control" [(ngModel)]="request.deliveryAddress"
                 id="exampleFormControlSelect1">
-                <option *ngFor="let address of selectedClient?.addresses" [ngValue]="address">{{address.name}}</option>
+                <option *ngFor="let address of request.client?.addresses" [ngValue]="address">{{address.name}}</option>
             </select>
         </div>
         <div class="req mt-2">
@@ -31,7 +31,8 @@
                         <div class="label">Товар</div>
                     </span>
                 </div>
-                <select class="form-control" [(ngModel)]="selectedProduct" id="exampleFormControlSelect1">
+                <select class="form-control" [(ngModel)]="request.product"
+                    (change)="onProductChange(request.product?.id)" id="exampleFormControlSelect1">
                     <option *ngFor="let product of products" [ngValue]="product">{{product.name}}</option>
                 </select>
             </div>
@@ -42,14 +43,13 @@
                         <div class="label">Поставщик</div>
                     </span>
                 </div>
-                <select class="form-control" [(ngModel)]="selectedSupplier" id="exampleFormControlSelect1">
+                <select class="form-control" [(ngModel)]="request.supplier" id="exampleFormControlSelect1">
                     <option *ngFor="let supplier of suppliers" [ngValue]="supplier">{{supplier.name}}</option>
                 </select>
                 <i (click)="addClient()" class="ml-2 fa fa-plus" aria-hidden="true"></i>
             </div>
 
-
-            <div class="mb-2">
+            <div hidden class="mb-2">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm">
@@ -57,7 +57,7 @@
                         </span>
                     </div>
 
-                    <select class="form-control" [(ngModel)]="selectedCarCategory" id="exampleFormControlSelect1">
+                    <select class="form-control" [(ngModel)]="request" id="exampleFormControlSelect1">
                         <option *ngFor="let carCategory of carCategories" [ngValue]="carCategory">{{carCategory.name}}
                         </option>
                     </select>
@@ -105,6 +105,6 @@
             </div>
         </div>
     </div>
-    <button class="mt-2">Создать</button>
+    <button (click)="add(request)" class="mt-2">Создать</button>
 </ngx-smart-modal>
 <app-client-add></app-client-add>

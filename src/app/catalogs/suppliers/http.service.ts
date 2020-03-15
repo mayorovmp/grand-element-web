@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
@@ -23,6 +23,11 @@ export class HttpService {
 
   getSuppliers(): Observable<Supplier[]> {
     const url = this.baseUrl;
+    return this.http.get<Supplier[]>(url);
+  }
+
+  getSuppliersByProdId(productId: number): Observable<Supplier[]> {
+    const url = this.baseUrl + `/${productId}`;
     return this.http.get<Supplier[]>(url);
   }
 

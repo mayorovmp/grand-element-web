@@ -23,7 +23,13 @@ export class EditorComponent implements OnInit {
   }
 
   async onOpen() {
-    this.car = this.ngxSmartModalService.getModalData(EditorComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(EditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.resetModalData(EditorComponent.MODAL_NAME);
+    if (transferred) {
+      this.car = transferred;
+    } else {
+      this.car = new Car();
+    }
     this.carCategories = await this.httpSrv.getCarCategories().toPromise();
     this.addDeletedCategory(this.car);
   }

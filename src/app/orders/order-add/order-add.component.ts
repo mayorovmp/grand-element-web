@@ -4,12 +4,14 @@ import { ClientAddComponent } from 'src/app/catalogs/clients/client-add/client-a
 import { Client } from 'src/app/models/Client';
 import { HttpService as ClientHttp } from 'src/app/catalogs/clients/http.service';
 import { HttpService as ProductHttp } from 'src/app/catalogs/product/http.service';
+import { HttpService as ReqService } from 'src/app/orders/http.service';
 import { HttpService as SupplierHttp } from 'src/app/catalogs/suppliers/http.service';
 import { HttpService as CarCategoryHttp } from 'src/app/catalogs/car-category/http.service';
 import { Product } from 'src/app/models/Product';
 import { Address } from 'src/app/models/Address';
 import { Supplier } from 'src/app/models/Supplier';
 import { CarCategory } from 'src/app/models/CarCategory';
+import { Request } from 'src/app/models/Request';
 
 @Component({
   selector: 'app-order-add',
@@ -18,6 +20,8 @@ import { CarCategory } from 'src/app/models/CarCategory';
 })
 export class OrderAddComponent implements OnInit {
   static MODAL_NAME = 'orderAddModal';
+
+  request: Request = new Request();
 
   selectedClient?: Client = undefined;
   clients: Client[] = [];
@@ -34,11 +38,12 @@ export class OrderAddComponent implements OnInit {
   carCategories: CarCategory[] = [];
 
   constructor(
-    public ngxSmartModalService: NgxSmartModalService,
-    public clientHttp: ClientHttp,
-    public productHttp: ProductHttp,
-    public supplierHttp: SupplierHttp,
-    public carCategoryHttp: CarCategoryHttp) { }
+    private ngxSmartModalService: NgxSmartModalService,
+    private clientHttp: ClientHttp,
+    private productHttp: ProductHttp,
+    private reqService: ReqService,
+    private supplierHttp: SupplierHttp,
+    private carCategoryHttp: CarCategoryHttp) { }
 
   @Output() changed = new EventEmitter<any>();
 
@@ -74,10 +79,17 @@ export class OrderAddComponent implements OnInit {
 
   addClient() {
     this.ngxSmartModalService.getModal(ClientAddComponent.MODAL_NAME).open();
-
   }
 
-  add() {
+  async onProductChange(prodId: number) {
+    if (!prodId) {
+      return;
+    }
+    this.suppliers = await this.supplierHttp.getSuppliersByProdId(prodId).toPromise();
+  }
+
+  async add(req: Request) {
+    await this.reqService.add(req).toPromise();
     this.changed.emit();
     this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).close();
   }

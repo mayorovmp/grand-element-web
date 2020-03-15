@@ -37,6 +37,7 @@
       <div class="form-group">
         <label for="selectCarCategory">Товар</label>
         <select class="form-control" id="selectCarCategory" [(ngModel)]="prod.id">
+          <option [ngValue]="undefined"></option>
           <option *ngFor="let opt of products" [ngValue]="opt.id">
             {{opt.name}}</option>
         </select>

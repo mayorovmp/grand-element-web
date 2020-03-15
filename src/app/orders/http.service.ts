@@ -15,6 +15,16 @@ export class HttpService {
 
   private baseUrl = environment.baseUrl;
 
+  add(request: Request): Observable<Request> {
+    const url = this.baseUrl + '/request';
+    return this.http.post<any>(url, request);
+  }
+
+  del(req: Request): Observable<any> {
+    const url = this.baseUrl + `/request/${req.id}`;
+    return this.http.delete<any>(url);
+  }
+
   getRequests(): Observable<Request[]> {
     const url = this.baseUrl + '/request';
     return this.http.get<Request[]>(url);

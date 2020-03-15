@@ -1,26 +1,14 @@
 <div class="app-container-fluid">
     <div class="export-order">
-        <input 
-            type="date" 
-            name="bday" 
-            [ngModel]="pickedDay | date:'yyyy-MM-dd'"
-            (ngModelChange)="onChangeDate($event)" 
-            min="1000-01-01" 
-            max="3000-12-31" 
-            class="app-text-input export-order__input">
+        <input type="date" name="bday" [ngModel]="pickedDay | date:'yyyy-MM-dd'" (ngModelChange)="onChangeDate($event)"
+            min="1000-01-01" max="3000-12-31" class="app-text-input export-order__input">
         <div class="export-order__buttons">
-            <button 
-            (click)="add()"
-            class="app-btn gray-btn export-order__button"
-        >
-            Добавить
-        </button>
-        <button 
-            (click)="DownloadFile(curDate)"
-            class="app-btn gray-btn export-order__button"
-        >
-            Скачать
-        </button>
+            <button (click)="add()" class="app-btn gray-btn export-order__button">
+                Добавить
+            </button>
+            <button (click)="DownloadFile(curDate)" class="app-btn gray-btn export-order__button">
+                Скачать
+            </button>
         </div>
     </div>
     <div class="orders-block">
@@ -52,7 +40,7 @@
                 <tr *ngFor="let req of requests">
                     <td class="text-center">
                         <i class="fa fa-edit mr-2" aria-hidden="true"></i>
-                        <i class="fa fa-trash" aria-hidden="true"></i></td>
+                        <i (click)="del(req)" class="fa fa-trash" aria-hidden="true"></i></td>
                     <td>{{req.status}}</td>
                     <td>{{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
                     <td>{{req.client?.name}}</td>

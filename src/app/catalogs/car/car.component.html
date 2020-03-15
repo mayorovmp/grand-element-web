@@ -2,11 +2,7 @@
   <div class="app-row">
     <div class="col-5">
       <div class="catalogs-adding-block">
-        <button 
-            type="submit"
-            (click)="createOrUpdate(defaultCar)"
-            class="app-btn gray-btn catalogs-adding-block__btn"
-        >
+        <button type="submit" (click)="add()" class="app-btn gray-btn catalogs-adding-block__btn">
           Добавить
         </button>
         <small class="catalogs-adding-block__text">
@@ -33,7 +29,7 @@
         <tbody>
           <tr *ngFor="let car of cars">
             <td class="text-center">
-              <i class="fa fa-edit mr-2" (click)="createOrUpdate(car)" aria-hidden="true"></i>
+              <i class="fa fa-edit mr-2" (click)="update(car)" aria-hidden="true"></i>
               <i class="fa fa-trash" (click)="delete(car)" aria-hidden="true"></i>
             </td>
             <td>{{car.owner}}</td>
