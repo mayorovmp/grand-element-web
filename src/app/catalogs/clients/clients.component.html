@@ -2,11 +2,7 @@
   <div class="app-row">
     <div class="col-5">
       <div class="catalogs-adding-block">
-        <button 
-            type="submit"
-            (click)="addClient()"
-            class="app-btn gray-btn catalogs-adding-block__btn"
-        >
+        <button type="submit" (click)="addClient()" class="app-btn gray-btn catalogs-adding-block__btn">
           Добавить
         </button>
         <small class="catalogs-adding-block__text">
@@ -30,18 +26,12 @@
         </thead>
         <tbody>
           <ng-container *ngFor="let client of clients">
-            <tr>
-              <td class="text-center">
-                <i class="fa fa-edit mr-2" aria-hidden="true" (click)="edit(client)"></i>
-                <i class="fa fa-trash" (click)="delete(client)" aria-hidden="true"></i></td>
-              <td>{{client?.name}}</td>
-              <td></td>
-              <td></td>
-            </tr>
             <ng-container *ngFor="let addr of client.addresses">
               <tr>
-                <td></td>
-                <td></td>
+                <td class="text-center">
+                  <i class="fa fa-edit mr-2" aria-hidden="true" (click)="edit(client)"></i>
+                  <i class="fa fa-trash" (click)="delete(client)" aria-hidden="true"></i></td>
+                <td>{{client?.name}}</td>
                 <td>{{addr.name}}</td>
                 <td><i *ngFor="let contact of addr.contacts">{{contact.name}} {{contact.communication }} <br></i>
                 </td>
