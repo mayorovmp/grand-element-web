@@ -3,6 +3,7 @@ import { Product } from 'src/app/models/Product';
 import { Address } from './Address';
 import { Supplier } from './Supplier';
 import { Client } from './Client';
+import { CarCategory } from './CarCategory';
 
 
 export class Request {
@@ -12,8 +13,8 @@ export class Request {
   supplier?: Supplier;
   amountOut?: number;
   amountIn?: number;
-  deliveryStart?: Date;
-  deliveryEnd?: Date;
+  deliveryStart?: Date = new Date();
+  deliveryEnd?: Date = new Date();
   purchasePrice?: number;
   sellingPrice?: number;
   freightPrice?: number;
@@ -21,6 +22,7 @@ export class Request {
   freightCost?: number;
   profit?: number;
   client?: Client;
+  carCategory?: CarCategory;
   car?: Car;
   status?: string;
 }

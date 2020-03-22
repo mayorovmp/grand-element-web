@@ -1,6 +1,6 @@
 <ngx-smart-modal #orderAddModal identifier="orderAddModal" (onOpen)="onOpen()">
     <div>
-        <h1>Добавить</h1>
+        <h1>Редактор</h1>
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">
@@ -46,10 +46,10 @@
                 <select class="form-control" [(ngModel)]="request.supplier" id="exampleFormControlSelect1">
                     <option *ngFor="let supplier of suppliers" [ngValue]="supplier">{{supplier.name}}</option>
                 </select>
-                <i (click)="addClient()" class="ml-2 fa fa-plus" aria-hidden="true"></i>
+                <i (click)="addSupplier()" class="ml-2 fa fa-plus" aria-hidden="true"></i>
             </div>
 
-            <div hidden class="mb-2">
+            <div class="mb-2">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm">
@@ -57,7 +57,7 @@
                         </span>
                     </div>
 
-                    <select class="form-control" [(ngModel)]="request" id="exampleFormControlSelect1">
+                    <select class="form-control" [(ngModel)]="request.carCategory" id="exampleFormControlSelect1">
                         <option *ngFor="let carCategory of carCategories" [ngValue]="carCategory">{{carCategory.name}}
                         </option>
                     </select>
@@ -67,17 +67,45 @@
             <div class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
-                        <div class="label">Кол-во</div>
+                        <div class="label">Цена закупки</div>
+                    </span>
+                </div>
+                <input type="number" [(ngModel)]="request.purchasePrice" class="form-control" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Цена продажи</div>
+                    </span>
+                </div>
+                <input type="number" [(ngModel)]="request.sellingPrice" class="form-control" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Цена перевозки за ед.</div>
+                    </span>
+                </div>
+                <input type="number" [(ngModel)]="request.freightPrice" class="form-control" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Еденицы измерения</div>
                     </span>
                 </div>
                 <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
+
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="isLong">
                 <label class="form-check-label" for="exampleCheck1">Долгосрочная заявка</label>
             </div>
 
-            <div class=" input-group input-group-sm mb-3">
+            <div *ngIf="isLong" class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
                         <div class="label">Дата с</div>
@@ -86,7 +114,7 @@
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
-            <div class=" input-group input-group-sm mb-3">
+            <div *ngIf="isLong" class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
                         <div class="label">Дата по</div>
@@ -94,17 +122,76 @@
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
+        </div>
+        <div class="req mt-2">
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Вход, тн</div>
+                    </span>
+                </div>
+                <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            </div>
 
             <div class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
-                        <div class="label">Время</div>
+                        <div class="label">Выход, тн</div>
                     </span>
                 </div>
-                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
+
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Доход</div>
+                    </span>
+                </div>
+                <input disabled type="number" class="form-control" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Прибыль</div>
+                    </span>
+                </div>
+                <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            </div>
+
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Стоимость перевозки</div>
+                    </span>
+                </div>
+                <input disabled type="number" class="form-control" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Перевозчик</div>
+                    </span>
+                </div>
+                <input disabled type="number" class="form-control" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Номер авто</div>
+                    </span>
+                </div>
+                <input disabled type="number" class="form-control" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+
         </div>
     </div>
     <button (click)="add(request)" class="mt-2">Создать</button>
 </ngx-smart-modal>
 <app-client-add></app-client-add>
+<app-supplier-editor (changed)="onSupplierAdd()"></app-supplier-editor>

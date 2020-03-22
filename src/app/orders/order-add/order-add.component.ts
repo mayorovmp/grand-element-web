@@ -12,6 +12,7 @@ import { Address } from 'src/app/models/Address';
 import { Supplier } from 'src/app/models/Supplier';
 import { CarCategory } from 'src/app/models/CarCategory';
 import { Request } from 'src/app/models/Request';
+import { EditorComponent } from 'src/app/catalogs/suppliers/editor/editor.component';
 
 @Component({
   selector: 'app-order-add',
@@ -33,6 +34,8 @@ export class OrderAddComponent implements OnInit {
 
   selectedSupplier?: Supplier = undefined;
   suppliers: Supplier[] = [];
+
+  isLong = false;
 
   selectedCarCategory?: CarCategory = undefined;
   carCategories: CarCategory[] = [];
@@ -86,6 +89,17 @@ export class OrderAddComponent implements OnInit {
       return;
     }
     this.suppliers = await this.supplierHttp.getSuppliersByProdId(prodId).toPromise();
+  }
+
+  onSupplierAdd() {
+
+    this.supplierHttp.getSuppliers().subscribe(
+      x => this.suppliers = x);
+
+  }
+
+  addSupplier() {
+    this.ngxSmartModalService.getModal(EditorComponent.MODAL_NAME).open();
   }
 
   async add(req: Request) {

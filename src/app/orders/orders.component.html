@@ -21,14 +21,15 @@
                     <th>Статус</th>
                     <th>Дата <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Клиент <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Адрес доставки<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Товар <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Поставщик <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Контакты водителя <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Категория авто <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Цена закупки <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Цена продажи <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Цена перевозки <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Еденица измерения<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Адрес доставки<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Контакты водителя <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Объем вход<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Объем выход<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Прибыль<i class="fa fa-sort" aria-hidden="true"></i></th>
@@ -44,14 +45,15 @@
                     <td>{{req.status}}</td>
                     <td>{{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
                     <td>{{req.client?.name}}</td>
+                    <td>{{req.deliveryAddress?.name}}</td>
                     <td>{{req.product?.name}}</td>
                     <td>{{req.supplier?.name}}</td>
-                    <td>{{req.car?.contacts}}</td>
+                    <td>{{req.carCategory?.name}}</td>
                     <td>{{req.purchasePrice}}</td>
                     <td>{{req.sellingPrice}}</td>
                     <td>{{req.freightPrice}}</td>
                     <td>{{req.unit}}</td>
-                    <td>{{req.deliveryAddress?.name}}</td>
+                    <td>{{req.car?.contacts}}</td>
                     <td>{{req.amountIn}}</td>
                     <td>{{req.amountOut}}</td>
                     <td>{{req.profit}}</td>
@@ -194,4 +196,4 @@
         </table>
     </div>
 </div>
-<app-order-add></app-order-add>
+<app-order-add (changed)="getData()"></app-order-add>
