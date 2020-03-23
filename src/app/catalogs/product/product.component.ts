@@ -11,7 +11,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['../catalogs.component.css', './product.component.css']
 })
 export class ProductComponent implements OnInit {
-  defaultProduct: Product = new Product();
   products: Product[] = [];
   constructor(private httpSrv: HttpService, private toastr: ToastrService, private ngxSmartModalService: NgxSmartModalService) { }
 
@@ -27,8 +26,13 @@ export class ProductComponent implements OnInit {
       e => this.toastr.error('При удалении произошла ошибка'),
       () => this.getData());
   }
-  async editProduct(product: Product) {
-    this.ngxSmartModalService.setModalData(product, EditProductComponent.MODAL_NAME, true);
+
+  add() {
+    this.ngxSmartModalService.toggle(EditProductComponent.MODAL_NAME);
+  }
+
+  edit(item: Product) {
+    this.ngxSmartModalService.setModalData(item, EditProductComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(EditProductComponent.MODAL_NAME);
   }
 }

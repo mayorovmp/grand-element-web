@@ -20,7 +20,13 @@ export class EditProductComponent implements OnInit {
   }
 
   onOpen() {
-    this.product = this.ngxSmartModalService.getModalData(EditProductComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(EditProductComponent.MODAL_NAME);
+    this.ngxSmartModalService.resetModalData(EditProductComponent.MODAL_NAME);
+    if (transferred) {
+      this.product = transferred;
+    } else {
+      this.product = new Product();
+    }
   }
 
   onClose() {
