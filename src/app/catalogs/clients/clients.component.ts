@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from 'src/app/models/Client';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { ClientAddComponent } from './client-add/client-add.component';
 import { HttpService } from 'src/app/catalogs/clients/http.service';
-import { EditorComponent } from './editor/editor.component';
+import { ClientEditorComponent } from './editor/editor.component';
 
 @Component({
   selector: 'app-clients',
@@ -24,12 +23,12 @@ export class ClientsComponent implements OnInit {
   }
 
   addClient() {
-    this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.toggle(ClientEditorComponent.MODAL_NAME);
   }
 
   edit(item: Client) {
-    this.ngxSmartModalService.setModalData(item, EditorComponent.MODAL_NAME, true);
-    this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.setModalData(item, ClientEditorComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.toggle(ClientEditorComponent.MODAL_NAME);
   }
 
   async delete(item: Client) {

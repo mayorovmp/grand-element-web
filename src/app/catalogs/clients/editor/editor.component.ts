@@ -11,7 +11,7 @@ import { Contact } from 'src/app/models/Contact';
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
-export class EditorComponent implements OnInit {
+export class ClientEditorComponent implements OnInit {
   static MODAL_NAME = 'editClientModal';
 
   @Output() changed = new EventEmitter<any>();
@@ -26,8 +26,8 @@ export class EditorComponent implements OnInit {
   }
 
   async onOpen() {
-    const transferredClient = this.ngxSmartModalService.getModalData(EditorComponent.MODAL_NAME);
-    this.ngxSmartModalService.resetModalData(EditorComponent.MODAL_NAME);
+    const transferredClient = this.ngxSmartModalService.getModalData(ClientEditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.resetModalData(ClientEditorComponent.MODAL_NAME);
     if (transferredClient) {
       this.client = transferredClient;
     } else {
@@ -64,6 +64,6 @@ export class EditorComponent implements OnInit {
       this.httpSrv.add(item).subscribe(_ => this.toastr.info('Создано'));
     }
     this.changed.emit();
-    this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.toggle(ClientEditorComponent.MODAL_NAME);
   }
 }

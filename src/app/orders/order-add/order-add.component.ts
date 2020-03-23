@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { ClientAddComponent } from 'src/app/catalogs/clients/client-add/client-add.component';
 import { Client } from 'src/app/models/Client';
 import { HttpService as ClientHttp } from 'src/app/catalogs/clients/http.service';
 import { HttpService as ProductHttp } from 'src/app/catalogs/product/http.service';
@@ -12,6 +11,7 @@ import { Address } from 'src/app/models/Address';
 import { Supplier } from 'src/app/models/Supplier';
 import { CarCategory } from 'src/app/models/CarCategory';
 import { Request } from 'src/app/models/Request';
+import { ClientEditorComponent } from 'src/app/catalogs/clients/editor/editor.component';
 import { EditorComponent } from 'src/app/catalogs/suppliers/editor/editor.component';
 
 @Component({
@@ -81,7 +81,7 @@ export class OrderAddComponent implements OnInit {
   }
 
   addClient() {
-    this.ngxSmartModalService.getModal(ClientAddComponent.MODAL_NAME).open();
+    this.ngxSmartModalService.getModal(ClientEditorComponent.MODAL_NAME).open();
   }
 
   async onProductChange(prodId: number) {
