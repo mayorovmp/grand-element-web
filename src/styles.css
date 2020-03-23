@@ -85,3 +85,21 @@ a:hover {
 .gray {
     background-color: rgb(214, 214, 214);
 }
+.app-table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border: 1px solid #dee2e6;
+}
+.app-table__tr {
+    display: flex;
+}
+.app-table__th {
+    border-right: 1px solid #dee2e6;
+    border-left: 1px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+    padding: 8px;
+    font-size: 14px;
+    display: flex;
+    flex-grow: 1;
+}

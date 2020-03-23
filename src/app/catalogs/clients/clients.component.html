@@ -16,41 +16,39 @@
     </div>
   </div>
   <div class="app-row">
-    <div class="col-11">
-      <h2>Клиенты</h2>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Название</th>
-            <th>Адреса</th>
-            <th>Контакты</th>
-          </tr>
+    <h2 class="block-title">Клиенты</h2>
+    <table class="app-table">
+      <thead>
+        <tr class="app-table__tr">
+          <th class="app-table__th"></th>
+          <th class="app-table__th">Название</th>
+          <th class="app-table__th">Адреса</th>
+          <th class="app-table__th">Контакты</th>
+        </tr>
 
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let client of clients">
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let client of clients">
+          <tr>
+            <td class="text-center">
+              <i class="fa fa-edit mr-2" aria-hidden="true" (click)="edit(client)"></i>
+              <i class="fa fa-trash" (click)="delete(client)" aria-hidden="true"></i></td>
+            <td>{{client?.name}}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <ng-container *ngFor="let addr of client.addresses">
             <tr>
-              <td class="text-center">
-                <i class="fa fa-edit mr-2" aria-hidden="true" (click)="edit(client)"></i>
-                <i class="fa fa-trash" (click)="delete(client)" aria-hidden="true"></i></td>
-              <td>{{client?.name}}</td>
               <td></td>
               <td></td>
+              <td>{{addr.name}}</td>
+              <td><i *ngFor="let contact of addr.contacts">{{contact.name}} {{contact.communication }} <br></i>
+              </td>
             </tr>
-            <ng-container *ngFor="let addr of client.addresses">
-              <tr>
-                <td></td>
-                <td></td>
-                <td>{{addr.name}}</td>
-                <td><i *ngFor="let contact of addr.contacts">{{contact.name}} {{contact.communication }} <br></i>
-                </td>
-              </tr>
-            </ng-container>
           </ng-container>
-        </tbody>
-      </table>
-    </div>
+        </ng-container>
+      </tbody>
+    </table>
   </div>
 </div>
 <app-client-editor (changed)="getData()"></app-client-editor>

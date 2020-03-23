@@ -16,27 +16,25 @@
     </div>
   </div>
   <div class="app-row">
-    <div class="col-8">
-      <h2>Товары</h2>
-      <table class="table table-bordered">
-        <thead>
+    <h2 class="block-title">Товары</h2>
+    <table class="app-table">
+      <thead>
+        <tr class="app-table__tr">
+          <th class="app-table__th"></th>
+          <th class="app-table__th">Название</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let product of products">
           <tr>
-            <th style="width: 70px;"></th>
-            <th>Название</th>
+            <td class="text-center">
+              <i class="fa fa-edit mr-2" (click)="editProduct(product)" aria-hidden="true"></i>
+              <i class="fa fa-trash" (click)="deleteProduct(product)" aria-hidden="true"></i></td>
+            <td>{{product.name}}</td>
           </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let product of products">
-            <tr>
-              <td class="text-center">
-                <i class="fa fa-edit mr-2" (click)="editProduct(product)" aria-hidden="true"></i>
-                <i class="fa fa-trash" (click)="deleteProduct(product)" aria-hidden="true"></i></td>
-              <td>{{product.name}}</td>
-            </tr>
-          </ng-container>
-        </tbody>
-      </table>
-    </div>
+        </ng-container>
+      </tbody>
+    </table>
   </div>
 </div>
 <app-edit-product (changed)="getData()"></app-edit-product>

@@ -16,26 +16,24 @@
     </div>
   </div>
   <div class="app-row">
-    <div class="col-5">
-      <h2>Категории машин</h2>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Название категории</th>
-          </tr>
+    <h2 class="block-title">Категории машин</h2>
+    <table class="app-table">
+      <thead>
+        <tr class="app-table__tr">
+          <th class="app-table__th"></th>
+          <th class="app-table__th">Название категории</th>
+        </tr>
 
-        </thead>
-        <tbody>
-          <tr *ngFor="let category of categories">
-            <td class="text-center">
-              <i class="fa fa-edit mr-2" (click)="edit(category)" aria-hidden="true"></i>
-              <i class="fa fa-trash" (click)="deleteCategory(category)" aria-hidden="true"></i></td>
-            <td>{{category.name}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories">
+          <td class="text-center">
+            <i class="fa fa-edit mr-2" (click)="edit(category)" aria-hidden="true"></i>
+            <i class="fa fa-trash" (click)="deleteCategory(category)" aria-hidden="true"></i></td>
+          <td>{{category.name}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 <app-edit-car-category (changed)="getData()"></app-edit-car-category>

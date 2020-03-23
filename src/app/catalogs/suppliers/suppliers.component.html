@@ -14,16 +14,15 @@
       </div>
   </div>
   <div class="app-row">
-    <div class="">
-      <h2>Поставщики</h2>
-      <table class="table table-bordered">
+      <h2 class="block-title">Поставщики</h2>
+      <table class="app-table">
         <thead>
-          <tr>
-            <th></th>
-            <th>Рабочее наименование</th>
-            <th>Юр.лицо</th>
-            <th>Местоположение</th>
-            <th>Номенклатура</th>
+          <tr class="app-table__tr">
+            <th class="app-table__th"></th>
+            <th class="app-table__th">Рабочее наименование</th>
+            <th class="app-table__th">Юр.лицо</th>
+            <th class="app-table__th">Местоположение</th>
+            <th class="app-table__th">Номенклатура</th>
           </tr>
 
         </thead>
@@ -42,7 +41,6 @@
           </ng-container>
         </tbody>
       </table>
-    </div>
   </div>
 </div>
 <app-supplier-editor (changed)="getData()"></app-supplier-editor>
