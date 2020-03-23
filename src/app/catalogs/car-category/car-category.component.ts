@@ -14,7 +14,6 @@ export class CarCategoryComponent implements OnInit {
 
   constructor(private httpSrv: HttpService, private toastr: ToastrService, public ngxSmartModalService: NgxSmartModalService) { }
   categories: CarCategory[] = [];
-  defaultCategory: CarCategory = new CarCategory();
   ngOnInit() {
     this.getData();
   }
@@ -28,7 +27,11 @@ export class CarCategoryComponent implements OnInit {
     this.getData();
   }
 
-  async edit(item: CarCategory) {
+  add() {
+    this.ngxSmartModalService.toggle(EditCarCategoryComponent.MODAL_NAME);
+  }
+
+  async update(item: CarCategory) {
     this.ngxSmartModalService.setModalData(item, EditCarCategoryComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(EditCarCategoryComponent.MODAL_NAME);
   }
