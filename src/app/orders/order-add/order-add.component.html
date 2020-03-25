@@ -32,7 +32,8 @@
                     </span>
                 </div>
                 <select class="form-control" [(ngModel)]="request.product"
-                    (change)="onProductChange(request.product?.id)" id="exampleFormControlSelect1">
+                    (ngModelChange)="onProductChange(request.product?.id)" id="exampleFormControlSelect1">
+                    <option [ngValue]="undefined"></option>
                     <option *ngFor="let product of products" [ngValue]="product">{{product.name}}</option>
                 </select>
             </div>
@@ -43,12 +44,19 @@
                         <div class="label">Поставщик</div>
                     </span>
                 </div>
-                <select class="form-control" [(ngModel)]="request.supplier" id="exampleFormControlSelect1">
+                <select class="form-control" [(ngModel)]="request.supplier" id="exampleFormControlSelect1"
+                    (ngModelChange)="onSupplierChange()"
+                >
+                    <option [ngValue]="undefined"></option>
                     <option *ngFor="let supplier of suppliers" [ngValue]="supplier">{{supplier.name}}</option>
                 </select>
                 <i (click)="addSupplier()" class="ml-2 fa fa-plus" aria-hidden="true"></i>
             </div>
 
+            <div  class="form-check">
+                <input disabled type="checkbox" class="form-check-input" id="" >
+                <label class="form-check-label" for="exampleCheck1">Перевозка без НДС</label>
+            </div>
             <div class="mb-2">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
@@ -70,7 +78,7 @@
                         <div class="label">Цена закупки</div>
                     </span>
                 </div>
-                <input type="number" [(ngModel)]="request.purchasePrice" class="form-control" aria-label="Small"
+                <input disabled type="number" [ngModel]="purchasePrice" class="form-control" aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm">
             </div>
             <div class=" input-group input-group-sm mb-3">
@@ -164,16 +172,21 @@
             <div class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
-                        <div class="label">Стоимость перевозки</div>
+                        <div class="label">Перевозчик</div>
                     </span>
                 </div>
                 <input disabled type="number" class="form-control" aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm">
             </div>
+            <div  class="form-check">
+                <input disabled type="checkbox" class="form-check-input" id="" >
+                <label class="form-check-label" for="exampleCheck1">Перевозка без НДС</label>
+            </div>
+
             <div class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
-                        <div class="label">Перевозчик</div>
+                        <div class="label">Стоимость перевозки</div>
                     </span>
                 </div>
                 <input disabled type="number" class="form-control" aria-label="Small"
@@ -193,5 +206,5 @@
     </div>
     <button (click)="add(request)" class="mt-2">Создать</button>
 </ngx-smart-modal>
-<app-client-editor></app-client-editor>
+<app-client-editor (changed)="onClientAdd()"></app-client-editor>
 <app-supplier-editor (changed)="onSupplierAdd()"></app-supplier-editor>

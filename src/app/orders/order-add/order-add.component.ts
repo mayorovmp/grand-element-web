@@ -24,6 +24,8 @@ export class OrderAddComponent implements OnInit {
 
   request: Request = new Request();
 
+  purchasePrice?: number;
+
   selectedClient?: Client = undefined;
   clients: Client[] = [];
 
@@ -67,6 +69,7 @@ export class OrderAddComponent implements OnInit {
     this.carCategoryHttp.getCarCategories().subscribe(
       x => this.carCategories = x);
   }
+
   reset() {
     this.selectedClient = undefined;
     this.clients = [];
@@ -84,11 +87,28 @@ export class OrderAddComponent implements OnInit {
     this.ngxSmartModalService.getModal(ClientEditorComponent.MODAL_NAME).open();
   }
 
+  onSupplierChange() {
+    if (this.request.supplier) {
+      const prod = this.request.product;
+      if (prod) {
+        const newProd = this.request.supplier.products.find(x => x.id === prod.id);
+        if (newProd) {
+          this.purchasePrice = newProd.price;
+        }
+      }
+    }
+  }
+
   async onProductChange(prodId: number) {
     if (!prodId) {
       return;
     }
     this.suppliers = await this.supplierHttp.getSuppliersByProdId(prodId).toPromise();
+  }
+
+  onClientAdd() {
+    this.clientHttp.getClients().subscribe(
+      x => this.clients = x);
   }
 
   onSupplierAdd() {
