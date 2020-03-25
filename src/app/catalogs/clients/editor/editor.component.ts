@@ -60,8 +60,10 @@ export class ClientEditorComponent implements OnInit {
   async createOrUpdate(item: Client) {
     if (item.id) {
       await this.httpSrv.edit(item).toPromise();
+      this.toastr.info('Изменено');
     } else {
-      this.httpSrv.add(item).subscribe(_ => this.toastr.info('Создано'));
+      await this.httpSrv.add(item).toPromise();
+      this.toastr.info('Создано');
     }
     this.changed.emit();
     this.ngxSmartModalService.toggle(ClientEditorComponent.MODAL_NAME);
