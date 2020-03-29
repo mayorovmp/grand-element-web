@@ -11,6 +11,15 @@
         aria-describedby="inputGroup-sizing-sm">
     </div>
 
+    <div class="form-group">
+      <label for="selectCarCategory">Категория автомобиля</label>
+      <select class="form-control" id="selectCarCategory" [(ngModel)]="car.carCategory" [compareWith]="byId">
+        <option [ngValue]="undefined"></option>
+        <option *ngFor="let opt of carCategories" [ngValue]="opt">
+          {{opt.name}}</option>
+      </select>
+    </div>
+
     <div class="input-group input-group-sm mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="inputGroup-sizing-sm">
@@ -21,7 +30,7 @@
         aria-describedby="inputGroup-sizing-sm">
     </div>
 
-    <div class="input-group input-group-sm mb-3">
+    <div hidden class="input-group input-group-sm mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="inputGroup-sizing-sm">
           <div class="label">Гос. номер</div>
@@ -29,15 +38,6 @@
       </div>
       <input type="text" [(ngModel)]="car.stateNumber" class="form-control" aria-label="Small"
         aria-describedby="inputGroup-sizing-sm">
-    </div>
-
-    <div class="form-group">
-      <label for="selectCarCategory">Категория автомобиля</label>
-      <select class="form-control" id="selectCarCategory" [(ngModel)]="car.carCategory" [compareWith]="byId">
-        <option [ngValue]="undefined"></option>
-        <option *ngFor="let opt of carCategories" [ngValue]="opt">
-          {{opt.name}}</option>
-      </select>
     </div>
 
     <div class="input-group input-group-sm mb-3">

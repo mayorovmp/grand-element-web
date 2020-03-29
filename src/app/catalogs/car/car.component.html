@@ -18,12 +18,11 @@
         <thead>
           <tr>
             <th></th>
-            <th>Владелец</th>
-            <th>Гос. номер</th>
+            <th>Собственник</th>
+            <th>Категория авто</th>
             <th>Цена перевозки</th>
             <th>Контакты</th>
-            <th>Комментарий</th>
-            <th>Категория авто</th>
+            <th>Комментарий(гос.номер)</th>
           </tr>
 
         </thead>
@@ -34,11 +33,10 @@
               <i class="fa fa-trash" (click)="delete(car)" aria-hidden="true"></i>
             </td>
             <td>{{car.owner}}</td>
-            <td>{{car.stateNumber}}</td>
+            <td>{{car.carCategory?.name}}</td>
             <td>{{car.freightPrice}}</td>
             <td>{{car.contacts}}</td>
             <td>{{car.comments}}</td>
-            <td>{{car.carCategory?.name}}</td>
           </tr>
         </tbody>
       </table>
