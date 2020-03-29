@@ -25,6 +25,17 @@
             </select>
         </div>
         <div class="req mt-2">
+
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Объем, тн</div>
+                    </span>
+                </div>
+                <input type="number" [(ngModel)]="request.amount" class="form-control" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
@@ -45,17 +56,50 @@
                     </span>
                 </div>
                 <select class="form-control" [(ngModel)]="request.supplier" id="exampleFormControlSelect1"
-                    (ngModelChange)="onSupplierChange()"
-                >
+                    (ngModelChange)="onSupplierChange()">
                     <option [ngValue]="undefined"></option>
                     <option *ngFor="let supplier of suppliers" [ngValue]="supplier">{{supplier.name}}</option>
                 </select>
                 <i (click)="addSupplier()" class="ml-2 fa fa-plus" aria-hidden="true"></i>
             </div>
+            <div class="form-check">
+                <input disabled type="checkbox" class="form-check-input" id="">
+                <label class="form-check-label" for="exampleCheck1">Поставщик без НДС</label>
+            </div>
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Цена закупки</div>
+                    </span>
+                </div>
+                <input disabled type="number" [ngModel]="purchasePrice" class="form-control" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
 
-            <div  class="form-check">
-                <input disabled type="checkbox" class="form-check-input" id="" >
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Перевозчик</div>
+                    </span>
+                </div>
+                <select class="form-control" [(ngModel)]="request.car">
+                    <option [ngValue]="undefined"></option>
+                    <option *ngFor="let car of cars" [ngValue]="car">{{car.owner}}</option>
+                </select>
+            </div>
+            <div class="form-check">
+                <input disabled type="checkbox" class="form-check-input" id="">
                 <label class="form-check-label" for="exampleCheck1">Перевозка без НДС</label>
+            </div>
+
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Стоимость перевозки</div>
+                    </span>
+                </div>
+                <input disabled type="number" class="form-control" [ngModel]="request.car?.freightPrice"
+                    aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
             <div class="mb-2">
                 <div class="input-group input-group-sm mb-3">
@@ -75,28 +119,10 @@
             <div class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
-                        <div class="label">Цена закупки</div>
-                    </span>
-                </div>
-                <input disabled type="number" [ngModel]="purchasePrice" class="form-control" aria-label="Small"
-                    aria-describedby="inputGroup-sizing-sm">
-            </div>
-            <div class=" input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">
                         <div class="label">Цена продажи</div>
                     </span>
                 </div>
                 <input type="number" [(ngModel)]="request.sellingPrice" class="form-control" aria-label="Small"
-                    aria-describedby="inputGroup-sizing-sm">
-            </div>
-            <div class=" input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">
-                        <div class="label">Цена перевозки за ед.</div>
-                    </span>
-                </div>
-                <input type="number" [(ngModel)]="request.freightPrice" class="form-control" aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm">
             </div>
             <div class=" input-group input-group-sm mb-3">
@@ -169,29 +195,6 @@
                 <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
-            <div class=" input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">
-                        <div class="label">Перевозчик</div>
-                    </span>
-                </div>
-                <input disabled type="number" class="form-control" aria-label="Small"
-                    aria-describedby="inputGroup-sizing-sm">
-            </div>
-            <div  class="form-check">
-                <input disabled type="checkbox" class="form-check-input" id="" >
-                <label class="form-check-label" for="exampleCheck1">Перевозка без НДС</label>
-            </div>
-
-            <div class=" input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">
-                        <div class="label">Стоимость перевозки</div>
-                    </span>
-                </div>
-                <input disabled type="number" class="form-control" aria-label="Small"
-                    aria-describedby="inputGroup-sizing-sm">
-            </div>
             <div class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">

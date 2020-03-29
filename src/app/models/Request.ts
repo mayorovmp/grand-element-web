@@ -13,6 +13,7 @@ export class Request {
   supplier?: Supplier;
   amountOut?: number;
   amountIn?: number;
+  amount?: number;
   deliveryStart?: Date = new Date();
   deliveryEnd?: Date = new Date();
   purchasePrice?: number;

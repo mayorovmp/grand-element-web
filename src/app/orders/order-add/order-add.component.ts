@@ -5,6 +5,7 @@ import { HttpService as ClientHttp } from 'src/app/catalogs/clients/http.service
 import { HttpService as ProductHttp } from 'src/app/catalogs/product/http.service';
 import { HttpService as ReqService } from 'src/app/orders/http.service';
 import { HttpService as SupplierHttp } from 'src/app/catalogs/suppliers/http.service';
+import { HttpService as CarHttp } from 'src/app/catalogs/car/http.service';
 import { HttpService as CarCategoryHttp } from 'src/app/catalogs/car-category/http.service';
 import { Product } from 'src/app/models/Product';
 import { Address } from 'src/app/models/Address';
@@ -13,6 +14,7 @@ import { CarCategory } from 'src/app/models/CarCategory';
 import { Request } from 'src/app/models/Request';
 import { ClientEditorComponent } from 'src/app/catalogs/clients/editor/editor.component';
 import { EditorComponent } from 'src/app/catalogs/suppliers/editor/editor.component';
+import { Car } from 'src/app/models/Car';
 
 @Component({
   selector: 'app-order-add',
@@ -28,6 +30,8 @@ export class OrderAddComponent implements OnInit {
 
   selectedClient?: Client = undefined;
   clients: Client[] = [];
+
+  cars: Car[] = [];
 
   selectedAddress?: Address = undefined;
 
@@ -48,7 +52,8 @@ export class OrderAddComponent implements OnInit {
     private productHttp: ProductHttp,
     private reqService: ReqService,
     private supplierHttp: SupplierHttp,
-    private carCategoryHttp: CarCategoryHttp) { }
+    private carCategoryHttp: CarCategoryHttp,
+    private carHttp: CarHttp) { }
 
   @Output() changed = new EventEmitter<any>();
 
@@ -68,6 +73,9 @@ export class OrderAddComponent implements OnInit {
 
     this.carCategoryHttp.getCarCategories().subscribe(
       x => this.carCategories = x);
+
+    this.carHttp.getCars().subscribe(
+      x => this.cars = x);
   }
 
   reset() {

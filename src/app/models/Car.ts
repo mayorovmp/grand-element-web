@@ -7,6 +7,7 @@ export class Car {
     public stateNumber?: string,
     public contacts?: string,
     public comments?: string,
+    public freightPrice?: number,
     public carCategory?: CarCategory) {
 
     // this.carCategory = new CarCategory();

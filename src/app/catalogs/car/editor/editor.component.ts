@@ -58,6 +58,7 @@ export class EditorComponent implements OnInit {
     } else {
       await this.httpSrv.add(item).toPromise();
     }
+    this.changed.emit();
     this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
   }
 }

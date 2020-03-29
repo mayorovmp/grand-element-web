@@ -22,6 +22,7 @@
                     <th>Дата <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Клиент <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Адрес доставки<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Объем, тнng<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Товар <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Поставщик <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Категория авто <i class="fa fa-sort" aria-hidden="true"></i></th>
@@ -46,6 +47,7 @@
                     <td>{{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
                     <td>{{req.client?.name}}</td>
                     <td>{{req.deliveryAddress?.name}}</td>
+                    <td>{{req.amount}}</td>
                     <td>{{req.product?.name}}</td>
                     <td>{{req.supplier?.name}}</td>
                     <td>{{req.carCategory?.name}}</td>
