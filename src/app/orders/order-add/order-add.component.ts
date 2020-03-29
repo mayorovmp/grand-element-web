@@ -26,8 +26,6 @@ export class OrderAddComponent implements OnInit {
 
   request: Request = new Request();
 
-  purchasePrice?: number;
-
   selectedClient?: Client = undefined;
   clients: Client[] = [];
 
@@ -79,6 +77,7 @@ export class OrderAddComponent implements OnInit {
   }
 
   reset() {
+    this.request = new Request();
     this.selectedClient = undefined;
     this.clients = [];
 
@@ -101,9 +100,17 @@ export class OrderAddComponent implements OnInit {
       if (prod) {
         const newProd = this.request.supplier.products.find(x => x.id === prod.id);
         if (newProd) {
-          this.purchasePrice = newProd.price;
+          this.request.purchasePrice = newProd.price;
         }
       }
+    }
+  }
+
+  onCarChange() {
+    if (this.request.car) {
+      const newCar = this.request.car;
+      this.request.freightPrice = newCar.freightPrice;
+      this.request.carCategory = newCar.carCategory;
     }
   }
 

@@ -25,7 +25,6 @@
             </select>
         </div>
         <div class="req mt-2">
-
             <div class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
@@ -62,17 +61,19 @@
                 </select>
                 <i (click)="addSupplier()" class="ml-2 fa fa-plus" aria-hidden="true"></i>
             </div>
+
             <div class="form-check">
                 <input disabled type="checkbox" class="form-check-input" id="">
                 <label class="form-check-label" for="exampleCheck1">Поставщик без НДС</label>
             </div>
+
             <div class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
                         <div class="label">Цена закупки</div>
                     </span>
                 </div>
-                <input disabled type="number" [ngModel]="purchasePrice" class="form-control" aria-label="Small"
+                <input disabled type="number" [ngModel]="request.purchasePrice" class="form-control" aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm">
             </div>
 
@@ -82,11 +83,12 @@
                         <div class="label">Перевозчик</div>
                     </span>
                 </div>
-                <select class="form-control" [(ngModel)]="request.car">
+                <select class="form-control" [(ngModel)]="request.car" (change)="onCarChange()">
                     <option [ngValue]="undefined"></option>
                     <option *ngFor="let car of cars" [ngValue]="car">{{car.owner}}</option>
                 </select>
             </div>
+
             <div class="form-check">
                 <input disabled type="checkbox" class="form-check-input" id="">
                 <label class="form-check-label" for="exampleCheck1">Перевозка без НДС</label>
@@ -95,11 +97,21 @@
             <div class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
-                        <div class="label">Стоимость перевозки</div>
+                        <div class="label">Еденицы измерения</div>
                     </span>
                 </div>
-                <input disabled type="number" class="form-control" [ngModel]="request.car?.freightPrice"
-                    aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input type="text" class="form-control" aria-label="Small" [(ngModel)]="request.unit"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Цена перевозки за ед.</div>
+                    </span>
+                </div>
+                <input disabled type="number" class="form-control" [ngModel]="request.freightPrice" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
             </div>
             <div class="mb-2">
                 <div class="input-group input-group-sm mb-3">
@@ -109,8 +121,10 @@
                         </span>
                     </div>
 
-                    <select class="form-control" [(ngModel)]="request.carCategory" id="exampleFormControlSelect1">
-                        <option *ngFor="let carCategory of carCategories" [ngValue]="carCategory">{{carCategory.name}}
+                    <select disabled class="form-control" [ngModel]="request.car?.carCategory?.id"
+                        id="exampleFormControlSelect1">
+                        <option *ngFor="let carCategory of carCategories" [ngValue]="carCategory.id">
+                            {{carCategory.name}}
                         </option>
                     </select>
                 </div>
@@ -125,36 +139,31 @@
                 <input type="number" [(ngModel)]="request.sellingPrice" class="form-control" aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm">
             </div>
-            <div class=" input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">
-                        <div class="label">Еденицы измерения</div>
-                    </span>
-                </div>
-                <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-            </div>
 
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="isLong">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="request.isLong">
                 <label class="form-check-label" for="exampleCheck1">Долгосрочная заявка</label>
             </div>
 
-            <div *ngIf="isLong" class=" input-group input-group-sm mb-3">
+            <div *ngIf="request.isLong" class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
                         <div class="label">Дата с</div>
                     </span>
                 </div>
-                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+                <input type="date" name="bday" [ngModel]="request.deliveryStart | date:'yyyy-MM-dd'"
+                    (ngModelChange)="request.deliveryStart = $event" min="1000-01-01" max="3000-12-31" class="">
             </div>
 
-            <div *ngIf="isLong" class=" input-group input-group-sm mb-3">
+            <div *ngIf="request.isLong" class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
                         <div class="label">Дата по</div>
                     </span>
                 </div>
-                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input type="date" name="bday" [ngModel]="request.deliveryEnd | date:'yyyy-MM-dd'"
+                    (ngModelChange)="request.deliveryEnd = $event" min="1000-01-01" max="3000-12-31" class="">
             </div>
         </div>
         <div class="req mt-2">
@@ -164,7 +173,8 @@
                         <div class="label">Вход, тн</div>
                     </span>
                 </div>
-                <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input type="number" class="form-control" [(ngModel)]="request.amountIn" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <div class=" input-group input-group-sm mb-3">
@@ -173,8 +183,20 @@
                         <div class="label">Выход, тн</div>
                     </span>
                 </div>
-                <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input type="number" class="form-control" [(ngModel)]="request.amountOut" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
             </div>
+
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Стоимость перевозки</div>
+                    </span>
+                </div>
+                <input disabled type="number" class="form-control" aria-label="Small" [ngModel]="request.freightCost"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+
 
             <div class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
@@ -182,7 +204,7 @@
                         <div class="label">Доход</div>
                     </span>
                 </div>
-                <input disabled type="number" class="form-control" aria-label="Small"
+                <input disabled type="number" class="form-control" aria-label="Small" [ngModel]="request.sellingCost"
                     aria-describedby="inputGroup-sizing-sm">
             </div>
 
@@ -192,16 +214,27 @@
                         <div class="label">Прибыль</div>
                     </span>
                 </div>
-                <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input type="number" class="form-control" aria-label="Small" [(ngModel)]="request.profit"
+                    aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <div class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
-                        <div class="label">Номер авто</div>
+                        <div class="label">Вознаграждение</div>
                     </span>
                 </div>
-                <input disabled type="number" class="form-control" aria-label="Small"
+                <input type="number" class="form-control" aria-label="Small" [(ngModel)]="request.reward"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+
+            <div class=" input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <div class="label">Комментарий</div>
+                    </span>
+                </div>
+                <input type="text" class="form-control" [(ngModel)]="request.comment" aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm">
             </div>
 

@@ -22,26 +22,28 @@
                     <th>Дата <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Клиент <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Адрес доставки<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Объем, тнng<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Объем, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Товар <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Поставщик <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Категория авто <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Цена закупки <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Цена продажи <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Цена перевозки <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Еденица измерения<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Контакты водителя <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Объем вход<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Объем выход<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Прибыль<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Стоимость перевозки<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Перевозчик<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Еденица измерения<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Цена перевозки <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Категория авто <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Цена продажи <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Вход, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Выход, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Стоимость перевозки<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Доход<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Прибыль<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Вознаграждение<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Комментарии<i class="fa fa-sort" aria-hidden="true"></i></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let req of requests">
                     <td class="text-center">
-                        <i class="fa fa-edit mr-2" aria-hidden="true"></i>
+                        <i hidden class="fa fa-edit mr-2" aria-hidden="true"></i>
                         <i (click)="del(req)" class="fa fa-trash" aria-hidden="true"></i></td>
                     <td>{{req.status}}</td>
                     <td>{{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
@@ -50,17 +52,19 @@
                     <td>{{req.amount}}</td>
                     <td>{{req.product?.name}}</td>
                     <td>{{req.supplier?.name}}</td>
+                    <td>{{req.purchasePrice}}</td>
+                    <td>{{req.car?.owner}}</td>
+                    <td>{{req.unit}}</td>
+                    <td>{{req.freightPrice}}</td>
                     <td>{{req.carCategory?.name}}</td>
                     <td>{{req.purchasePrice}}</td>
-                    <td>{{req.sellingPrice}}</td>
-                    <td>{{req.freightPrice}}</td>
-                    <td>{{req.unit}}</td>
-                    <td>{{req.car?.contacts}}</td>
                     <td>{{req.amountIn}}</td>
                     <td>{{req.amountOut}}</td>
-                    <td>{{req.profit}}</td>
                     <td>{{req.freightCost}}</td>
-                    <td>{{req.car?.owner}}</td>
+                    <td>{{req.sellingPrice}}</td>
+                    <td>{{req.profit}}</td>
+                    <td>{{req.reward}}</td>
+                    <td>{{req.comment}}</td>
 
                 </tr>
                 <ng-container *ngFor="let order of []">
@@ -120,51 +124,82 @@
     </div>
     <div class="longTerm-order">
         <h2 class="block-title">Долгосрочные заказы</h2>
-        <table hidden class="table table-bordered">
+
+        <table class="table table-bordered" style="font-size: 12px;">
             <thead>
                 <tr>
                     <th></th>
-                    <th>Статус <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Клиент <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Адрес <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Товар <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Кол-во <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Дата с<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Статус</th>
+                    <th>Дата с <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Дата по <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>
-                        Время
-                        <i class="fa fa-sort" aria-hidden="true"></i>
-                    </th>
+                    <th>Клиент <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Адрес доставки<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Объем, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Товар <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Поставщик <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Цена закупки <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Перевозчик<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Еденица измерения<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Цена перевозки <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Категория авто <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Цена продажи <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Вход, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Выход, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Стоимость перевозки<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Доход<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Прибыль<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Вознаграждение<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>Комментарии<i class="fa fa-sort" aria-hidden="true"></i></th>
                 </tr>
             </thead>
             <tbody>
+                <tr *ngFor="let req of longRequests">
+                    <td class="text-center">
+                        <i hidden class="fa fa-edit mr-2" aria-hidden="true"></i>
+                        <i (click)="del(req)" class="fa fa-trash" aria-hidden="true"></i></td>
+                    <td>{{req.status}}</td>
+                    <td>{{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
+                    <td>{{req.deliveryEnd | date: "dd.MM.yyyy"}}</td>
+                    <td>{{req.client?.name}}</td>
+                    <td>{{req.deliveryAddress?.name}}</td>
+                    <td>{{req.amount}}</td>
+                    <td>{{req.product?.name}}</td>
+                    <td>{{req.supplier?.name}}</td>
+                    <td>{{req.purchasePrice}}</td>
+                    <td>{{req.car?.owner}}</td>
+                    <td>{{req.unit}}</td>
+                    <td>{{req.freightPrice}}</td>
+                    <td>{{req.carCategory?.name}}</td>
+                    <td>{{req.purchasePrice}}</td>
+                    <td>{{req.amountIn}}</td>
+                    <td>{{req.amountOut}}</td>
+                    <td>{{req.freightCost}}</td>
+                    <td>{{req.sellingPrice}}</td>
+                    <td>{{req.profit}}</td>
+                    <td>{{req.reward}}</td>
+                    <td>{{req.comment}}</td>
+
+                </tr>
                 <ng-container *ngFor="let order of []">
                     <ng-container *ngIf="order.expanded">
                         <ng-container *ngFor="let req of order.requests">
                             <tr>
                                 <td>
-                                    <i class="fa fa-angle-down  fa-2x" aria-hidden="true"></i>
                                     <i class="fa fa-edit"></i>
-                                </td>
-                                <td>
-                                    {{ req.status }}
-                                </td>
-                                <td>{{ order.client.name }}</td>
-                                <td>
-                                    {{ req.product }}
-                                </td>
-                                <td>{{ order.client.address }}</td>
-                                <td>
-                                    {{ req.quantity }}
                                 </td>
                                 <td>
                                     {{ req.startDate }}
                                 </td>
                                 <td>
-                                    {{ req.endDate }}
+                                    {{ req.status }}
+                                </td>
+                                <td>{{ req.client?.name }}</td>
+                                <td>{{ req.client?.address }}</td>
+                                <td>
+                                    {{ req.product }}
                                 </td>
                                 <td>
-                                    {{ req.time }}
+                                    {{ req.quantity }}
                                 </td>
                             </tr>
 
@@ -174,20 +209,23 @@
                                     <th></th>
                                     <th>Статус</th>
                                     <th>Категория авто</th>
-                                    <th>Рейсов запланировано</th>
-                                    <th>Рейсов осталось</th>
+                                    <th>Рейсов</th>
+                                    <th>Гос.номер</th>
+                                    <th>Контакты</th>
+                                    <th>Загрузка</th>
                                 </tr>
                                 <ng-container *ngFor="let car of req.cars">
                                     <tr>
                                         <td></td>
                                         <td style="text-align: right;">
                                             <i class="fa fa-edit"></i>
-                                            <i class="fa fa-truck" aria-hidden="true"></i>
                                         </td>
-                                        <td>{{ req.status }}</td>
+                                        <td>Выпонен</td>
                                         <td>{{ car.category }}</td>
                                         <td>{{ car.amount }}</td>
-                                        <td>{{ car.amount }}</td>
+                                        <td>{{ car.num }}</td>
+                                        <td>{{ car.contact }}</td>
+                                        <td>1</td>
                                     </tr>
                                 </ng-container>
                             </ng-container>

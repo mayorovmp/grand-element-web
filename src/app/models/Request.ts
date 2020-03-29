@@ -8,9 +8,11 @@ import { CarCategory } from './CarCategory';
 
 export class Request {
   id?: number;
+  client?: Client;
   product?: Product;
   deliveryAddress?: Address;
   supplier?: Supplier;
+  car?: Car;
   amountOut?: number;
   amountIn?: number;
   amount?: number;
@@ -21,9 +23,11 @@ export class Request {
   freightPrice?: number;
   unit?: string;
   freightCost?: number;
+  sellingCost?: number;
   profit?: number;
-  client?: Client;
+  reward?: number;
   carCategory?: CarCategory;
-  car?: Car;
   status?: string;
+  comment?: string;
+  isLong?: number;
 }
