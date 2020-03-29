@@ -26,11 +26,11 @@
         </thead>
         <tbody>
           <ng-container *ngFor="let client of clients">
-            <ng-container *ngFor="let addr of client.addresses">
+            <ng-container *ngFor="let addr of client.addresses; let addrIndx = index">
               <tr>
                 <td class="text-center">
-                  <i class="fa fa-edit mr-2" aria-hidden="true" (click)="edit(client)"></i>
-                  <i class="fa fa-trash" (click)="delete(client)" aria-hidden="true"></i></td>
+                  <i *ngIf="addrIndx==0" class="fa fa-edit mr-2" aria-hidden="true" (click)="edit(client)"></i>
+                  <i *ngIf="addrIndx==0" class="fa fa-trash" (click)="delete(client)" aria-hidden="true"></i></td>
                 <td>{{client?.name}}</td>
                 <td>{{addr.name}}</td>
                 <td><i *ngFor="let contact of addr.contacts">{{contact.name}} {{contact.communication }} <br></i>
