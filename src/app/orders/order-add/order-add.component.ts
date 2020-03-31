@@ -111,6 +111,8 @@ export class OrderAddComponent implements OnInit {
       const newCar = this.request.car;
       this.request.freightPrice = newCar.freightPrice;
       this.request.carCategory = newCar.carCategory;
+      this.request.unit = newCar.unit;
+      this.request.carVat = newCar.vat;
     }
   }
 

@@ -30,13 +30,23 @@
         aria-describedby="inputGroup-sizing-sm">
     </div>
 
-    <div hidden class="input-group input-group-sm mb-3">
+    <div class="input-group input-group-sm mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="inputGroup-sizing-sm">
-          <div class="label">Гос. номер</div>
+          <div class="label">Включен ли НДС</div>
         </span>
       </div>
-      <input type="text" [(ngModel)]="car.stateNumber" class="form-control" aria-label="Small"
+      <input type="checkbox" [(ngModel)]="car.vat" class="form-control" aria-label="Small"
+        aria-describedby="inputGroup-sizing-sm">
+    </div>
+
+    <div class="input-group input-group-sm mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">
+          <div class="label">Еденица измерения</div>
+        </span>
+      </div>
+      <input type="text" [(ngModel)]="car.unit" class="form-control" aria-label="Small"
         aria-describedby="inputGroup-sizing-sm">
     </div>
 

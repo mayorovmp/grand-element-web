@@ -90,8 +90,8 @@
             </div>
 
             <div class="form-check">
-                <input disabled type="checkbox" class="form-check-input" id="">
-                <label class="form-check-label" for="exampleCheck1">Перевозка без НДС</label>
+                <input disabled type="checkbox" [ngModel]="request.carVat" class="form-check-input" id="">
+                <label class="form-check-label" for="exampleCheck1">Перевозка НДС включен</label>
             </div>
 
             <div class=" input-group input-group-sm mb-3">
@@ -100,7 +100,7 @@
                         <div class="label">Еденицы измерения</div>
                     </span>
                 </div>
-                <input type="text" class="form-control" aria-label="Small" [(ngModel)]="request.unit"
+                <input disabled type="text" class="form-control" aria-label="Small" [(ngModel)]="request.unit"
                     aria-describedby="inputGroup-sizing-sm">
             </div>
 

@@ -21,6 +21,8 @@
             <th>Собственник</th>
             <th>Категория авто</th>
             <th>Цена перевозки</th>
+            <th>Включен ли НДС</th>
+            <th>Еденица измерения</th>
             <th>Контакты</th>
             <th>Комментарий(гос.номер)</th>
           </tr>
@@ -35,6 +37,8 @@
             <td>{{car.owner}}</td>
             <td>{{car.carCategory?.name}}</td>
             <td>{{car.freightPrice}}</td>
+            <td><input disabled type="checkbox" [ngModel]="car.vat"></td>
+            <td>{{car.unit}}</td>
             <td>{{car.contacts}}</td>
             <td>{{car.comments}}</td>
           </tr>
