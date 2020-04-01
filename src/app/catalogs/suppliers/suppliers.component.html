@@ -18,6 +18,7 @@
             <th></th>
             <th>Рабочее наименование</th>
             <th>Юр.лицо</th>
+            <th>НДС включен</th>
             <th>Местоположение</th>
             <th>Номенклатура</th>
           </tr>
@@ -30,6 +31,7 @@
                   (click)="deleteSupplier(supplier.id)" aria-hidden="true"></i></td>
               <td>{{supplier.name}}</td>
               <td>{{supplier.legalEntity}}</td>
+              <td> <input disabled type="checkbox" [ngModel]="supplier.vat"></td>
               <td>{{supplier.address}}</td>
               <td> <span *ngFor="let prod of supplier.products"><i>{{prod.name}} <b
                       *ngIf="prod.price">({{prod.price}}р)</b>
