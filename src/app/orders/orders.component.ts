@@ -69,9 +69,14 @@ export class OrdersComponent implements OnInit {
     );
   }
 
+  async del(req: Request) {
+    await this.http.del(req).toPromise();
+    this.getData();
+  }
+
   async getData() {
     this.http.getRequests().subscribe(
-      x => this.requests = x,
+      x => { this.requests = x.filter(r => !r.isLong); this.longRequests = x.filter(r => r.isLong); },
       e => this.toastr.error(e.message)
     );
   }

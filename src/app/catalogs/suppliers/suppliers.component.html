@@ -1,17 +1,13 @@
 <div class="app-container">
   <div class="app-row">
-      <div class="catalogs-adding-block">
-        <button 
-            type="submit"
-            (click)="add()" 
-            class="app-btn gray-btn catalogs-adding-block__btn"
-        >
-          Добавить
-        </button>
-        <small class="catalogs-adding-block__text">
-          Если не нашли нужного поставщика, то добавьте его.
-        </small>
-      </div>
+    <div class="catalogs-adding-block">
+      <button type="submit" (click)="add()" class="app-btn gray-btn catalogs-adding-block__btn">
+        Добавить
+      </button>
+      <small class="catalogs-adding-block__text">
+        Если не нашли нужного поставщика, то добавьте его.
+      </small>
+    </div>
   </div>
   <div class="app-row">
       <h2 class="block-title">Поставщики</h2>
@@ -21,6 +17,7 @@
             <th class="app-table__th"></th>
             <th class="app-table__th">Рабочее наименование</th>
             <th class="app-table__th">Юр.лицо</th>
+            <th class="app-table__th">НДС включен</th>
             <th class="app-table__th">Местоположение</th>
             <th class="app-table__th">Номенклатура</th>
           </tr>
@@ -33,6 +30,7 @@
                   (click)="deleteSupplier(supplier.id)" aria-hidden="true"></i></td>
               <td>{{supplier.name}}</td>
               <td>{{supplier.legalEntity}}</td>
+              <td> <input disabled type="checkbox" [ngModel]="supplier.vat"></td>
               <td>{{supplier.address}}</td>
               <td> <span *ngFor="let prod of supplier.products"><i>{{prod.name}} <b
                       *ngIf="prod.price">({{prod.price}}р)</b>

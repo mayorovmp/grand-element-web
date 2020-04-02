@@ -2,11 +2,7 @@
   <div class="app-row">
     <div class="col-5">
       <div class="catalogs-adding-block">
-        <button 
-            type="submit"
-            (click)="createOrUpdate(defaultCar)"
-            class="app-btn gray-btn catalogs-adding-block__btn"
-        >
+        <button type="submit" (click)="add()" class="app-btn gray-btn catalogs-adding-block__btn">
           Добавить
         </button>
         <small class="catalogs-adding-block__text">
@@ -21,11 +17,13 @@
       <thead>
         <tr class="app-table__tr">
           <th class="app-table__th"></th>
-          <th class="app-table__th">Владелец</th>
-          <th class="app-table__th">Гос. номер</th>
-          <th class="app-table__th">Контакты</th>
-          <th class="app-table__th">Комментарий</th>
+          <th class="app-table__th">Собственник</th>
           <th class="app-table__th">Категория авто</th>
+          <th class="app-table__th">Цена перевозки</th>
+          <th class="app-table__th">Включен ли НДС</th>
+          <th class="app-table__th">Еденица измерения</th>
+          <th class="app-table__th">Контакты</th>
+          <th class="app-table__th">Комментарий(гос.номер)</th>
         </tr>
 
       </thead>
@@ -36,10 +34,12 @@
             <i class="fa fa-trash" (click)="delete(car)" aria-hidden="true"></i>
           </td>
           <td>{{car.owner}}</td>
-          <td>{{car.stateNumber}}</td>
+          <td>{{car.carCategory?.name}}</td>
+          <td>{{car.freightPrice}}</td>
+          <td><input disabled type="checkbox" [ngModel]="car.vat"></td>
+          <td>{{car.unit}}</td>
           <td>{{car.contacts}}</td>
           <td>{{car.comments}}</td>
-          <td>{{car.carCategory?.name}}</td>
         </tr>
       </tbody>
     </table>

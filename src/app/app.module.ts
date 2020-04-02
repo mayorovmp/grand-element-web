@@ -34,10 +34,9 @@ import { EditCarCategoryComponent } from './catalogs/car-category/editor/edit.co
 import { OrdersComponent } from './orders/orders.component';
 import { OrderAddComponent } from './orders/order-add/order-add.component';
 import { ClientsComponent } from './catalogs/clients/clients.component';
-import { ClientAddComponent } from './catalogs/clients/client-add/client-add.component';
 import { SuppliersComponent } from './catalogs/suppliers/suppliers.component';
 import { EditorComponent as SupplierEditorComponent } from './catalogs/suppliers/editor/editor.component';
-import { EditorComponent as ClientEditorComponent } from './catalogs/clients/editor/editor.component';
+import { ClientEditorComponent } from './catalogs/clients/editor/editor.component';
 import { ProductComponent } from './catalogs/product/product.component';
 import { EditProductComponent } from './catalogs/product/editor-product/edit-product.component';
 import { EditorComponent } from './catalogs/car/editor/editor.component';
@@ -59,7 +58,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     OrdersComponent,
     OrderAddComponent,
     ClientsComponent,
-    ClientAddComponent,
     SuppliersComponent,
     ProductComponent,
     EditProductComponent,

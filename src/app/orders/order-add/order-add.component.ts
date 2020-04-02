@@ -1,15 +1,20 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { ClientAddComponent } from 'src/app/catalogs/clients/client-add/client-add.component';
 import { Client } from 'src/app/models/Client';
 import { HttpService as ClientHttp } from 'src/app/catalogs/clients/http.service';
 import { HttpService as ProductHttp } from 'src/app/catalogs/product/http.service';
+import { HttpService as ReqService } from 'src/app/orders/http.service';
 import { HttpService as SupplierHttp } from 'src/app/catalogs/suppliers/http.service';
+import { HttpService as CarHttp } from 'src/app/catalogs/car/http.service';
 import { HttpService as CarCategoryHttp } from 'src/app/catalogs/car-category/http.service';
 import { Product } from 'src/app/models/Product';
 import { Address } from 'src/app/models/Address';
 import { Supplier } from 'src/app/models/Supplier';
 import { CarCategory } from 'src/app/models/CarCategory';
+import { Request } from 'src/app/models/Request';
+import { ClientEditorComponent } from 'src/app/catalogs/clients/editor/editor.component';
+import { EditorComponent } from 'src/app/catalogs/suppliers/editor/editor.component';
+import { Car } from 'src/app/models/Car';
 
 @Component({
   selector: 'app-order-add',
@@ -19,8 +24,12 @@ import { CarCategory } from 'src/app/models/CarCategory';
 export class OrderAddComponent implements OnInit {
   static MODAL_NAME = 'orderAddModal';
 
+  request: Request = new Request();
+
   selectedClient?: Client = undefined;
   clients: Client[] = [];
+
+  cars: Car[] = [];
 
   selectedAddress?: Address = undefined;
 
@@ -30,15 +39,19 @@ export class OrderAddComponent implements OnInit {
   selectedSupplier?: Supplier = undefined;
   suppliers: Supplier[] = [];
 
+  isLong = false;
+
   selectedCarCategory?: CarCategory = undefined;
   carCategories: CarCategory[] = [];
 
   constructor(
-    public ngxSmartModalService: NgxSmartModalService,
-    public clientHttp: ClientHttp,
-    public productHttp: ProductHttp,
-    public supplierHttp: SupplierHttp,
-    public carCategoryHttp: CarCategoryHttp) { }
+    private ngxSmartModalService: NgxSmartModalService,
+    private clientHttp: ClientHttp,
+    private productHttp: ProductHttp,
+    private reqService: ReqService,
+    private supplierHttp: SupplierHttp,
+    private carCategoryHttp: CarCategoryHttp,
+    private carHttp: CarHttp) { }
 
   @Output() changed = new EventEmitter<any>();
 
@@ -58,8 +71,13 @@ export class OrderAddComponent implements OnInit {
 
     this.carCategoryHttp.getCarCategories().subscribe(
       x => this.carCategories = x);
+
+    this.carHttp.getCars().subscribe(
+      x => this.cars = x);
   }
+
   reset() {
+    this.request = new Request();
     this.selectedClient = undefined;
     this.clients = [];
 
@@ -73,11 +91,57 @@ export class OrderAddComponent implements OnInit {
   }
 
   addClient() {
-    this.ngxSmartModalService.getModal(ClientAddComponent.MODAL_NAME).open();
+    this.ngxSmartModalService.getModal(ClientEditorComponent.MODAL_NAME).open();
+  }
+
+  onSupplierChange() {
+    if (this.request.supplier) {
+      this.request.supplierVat = this.request.supplier.vat;
+      const prod = this.request.product;
+      if (prod) {
+        const newProd = this.request.supplier.products.find(x => x.id === prod.id);
+        if (newProd) {
+          this.request.purchasePrice = newProd.price;
+        }
+      }
+    }
+  }
+
+  onCarChange() {
+    if (this.request.car) {
+      const newCar = this.request.car;
+      this.request.freightPrice = newCar.freightPrice;
+      this.request.carCategory = newCar.carCategory;
+      this.request.unit = newCar.unit;
+      this.request.carVat = newCar.vat;
+    }
+  }
+
+  async onProductChange(prodId: number) {
+    if (!prodId) {
+      return;
+    }
+    this.suppliers = await this.supplierHttp.getSuppliersByProdId(prodId).toPromise();
+  }
+
+  onClientAdd() {
+    this.clientHttp.getClients().subscribe(
+      x => this.clients = x);
+  }
+
+  onSupplierAdd() {
+
+    this.supplierHttp.getSuppliers().subscribe(
+      x => this.suppliers = x);
 
   }
 
-  add() {
+  addSupplier() {
+    this.ngxSmartModalService.getModal(EditorComponent.MODAL_NAME).open();
+  }
+
+  async add(req: Request) {
+    await this.reqService.add(req).toPromise();
     this.changed.emit();
     this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).close();
   }

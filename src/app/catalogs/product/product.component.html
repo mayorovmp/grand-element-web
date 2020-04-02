@@ -4,7 +4,7 @@
       <div class="catalogs-adding-block">
         <button 
             type="submit"
-            (click)="editProduct(defaultProduct)"
+            (click)="add()"
             class="app-btn gray-btn catalogs-adding-block__btn"
         >
           Добавить
@@ -28,13 +28,14 @@
         <ng-container *ngFor="let product of products">
           <tr>
             <td class="text-center">
-              <i class="fa fa-edit mr-2" (click)="editProduct(product)" aria-hidden="true"></i>
+              <i class="fa fa-edit mr-2" (click)="edit(product)" aria-hidden="true"></i>
               <i class="fa fa-trash" (click)="deleteProduct(product)" aria-hidden="true"></i></td>
             <td>{{product.name}}</td>
           </tr>
-        </ng-container>
-      </tbody>
-    </table>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <app-edit-product (changed)="getData()"></app-edit-product>
