@@ -26,6 +26,7 @@ export class Request {
   sellingCost?: number;
   profit?: number;
   reward?: number;
+  supplierVat?: boolean;
   carVat?: boolean;
   carCategory?: CarCategory;
   status?: string;

@@ -63,8 +63,9 @@
             </div>
 
             <div class="form-check">
-                <input disabled type="checkbox" class="form-check-input" id="">
-                <label class="form-check-label" for="exampleCheck1">Поставщик без НДС</label>
+                <input disabled type="checkbox" [ngModel]="request.supplierVat" id="supplierVat"
+                    class="form-check-input">
+                <label class="form-check-label" for="supplierVat">Поставщик без НДС</label>
             </div>
 
             <div class=" input-group input-group-sm mb-3">

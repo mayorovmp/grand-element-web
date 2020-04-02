@@ -96,6 +96,7 @@ export class OrderAddComponent implements OnInit {
 
   onSupplierChange() {
     if (this.request.supplier) {
+      this.request.supplierVat = this.request.supplier.vat;
       const prod = this.request.product;
       if (prod) {
         const newProd = this.request.supplier.products.find(x => x.id === prod.id);
