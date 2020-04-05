@@ -102,10 +102,20 @@ a:hover {
     padding: 8px;
     text-align: center;
 }
-
+.app-table-heading-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .app-table__td {
     border-right: 1px solid #dee2e6;
     padding: 8px;
+    text-align: center;
+}
+.app-table__sorting-img{
+    width: 24px;
+    height: 24px;
+    margin-left: 12px;
 }
 .btn-container{
     display: flex;

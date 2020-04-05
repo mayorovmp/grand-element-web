@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];
+  nameSorting: string = 'none';
   constructor(private httpSrv: HttpService, private toastr: ToastrService, private ngxSmartModalService: NgxSmartModalService) { }
 
   async ngOnInit() {
@@ -35,4 +36,15 @@ export class ProductComponent implements OnInit {
     this.ngxSmartModalService.setModalData(item, EditProductComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(EditProductComponent.MODAL_NAME);
   }
+
+  sortedByName = () => {
+    if (this.nameSorting === 'none' || this.nameSorting === 'reverse'){
+      this.products.sort((a, b) => a.name.localeCompare(b.name));
+      this.nameSorting = 'direct';
+    } else if (this.nameSorting === 'direct'){
+      this.products.sort((a, b) => b.name.localeCompare(a.name));
+      this.nameSorting = 'reverse';
+    }
+  }
+
 }

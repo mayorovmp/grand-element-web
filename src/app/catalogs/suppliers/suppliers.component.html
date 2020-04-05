@@ -19,7 +19,19 @@
         <table class="app-table">
           <thead>
             <tr class="app-table__tr">
-              <th class="app-table__th">Рабочее наименование</th>
+              <th 
+                class="app-table__th" 
+                (click)="sortedByName()"
+              >
+                <div class="app-table-heading-content">
+                  Рабочее наименование
+                  <img
+                    src="assets/img/icons/sort-{{nameSorting}}.svg"
+                    class="app-table__sorting-img" 
+                    alt=""
+                  >
+                </div>
+              </th>
               <th class="app-table__th">Юр.лицо</th>
               <th class="app-table__th">НДС включен</th>
               <th class="app-table__th">Местоположение</th>

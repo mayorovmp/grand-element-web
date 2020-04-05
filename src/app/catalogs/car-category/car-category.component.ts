@@ -11,7 +11,7 @@ import { EditCarCategoryComponent } from './editor/edit.component';
   styleUrls: ['../catalogs.component.css', './car-category.component.css']
 })
 export class CarCategoryComponent implements OnInit {
-
+  nameSorting: string = 'none';
   constructor(private httpSrv: HttpService, private toastr: ToastrService, public ngxSmartModalService: NgxSmartModalService) { }
   categories: CarCategory[] = [];
   ngOnInit() {
@@ -42,5 +42,14 @@ export class CarCategoryComponent implements OnInit {
 
   private handleError() {
     this.toastr.error('При загрузке данных произошла ошибка');
+  }
+  sortedByName = () => {
+    if (this.nameSorting === 'none' || this.nameSorting === 'reverse'){
+      this.categories.sort((a, b) => a.name.localeCompare(b.name));
+      this.nameSorting = 'direct';
+    } else if (this.nameSorting === 'direct'){
+      this.categories.sort((a, b) => b.name.localeCompare(a.name));
+      this.nameSorting = 'reverse';
+    }
   }
 }

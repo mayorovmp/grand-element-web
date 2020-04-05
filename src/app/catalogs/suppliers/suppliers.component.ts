@@ -12,7 +12,7 @@ import { EditorComponent } from './editor/editor.component';
 export class SuppliersComponent implements OnInit {
 
   suppliers: Supplier[] = [];
-
+  nameSorting: string = 'none';
   constructor(public ngxSmartModalService: NgxSmartModalService, private httpSrv: HttpService) { }
 
   ngOnInit() {
@@ -35,5 +35,15 @@ export class SuppliersComponent implements OnInit {
   async deleteSupplier(id: number) {
     await this.httpSrv.deleteSupplier(id).toPromise();
     this.getData();
+  }
+
+  sortedByName = () => {
+    if (this.nameSorting === 'none' || this.nameSorting === 'reverse'){
+      this.suppliers.sort((a, b) => a.name.localeCompare(b.name));
+      this.nameSorting = 'direct';
+    } else if (this.nameSorting === 'direct'){
+      this.suppliers.sort((a, b) => b.name.localeCompare(a.name));
+      this.nameSorting = 'reverse';
+    }
   }
 }
