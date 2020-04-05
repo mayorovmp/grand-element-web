@@ -14,6 +14,7 @@ export class Request {
   supplier?: Supplier;
   car?: Car;
   amountOut?: number;
+  amountComplete?: number;
   amountIn?: number;
   amount?: number;
   deliveryStart?: Date = new Date();

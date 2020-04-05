@@ -157,7 +157,7 @@
                     <td class="text-center">
                         <i hidden class="fa fa-edit mr-2" aria-hidden="true"></i>
                         <i (click)="del(req)" class="fa fa-trash" aria-hidden="true"></i></td>
-                    <td>{{req.status}}</td>
+                    <td>{{req.amountComplete}}/{{req.amount}}</td>
                     <td>{{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
                     <td>{{req.deliveryEnd | date: "dd.MM.yyyy"}}</td>
                     <td>{{req.client?.name}}</td>
