@@ -136,18 +136,18 @@
                     <th>Адрес доставки<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Объем, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Товар <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Поставщик <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Цена закупки <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Перевозчик<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Еденица измерения<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Цена перевозки <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Категория авто <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden>Поставщик <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden>Цена закупки <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden>Перевозчик<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden>Еденица измерения<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden>Цена перевозки <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden>Категория авто <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Цена продажи <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Вход, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Выход, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Стоимость перевозки<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Доход<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Прибыль<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden>Вход, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden>Выход, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden>Стоимость перевозки<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden>Доход<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden>Прибыль<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Вознаграждение<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th>Комментарии<i class="fa fa-sort" aria-hidden="true"></i></th>
                 </tr>
@@ -164,18 +164,18 @@
                     <td>{{req.deliveryAddress?.name}}</td>
                     <td>{{req.amount}}</td>
                     <td>{{req.product?.name}}</td>
-                    <td>{{req.supplier?.name}}</td>
-                    <td>{{req.purchasePrice}}</td>
-                    <td>{{req.car?.owner}}</td>
-                    <td>{{req.unit}}</td>
-                    <td>{{req.freightPrice}}</td>
-                    <td>{{req.carCategory?.name}}</td>
-                    <td>{{req.purchasePrice}}</td>
-                    <td>{{req.amountIn}}</td>
-                    <td>{{req.amountOut}}</td>
-                    <td>{{req.freightCost}}</td>
+                    <td hidden>{{req.supplier?.name}}</td>
+                    <td hidden>{{req.purchasePrice}}</td>
+                    <td hidden>{{req.car?.owner}}</td>
+                    <td hidden>{{req.unit}}</td>
+                    <td hidden>{{req.freightPrice}}</td>
+                    <td hidden>{{req.carCategory?.name}}</td>
                     <td>{{req.sellingPrice}}</td>
-                    <td>{{req.profit}}</td>
+                    <td hidden>{{req.amountIn}}</td>
+                    <td hidden>{{req.amountOut}}</td>
+                    <td hidden>{{req.freightCost}}</td>
+                    <td hidden>{{req.sellingPrice}}</td>
+                    <td hidden>{{req.profit}}</td>
                     <td>{{req.reward}}</td>
                     <td>{{req.comment}}</td>
 

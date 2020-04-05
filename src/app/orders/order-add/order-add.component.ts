@@ -104,6 +104,9 @@ export class OrderAddComponent implements OnInit {
           this.request.purchasePrice = newProd.price;
         }
       }
+    } else {
+      this.request.supplierVat = undefined;
+      this.request.purchasePrice = undefined;
     }
   }
 
@@ -114,6 +117,11 @@ export class OrderAddComponent implements OnInit {
       this.request.carCategory = newCar.carCategory;
       this.request.unit = newCar.unit;
       this.request.carVat = newCar.vat;
+    } else {
+      this.request.freightPrice = undefined;
+      this.request.carCategory = undefined;
+      this.request.unit = undefined;
+      this.request.carVat = undefined;
     }
   }
 
