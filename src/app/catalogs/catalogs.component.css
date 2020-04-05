@@ -12,3 +12,7 @@
     max-width: 150px;
     margin-bottom: 12px;
 }
+.table-container{
+    overflow-x: scroll;
+    width: 100%;
+  }

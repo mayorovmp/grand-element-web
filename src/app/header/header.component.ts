@@ -11,6 +11,8 @@ import { Catalog } from '../models/Catalog';
 export class NavbarComponent implements OnInit {
 
   logoSrc = require('./logo.svg');
+  mobileNavActive = false;
+  mobileBtnActive = false;
 
   catalogs: Catalog[] = [
     new Catalog('Клиенты', ['catalog/clients']),
@@ -23,6 +25,11 @@ export class NavbarComponent implements OnInit {
   constructor(public auth: AuthService, private router: Router, ) { }
 
   ngOnInit() {
+  }
+
+  public toggleMenu = () => {
+    this.mobileNavActive = !this.mobileNavActive;
+    this.mobileBtnActive = !this.mobileBtnActive;
   }
 
   public logout() {

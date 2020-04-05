@@ -90,16 +90,27 @@ a:hover {
     margin-bottom: 1rem;
     color: #212529;
     border: 1px solid #dee2e6;
+    font-size: 13px;
 }
 .app-table__tr {
-    display: flex;
+    border-bottom: 1px solid #dee2e6;
 }
 .app-table__th {
     border-right: 1px solid #dee2e6;
     border-left: 1px solid #dee2e6;
     border-top: 1px solid #dee2e6;
     padding: 8px;
-    font-size: 14px;
-    display: flex;
-    flex-grow: 1;
+}
+
+.app-table__td {
+    border-right: 1px solid #dee2e6;
+    padding: 8px;
+}
+@media (max-width: 996px){
+    .app-container-fluid {
+        padding: 24px
+    }
+    .app-container {
+        padding: 24px
+    }
 }

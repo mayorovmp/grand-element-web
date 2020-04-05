@@ -1,39 +1,38 @@
 <div class="app-container">
   <div class="app-row">
-    <div class="col-5">
-      <div class="catalogs-adding-block">
-        <button 
-            type="submit"
-            (click)="add()"
-            class="app-btn gray-btn catalogs-adding-block__btn"
-        >
-          Добавить
-        </button>
-        <small class="catalogs-adding-block__text">
-          Если не нашли нужную категорию, то добавьте ее.
-        </small>
-      </div>
+    <div class="catalogs-adding-block">
+      <button 
+          type="submit"
+          (click)="add()"
+          class="app-btn gray-btn catalogs-adding-block__btn"
+      >
+        Добавить
+      </button>
+      <p class="catalogs-adding-block__text">
+        Если не нашли нужную категорию, то добавьте ее.
+      </p>
     </div>
   </div>
   <div class="app-row">
     <h2 class="block-title">Категории машин</h2>
-    <table class="app-table">
-      <thead>
-        <tr class="app-table__tr">
-          <th class="app-table__th"></th>
-          <th class="app-table__th">Название категории</th>
-        </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let category of categories">
-            <td class="text-center">
-              <i class="fa fa-edit mr-2" (click)="update(category)" aria-hidden="true"></i>
-              <i class="fa fa-trash" (click)="deleteCategory(category)" aria-hidden="true"></i></td>
-            <td>{{category.name}}</td>
+    <div class="table-container">
+      <table class="app-table">
+        <thead>
+          <tr class="app-table__tr">
+            <th class="app-table__th"></th>
+            <th class="app-table__th">Название категории</th>
           </tr>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of categories" class="app-table__tr">
+              <td class="text-center app-table__td">
+                <i class="fa fa-edit mr-2" (click)="update(category)" aria-hidden="true"></i>
+                <i class="fa fa-trash" (click)="deleteCategory(category)" aria-hidden="true"></i></td>
+              <td class="app-table__td">{{category.name}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 </div>
 <app-edit-car-category (changed)="getData()"></app-edit-car-category>

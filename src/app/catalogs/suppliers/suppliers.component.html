@@ -4,41 +4,42 @@
       <button type="submit" (click)="add()" class="app-btn gray-btn catalogs-adding-block__btn">
         Добавить
       </button>
-      <small class="catalogs-adding-block__text">
+      <p class="catalogs-adding-block__text">
         Если не нашли нужного поставщика, то добавьте его.
-      </small>
+      </p>
     </div>
   </div>
   <div class="app-row">
       <h2 class="block-title">Поставщики</h2>
-      <table class="app-table">
-        <thead>
-          <tr class="app-table__tr">
-            <th class="app-table__th"></th>
-            <th class="app-table__th">Рабочее наименование</th>
-            <th class="app-table__th">Юр.лицо</th>
-            <th class="app-table__th">НДС включен</th>
-            <th class="app-table__th">Местоположение</th>
-            <th class="app-table__th">Номенклатура</th>
-          </tr>
-
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let supplier of suppliers">
-            <tr>
-              <td><i (click)="edit(supplier)" class="fa fa-edit" aria-hidden="true"></i><i class="fa fa-trash"
-                  (click)="deleteSupplier(supplier.id)" aria-hidden="true"></i></td>
-              <td>{{supplier.name}}</td>
-              <td>{{supplier.legalEntity}}</td>
-              <td> <input disabled type="checkbox" [ngModel]="supplier.vat"></td>
-              <td>{{supplier.address}}</td>
-              <td> <span *ngFor="let prod of supplier.products"><i>{{prod.name}} <b
-                      *ngIf="prod.price">({{prod.price}}р)</b>
-                  </i><br></span></td>
+      <div class="table-container">
+        <table class="app-table">
+          <thead>
+            <tr class="app-table__tr">
+              <th class="app-table__th"></th>
+              <th class="app-table__th">Рабочее наименование</th>
+              <th class="app-table__th">Юр.лицо</th>
+              <th class="app-table__th">НДС включен</th>
+              <th class="app-table__th">Местоположение</th>
+              <th class="app-table__th">Номенклатура</th>
             </tr>
-          </ng-container>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let supplier of suppliers">
+              <tr class="app-table__tr">
+                <td class="app-table__td"><i (click)="edit(supplier)" class="fa fa-edit" aria-hidden="true"></i><i class="fa fa-trash"
+                    (click)="deleteSupplier(supplier.id)" aria-hidden="true"></i></td>
+                <td class="app-table__td">{{supplier.name}}</td>
+                <td class="app-table__td">{{supplier.legalEntity}}</td>
+                <td class="app-table__td"> <input disabled type="checkbox" [ngModel]="supplier.vat"></td>
+                <td class="app-table__td">{{supplier.address}}</td>
+                <td class="app-table__td"> <span *ngFor="let prod of supplier.products"><i>{{prod.name}} <b
+                        *ngIf="prod.price">({{prod.price}}р)</b>
+                    </i><br></span></td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
   </div>
 </div>
 <app-supplier-editor (changed)="getData()"></app-supplier-editor>
