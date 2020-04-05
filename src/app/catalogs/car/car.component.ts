@@ -34,7 +34,7 @@ export class CarComponent implements OnInit {
     this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
   }
 
-  async update(item: Car) {
+  async edit(item: Car) {
     this.ngxSmartModalService.setModalData(item, EditorComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
   }

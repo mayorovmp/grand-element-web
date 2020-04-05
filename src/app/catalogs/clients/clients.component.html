@@ -1,7 +1,11 @@
 <div class="app-container">
   <div class="app-row">
     <div class="catalogs-adding-block">
-      <button type="submit" (click)="addClient()" class="app-btn gray-btn catalogs-adding-block__btn">
+      <button 
+        type="submit" 
+        (click)="addClient()" 
+        class="app-btn gray-btn catalogs-adding-block__btn"
+      >
         Добавить
       </button>
       <p class="catalogs-adding-block__text">
@@ -15,10 +19,10 @@
       <table class="app-table">
         <thead>
           <tr class="app-table__tr">
-            <th class="app-table__th"></th>
             <th class="app-table__th">Название</th>
             <th class="app-table__th">Адреса</th>
             <th class="app-table__th">Контакты</th>
+            <th class="app-table__th"></th>
           </tr>
   
         </thead>
@@ -26,12 +30,35 @@
             <ng-container *ngFor="let client of clients">
               <ng-container *ngFor="let addr of client.addresses; let addrIndx = index">
                 <tr class="app-table__tr">
-                  <td class="text-center app-table__td">
-                    <i *ngIf="addrIndx==0" class="fa fa-edit mr-2" aria-hidden="true" (click)="edit(client)"></i>
-                    <i *ngIf="addrIndx==0" class="fa fa-trash" (click)="delete(client)" aria-hidden="true"></i></td>
                   <td class="app-table__td">{{client?.name}}</td>
                   <td class="app-table__td">{{addr.name}}</td>
                   <td class="app-table__td"><i *ngFor="let contact of addr.contacts">{{contact.name}} {{contact.communication }} <br></i>
+                  </td>
+                  <td class="app-table__td">
+                    <div class="btn-container btn-container--centered">
+                      <button
+                        *ngIf="addrIndx==0"
+                        (click)="edit(client)"
+                        class="edit-btn"
+                      >
+                        <img 
+                          class="edit-btn__img"
+                          src="assets/img/icons/edit.svg" 
+                          alt="изменить"
+                        >
+                      </button>
+                      <button
+                        *ngIf="addrIndx==0"
+                        (click)="delete(client)" 
+                        class="delete-btn"
+                      >
+                        <img 
+                          class="edit-btn__img"
+                          src="assets/img/icons/delete.svg" 
+                          alt="удалить"
+                        >
+                      </button>
+                    </div>
                   </td>
                 </tr>
               </ng-container>

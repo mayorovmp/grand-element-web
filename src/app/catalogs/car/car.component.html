@@ -1,7 +1,11 @@
 <div class="app-container">
   <div class="app-row">
     <div class="catalogs-adding-block">
-      <button type="submit" (click)="add()" class="app-btn gray-btn catalogs-adding-block__btn">
+      <button 
+        type="submit" 
+        (click)="add()" 
+        class="app-btn gray-btn catalogs-adding-block__btn"
+      >
         Добавить
       </button>
       <p class="catalogs-adding-block__text">
@@ -15,7 +19,6 @@
       <table class="app-table">
         <thead>
           <tr class="app-table__tr">
-            <th class="app-table__th"></th>
             <th class="app-table__th">Собственник</th>
             <th class="app-table__th">Категория авто</th>
             <th class="app-table__th">Цена перевозки</th>
@@ -23,15 +26,12 @@
             <th class="app-table__th">Еденица измерения</th>
             <th class="app-table__th">Контакты</th>
             <th class="app-table__th">Комментарий(гос.номер)</th>
+            <th class="app-table__th"></th>
           </tr>
   
         </thead>
         <tbody>
           <tr *ngFor="let car of cars" class="app-table__tr">
-            <td class="text-center app-table__td">
-              <i class="fa fa-edit mr-2" (click)="createOrUpdate(car)" aria-hidden="true"></i>
-              <i class="fa fa-trash" (click)="delete(car)" aria-hidden="true"></i>
-            </td>
             <td class="app-table__td">{{car.owner}}</td>
             <td class="app-table__td">{{car.carCategory?.name}}</td>
             <td class="app-table__td">{{car.freightPrice}}</td>
@@ -39,6 +39,30 @@
             <td class="app-table__td">{{car.unit}}</td>
             <td class="app-table__td">{{car.contacts}}</td>
             <td class="app-table__td">{{car.comments}}</td>
+            <td class="app-table__td">
+              <div class="btn-container btn-container--centered">
+                <button
+                  (click)="edit(car)"
+                  class="edit-btn"
+                >
+                  <img 
+                    class="edit-btn__img"
+                    src="assets/img/icons/edit.svg" 
+                    alt="изменить"
+                  >
+                </button>
+                <button
+                  (click)="delete(car)" 
+                  class="delete-btn"
+                >
+                  <img 
+                    class="edit-btn__img"
+                    src="assets/img/icons/delete.svg" 
+                    alt="удалить"
+                  >
+                </button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>

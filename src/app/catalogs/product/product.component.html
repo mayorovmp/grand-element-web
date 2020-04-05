@@ -19,17 +19,38 @@
       <table class="app-table">
         <thead>
           <tr class="app-table__tr">
-            <th class="app-table__th"></th>
             <th class="app-table__th">Название</th>
+            <th class="app-table__th"></th>
           </tr>
         </thead>
         <tbody>
           <ng-container *ngFor="let product of products">
             <tr class="app-table__tr">
-              <td class="text-center app-table__td">
-                <i class="fa fa-edit mr-2" (click)="edit(product)" aria-hidden="true"></i>
-                <i class="fa fa-trash" (click)="deleteProduct(product)" aria-hidden="true"></i></td>
               <td class="app-table__td">{{product.name}}</td>
+              <td class="app-table__td">
+                <div class="btn-container btn-container--centered">
+                  <button
+                    (click)="edit(product)"
+                    class="edit-btn"
+                  >
+                    <img 
+                      class="edit-btn__img"
+                      src="assets/img/icons/edit.svg" 
+                      alt="изменить"
+                    >
+                  </button>
+                  <button
+                    (click)="delete(product)" 
+                    class="delete-btn"
+                  >
+                    <img 
+                      class="edit-btn__img"
+                      src="assets/img/icons/delete.svg" 
+                      alt="удалить"
+                    >
+                  </button>
+                </div>
+              </td>
             </tr>
             </ng-container>
           </tbody>

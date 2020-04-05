@@ -1,7 +1,11 @@
 <div class="app-container">
   <div class="app-row">
     <div class="catalogs-adding-block">
-      <button type="submit" (click)="add()" class="app-btn gray-btn catalogs-adding-block__btn">
+      <button 
+        type="submit" 
+        (click)="add()" 
+        class="app-btn gray-btn catalogs-adding-block__btn"
+      >
         Добавить
       </button>
       <p class="catalogs-adding-block__text">
@@ -15,26 +19,60 @@
         <table class="app-table">
           <thead>
             <tr class="app-table__tr">
-              <th class="app-table__th"></th>
               <th class="app-table__th">Рабочее наименование</th>
               <th class="app-table__th">Юр.лицо</th>
               <th class="app-table__th">НДС включен</th>
               <th class="app-table__th">Местоположение</th>
               <th class="app-table__th">Номенклатура</th>
+              <th class="app-table__th"></th>
             </tr>
           </thead>
           <tbody>
             <ng-container *ngFor="let supplier of suppliers">
               <tr class="app-table__tr">
-                <td class="app-table__td"><i (click)="edit(supplier)" class="fa fa-edit" aria-hidden="true"></i><i class="fa fa-trash"
-                    (click)="deleteSupplier(supplier.id)" aria-hidden="true"></i></td>
                 <td class="app-table__td">{{supplier.name}}</td>
                 <td class="app-table__td">{{supplier.legalEntity}}</td>
-                <td class="app-table__td"> <input disabled type="checkbox" [ngModel]="supplier.vat"></td>
+                <td class="app-table__td">
+                  <input 
+                    disabled 
+                    type="checkbox" 
+                    [ngModel]="supplier.vat"
+                  >
+                </td>
                 <td class="app-table__td">{{supplier.address}}</td>
-                <td class="app-table__td"> <span *ngFor="let prod of supplier.products"><i>{{prod.name}} <b
-                        *ngIf="prod.price">({{prod.price}}р)</b>
-                    </i><br></span></td>
+                <td class="app-table__td"> 
+                  <span *ngFor="let prod of supplier.products">
+                    <i>
+                      {{prod.name}}
+                      <b *ngIf="prod.price">({{prod.price}}р)</b>
+                    </i>
+                    <br>
+                  </span>
+                </td>
+                <td class="app-table__td">
+                  <div class="btn-container btn-container--centered">
+                    <button
+                      (click)="edit(supplier)"
+                      class="edit-btn"
+                    >
+                      <img 
+                        class="edit-btn__img"
+                        src="assets/img/icons/edit.svg" 
+                        alt="изменить"
+                      >
+                    </button>
+                    <button
+                      (click)="deleteSupplier(supplier.id)" 
+                      class="delete-btn"
+                    >
+                      <img 
+                        class="edit-btn__img"
+                        src="assets/img/icons/delete.svg" 
+                        alt="удалить"
+                      >
+                    </button>
+                  </div>
+                </td>
               </tr>
             </ng-container>
           </tbody>

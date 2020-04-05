@@ -100,11 +100,30 @@ a:hover {
     border-left: 1px solid #dee2e6;
     border-top: 1px solid #dee2e6;
     padding: 8px;
+    text-align: center;
 }
 
 .app-table__td {
     border-right: 1px solid #dee2e6;
     padding: 8px;
+}
+.btn-container{
+    display: flex;
+}
+.btn-container.btn-container--centered{
+    justify-content: center;
+}
+.delete-btn,
+.edit-btn{
+    padding: 7px;
+    background-color: transparent;
+    border: none;
+    margin-right: 6px;
+}
+.delete-btn__img,
+.edit-btn__img{
+    width: 24px;
+    height: 24px;
 }
 @media (max-width: 996px){
     .app-container-fluid {

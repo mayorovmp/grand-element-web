@@ -20,7 +20,7 @@ export class ProductComponent implements OnInit {
   async getData() {
     this.httpSrv.getProducts().subscribe(e => { this.products = e; });
   }
-  async deleteProduct(product: Product) {
+  async delete(product: Product) {
     this.httpSrv.deleteProduct(product.id).subscribe(
       _ => this.toastr.info('Успешно удалено'),
       e => this.toastr.error('При удалении произошла ошибка'),

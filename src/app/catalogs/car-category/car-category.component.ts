@@ -22,7 +22,7 @@ export class CarCategoryComponent implements OnInit {
     this.httpSrv.getCarCategories().subscribe(x => this.categories = x);
   }
 
-  async deleteCategory(category: CarCategory) {
+  async delete(category: CarCategory) {
     await this.httpSrv.deleteCarCategory(category.id).toPromise();
     this.getData();
   }
@@ -31,7 +31,7 @@ export class CarCategoryComponent implements OnInit {
     this.ngxSmartModalService.toggle(EditCarCategoryComponent.MODAL_NAME);
   }
 
-  async update(item: CarCategory) {
+  async edit(item: CarCategory) {
     this.ngxSmartModalService.setModalData(item, EditCarCategoryComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(EditCarCategoryComponent.MODAL_NAME);
   }
