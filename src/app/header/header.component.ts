@@ -13,7 +13,7 @@ import { Catalog } from '../models/Catalog';
 })
 export class NavbarComponent implements OnInit{ 
 
-  logoSrc = require('./logo.svg');
+  logoSrc = 'assets/img/logo.svg';
 
   mobileNavActive:boolean = false;
   mobileBtnActive:boolean = false;
