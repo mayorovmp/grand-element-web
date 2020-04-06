@@ -39,10 +39,18 @@ export class ProductComponent implements OnInit {
 
   sortedByName = () => {
     if (this.nameSorting === 'none' || this.nameSorting === 'reverse'){
-      this.products.sort((a, b) => a.name.localeCompare(b.name));
+      this.products.sort((a, b) => {
+        if (!a.name) { a.name = ''}
+        if (!b.name) { b.name = ''}
+        return a.name.localeCompare(b.name);
+      });
       this.nameSorting = 'direct';
     } else if (this.nameSorting === 'direct'){
-      this.products.sort((a, b) => b.name.localeCompare(a.name));
+      this.products.sort((a, b) => {
+        if (!a.name) { a.name = ''}
+        if (!b.name) { b.name = ''}
+        return b.name.localeCompare(a.name);
+      });
       this.nameSorting = 'reverse';
     }
   }

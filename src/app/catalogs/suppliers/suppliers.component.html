@@ -32,9 +32,33 @@
                   >
                 </div>
               </th>
-              <th class="app-table__th">Юр.лицо</th>
+              <th 
+                class="app-table__th" 
+                (click)="sortedBylegalEntity()"
+              >
+                <div class="app-table-heading-content">
+                  Юр.лицо
+                  <img
+                    src="assets/img/icons/sort-{{legalEntitySorting}}.svg"
+                    class="app-table__sorting-img" 
+                    alt=""
+                  >
+                </div>
+              </th>
               <th class="app-table__th">НДС включен</th>
-              <th class="app-table__th">Местоположение</th>
+              <th 
+                class="app-table__th" 
+                (click)="sortedByAddress()"
+              >
+                <div class="app-table-heading-content">
+                  Местоположение
+                  <img
+                    src="assets/img/icons/sort-{{addressSorting}}.svg"
+                    class="app-table__sorting-img" 
+                    alt=""
+                  >
+                </div>
+              </th>
               <th class="app-table__th">Номенклатура</th>
               <th class="app-table__th"></th>
             </tr>

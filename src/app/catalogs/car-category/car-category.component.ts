@@ -43,12 +43,21 @@ export class CarCategoryComponent implements OnInit {
   private handleError() {
     this.toastr.error('При загрузке данных произошла ошибка');
   }
+  
   sortedByName = () => {
     if (this.nameSorting === 'none' || this.nameSorting === 'reverse'){
-      this.categories.sort((a, b) => a.name.localeCompare(b.name));
+      this.categories.sort((a, b) => {
+        if (!a.name) { a.name = ''}
+        if (!b.name) { b.name = ''}
+        return a.name.localeCompare(b.name);
+      });
       this.nameSorting = 'direct';
     } else if (this.nameSorting === 'direct'){
-      this.categories.sort((a, b) => b.name.localeCompare(a.name));
+      this.categories.sort((a, b) => {
+        if (!a.name) { a.name = ''}
+        if (!b.name) { b.name = ''}
+        return b.name.localeCompare(a.name);
+      });
       this.nameSorting = 'reverse';
     }
   }

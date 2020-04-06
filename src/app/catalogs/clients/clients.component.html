@@ -19,7 +19,19 @@
       <table class="app-table">
         <thead>
           <tr class="app-table__tr">
-            <th class="app-table__th">Название</th>
+            <th 
+              class="app-table__th"
+              (click)="sortedByName()"
+            >
+              <div class="app-table-heading-content">
+                Название
+                <img
+                  src="assets/img/icons/sort-{{nameSorting}}.svg"
+                  class="app-table__sorting-img" 
+                  alt=""
+                >
+              </div>
+            </th>
             <th class="app-table__th">Адреса</th>
             <th class="app-table__th">Контакты</th>
             <th class="app-table__th"></th>

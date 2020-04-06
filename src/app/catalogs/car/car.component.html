@@ -19,9 +19,33 @@
       <table class="app-table">
         <thead>
           <tr class="app-table__tr">
-            <th class="app-table__th">Собственник</th>
+            <th 
+              class="app-table__th" 
+              (click)="sortedByOwnerName()"
+            >
+              <div class="app-table-heading-content">
+                Собственник
+                <img
+                  src="assets/img/icons/sort-{{ownerCarSorting}}.svg"
+                  class="app-table__sorting-img" 
+                  alt=""
+                >
+              </div>
+            </th>
             <th class="app-table__th">Категория авто</th>
-            <th class="app-table__th">Цена перевозки</th>
+            <th 
+              class="app-table__th" 
+              (click)="sortedByPrice()"
+            >
+              <div class="app-table-heading-content">
+                Цена перевозки
+                <img
+                  src="assets/img/icons/sort-{{priceSorting}}.svg"
+                  class="app-table__sorting-img" 
+                  alt=""
+                >
+              </div>
+            </th>
             <th class="app-table__th">Включен ли НДС</th>
             <th class="app-table__th">Еденица измерения</th>
             <th class="app-table__th">Контакты</th>
