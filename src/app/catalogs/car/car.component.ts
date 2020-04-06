@@ -13,7 +13,9 @@ import { EditorComponent } from './editor/editor.component';
 export class CarComponent implements OnInit {
 
   cars: Car[] = [];
-
+  ownerCarSorting: string = 'none';
+  categoryCarSorting: string = 'none';
+  priceSorting: string = 'none';
   constructor(public http: HttpService, private toastr: ToastrService, public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
@@ -34,7 +36,7 @@ export class CarComponent implements OnInit {
     this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
   }
 
-  async update(item: Car) {
+  async edit(item: Car) {
     this.ngxSmartModalService.setModalData(item, EditorComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
   }
@@ -51,4 +53,43 @@ export class CarComponent implements OnInit {
   onAdd() {
     this.getData();
   }
+
+  sortedByOwnerName = () => {
+    this.priceSorting = 'none';
+    if (this.ownerCarSorting === 'none' || this.ownerCarSorting === 'reverse'){
+      this.cars.sort((a, b) => {
+        if (!a.owner) { a.owner = ''}
+        if (!b.owner) { b.owner = ''}
+        return a.owner.localeCompare(b.owner);
+      });
+      this.ownerCarSorting = 'direct';
+    } else if (this.ownerCarSorting === 'direct'){
+      this.cars.sort((a, b) => {
+        if (!a.owner) { a.owner = ''}
+        if (!b.owner) { b.owner = ''}
+        return b.owner.localeCompare(a.owner);
+      });
+      this.ownerCarSorting = 'reverse';
+    }
+  }
+
+  sortedByPrice = () => {
+    this.ownerCarSorting = 'none';
+    if (this.priceSorting === 'none' || this.priceSorting === 'reverse'){
+      this.cars.sort((a, b) => {
+        if (!a.freightPrice) { a.freightPrice = 0}
+        if (!b.freightPrice) { b.freightPrice = 0}
+        return a.freightPrice - b.freightPrice
+      });
+      this.priceSorting = 'direct';
+    } else if (this.priceSorting === 'direct'){
+      this.cars.sort((a, b) => {
+        if (!a.freightPrice) { a.freightPrice = 0}
+        if (!b.freightPrice) { b.freightPrice = 0}
+        return b.freightPrice - a.freightPrice
+      });
+      this.priceSorting = 'reverse';
+    }
+  }
+
 }

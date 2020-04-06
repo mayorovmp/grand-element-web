@@ -1,46 +1,92 @@
 <div class="app-container">
   <div class="app-row">
-    <div class="col-5">
-      <div class="catalogs-adding-block">
-        <button type="submit" (click)="add()" class="app-btn gray-btn catalogs-adding-block__btn">
-          Добавить
-        </button>
-        <small class="catalogs-adding-block__text">
-          Если не нашли перевозчика, добавьте его.
-        </small>
-      </div>
+    <div class="catalogs-adding-block">
+      <button 
+        type="submit" 
+        (click)="add()" 
+        class="app-btn gray-btn catalogs-adding-block__btn"
+      >
+        Добавить
+      </button>
+      <p class="catalogs-adding-block__text">
+        Если не нашли перевозчика, добавьте его.
+      </p>
     </div>
   </div>
   <div class="app-row">
-    <div class="col-12">
-      <h2>Перевозчики</h2>
-      <table class="table table-bordered">
+    <h2 class="block-title">Перевозчики</h2>
+    <div class="table-container">
+      <table class="app-table">
         <thead>
-          <tr>
-            <th></th>
-            <th>Собственник</th>
-            <th>Категория авто</th>
-            <th>Цена перевозки</th>
-            <th>Включен ли НДС</th>
-            <th>Еденица измерения</th>
-            <th>Контакты</th>
-            <th>Комментарий(гос.номер)</th>
+          <tr class="app-table__tr">
+            <th 
+              class="app-table__th" 
+              (click)="sortedByOwnerName()"
+            >
+              <div class="app-table-heading-content">
+                Собственник
+                <img
+                  src="assets/img/icons/sort-{{ownerCarSorting}}.svg"
+                  class="app-table__sorting-img" 
+                  alt=""
+                >
+              </div>
+            </th>
+            <th class="app-table__th">Категория авто</th>
+            <th 
+              class="app-table__th" 
+              (click)="sortedByPrice()"
+            >
+              <div class="app-table-heading-content">
+                Цена перевозки
+                <img
+                  src="assets/img/icons/sort-{{priceSorting}}.svg"
+                  class="app-table__sorting-img" 
+                  alt=""
+                >
+              </div>
+            </th>
+            <th class="app-table__th">Включен ли НДС</th>
+            <th class="app-table__th">Еденица измерения</th>
+            <th class="app-table__th">Контакты</th>
+            <th class="app-table__th">Комментарий(гос.номер)</th>
+            <th class="app-table__th"></th>
           </tr>
-
+  
         </thead>
         <tbody>
-          <tr *ngFor="let car of cars">
-            <td class="text-center">
-              <i class="fa fa-edit mr-2" (click)="update(car)" aria-hidden="true"></i>
-              <i class="fa fa-trash" (click)="delete(car)" aria-hidden="true"></i>
+          <tr *ngFor="let car of cars" class="app-table__tr">
+            <td class="app-table__td">{{car.owner}}</td>
+            <td class="app-table__td">{{car.carCategory?.name}}</td>
+            <td class="app-table__td">{{car.freightPrice}}</td>
+            <td class="app-table__td"><input disabled type="checkbox" [ngModel]="car.vat"></td>
+            <td class="app-table__td">{{car.unit}}</td>
+            <td class="app-table__td">{{car.contacts}}</td>
+            <td class="app-table__td">{{car.comments}}</td>
+            <td class="app-table__td">
+              <div class="btn-container btn-container--centered">
+                <button
+                  (click)="edit(car)"
+                  class="edit-btn"
+                >
+                  <img 
+                    class="edit-btn__img"
+                    src="assets/img/icons/edit.svg" 
+                    alt="изменить"
+                  >
+                </button>
+                <button
+                  (click)="delete(car)" 
+                  class="delete-btn"
+                >
+                  <img 
+                    class="edit-btn__img"
+                    src="assets/img/icons/delete.svg" 
+                    alt="удалить"
+                  >
+                </button>
+              </div>
             </td>
-            <td>{{car.owner}}</td>
-            <td>{{car.carCategory?.name}}</td>
-            <td>{{car.freightPrice}}</td>
-            <td><input disabled type="checkbox" [ngModel]="car.vat"></td>
-            <td>{{car.unit}}</td>
-            <td>{{car.contacts}}</td>
-            <td>{{car.comments}}</td>
           </tr>
         </tbody>
       </table>

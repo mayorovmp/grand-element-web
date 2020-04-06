@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];
+  nameSorting: string = 'none';
   constructor(private httpSrv: HttpService, private toastr: ToastrService, private ngxSmartModalService: NgxSmartModalService) { }
 
   async ngOnInit() {
@@ -20,7 +21,7 @@ export class ProductComponent implements OnInit {
   async getData() {
     this.httpSrv.getProducts().subscribe(e => { this.products = e; });
   }
-  async deleteProduct(product: Product) {
+  async delete(product: Product) {
     this.httpSrv.deleteProduct(product.id).subscribe(
       _ => this.toastr.info('Успешно удалено'),
       e => this.toastr.error('При удалении произошла ошибка'),
@@ -35,4 +36,23 @@ export class ProductComponent implements OnInit {
     this.ngxSmartModalService.setModalData(item, EditProductComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(EditProductComponent.MODAL_NAME);
   }
+
+  sortedByName = () => {
+    if (this.nameSorting === 'none' || this.nameSorting === 'reverse'){
+      this.products.sort((a, b) => {
+        if (!a.name) { a.name = ''}
+        if (!b.name) { b.name = ''}
+        return a.name.localeCompare(b.name);
+      });
+      this.nameSorting = 'direct';
+    } else if (this.nameSorting === 'direct'){
+      this.products.sort((a, b) => {
+        if (!a.name) { a.name = ''}
+        if (!b.name) { b.name = ''}
+        return b.name.localeCompare(a.name);
+      });
+      this.nameSorting = 'reverse';
+    }
+  }
+
 }

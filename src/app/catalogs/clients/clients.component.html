@@ -1,43 +1,80 @@
 <div class="app-container">
   <div class="app-row">
-    <div class="col-5">
-      <div class="catalogs-adding-block">
-        <button type="submit" (click)="addClient()" class="app-btn gray-btn catalogs-adding-block__btn">
-          Добавить
-        </button>
-        <small class="catalogs-adding-block__text">
-          Если не нашли нужного клиента, то добавьте его.
-        </small>
-      </div>
+    <div class="catalogs-adding-block">
+      <button 
+        type="submit" 
+        (click)="addClient()" 
+        class="app-btn gray-btn catalogs-adding-block__btn"
+      >
+        Добавить
+      </button>
+      <p class="catalogs-adding-block__text">
+        Если не нашли нужного клиента, то добавьте его.
+      </p>
     </div>
   </div>
   <div class="app-row">
-    <div class="col-11">
-      <h2>Клиенты</h2>
-      <table class="table table-bordered">
+    <h2 class="block-title">Клиенты</h2>
+    <div class="table-container">
+      <table class="app-table">
         <thead>
-          <tr>
-            <th></th>
-            <th>Название</th>
-            <th>Адреса</th>
-            <th>Контакты</th>
+          <tr class="app-table__tr">
+            <th 
+              class="app-table__th"
+              (click)="sortedByName()"
+            >
+              <div class="app-table-heading-content">
+                Название
+                <img
+                  src="assets/img/icons/sort-{{nameSorting}}.svg"
+                  class="app-table__sorting-img" 
+                  alt=""
+                >
+              </div>
+            </th>
+            <th class="app-table__th">Адреса</th>
+            <th class="app-table__th">Контакты</th>
+            <th class="app-table__th"></th>
           </tr>
-
+  
         </thead>
-        <tbody>
-          <ng-container *ngFor="let client of clients">
-            <ng-container *ngFor="let addr of client.addresses; let addrIndx = index">
-              <tr>
-                <td class="text-center">
-                  <i *ngIf="addrIndx==0" class="fa fa-edit mr-2" aria-hidden="true" (click)="edit(client)"></i>
-                  <i *ngIf="addrIndx==0" class="fa fa-trash" (click)="delete(client)" aria-hidden="true"></i></td>
-                <td>{{client?.name}}</td>
-                <td>{{addr.name}}</td>
-                <td><i *ngFor="let contact of addr.contacts">{{contact.name}} {{contact.communication }} <br></i>
-                </td>
-              </tr>
+          <tbody>
+            <ng-container *ngFor="let client of clients">
+              <ng-container *ngFor="let addr of client.addresses; let addrIndx = index">
+                <tr class="app-table__tr">
+                  <td class="app-table__td">{{client?.name}}</td>
+                  <td class="app-table__td">{{addr.name}}</td>
+                  <td class="app-table__td"><i *ngFor="let contact of addr.contacts">{{contact.name}} {{contact.communication }} <br></i>
+                  </td>
+                  <td class="app-table__td">
+                    <div class="btn-container btn-container--centered">
+                      <button
+                        *ngIf="addrIndx==0"
+                        (click)="edit(client)"
+                        class="edit-btn"
+                      >
+                        <img 
+                          class="edit-btn__img"
+                          src="assets/img/icons/edit.svg" 
+                          alt="изменить"
+                        >
+                      </button>
+                      <button
+                        *ngIf="addrIndx==0"
+                        (click)="delete(client)" 
+                        class="delete-btn"
+                      >
+                        <img 
+                          class="edit-btn__img"
+                          src="assets/img/icons/delete.svg" 
+                          alt="удалить"
+                        >
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
             </ng-container>
-          </ng-container>
         </tbody>
       </table>
     </div>

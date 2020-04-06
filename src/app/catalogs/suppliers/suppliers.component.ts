@@ -12,7 +12,9 @@ import { EditorComponent } from './editor/editor.component';
 export class SuppliersComponent implements OnInit {
 
   suppliers: Supplier[] = [];
-
+  nameSorting: string = 'none';
+  legalEntitySorting: string = 'none';
+  addressSorting: string = 'none';
   constructor(public ngxSmartModalService: NgxSmartModalService, private httpSrv: HttpService) { }
 
   ngOnInit() {
@@ -36,4 +38,66 @@ export class SuppliersComponent implements OnInit {
     await this.httpSrv.deleteSupplier(id).toPromise();
     this.getData();
   }
+
+  sortedByName = () => {
+    this.legalEntitySorting = 'none';
+    this.addressSorting = 'none';
+    if (this.nameSorting === 'none' || this.nameSorting === 'reverse'){
+      this.suppliers.sort((a, b) => {
+        if (!a.name) { a.name = ''}
+        if (!b.name) { b.name = ''}
+        return a.name.localeCompare(b.name);
+      });
+      this.nameSorting = 'direct';
+    } else if (this.nameSorting === 'direct'){
+      this.suppliers.sort((a, b) => {
+        if (!a.name) { a.name = ''}
+        if (!b.name) { b.name = ''}
+        return b.name.localeCompare(a.name);
+      });
+      this.nameSorting = 'reverse';
+    }
+  }
+
+  sortedBylegalEntity = () => {
+    this.nameSorting = 'none';
+    this.addressSorting = 'none';
+    if (this.legalEntitySorting === 'none' || this.legalEntitySorting === 'reverse'){
+      this.suppliers.sort((a, b) => {
+        if (!a.legalEntity) { a.legalEntity = ''}
+        if (!b.legalEntity) { b.legalEntity = ''}
+        return a.legalEntity.localeCompare(b.legalEntity);
+      });
+      this.legalEntitySorting = 'direct';
+    } else if (this.legalEntitySorting === 'direct'){
+      this.suppliers.sort((a, b) => {
+        if (!a.legalEntity) { a.legalEntity = ''}
+        if (!b.legalEntity) { b.legalEntity = ''}
+        return b.legalEntity.localeCompare(a.legalEntity);
+      });
+      this.legalEntitySorting = 'reverse';
+    }
+  }
+
+  sortedByAddress = () => {
+    this.nameSorting = 'none';
+    this.legalEntitySorting = 'none';
+    if (this.addressSorting === 'none' || this.addressSorting === 'reverse'){
+      console.log('this.suppliers', this.suppliers);
+      this.suppliers.sort((a, b) => {
+        if (!a.address) { a.address = ''}
+        if (!b.address) { b.address = ''}
+        return a.address.localeCompare(b.address);
+      });
+      this.addressSorting = 'direct';
+    } else if (this.addressSorting === 'direct'){
+      this.suppliers.sort((a, b) => {
+        if (!a.address) { a.address = ''}
+        if (!b.address) { b.address = ''}
+        return b.address.localeCompare(a.address);
+      });
+      this.addressSorting = 'reverse';
+    }
+  }
+
 }

@@ -85,3 +85,61 @@ a:hover {
 .gray {
     background-color: rgb(214, 214, 214);
 }
+.app-table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border: 1px solid #dee2e6;
+    font-size: 13px;
+}
+.app-table__tr {
+    border-bottom: 1px solid #dee2e6;
+}
+.app-table__th {
+    border-right: 1px solid #dee2e6;
+    border-left: 1px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: center;
+}
+.app-table-heading-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.app-table__td {
+    border-right: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: center;
+}
+.app-table__sorting-img{
+    width: 24px;
+    height: 24px;
+    margin-left: 12px;
+}
+.btn-container{
+    display: flex;
+}
+.btn-container.btn-container--centered{
+    justify-content: center;
+}
+.delete-btn,
+.edit-btn{
+    padding: 7px;
+    background-color: transparent;
+    border: none;
+    margin-right: 6px;
+}
+.delete-btn__img,
+.edit-btn__img{
+    width: 24px;
+    height: 24px;
+}
+@media (max-width: 996px){
+    .app-container-fluid {
+        padding: 24px
+    }
+    .app-container {
+        padding: 24px
+    }
+}

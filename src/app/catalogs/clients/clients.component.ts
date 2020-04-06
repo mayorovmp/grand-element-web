@@ -11,7 +11,7 @@ import { ClientEditorComponent } from './editor/editor.component';
 })
 export class ClientsComponent implements OnInit {
   clients: Client[] = [];
-
+  nameSorting: string = 'none';
   constructor(private httpClient: HttpService, public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
@@ -37,4 +37,23 @@ export class ClientsComponent implements OnInit {
     }
     this.getData();
   }
+
+  sortedByName = () => {
+    if (this.nameSorting === 'none' || this.nameSorting === 'reverse'){
+      this.clients.sort((a, b) => {
+        if (!a.name) { a.name = ''}
+        if (!b.name) { b.name = ''}
+        return a.name.localeCompare(b.name);
+      });
+      this.nameSorting = 'direct';
+    } else if (this.nameSorting === 'direct'){
+      this.clients.sort((a, b) => {
+        if (!a.name) { a.name = ''}
+        if (!b.name) { b.name = ''}
+        return b.name.localeCompare(a.name);
+      });
+      this.nameSorting = 'reverse';
+    }
+  }
+
 }
