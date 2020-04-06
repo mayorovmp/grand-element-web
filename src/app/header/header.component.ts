@@ -9,7 +9,10 @@ import { Catalog } from '../models/Catalog';
 @Component({
   selector: 'app-navbar',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  host: {
+    '(window:resize)': 'onResize($event)'
+  }
 })
 export class NavbarComponent implements OnInit{ 
 
@@ -42,5 +45,13 @@ export class NavbarComponent implements OnInit{
 
   public logout() {
     this.auth.logout();
+  }
+  onResize = (event) =>{
+    if (this.mobileNavActive && 
+      event.target.innerWidth > 1000 && this.mobileBtnActive
+    ){
+      this.mobileNavActive = false;
+      this.mobileBtnActive = false;
+    }
   }
 }
