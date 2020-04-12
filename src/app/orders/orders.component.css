@@ -1,13 +1,24 @@
 .table-bordered td, .table-bordered th {
-    padding: 1px;
-  }
-  .export-order{
-    margin-bottom: 20px;
-  }
+  padding: 1px;
+}
+.export-order{
+  margin-bottom: 20px;
+}
+.export-order__input{
+  margin-bottom: 20px;
+  min-width: 300px;
+}
+.export-order__button{
+  margin-right: 20px;
+}
+.longTerm-order,
+.orders-block{
+  overflow-x: scroll;
+}
+
+@media (max-width: 500px){
   .export-order__input{
     margin-bottom: 20px;
-    min-width: 300px;
+    min-width: 250px;
   }
-  .export-order__button{
-    margin-right: 20px;
-  }
+}

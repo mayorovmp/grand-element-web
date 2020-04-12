@@ -142,4 +142,27 @@ a:hover {
     .app-container {
         padding: 24px
     }
+    .app-table{
+        font-size: 12px;
+    }
+    .app-table__td,
+    .app-table__th{
+        padding: 2px;
+    }
+}
+
+@media (max-width: 700px){
+    .block-title{
+        font-size: 28px;
+    }
+    .app-table__sorting-img,
+    .delete-btn__img,
+    .edit-btn__img{
+        width: 18px;
+        height: 18px;
+    }
+    .delete-btn, 
+    .edit-btn{
+        padding: 4px;
+    }
 }

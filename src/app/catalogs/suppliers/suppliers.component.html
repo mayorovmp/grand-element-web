@@ -45,7 +45,7 @@
                   >
                 </div>
               </th>
-              <th class="app-table__th">НДС включен</th>
+              <th class="app-table__th">НДС</th>
               <th 
                 class="app-table__th" 
                 (click)="sortedByAddress()"
@@ -70,6 +70,7 @@
                 <td class="app-table__td">{{supplier.legalEntity}}</td>
                 <td class="app-table__td">
                   <input 
+                    class="app-table__nds-checkbox"
                     disabled 
                     type="checkbox" 
                     [ngModel]="supplier.vat"

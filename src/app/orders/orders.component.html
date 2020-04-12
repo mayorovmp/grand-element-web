@@ -14,10 +14,9 @@
     <div class="orders-block">
         <h2 class="block-title">Заказы на {{pickedDay | date: "dd.MM.yyyy"}} </h2>
 
-        <table class="app-table" style="font-size: 12px;">
+        <table class="app-table">
             <thead>
-                <tr>
-                    <th></th>
+                <tr class="app-table__tr">
                     <th class="app-table__th">Статус</th>
                     <th class="app-table__th">Дата <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th class="app-table__th">Клиент <i class="fa fa-sort" aria-hidden="true"></i></th>
@@ -38,34 +37,55 @@
                     <th class="app-table__th">Прибыль<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th class="app-table__th">Вознаграждение<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th class="app-table__th">Комментарии<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let req of requests">
-                    <td class="text-center">
-                        <i hidden class="fa fa-edit mr-2" aria-hidden="true"></i>
-                        <i (click)="del(req)" class="fa fa-trash" aria-hidden="true"></i></td>
-                    <td>{{req.status}}</td>
-                    <td>{{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
-                    <td>{{req.client?.name}}</td>
-                    <td>{{req.deliveryAddress?.name}}</td>
-                    <td>{{req.amount}}</td>
-                    <td>{{req.product?.name}}</td>
-                    <td>{{req.supplier?.name}}</td>
-                    <td>{{req.purchasePrice}}</td>
-                    <td>{{req.car?.owner}}</td>
-                    <td>{{req.unit}}</td>
-                    <td>{{req.freightPrice}}</td>
-                    <td>{{req.carCategory?.name}}</td>
-                    <td>{{req.purchasePrice}}</td>
-                    <td>{{req.amountIn}}</td>
-                    <td>{{req.amountOut}}</td>
-                    <td>{{req.freightCost}}</td>
-                    <td>{{req.sellingPrice}}</td>
-                    <td>{{req.profit}}</td>
-                    <td>{{req.reward}}</td>
-                    <td>{{req.comment}}</td>
-
+                <tr *ngFor="let req of requests" class="app-table__tr">
+                    <td class="app-table__td">{{req.status}}</td>
+                    <td class="app-table__td">{{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
+                    <td class="app-table__td">{{req.client?.name}}</td>
+                    <td class="app-table__td">{{req.deliveryAddress?.name}}</td>
+                    <td class="app-table__td">{{req.amount}}</td>
+                    <td class="app-table__td">{{req.product?.name}}</td>
+                    <td class="app-table__td">{{req.supplier?.name}}</td>
+                    <td class="app-table__td">{{req.purchasePrice}}</td>
+                    <td class="app-table__td">{{req.car?.owner}}</td>
+                    <td class="app-table__td">{{req.unit}}</td>
+                    <td class="app-table__td">{{req.freightPrice}}</td>
+                    <td class="app-table__td">{{req.carCategory?.name}}</td>
+                    <td class="app-table__td">{{req.purchasePrice}}</td>
+                    <td class="app-table__td">{{req.amountIn}}</td>
+                    <td class="app-table__td">{{req.amountOut}}</td>
+                    <td class="app-table__td">{{req.freightCost}}</td>
+                    <td class="app-table__td">{{req.sellingPrice}}</td>
+                    <td class="app-table__td">{{req.profit}}</td>
+                    <td class="app-table__td">{{req.reward}}</td>
+                    <td class="app-table__td">{{req.comment}}</td>
+                    <td class="app-table__td">
+                        <div class="btn-container btn-container--centered">
+                            <button
+                              class="edit-btn"
+                              hidden
+                            >
+                              <img 
+                                class="edit-btn__img"
+                                src="assets/img/icons/edit.svg" 
+                                alt="изменить"
+                              >
+                            </button>
+                            <button
+                              (click)="del(req)"
+                              class="delete-btn"
+                            >
+                              <img 
+                                class="edit-btn__img"
+                                src="assets/img/icons/delete.svg" 
+                                alt="удалить"
+                              >
+                            </button>
+                        </div>
+                    </td>
                 </tr>
                 <ng-container *ngFor="let order of []">
                     <ng-container *ngIf="order.expanded">
@@ -124,61 +144,80 @@
     </div>
     <div class="longTerm-order">
         <h2 class="block-title">Долгосрочные заказы</h2>
-
-        <table class="table table-bordered" style="font-size: 12px;">
+        <table class="app-table">
             <thead>
-                <tr>
-                    <th></th>
-                    <th>Статус</th>
-                    <th>Дата с <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Дата по <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Клиент <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Адрес доставки<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Объем, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Товар <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th hidden>Поставщик <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th hidden>Цена закупки <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th hidden>Перевозчик<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th hidden>Еденица измерения<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th hidden>Цена перевозки <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th hidden>Категория авто <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Цена продажи <i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th hidden>Вход, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th hidden>Выход, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th hidden>Стоимость перевозки<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th hidden>Доход<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th hidden>Прибыль<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Вознаграждение<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th>Комментарии<i class="fa fa-sort" aria-hidden="true"></i></th>
+                <tr class="app-table__tr">
+                    <th class="app-table__th">Статус</th>
+                    <th class="app-table__th">Дата с <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th class="app-table__th">Дата по <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th class="app-table__th">Клиент <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th class="app-table__th">Адрес доставки<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th class="app-table__th">Объем, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th class="app-table__th">Товар <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden class="app-table__th">Поставщик <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden class="app-table__th">Цена закупки <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden class="app-table__th">Перевозчик<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden class="app-table__th">Еденица измерения<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden class="app-table__th">Цена перевозки <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden class="app-table__th">Категория авто <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th class="app-table__th">Цена продажи <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden class="app-table__th">Вход, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden class="app-table__th">Выход, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden class="app-table__th">Стоимость перевозки<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden class="app-table__th">Доход<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden class="app-table__th">Прибыль<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th class="app-table__th">Вознаграждение<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th class="app-table__th">Комментарии<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th class="app-table__th"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let req of longRequests">
-                    <td class="text-center">
-                        <i hidden class="fa fa-edit mr-2" aria-hidden="true"></i>
-                        <i (click)="del(req)" class="fa fa-trash" aria-hidden="true"></i></td>
-                    <td>{{req.amountComplete}}/{{req.amount}}</td>
-                    <td>{{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
-                    <td>{{req.deliveryEnd | date: "dd.MM.yyyy"}}</td>
-                    <td>{{req.client?.name}}</td>
-                    <td>{{req.deliveryAddress?.name}}</td>
-                    <td>{{req.amount}}</td>
-                    <td>{{req.product?.name}}</td>
-                    <td hidden>{{req.supplier?.name}}</td>
-                    <td hidden>{{req.purchasePrice}}</td>
-                    <td hidden>{{req.car?.owner}}</td>
-                    <td hidden>{{req.unit}}</td>
-                    <td hidden>{{req.freightPrice}}</td>
-                    <td hidden>{{req.carCategory?.name}}</td>
-                    <td>{{req.sellingPrice}}</td>
-                    <td hidden>{{req.amountIn}}</td>
-                    <td hidden>{{req.amountOut}}</td>
-                    <td hidden>{{req.freightCost}}</td>
-                    <td hidden>{{req.sellingPrice}}</td>
-                    <td hidden>{{req.profit}}</td>
-                    <td>{{req.reward}}</td>
-                    <td>{{req.comment}}</td>
-
+                <tr class="app-table__tr" *ngFor="let req of longRequests">
+                    <td class="app-table__td">{{req.amountComplete}}/{{req.amount}}</td>
+                    <td class="app-table__td">{{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
+                    <td class="app-table__td">{{req.deliveryEnd | date: "dd.MM.yyyy"}}</td>
+                    <td class="app-table__td">{{req.client?.name}}</td>
+                    <td class="app-table__td">{{req.deliveryAddress?.name}}</td>
+                    <td class="app-table__td">{{req.amount}}</td>
+                    <td class="app-table__td">{{req.product?.name}}</td>
+                    <td hidden class="app-table__td">{{req.supplier?.name}}</td>
+                    <td hidden class="app-table__td">{{req.purchasePrice}}</td>
+                    <td hidden class="app-table__td">{{req.car?.owner}}</td>
+                    <td hidden class="app-table__td">{{req.unit}}</td>
+                    <td hidden class="app-table__td">{{req.freightPrice}}</td>
+                    <td hidden class="app-table__td">{{req.carCategory?.name}}</td>
+                    <td class="app-table__td">{{req.sellingPrice}}</td>
+                    <td hidden class="app-table__td">{{req.amountIn}}</td>
+                    <td hidden class="app-table__td">{{req.amountOut}}</td>
+                    <td hidden class="app-table__td">{{req.freightCost}}</td>
+                    <td hidden class="app-table__td">{{req.sellingPrice}}</td>
+                    <td hidden class="app-table__td">{{req.profit}}</td>
+                    <td class="app-table__td">{{req.reward}}</td>
+                    <td class="app-table__td">{{req.comment}}</td>
+                    <td class="app-table__td">
+                        <div class="btn-container btn-container--centered">
+                            <button
+                              class="edit-btn"
+                              hidden
+                            >
+                              <img 
+                                class="edit-btn__img"
+                                src="assets/img/icons/edit.svg" 
+                                alt="изменить"
+                              >
+                            </button>
+                            <button
+                              (click)="del(req)"
+                              class="delete-btn"
+                            >
+                              <img 
+                                class="edit-btn__img"
+                                src="assets/img/icons/delete.svg" 
+                                alt="удалить"
+                              >
+                            </button>
+                        </div>
+                    </td>
                 </tr>
                 <ng-container *ngFor="let order of []">
                     <ng-container *ngIf="order.expanded">

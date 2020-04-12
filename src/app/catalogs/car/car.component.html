@@ -46,7 +46,7 @@
                 >
               </div>
             </th>
-            <th class="app-table__th">Включен ли НДС</th>
+            <th class="app-table__th">НДС</th>
             <th class="app-table__th">Еденица измерения</th>
             <th class="app-table__th">Контакты</th>
             <th class="app-table__th">Комментарий(гос.номер)</th>
@@ -59,7 +59,14 @@
             <td class="app-table__td">{{car.owner}}</td>
             <td class="app-table__td">{{car.carCategory?.name}}</td>
             <td class="app-table__td">{{car.freightPrice}}</td>
-            <td class="app-table__td"><input disabled type="checkbox" [ngModel]="car.vat"></td>
+            <td class="app-table__td">
+              <input 
+                class="app-table__nds-checkbox"
+                disabled 
+                type="checkbox" 
+                [ngModel]="car.vat"
+              >
+            </td>
             <td class="app-table__td">{{car.unit}}</td>
             <td class="app-table__td">{{car.contacts}}</td>
             <td class="app-table__td">{{car.comments}}</td>
