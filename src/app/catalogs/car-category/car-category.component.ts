@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from "@angular/platform-browser";
 import { HttpService } from './http.service';
 import { CarCategory } from '../../models/CarCategory';
 import { ToastrService } from 'ngx-toastr';
@@ -12,8 +13,16 @@ import { EditCarCategoryComponent } from './editor/edit.component';
 })
 export class CarCategoryComponent implements OnInit {
   nameSorting: string = 'none';
-  constructor(private httpSrv: HttpService, private toastr: ToastrService, public ngxSmartModalService: NgxSmartModalService) { }
   categories: CarCategory[] = [];
+
+  constructor(
+    private httpSrv: HttpService, 
+    private toastr: ToastrService, 
+    public ngxSmartModalService: NgxSmartModalService,
+    private title: Title) { 
+      title.setTitle("Категории машин");  
+  }
+  
   ngOnInit() {
     this.getData();
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from "@angular/platform-browser";
 import { Client } from '../models/Client';
 import { Request } from '../models/Request';
 import { Subject } from 'rxjs';
@@ -23,10 +24,17 @@ export class OrdersComponent implements OnInit {
 
   curDate = new Date();
 
+  constructor(
+    public http: HttpService, 
+    private toastr: ToastrService, 
+    public ngxSmartModalService: NgxSmartModalService,
+    private title: Title) { 
+      title.setTitle("Заказы");
+    }
+    
   getRand(): number {
     return Math.floor((Math.random() * 3)) + 0;
   }
-  constructor(public http: HttpService, private toastr: ToastrService, public ngxSmartModalService: NgxSmartModalService) { }
 
   add() {
     this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
