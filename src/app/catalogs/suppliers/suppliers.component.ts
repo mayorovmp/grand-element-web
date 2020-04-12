@@ -26,6 +26,9 @@ export class SuppliersComponent implements OnInit {
   }
 
   async getData() {
+    this.nameSorting = 'none';
+    this.legalEntitySorting = 'none';
+    this.addressSorting = 'none';
     this.suppliers = await this.httpSrv.getSuppliers().toPromise();
   }
 
@@ -83,7 +86,6 @@ export class SuppliersComponent implements OnInit {
     this.nameSorting = 'none';
     this.legalEntitySorting = 'none';
     if (this.addressSorting === 'none' || this.addressSorting === 'reverse'){
-      console.log('this.suppliers', this.suppliers);
       this.suppliers.sort((a, b) => {
         if (!a.address) { a.address = ''}
         if (!b.address) { b.address = ''}

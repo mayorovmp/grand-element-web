@@ -23,6 +23,9 @@ export class CarComponent implements OnInit {
   }
 
   getData() {
+    this.ownerCarSorting = 'none';
+    this.categoryCarSorting = 'none';
+    this.priceSorting = 'none';
     this.http.getCars().subscribe(
       m =>
         this.cars = m,

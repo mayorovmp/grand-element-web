@@ -19,6 +19,7 @@ export class CarCategoryComponent implements OnInit {
   }
 
   async getData() {
+    this.nameSorting = 'none';
     this.httpSrv.getCarCategories().subscribe(x => this.categories = x);
   }
 

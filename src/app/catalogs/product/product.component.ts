@@ -19,6 +19,7 @@ export class ProductComponent implements OnInit {
     this.getData();
   }
   async getData() {
+    this.nameSorting = 'none';
     this.httpSrv.getProducts().subscribe(e => { this.products = e; });
   }
   async delete(product: Product) {

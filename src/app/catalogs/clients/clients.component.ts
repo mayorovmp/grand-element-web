@@ -19,6 +19,7 @@ export class ClientsComponent implements OnInit {
   }
 
   async getData() {
+    this.nameSorting = 'none';
     this.clients = await this.httpClient.getClients().toPromise();
   }
 
