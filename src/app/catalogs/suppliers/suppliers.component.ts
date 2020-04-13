@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from "@angular/platform-browser";
 import { Supplier } from '../../models/Supplier';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from './http.service';
@@ -15,7 +16,12 @@ export class SuppliersComponent implements OnInit {
   nameSorting: string = 'none';
   legalEntitySorting: string = 'none';
   addressSorting: string = 'none';
-  constructor(public ngxSmartModalService: NgxSmartModalService, private httpSrv: HttpService) { }
+  constructor(
+    public ngxSmartModalService: NgxSmartModalService, 
+    private httpSrv: HttpService,
+    private title: Title) {
+      title.setTitle("Поставщики");
+  }
 
   ngOnInit() {
     this.getData();
@@ -26,6 +32,9 @@ export class SuppliersComponent implements OnInit {
   }
 
   async getData() {
+    this.nameSorting = 'none';
+    this.legalEntitySorting = 'none';
+    this.addressSorting = 'none';
     this.suppliers = await this.httpSrv.getSuppliers().toPromise();
   }
 
@@ -83,7 +92,6 @@ export class SuppliersComponent implements OnInit {
     this.nameSorting = 'none';
     this.legalEntitySorting = 'none';
     if (this.addressSorting === 'none' || this.addressSorting === 'reverse'){
-      console.log('this.suppliers', this.suppliers);
       this.suppliers.sort((a, b) => {
         if (!a.address) { a.address = ''}
         if (!b.address) { b.address = ''}

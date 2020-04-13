@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from "@angular/platform-browser";
 import { Client } from 'src/app/models/Client';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from 'src/app/catalogs/clients/http.service';
@@ -12,13 +13,19 @@ import { ClientEditorComponent } from './editor/editor.component';
 export class ClientsComponent implements OnInit {
   clients: Client[] = [];
   nameSorting: string = 'none';
-  constructor(private httpClient: HttpService, public ngxSmartModalService: NgxSmartModalService) { }
+  constructor(
+    private httpClient: HttpService, 
+    public ngxSmartModalService: NgxSmartModalService,
+    private title: Title) { 
+      title.setTitle("Клиенты");  
+    }
 
   ngOnInit() {
     this.getData();
   }
 
   async getData() {
+    this.nameSorting = 'none';
     this.clients = await this.httpClient.getClients().toPromise();
   }
 

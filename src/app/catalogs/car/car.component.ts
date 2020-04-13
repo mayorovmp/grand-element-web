@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from "@angular/platform-browser";
 import { Car } from '../../models/Car';
 import { HttpService } from './http.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
@@ -16,13 +17,23 @@ export class CarComponent implements OnInit {
   ownerCarSorting: string = 'none';
   categoryCarSorting: string = 'none';
   priceSorting: string = 'none';
-  constructor(public http: HttpService, private toastr: ToastrService, public ngxSmartModalService: NgxSmartModalService) { }
+
+  constructor(
+    public http: HttpService, 
+    private toastr: ToastrService, 
+    public ngxSmartModalService: NgxSmartModalService,
+    private title: Title) { 
+      title.setTitle("Перевозчики");
+    }
 
   ngOnInit() {
     this.getData();
   }
 
   getData() {
+    this.ownerCarSorting = 'none';
+    this.categoryCarSorting = 'none';
+    this.priceSorting = 'none';
     this.http.getCars().subscribe(
       m =>
         this.cars = m,

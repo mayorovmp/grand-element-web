@@ -15,4 +15,23 @@
 .table-container{
     overflow-x: scroll;
     width: 100%;
-  }
+}
+.app-table__nds-checkbox{
+    height: 18px;
+    width: 18px;
+    border: 1px solid #dee2e6;
+    border-radius: 2px;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #dee2e6;
+    position: relative;
+}
+.app-table__nds-checkbox:checked::after{
+    text-align: center;
+    content: "✔";
+    font-size: 12px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}

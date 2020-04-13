@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from "@angular/platform-browser";
 import { Product } from 'src/app/models/Product';
 import { HttpService } from './http.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
@@ -13,12 +14,19 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductComponent implements OnInit {
   products: Product[] = [];
   nameSorting: string = 'none';
-  constructor(private httpSrv: HttpService, private toastr: ToastrService, private ngxSmartModalService: NgxSmartModalService) { }
+  constructor(
+    private httpSrv: HttpService, 
+    private toastr: ToastrService, 
+    private ngxSmartModalService: NgxSmartModalService,
+    private title: Title) {
+        title.setTitle("Товары");    
+    }
 
   async ngOnInit() {
     this.getData();
   }
   async getData() {
+    this.nameSorting = 'none';
     this.httpSrv.getProducts().subscribe(e => { this.products = e; });
   }
   async delete(product: Product) {
