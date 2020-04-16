@@ -135,6 +135,95 @@ a:hover {
     width: 24px;
     height: 24px;
 }
+.form-container{
+    text-align: center;
+}
+.form-title{
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.form-block{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+.form-block__label{
+    padding: 4px 8px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    width: 194px;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+.form-block__input{
+    width: calc(100% - 194px);
+    border: 1px solid #ced4da;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    border-left: none;
+    padding: 4px 8px;
+    margin-bottom: 0;
+    font-size: 14px;
+    flex: 1;
+    background-color: #fff;
+}
+.form-block__label.form-block__label--autoWidth{
+    width: auto;
+}
+.form-block__input[type="checkbox"]{
+    max-width: 27px;
+    height: 27px;
+    margin-left: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    position: relative;
+    background-color: #fff;
+    margin-top: 2px;
+}
+.form-block__input[type="checkbox"]:checked{
+    background-color: #343a40;
+}
+.form-block__input[type="checkbox"]:checked::after{
+    text-align: center;
+    content: "✔";
+    font-size: 17px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    color: #fff;
+}
+.additional-btn-container{
+    margin-top: 16px;
+}
+.form-block__select{
+    width: calc(100% - 194px);
+    border: 1px solid #ced4da;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    border-left: none;
+    padding: 4px 8px;
+    margin-bottom: 0;
+    font-size: 14px;
+    flex: 1;
+    background-color: #fff;
+}
+.form-block-adding-block{
+    margin: 16px 0;
+    border: 1px solid #343a40;
+    padding: 12px;
+    border-radius: 6px;
+}
 @media (max-width: 996px){
     .app-container-fluid {
         padding: 24px
