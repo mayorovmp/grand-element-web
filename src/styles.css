@@ -180,8 +180,8 @@ a:hover {
     width: auto;
 }
 .form-block__input[type="checkbox"]{
-    max-width: 31px;
-    height: 31px;
+    max-width: 27px;
+    height: 27px;
     margin-left: 20px;
     border: 1px solid #ced4da;
     border-radius: 4px;
@@ -189,6 +189,7 @@ a:hover {
     appearance: none;
     position: relative;
     background-color: #fff;
+    margin-top: 2px;
 }
 .form-block__input[type="checkbox"]:checked{
     background-color: #343a40;
@@ -196,7 +197,7 @@ a:hover {
 .form-block__input[type="checkbox"]:checked::after{
     text-align: center;
     content: "✔";
-    font-size: 20px;
+    font-size: 17px;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -216,6 +217,12 @@ a:hover {
     font-size: 14px;
     flex: 1;
     background-color: #fff;
+}
+.form-block-adding-block{
+    margin: 16px 0;
+    border: 1px solid #343a40;
+    padding: 12px;
+    border-radius: 6px;
 }
 @media (max-width: 996px){
     .app-container-fluid {
