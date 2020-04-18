@@ -1,0 +1,14 @@
+.login-form__title{
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+.login-form__btns{
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (max-width: 440px){
+    .login-form__title{
+        font-size: 24px;
+    }
+}
