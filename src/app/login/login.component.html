@@ -1,37 +1,67 @@
-<div class="container mt-3">
-  <div class="app-row">
-    <div class="offset-3 col-6">
-      <form #form="ngForm" (ngSubmit)="authenticate(form)">
-        <h3>Войти c учетной записью Гранд Элемент</h3>
-        <div *ngIf="errorMessage" class="alert alert-secondary" role="alert">
-          {{errorMessage}}
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <label for="username" class="sr-only">Имя пользователя</label>
-            <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-            </div>
-            <input type="text" class="form-control" id="username" placeholder="Имя пользователя" required autofocus
-              [(ngModel)]="username" name="username">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <label for="password" class="sr-only">Пароль</label>
-            <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-            </div>
-            <input class="form-control" placeholder="Пароль" type="password" required [(ngModel)]="password"
-              name="password">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <button type="submit" class="btn btn-info">ВХОД</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
+<div class="app-container">
+  <div class="app-row app-row--centered">
+    <form 
+      #form="ngForm" 
+      (ngSubmit)="authenticate(form)"
+      class="login-form"
+    >
+      <h2 class="login-form__title">
+        Войти c учетной записью <br>Гранд Элемент
+      </h2>
+      <div 
+        *ngIf="errorMessage" 
+        class="alert alert-secondary" 
+        role="alert"
+      >
+        {{errorMessage}}
+      </div>
+
+      <div class="form-block">
+        <label for="username" class="form-block__label form-block__label--icon">
+          <img 
+            class="label-icon-img"
+            src="{{nameIconSrc}}" 
+            alt="Имя"
+          >
+        </label>
+        <input 
+          type="text" 
+          [(ngModel)]="username" 
+          class="form-block__input form-block__input--login"
+          name="username"
+          id="username"
+          placeholder="Имя пользователя" 
+          required 
+          autofocus
+        >
+      </div>
+
+      <div class="form-block">
+        <label for="password" class="form-block__label form-block__label--icon">
+          <img 
+            class="label-icon-img"
+            src="{{passwordIconSrc}}" 
+            alt="Пароль"
+          >
+        </label>
+        <input 
+          type="password" 
+          [(ngModel)]="password" 
+          class="form-block__input form-block__input--login"
+          name="password"
+          id="password"
+          placeholder="Пароль" 
+          required
+        >
+      </div>
+
+      <div class="login-form__btns">
+        <button 
+          type="submit" 
+          class="app-btn gray-btn" 
+        >
+          Вход
+        </button>
+      </div>
+    </form>
 </div>
