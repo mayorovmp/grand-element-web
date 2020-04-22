@@ -105,6 +105,10 @@ a:hover {
     padding: 8px;
     text-align: center;
 }
+.app-table__btns-th {
+    border-right: 1px solid #dee2e6;
+    background-color: #6f6f6f;
+}
 .app-table-heading-content{
     display: flex;
     align-items: center;
@@ -119,6 +123,10 @@ a:hover {
     width: 24px;
     height: 24px;
     margin-left: 12px;
+}
+.app-table__sorting-img.app-table__sorting-img--orders{
+    margin-left: 0;
+    margin-top: 6px;
 }
 .btn-container{
     display: flex;
@@ -179,6 +187,13 @@ a:hover {
     flex: 1;
     background-color: #fff;
 }
+.form-block__input[type="checkbox"].form-block__input--orders-all{
+    margin-top: 0;
+    max-width: 20px;
+    height: 20px;
+    margin-left: 12px;
+    width: 20px;
+}
 .form-block__label.form-block__label--autoWidth{
     width: auto;
 }
@@ -211,6 +226,9 @@ a:hover {
     height: 100%;
     position: absolute;
     color: #fff;
+}
+.form-block__input--orders-all.form-block__input[type="checkbox"]:checked::after{
+    font-size: 12px;
 }
 .form-block__input.form-block__input--login{
     padding: 8px 12px;
