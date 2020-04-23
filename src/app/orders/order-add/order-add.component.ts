@@ -74,6 +74,12 @@ export class OrderAddComponent implements OnInit {
 
     this.carHttp.getCars().subscribe(
       x => this.cars = x);
+
+    this.request = this.ngxSmartModalService.getModalData(OrderAddComponent.MODAL_NAME);
+  }
+
+  byId(a: any, b: any) {
+    return a && b ? a.id === b.id : a === b;
   }
 
   reset() {
@@ -149,7 +155,11 @@ export class OrderAddComponent implements OnInit {
   }
 
   async add(req: Request) {
-    await this.reqService.add(req).toPromise();
+    if (this.request.id) {
+      await this.reqService.edit(req).toPromise();
+    } else {
+      await this.reqService.add(req).toPromise();
+    }
     this.changed.emit();
     this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).close();
   }

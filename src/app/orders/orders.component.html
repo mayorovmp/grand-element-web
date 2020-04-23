@@ -64,25 +64,11 @@
                     <td class="app-table__td">{{req.comment}}</td>
                     <td class="app-table__td">
                         <div class="btn-container btn-container--centered">
-                            <button
-                              class="edit-btn"
-                              hidden
-                            >
-                              <img 
-                                class="edit-btn__img"
-                                src="assets/img/icons/edit.svg" 
-                                alt="изменить"
-                              >
+                            <button (click)="edit(req)" class="edit-btn">
+                                <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
                             </button>
-                            <button
-                              (click)="del(req)"
-                              class="delete-btn"
-                            >
-                              <img 
-                                class="edit-btn__img"
-                                src="assets/img/icons/delete.svg" 
-                                alt="удалить"
-                              >
+                            <button (click)="del(req)" class="delete-btn">
+                                <img class="edit-btn__img" src="assets/img/icons/delete.svg" alt="удалить">
                             </button>
                         </div>
                     </td>
@@ -163,7 +149,8 @@
                     <th class="app-table__th">Цена продажи <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th hidden class="app-table__th">Вход, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th hidden class="app-table__th">Выход, тн<i class="fa fa-sort" aria-hidden="true"></i></th>
-                    <th hidden class="app-table__th">Стоимость перевозки<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th hidden class="app-table__th">Стоимость перевозки<i class="fa fa-sort" aria-hidden="true"></i>
+                    </th>
                     <th hidden class="app-table__th">Доход<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th hidden class="app-table__th">Прибыль<i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th class="app-table__th">Вознаграждение<i class="fa fa-sort" aria-hidden="true"></i></th>
@@ -196,25 +183,11 @@
                     <td class="app-table__td">{{req.comment}}</td>
                     <td class="app-table__td">
                         <div class="btn-container btn-container--centered">
-                            <button
-                              class="edit-btn"
-                              hidden
-                            >
-                              <img 
-                                class="edit-btn__img"
-                                src="assets/img/icons/edit.svg" 
-                                alt="изменить"
-                              >
+                            <button (click)="edit(req)" class="edit-btn">
+                                <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
                             </button>
-                            <button
-                              (click)="del(req)"
-                              class="delete-btn"
-                            >
-                              <img 
-                                class="edit-btn__img"
-                                src="assets/img/icons/delete.svg" 
-                                alt="удалить"
-                              >
+                            <button (click)="del(req)" class="delete-btn">
+                                <img class="edit-btn__img" src="assets/img/icons/delete.svg" alt="удалить">
                             </button>
                         </div>
                     </td>

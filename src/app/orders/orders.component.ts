@@ -25,17 +25,22 @@ export class OrdersComponent implements OnInit {
   curDate = new Date();
 
   constructor(
-    public http: HttpService, 
-    private toastr: ToastrService, 
+    public http: HttpService,
+    private toastr: ToastrService,
     public ngxSmartModalService: NgxSmartModalService,
-    private title: Title) { 
-      title.setTitle("Заказы");
-    }
-    
+    private title: Title) {
+    title.setTitle("Заказы");
+  }
+
   getRand(): number {
     return Math.floor((Math.random() * 3)) + 0;
   }
 
+  edit(req: Request) {
+    this.ngxSmartModalService.setModalData(req, OrderAddComponent.MODAL_NAME, true);
+
+    this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
+  }
   add() {
     this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
   }
@@ -72,7 +77,7 @@ export class OrdersComponent implements OnInit {
 
   async getDataByDate(dt: Date) {
     this.http.getRequestsByDate(dt).subscribe(
-      x => this.requests = x,
+      x => { this.requests = x.filter(r => !r.isLong); this.longRequests = x.filter(r => r.isLong); },
       e => this.toastr.error(e.message)
     );
   }
