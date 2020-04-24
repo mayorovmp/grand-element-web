@@ -27,6 +27,15 @@ export class ClientsComponent implements OnInit {
   async getData() {
     this.nameSorting = 'none';
     this.clients = await this.httpClient.getClients().toPromise();
+    this.clients.forEach((client) => {
+      if (!client.addresses.length){
+        client.addresses.push({
+          contacts: [],
+          id: client.id,
+          name: "",
+        });
+      }
+    })
   }
 
   addClient() {
