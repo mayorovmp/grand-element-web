@@ -49,6 +49,13 @@
   color: #fff;
   font-weight: 700;
 }
+.finish-order{
+  background-color: transparent;
+  border: 1px solid #dee2e6;
+}
+.finish-order__icon{
+  width: 24px;
+}
 
 @media (max-width: 500px){
   .export-order__input{

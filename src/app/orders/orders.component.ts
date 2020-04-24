@@ -69,6 +69,10 @@ export class OrdersComponent implements OnInit {
       );
   }
 
+  async finishRequest(orderId: number) {
+    await this.http.finishRequest(orderId).toPromise();
+    this.getData();
+  }
   onChangeDate($event: number) {
     this.curDate = new Date($event);
     this.DateChanged.next(this.curDate);
