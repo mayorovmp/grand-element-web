@@ -40,6 +40,35 @@
         </thead>
           <tbody>
             <ng-container *ngFor="let client of clients">
+              <tr class="app-table__tr" *ngIf="client.addresses.length === 0">
+                <td class="app-table__td">{{client?.name}}</td>
+                <td class="app-table__td"></td>
+                <td class="app-table__td"></td>
+                <td class="app-table__td">
+                  <div class="btn-container btn-container--centered">
+                    <button
+                      (click)="edit(client)"
+                      class="edit-btn"
+                    >
+                      <img 
+                        class="edit-btn__img"
+                        src="assets/img/icons/edit.svg" 
+                        alt="изменить"
+                      >
+                    </button>
+                    <button
+                      (click)="delete(client)" 
+                      class="delete-btn"
+                    >
+                      <img 
+                        class="edit-btn__img"
+                        src="assets/img/icons/delete.svg" 
+                        alt="удалить"
+                      >
+                    </button>
+                  </div>
+                </td>
+              </tr>
               <ng-container *ngFor="let addr of client.addresses; let addrIndx = index">
                 <tr class="app-table__tr">
                   <td class="app-table__td">{{client?.name}}</td>
