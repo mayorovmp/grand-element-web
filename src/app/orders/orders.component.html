@@ -249,7 +249,7 @@
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
                         {{req.status}}
                         <button 
-                            *ngIf="req.status !== 'Заверш.'"
+                            *ngIf="!req.statusId"
                             title="Завершить заявку"
                             class="finish-order"
                             (click)="finishRequest(req.id)"
