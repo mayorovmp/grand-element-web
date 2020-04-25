@@ -75,7 +75,7 @@ export class OrderAddComponent implements OnInit {
     this.carHttp.getCars().subscribe(
       x => this.cars = x);
 
-    this.request = this.ngxSmartModalService.getModalData(OrderAddComponent.MODAL_NAME);
+    // this.request = this.ngxSmartModalService.getModalData(OrderAddComponent.MODAL_NAME);
   }
 
   byId(a: any, b: any) {
