@@ -30,34 +30,29 @@ export class OrdersComponent implements OnInit {
   hidingColumnsLongTerm: string[] = [];
 
   constructor(
-    public http: HttpService,
-    private toastr: ToastrService,
+    public http: HttpService, 
+    private toastr: ToastrService, 
     public ngxSmartModalService: NgxSmartModalService,
-    private title: Title) {
-    title.setTitle("Заказы");
-  }
-
+    private title: Title) { 
+      title.setTitle("Заказы");
+    }
+    
   getRand(): number {
     return Math.floor((Math.random() * 3)) + 0;
   }
 
-  edit(req: Request) {
-    this.ngxSmartModalService.setModalData(req, OrderAddComponent.MODAL_NAME, true);
-
-    this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
-  }
   add() {
     this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
   }
 
   ngOnInit() {
-    this.getData();
+    this.getData(this.pickedDay);
 
 
     this.DateChanged.pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe(dt => {
         this.pickedDay = dt;
-        this.getDataByDate(dt);
+        this.getData(dt);
       });
   }
 
@@ -76,31 +71,27 @@ export class OrdersComponent implements OnInit {
 
   async finishRequest(orderId: number) {
     await this.http.finishRequest(orderId).toPromise();
-    this.getData();
+    this.getData(this.pickedDay);
   }
   onChangeDate($event: number) {
     this.curDate = new Date($event);
     this.DateChanged.next(this.curDate);
   }
 
-
-  async getDataByDate(dt: Date) {
-    this.http.getRequestsByDate(dt).subscribe(
-      x => { this.requests = x.filter(r => !r.isLong); this.longRequests = x.filter(r => r.isLong); },
-      e => this.toastr.error(e.message)
-    );
-  }
-
   async del(req: Request) {
     await this.http.del(req).toPromise();
-    this.getData();
+    this.getData(this.pickedDay);
   }
 
-  async getData() {
-    this.http.getRequests().subscribe(
-      x => { this.requests = x.filter(r => !r.isLong); this.longRequests = x.filter(r => r.isLong); },
-      e => this.toastr.error(e.message)
+  async getData(dt: Date) {
+    this.http.getRequestsByDate(dt).subscribe(
+      allRequests => {
+        this.requests = allRequests.filter(req => !req.isLong); 
+        this.longRequests = allRequests.filter(req => req.isLong); 
+      },
+      error => this.toastr.error(error.message)
     );
+
   }
 
   hideColumn(column: string){
