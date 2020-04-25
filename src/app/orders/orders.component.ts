@@ -46,7 +46,7 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getData();
+    this.getData(this.pickedDay);
 
 
     this.DateChanged.pipe(debounceTime(1000), distinctUntilChanged())
@@ -71,7 +71,7 @@ export class OrdersComponent implements OnInit {
 
   async finishRequest(orderId: number) {
     await this.http.finishRequest(orderId).toPromise();
-    this.getData();
+    this.getData(this.pickedDay);
   }
   onChangeDate($event: number) {
     this.curDate = new Date($event);
@@ -81,21 +81,28 @@ export class OrdersComponent implements OnInit {
 
   async getDataByDate(dt: Date) {
     this.http.getRequestsByDate(dt).subscribe(
-      x => this.requests = x,
-      e => this.toastr.error(e.message)
+      allRequests => {
+        this.requests = allRequests.filter(req => !req.isLong); 
+        this.longRequests = allRequests.filter(req => req.isLong); 
+      },
+      error => this.toastr.error(error.message)
     );
   }
 
   async del(req: Request) {
     await this.http.del(req).toPromise();
-    this.getData();
+    this.getData(this.pickedDay);
   }
 
-  async getData() {
-    this.http.getRequests().subscribe(
-      x => { this.requests = x.filter(r => !r.isLong); this.longRequests = x.filter(r => r.isLong); },
-      e => this.toastr.error(e.message)
+  async getData(dt: Date) {
+    this.http.getRequestsByDate(dt).subscribe(
+      allRequests => {
+        this.requests = allRequests.filter(req => !req.isLong); 
+        this.longRequests = allRequests.filter(req => req.isLong); 
+      },
+      error => this.toastr.error(error.message)
     );
+
   }
 
   hideColumn(column: string){
