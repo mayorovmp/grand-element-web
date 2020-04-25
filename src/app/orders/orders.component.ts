@@ -52,7 +52,7 @@ export class OrdersComponent implements OnInit {
     this.DateChanged.pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe(dt => {
         this.pickedDay = dt;
-        this.getDataByDate(dt);
+        this.getData(dt);
       });
   }
 
@@ -76,17 +76,6 @@ export class OrdersComponent implements OnInit {
   onChangeDate($event: number) {
     this.curDate = new Date($event);
     this.DateChanged.next(this.curDate);
-  }
-
-
-  async getDataByDate(dt: Date) {
-    this.http.getRequestsByDate(dt).subscribe(
-      allRequests => {
-        this.requests = allRequests.filter(req => !req.isLong); 
-        this.longRequests = allRequests.filter(req => req.isLong); 
-      },
-      error => this.toastr.error(error.message)
-    );
   }
 
   async del(req: Request) {
