@@ -8,6 +8,7 @@ import { OrderAddComponent } from './order-add/order-add.component';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from './http.service';
 import { ToastrService } from 'ngx-toastr';
+import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-orders',
@@ -23,6 +24,10 @@ export class OrdersComponent implements OnInit {
   longRequests: Request[] = [];
 
   curDate = new Date();
+
+  hidingColumns: string[] = [];
+
+  hidingColumnsLongTerm: string[] = [];
 
   constructor(
     public http: HttpService,
@@ -69,6 +74,10 @@ export class OrdersComponent implements OnInit {
       );
   }
 
+  async finishRequest(orderId: number) {
+    await this.http.finishRequest(orderId).toPromise();
+    this.getData();
+  }
   onChangeDate($event: number) {
     this.curDate = new Date($event);
     this.DateChanged.next(this.curDate);
@@ -94,4 +103,27 @@ export class OrdersComponent implements OnInit {
     );
   }
 
+  hideColumn(column: string){
+    this.hidingColumns.push(column);
+  }
+
+  showColumn(column: string){
+    this.hidingColumns = this.hidingColumns.filter(item => item !== column);
+  }
+
+  showAllColumns(){
+    this.hidingColumns = [];
+  }
+
+  hideColumnLongTerm(column: string){
+    this.hidingColumnsLongTerm.push(column);
+  }
+
+  showColumnLongTerm(column: string){
+    this.hidingColumnsLongTerm = this.hidingColumnsLongTerm.filter(item => item !== column);
+  }
+
+  showAllColumnsLongTerm(){
+    this.hidingColumnsLongTerm = [];
+  }
 }

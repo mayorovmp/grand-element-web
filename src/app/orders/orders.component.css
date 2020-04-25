@@ -16,6 +16,47 @@
   overflow-x: scroll;
 }
 
+.additional-rows{
+  margin-bottom: 12px;
+}
+.all-rows{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.hidden-columns{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.all-rows__label{
+  margin-bottom: 0;
+}
+.hidden-column-block{
+  margin-right: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+.hidden-column-block__label{
+  margin-bottom: 0;
+}
+.hide-column-btn{
+  width: 100%;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-weight: 700;
+}
+.finish-order{
+  background-color: transparent;
+  border: 1px solid #dee2e6;
+}
+.finish-order__icon{
+  width: 24px;
+}
+
 @media (max-width: 500px){
   .export-order__input{
     margin-bottom: 20px;

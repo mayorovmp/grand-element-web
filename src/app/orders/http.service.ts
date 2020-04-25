@@ -73,6 +73,11 @@ export class HttpService {
     return this.http.delete<any>(url);
   }
 
+  finishRequest(requestId: number): Observable<any> {
+    const url = this.baseUrl + `/request/complete/${requestId}`;
+    return this.http.post<any>(url, requestId);
+  }
+
   getRequests(): Observable<Request[]> {
     const url = this.baseUrl + '/request';
     return this.http.get<Request[]>(url);
