@@ -28,7 +28,7 @@
                   <img
                     src="assets/img/icons/sort-{{nameSorting}}.svg"
                     class="app-table__sorting-img" 
-                    alt=""
+                    alt="Сортировка"
                   >
                 </div>
               </th>
@@ -55,7 +55,7 @@
                   <img
                     src="assets/img/icons/sort-{{addressSorting}}.svg"
                     class="app-table__sorting-img" 
-                    alt=""
+                    alt="Сортировка"
                   >
                 </div>
               </th>
@@ -79,10 +79,8 @@
                 <td class="app-table__td">{{supplier.address}}</td>
                 <td class="app-table__td"> 
                   <span *ngFor="let prod of supplier.products">
-                    <i>
                       {{prod.name}}
                       <b *ngIf="prod.price">({{prod.price}}р)</b>
-                    </i>
                     <br>
                   </span>
                 </td>
@@ -99,7 +97,7 @@
                       >
                     </button>
                     <button
-                      (click)="deleteSupplier(supplier.id)" 
+                      (click)="confirm(supplier.id)"
                       class="delete-btn"
                     >
                       <img 
@@ -118,3 +116,4 @@
   </div>
 </div>
 <app-supplier-editor (changed)="getData()"></app-supplier-editor>
+<app-supplier-confirm (changed)="getData()"></app-supplier-confirm>

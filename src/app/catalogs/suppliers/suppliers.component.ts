@@ -4,6 +4,7 @@ import { Supplier } from '../../models/Supplier';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from './http.service';
 import { EditorComponent } from './editor/editor.component';
+import { ConfirmModalComponent } from '../../common/confirm-modal/confirm.component'
 
 @Component({
   selector: 'app-suppliers',
@@ -29,6 +30,20 @@ export class SuppliersComponent implements OnInit {
 
   add() {
     this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
+  }
+
+  confirm(id: number) {
+    this.ngxSmartModalService.setModalData(
+      {
+        title: 'Подтвердите действие',
+        btnAction: () => this.deleteSupplier(id),
+        btnActionColor: 'red',
+        btnActionName: 'Удалить'
+      }, 
+      'confirmModal', 
+      true
+    );
+    this.ngxSmartModalService.toggle('confirmModal');
   }
 
   async getData() {
