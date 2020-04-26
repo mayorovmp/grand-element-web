@@ -83,7 +83,7 @@
                   >
                 </button>
                 <button
-                  (click)="delete(car)" 
+                  (click)="confirm(car)"
                   class="delete-btn"
                 >
                   <img 
@@ -101,3 +101,4 @@
   </div>
 </div>
 <app-car-editor (changed)="getData()"></app-car-editor>
+<app-modal-confirm (changed)="getData()"></app-modal-confirm>
