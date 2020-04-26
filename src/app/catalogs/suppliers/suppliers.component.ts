@@ -38,7 +38,7 @@ export class SuppliersComponent implements OnInit {
         title: 'Подтвердите действие',
         btnAction: () => this.deleteSupplier(id),
         btnActionColor: 'red',
-        btnActionName: 'Удалить'
+        btnActionName: 'Удалить поставщика'
       }, 
       'confirmModal', 
       true

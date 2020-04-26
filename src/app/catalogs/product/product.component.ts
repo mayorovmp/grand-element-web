@@ -40,7 +40,7 @@ export class ProductComponent implements OnInit {
         title: 'Подтвердите действие',
         btnAction: () => this.delete(product),
         btnActionColor: 'red',
-        btnActionName: 'Удалить'
+        btnActionName: 'Удалить товар'
       }, 
       'confirmModal', 
       true

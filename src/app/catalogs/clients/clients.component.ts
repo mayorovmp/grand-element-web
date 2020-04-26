@@ -38,6 +38,20 @@ export class ClientsComponent implements OnInit {
     this.ngxSmartModalService.toggle(ClientEditorComponent.MODAL_NAME);
   }
 
+  confirm(item: Client) {
+    this.ngxSmartModalService.setModalData(
+      {
+        title: 'Подтвердите действие',
+        btnAction: () => this.delete(item),
+        btnActionColor: 'red',
+        btnActionName: 'Удалить клиента'
+      }, 
+      'confirmModal', 
+      true
+    );
+    this.ngxSmartModalService.toggle('confirmModal');
+  }
+
   async delete(item: Client) {
     if (item.id) {
       await this.httpClient.deleteClient(item.id).toPromise();
