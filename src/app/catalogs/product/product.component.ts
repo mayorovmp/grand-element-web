@@ -29,15 +29,30 @@ export class ProductComponent implements OnInit {
     this.nameSorting = 'none';
     this.httpSrv.getProducts().subscribe(e => { this.products = e; });
   }
+
+  add() {
+    this.ngxSmartModalService.toggle(EditProductComponent.MODAL_NAME);
+  }
+
+  confirm(product: Product) {
+    this.ngxSmartModalService.setModalData(
+      {
+        title: 'Подтвердите действие',
+        btnAction: () => this.delete(product),
+        btnActionColor: 'red',
+        btnActionName: 'Удалить'
+      }, 
+      'confirmModal', 
+      true
+    );
+    this.ngxSmartModalService.toggle('confirmModal');
+  }
+
   async delete(product: Product) {
     this.httpSrv.deleteProduct(product.id).subscribe(
       _ => this.toastr.info('Успешно удалено'),
       e => this.toastr.error('При удалении произошла ошибка'),
       () => this.getData());
-  }
-
-  add() {
-    this.ngxSmartModalService.toggle(EditProductComponent.MODAL_NAME);
   }
 
   edit(item: Product) {

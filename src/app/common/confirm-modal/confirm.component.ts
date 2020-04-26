@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-supplier-confirm',
+  selector: 'app-modal-confirm',
   templateUrl: './confirm.component.html',
   styleUrls: ['./confirm.component.css']
 })

@@ -52,7 +52,7 @@
                     >
                   </button>
                   <button
-                    (click)="delete(product)" 
+                    (click)="confirm(product)"
                     class="delete-btn"
                   >
                     <img 
@@ -71,3 +71,4 @@
     </div>
   </div>
 <app-edit-product (changed)="getData()"></app-edit-product>
+<app-modal-confirm (changed)="getData()"></app-modal-confirm>
