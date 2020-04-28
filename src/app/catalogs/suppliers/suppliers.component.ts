@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from "@angular/platform-browser";
+import { Title } from '@angular/platform-browser';
 import { Supplier } from '../../models/Supplier';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from './http.service';
 import { EditorComponent } from './editor/editor.component';
-import { ConfirmModalComponent } from '../../common/confirm-modal/confirm.component'
+import { ConfirmModalComponent } from '../../common/confirm-modal/confirm.component';
 
 @Component({
   selector: 'app-suppliers',
@@ -14,14 +14,14 @@ import { ConfirmModalComponent } from '../../common/confirm-modal/confirm.compon
 export class SuppliersComponent implements OnInit {
 
   suppliers: Supplier[] = [];
-  nameSorting: string = 'none';
-  legalEntitySorting: string = 'none';
-  addressSorting: string = 'none';
+  nameSorting = 'none';
+  legalEntitySorting = 'none';
+  addressSorting = 'none';
   constructor(
-    public ngxSmartModalService: NgxSmartModalService, 
+    public ngxSmartModalService: NgxSmartModalService,
     private httpSrv: HttpService,
     private title: Title) {
-      title.setTitle("Поставщики");
+      title.setTitle('Поставщики');
   }
 
   ngOnInit() {
@@ -39,8 +39,8 @@ export class SuppliersComponent implements OnInit {
         btnAction: () => this.deleteSupplier(id),
         btnActionColor: 'red',
         btnActionName: 'Удалить поставщика'
-      }, 
-      'confirmModal', 
+      },
+      'confirmModal',
       true
     );
     this.ngxSmartModalService.toggle('confirmModal');
@@ -66,17 +66,17 @@ export class SuppliersComponent implements OnInit {
   sortedByName = () => {
     this.legalEntitySorting = 'none';
     this.addressSorting = 'none';
-    if (this.nameSorting === 'none' || this.nameSorting === 'reverse'){
+    if (this.nameSorting === 'none' || this.nameSorting === 'reverse') {
       this.suppliers.sort((a, b) => {
-        if (!a.name) { a.name = ''}
-        if (!b.name) { b.name = ''}
+        if (!a.name) { a.name = ''; }
+        if (!b.name) { b.name = ''; }
         return a.name.localeCompare(b.name);
       });
       this.nameSorting = 'direct';
-    } else if (this.nameSorting === 'direct'){
+    } else if (this.nameSorting === 'direct') {
       this.suppliers.sort((a, b) => {
-        if (!a.name) { a.name = ''}
-        if (!b.name) { b.name = ''}
+        if (!a.name) { a.name = ''; }
+        if (!b.name) { b.name = ''; }
         return b.name.localeCompare(a.name);
       });
       this.nameSorting = 'reverse';
@@ -86,17 +86,17 @@ export class SuppliersComponent implements OnInit {
   sortedBylegalEntity = () => {
     this.nameSorting = 'none';
     this.addressSorting = 'none';
-    if (this.legalEntitySorting === 'none' || this.legalEntitySorting === 'reverse'){
+    if (this.legalEntitySorting === 'none' || this.legalEntitySorting === 'reverse') {
       this.suppliers.sort((a, b) => {
-        if (!a.legalEntity) { a.legalEntity = ''}
-        if (!b.legalEntity) { b.legalEntity = ''}
+        if (!a.legalEntity) { a.legalEntity = ''; }
+        if (!b.legalEntity) { b.legalEntity = ''; }
         return a.legalEntity.localeCompare(b.legalEntity);
       });
       this.legalEntitySorting = 'direct';
-    } else if (this.legalEntitySorting === 'direct'){
+    } else if (this.legalEntitySorting === 'direct') {
       this.suppliers.sort((a, b) => {
-        if (!a.legalEntity) { a.legalEntity = ''}
-        if (!b.legalEntity) { b.legalEntity = ''}
+        if (!a.legalEntity) { a.legalEntity = ''; }
+        if (!b.legalEntity) { b.legalEntity = ''; }
         return b.legalEntity.localeCompare(a.legalEntity);
       });
       this.legalEntitySorting = 'reverse';
@@ -106,17 +106,17 @@ export class SuppliersComponent implements OnInit {
   sortedByAddress = () => {
     this.nameSorting = 'none';
     this.legalEntitySorting = 'none';
-    if (this.addressSorting === 'none' || this.addressSorting === 'reverse'){
+    if (this.addressSorting === 'none' || this.addressSorting === 'reverse') {
       this.suppliers.sort((a, b) => {
-        if (!a.address) { a.address = ''}
-        if (!b.address) { b.address = ''}
+        if (!a.address) { a.address = ''; }
+        if (!b.address) { b.address = ''; }
         return a.address.localeCompare(b.address);
       });
       this.addressSorting = 'direct';
-    } else if (this.addressSorting === 'direct'){
+    } else if (this.addressSorting === 'direct') {
       this.suppliers.sort((a, b) => {
-        if (!a.address) { a.address = ''}
-        if (!b.address) { b.address = ''}
+        if (!a.address) { a.address = ''; }
+        if (!b.address) { b.address = ''; }
         return b.address.localeCompare(a.address);
       });
       this.addressSorting = 'reverse';

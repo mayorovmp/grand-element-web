@@ -20,6 +20,11 @@ export class HttpService {
     return this.http.post<any>(url, request);
   }
 
+  edit(request: Request): Observable<Request> {
+    const url = this.baseUrl + '/request';
+    return this.http.put<any>(url, request);
+  }
+
   editProduct(request: Request): Observable<Request> {
     const url = this.baseUrl;
 

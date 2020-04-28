@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from "@angular/platform-browser";
+import { Title } from '@angular/platform-browser';
 import { Client } from '../models/Client';
 import { Request } from '../models/Request';
 import { Subject } from 'rxjs';
@@ -30,13 +30,12 @@ export class OrdersComponent implements OnInit {
   hidingColumnsLongTerm: string[] = [];
 
   constructor(
-    public http: HttpService, 
-    private toastr: ToastrService, 
+    public http: HttpService,
+    private toastr: ToastrService,
     public ngxSmartModalService: NgxSmartModalService,
-    private title: Title) { 
-      title.setTitle("Заказы");
-    }
-    
+    private title: Title) {
+      title.setTitle('Заказы');
+  }
   getRand(): number {
     return Math.floor((Math.random() * 3)) + 0;
   }
@@ -44,7 +43,10 @@ export class OrdersComponent implements OnInit {
   add() {
     this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
   }
-
+  edit(request: Request) {
+    this.ngxSmartModalService.setModalData(request, OrderAddComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.toggle(OrderAddComponent.MODAL_NAME);
+  }
   ngOnInit() {
     this.getData(this.pickedDay);
 
@@ -86,35 +88,36 @@ export class OrdersComponent implements OnInit {
   async getData(dt: Date) {
     this.http.getRequestsByDate(dt).subscribe(
       allRequests => {
-        this.requests = allRequests.filter(req => !req.isLong); 
-        this.longRequests = allRequests.filter(req => req.isLong); 
+        console.log('allRequests', allRequests);
+        this.requests = allRequests.filter(req => !req.isLong);
+        this.longRequests = allRequests.filter(req => req.isLong);
       },
       error => this.toastr.error(error.message)
     );
 
   }
 
-  hideColumn(column: string){
+  hideColumn(column: string) {
     this.hidingColumns.push(column);
   }
 
-  showColumn(column: string){
+  showColumn(column: string) {
     this.hidingColumns = this.hidingColumns.filter(item => item !== column);
   }
 
-  showAllColumns(){
+  showAllColumns() {
     this.hidingColumns = [];
   }
 
-  hideColumnLongTerm(column: string){
+  hideColumnLongTerm(column: string) {
     this.hidingColumnsLongTerm.push(column);
   }
 
-  showColumnLongTerm(column: string){
+  showColumnLongTerm(column: string) {
     this.hidingColumnsLongTerm = this.hidingColumnsLongTerm.filter(item => item !== column);
   }
 
-  showAllColumnsLongTerm(){
+  showAllColumnsLongTerm() {
     this.hidingColumnsLongTerm = [];
   }
 }
