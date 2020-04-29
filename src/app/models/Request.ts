@@ -34,4 +34,10 @@ export class Request {
   comment?: string;
   isLong?: number;
   statusId?: boolean;
+  carId?: number;
+  productId?: number;
+  deliveryAddressId?: number;
+  clientId?: number;
+  carCategoryId?: number;
+  supplierId?: number;
 }

@@ -61,6 +61,7 @@ export class OrderAddComponent implements OnInit {
   onOpen() {
     // this.reset();
     const transferred = this.ngxSmartModalService.getModalData(OrderAddComponent.MODAL_NAME);
+    console.log('transferred', transferred);
     this.ngxSmartModalService.resetModalData(EditorComponent.MODAL_NAME);
     if (transferred) {
       this.request = transferred;
@@ -94,7 +95,9 @@ export class OrderAddComponent implements OnInit {
     this.selectedCarCategory = undefined;
     this.carCategories = [];
   }
-
+  byId(a: any, b: any) {
+    return a && b ? a.id === b.id : a === b;
+  }
   addClient() {
     this.ngxSmartModalService.getModal(ClientEditorComponent.MODAL_NAME).open();
   }
@@ -154,13 +157,37 @@ export class OrderAddComponent implements OnInit {
   }
 
   async createOrUpdate(req: Request) {
-    console.log('this.request', this.request);
-    console.log('req', req);
+    // console.log('this.request', this.request);
+
+    if (req.car) {
+      req.carId = req.car.id;
+    }
+
+    if (req.product) {
+      req.productId = req.product.id;
+    }
+
+    if (req.deliveryAddress) {
+      req.deliveryAddressId = req.deliveryAddress.id;
+    }
+
+    if (req.client) {
+      req.clientId = req.client.id;
+    }
+
+    if (req.carCategory) {
+      req.carCategoryId = req.carCategory.id;
+    }
+
+    if (req.supplier) {
+      req.supplierId = req.supplier.id;
+    }
+
+    console.log('this.request', req);
+
     if (req.id) {
-      console.log('333', req);
       await this.reqService.edit(req).toPromise();
     } else {
-      console.log('222', req);
       await this.reqService.add(req).toPromise();
     }
     this.changed.emit();

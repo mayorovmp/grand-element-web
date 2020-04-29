@@ -7,7 +7,12 @@
                     <div class="label">Клиент</div>
                 </span>
             </div>
-            <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="request.client">
+            <select 
+                class="form-control" 
+                id="exampleFormControlSelect1" 
+                [(ngModel)]="request.client"
+                [compareWith]="byId"
+            >
                 <option [ngValue]="undefined"></option>
                 <option *ngFor="let client of clients" [ngValue]="client">{{client.name}}</option>
             </select>
@@ -21,8 +26,12 @@
                 </span>
             </div>
 
-            <select [disabled]="!request.client" class="form-control" [(ngModel)]="request.deliveryAddress"
-                id="exampleFormControlSelect1">
+            <select 
+                [disabled]="!request.client" 
+                class="form-control" 
+                [(ngModel)]="request.deliveryAddress"
+                id="exampleFormControlSelect1"
+            >
                 <option *ngFor="let address of request.client?.addresses" [ngValue]="address">{{address.name}}</option>
             </select>
         </div>
