@@ -25,6 +25,7 @@ export class AuthService {
     }
 
     setUser(user: User): void {
+        console.log('token', user.token);
         localStorage.token = user.token;
         localStorage.username = user.name;
         localStorage.userId = user.userId;

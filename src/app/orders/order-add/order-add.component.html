@@ -7,8 +7,12 @@
                     <div class="label">Клиент</div>
                 </span>
             </div>
-            <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="request.client"
-                [compareWith]="byId">
+            <select 
+                class="form-control" 
+                id="exampleFormControlSelect1" 
+                [(ngModel)]="request.client"
+                [compareWith]="byId"
+            >
                 <option [ngValue]="undefined"></option>
                 <option *ngFor="let client of clients" [ngValue]="client">{{client.name}}</option>
             </select>
@@ -22,8 +26,12 @@
                 </span>
             </div>
 
-            <select [disabled]="!request.client" class="form-control" [(ngModel)]="request.deliveryAddress"
-                id="exampleFormControlSelect1">
+            <select 
+                [disabled]="!request.client" 
+                class="form-control" 
+                [(ngModel)]="request.deliveryAddress"
+                id="exampleFormControlSelect1"
+            >
                 <option *ngFor="let address of request.client?.addresses" [ngValue]="address">{{address.name}}</option>
             </select>
         </div>
@@ -79,8 +87,7 @@
                 </span>
             </div>
             <select class="form-control" [(ngModel)]="request.product"
-                (ngModelChange)="onProductChange(request.product?.id)" id="exampleFormControlSelect1"
-                [compareWith]="byId">
+                (ngModelChange)="onProductChange(request.product?.id)" id="exampleFormControlSelect1">
                 <option [ngValue]="undefined"></option>
                 <option *ngFor="let product of products" [ngValue]="product">{{product.name}}</option>
             </select>
@@ -94,7 +101,7 @@
                     </span>
                 </div>
                 <select class="form-control" [(ngModel)]="request.supplier" id="exampleFormControlSelect1"
-                    (ngModelChange)="onSupplierChange()" [compareWith]="byId">
+                    (ngModelChange)="onSupplierChange()">
                     <option [ngValue]="undefined"></option>
                     <option *ngFor="let supplier of suppliers" [ngValue]="supplier">{{supplier.name}}</option>
                 </select>
@@ -123,7 +130,7 @@
                         <div class="label">Перевозчик</div>
                     </span>
                 </div>
-                <select class="form-control" [(ngModel)]="request.car" (change)="onCarChange()" [compareWith]="byId">
+                <select class="form-control" [(ngModel)]="request.car" (change)="onCarChange()">
                     <option [ngValue]="undefined"></option>
                     <option *ngFor="let car of cars" [ngValue]="car">{{car.owner}}</option>
                 </select>
@@ -162,7 +169,7 @@
                     </div>
 
                     <select disabled class="form-control" [ngModel]="request.car?.carCategory?.id"
-                        id="exampleFormControlSelect1" [compareWith]="byId">
+                        id="exampleFormControlSelect1">
                         <option *ngFor="let carCategory of carCategories" [ngValue]="carCategory.id">
                             {{carCategory.name}}
                         </option>
