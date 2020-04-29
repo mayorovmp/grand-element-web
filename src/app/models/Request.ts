@@ -40,5 +40,6 @@ export class Request {
   status?: string;
   comment?: string;
   isLong?: number;
+  statusId?: boolean;
 }
 

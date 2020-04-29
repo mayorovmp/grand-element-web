@@ -67,6 +67,15 @@ a:hover {
     background-color: #343a40;
     color: #fff;
 }
+.red-btn {
+    background-color: #ea1d1d;
+    color: #fff;
+}
+.red-btn:hover {
+    -webkit-box-shadow: 0px 0px 18px 3px rgba(234, 29, 29, 0.75);
+    -moz-box-shadow: 0px 0px 18px 3px rgba(234, 29, 29, 0.75);
+    box-shadow: 0px 0px 18px 3px rgba(234, 29, 29, 0.75);
+}
 .gray-btn:hover {
     -webkit-box-shadow: 0px 0px 18px 3px rgba(52, 58, 64, 0.75);
     -moz-box-shadow: 0px 0px 18px 3px rgba(52, 58, 64, 0.75);

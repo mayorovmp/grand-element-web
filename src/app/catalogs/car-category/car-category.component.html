@@ -51,7 +51,7 @@
                     >
                   </button>
                   <button
-                    (click)="delete(category)" 
+                    (click)="confirm(category)"
                     class="delete-btn"
                   >
                     <img 
@@ -69,3 +69,4 @@
     </div>
 </div>
 <app-edit-car-category (changed)="getData()"></app-edit-car-category>
+<app-modal-confirm (changed)="getData()"></app-modal-confirm>

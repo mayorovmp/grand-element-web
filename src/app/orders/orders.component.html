@@ -13,24 +13,38 @@
     </div>
     <div class="orders-block">
         <h2 class="block-title">
-            Заказы на {{pickedDay | date: "dd.MM.yyyy"}}
+            Заказы на {{pickedDay | date: "dd.MM.yyyy"}} 
         </h2>
 
         <div class="additional-rows">
             <div class="all-rows" *ngIf="hidingColumns.length">
-                <label class="all-rows__label" for="all-rows__checkbox">
+                <label 
+                    class="all-rows__label"
+                    for="all-rows__checkbox"
+                >
                     Показать все поля
                 </label>
-                <input id="all-rows__checkbox" class="form-block__input form-block__input--orders-all" type="checkbox"
-                    (click)="showAllColumns()">
+                <input 
+                    id="all-rows__checkbox"
+                    class="form-block__input form-block__input--orders-all"
+                    type="checkbox"
+                    (click)="showAllColumns()"
+                >
             </div>
             <div class="hidden-columns">
                 <div class="hidden-column-block" *ngFor="let hidingColumn of hidingColumns">
-                    <label class="hidden-column-block__label" for="{{hidingColumn}}">
+                    <label 
+                        class="hidden-column-block__label"
+                        for="{{hidingColumn}}"
+                    >
                         {{hidingColumn}}
                     </label>
-                    <input id="{{hidingColumn}}" class="form-block__input form-block__input--orders-all" type="checkbox"
-                        (click)="showColumn(hidingColumn)">
+                    <input 
+                        id="{{hidingColumn}}"
+                        class="form-block__input form-block__input--orders-all"
+                        type="checkbox"
+                        (click)="showColumn(hidingColumn)"
+                    >
                 </div>
             </div>
         </div>
@@ -39,102 +53,162 @@
             <thead>
                 <tr class="app-table__tr">
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Статус')">
-                        <button class="hide-column-btn" (click)="hideColumn('Статус')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Статус')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Дата')">
-                        <button class="hide-column-btn" (click)="hideColumn('Дата')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Дата')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Клиент')">
-                        <button class="hide-column-btn" (click)="hideColumn('Клиент')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Клиент')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Адрес доставки')">
-                        <button class="hide-column-btn" (click)="hideColumn('Адрес доставки')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Адрес доставки')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Объем, тн')">
-                        <button class="hide-column-btn" (click)="hideColumn('Объем, тн')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Объем, тн')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Товар')">
-                        <button class="hide-column-btn" (click)="hideColumn('Товар')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Товар')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Поставщик')">
-                        <button class="hide-column-btn" (click)="hideColumn('Поставщик')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Поставщик')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Цена закупки')">
-                        <button class="hide-column-btn" (click)="hideColumn('Цена закупки')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Цена закупки')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Перевозчик')">
-                        <button class="hide-column-btn" (click)="hideColumn('Перевозчик')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Перевозчик')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Еденица измерения')">
-                        <button class="hide-column-btn" (click)="hideColumn('Еденица измерения')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Еденица измерения')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Цена перевозки')">
-                        <button class="hide-column-btn" (click)="hideColumn('Цена перевозки')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Цена перевозки')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Категория авто')">
-                        <button class="hide-column-btn" (click)="hideColumn('Категория авто')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Категория авто')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Цена продажи')">
-                        <button class="hide-column-btn" (click)="hideColumn('Цена продажи')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Цена продажи')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Вход, тн')">
-                        <button class="hide-column-btn" (click)="hideColumn('Вход, тн')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Вход, тн')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Выход, тн')">
-                        <button class="hide-column-btn" (click)="hideColumn('Выход, тн')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Выход, тн')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Стоимость перевозки')">
-                        <button class="hide-column-btn" (click)="hideColumn('Стоимость перевозки')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Стоимость перевозки')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Доход')">
-                        <button class="hide-column-btn" (click)="hideColumn('Доход')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Доход')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Прибыль')">
-                        <button class="hide-column-btn" (click)="hideColumn('Прибыль')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Прибыль')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Вознаграждение')">
-                        <button class="hide-column-btn" (click)="hideColumn('Вознаграждение')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Вознаграждение')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Комментарии')">
-                        <button class="hide-column-btn" (click)="hideColumn('Комментарии')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumn('Комментарии')"
+                        >
                             X
                         </button>
                     </th>
@@ -142,8 +216,11 @@
                 <tr class="app-table__tr">
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Статус')">
                         Статус
-                        <img src="assets/img/icons/sort-none.svg"
-                            class="app-table__sorting-img app-table__sorting-img--orders" alt="">
+                        <img
+                            src="assets/img/icons/sort-none.svg"
+                            class="app-table__sorting-img app-table__sorting-img--orders" 
+                            alt=""
+                        >
                     </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Дата')">Дата </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Клиент')">Клиент </th>
@@ -153,15 +230,13 @@
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Поставщик')">Поставщик </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Цена закупки')">Цена закупки </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Перевозчик')">Перевозчик</th>
-                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Еденица измерения')">Еденица измерения
-                    </th>
+                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Еденица измерения')">Еденица измерения</th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Цена перевозки')">Цена перевозки </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Категория авто')">Категория авто </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Цена продажи')">Цена продажи </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Вход, тн')">Вход, тн</th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Выход, тн')">Выход, тн</th>
-                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Стоимость перевозки')">Стоимость перевозки
-                    </th>
+                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Стоимость перевозки')">Стоимость перевозки</th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Доход')">Доход</th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Прибыль')">Прибыль</th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Вознаграждение')">Вознаграждение</th>
@@ -173,42 +248,59 @@
                 <tr *ngFor="let req of requests" class="app-table__tr">
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
                         {{req.status}}
-                        <button *ngIf="!req.statusId" title="Завершить заявку" class="finish-order"
-                            (click)="finishRequest(req.id)">
-                            <img class="finish-order__icon" src="assets/img/icons/finish.svg" alt="Завершить заявку">
+                        <button 
+                            *ngIf="!req.statusId"
+                            title="Завершить заявку"
+                            class="finish-order"
+                            (click)="finishRequest(req.id)"
+                        > 
+                            <img 
+                                class="finish-order__icon"
+                                src="assets/img/icons/finish.svg" 
+                                alt="Завершить заявку" 
+                            >
                         </button>
                     </td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Дата')">
-                        {{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Дата')">{{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Адрес доставки')">
-                        {{req.deliveryAddress?.name}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Адрес доставки')">{{req.deliveryAddress?.name}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Объем, тн')">{{req.amount}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Цена закупки')">{{req.purchasePrice}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Перевозчик')">{{req.car?.owner}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Еденица измерения')">{{req.unit}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Цена перевозки')">{{req.freightPrice}}
-                    </td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Категория авто')">
-                        {{req.carCategory?.name}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Цена перевозки')">{{req.freightPrice}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Категория авто')">{{req.carCategory?.name}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Цена продажи')">{{req.purchasePrice}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Вход, тн')">{{req.amountIn}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Выход, тн')">{{req.amountOut}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Стоимость перевозки')">{{req.freightCost}}
-                    </td>
+                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Стоимость перевозки')">{{req.freightCost}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Доход')">{{req.sellingPrice}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Прибыль')">{{req.profit}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Вознаграждение')">{{req.reward}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Комментарии')">{{req.comment}}</td>
                     <td class="app-table__td" *ngIf="hidingColumns.length !== 20">
                         <div class="btn-container btn-container--centered">
-                            <button (click)="edit(req)" class="edit-btn">
-                                <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
+                            <button
+                              class="edit-btn"
+                              (click)="edit(req)"
+                            >
+                              <img 
+                                class="edit-btn__img"
+                                src="assets/img/icons/edit.svg" 
+                                alt="изменить"
+                              >
                             </button>
-                            <button (click)="del(req)" class="delete-btn">
-                                <img class="edit-btn__img" src="assets/img/icons/delete.svg" alt="удалить">
+                            <button
+                              (click)="del(req)"
+                              class="delete-btn"
+                            >
+                              <img 
+                                class="edit-btn__img"
+                                src="assets/img/icons/delete.svg" 
+                                alt="удалить"
+                              >
                             </button>
                         </div>
                     </td>
@@ -272,19 +364,33 @@
         <h2 class="block-title">Долгосрочные заказы</h2>
         <div class="additional-rows">
             <div class="all-rows" *ngIf="hidingColumnsLongTerm.length">
-                <label class="all-rows__label" for="all-rows__checkbox">
+                <label 
+                    class="all-rows__label"
+                    for="all-rows__checkbox"
+                >
                     Показать все поля
                 </label>
-                <input id="all-rows__checkbox" class="form-block__input form-block__input--orders-all" type="checkbox"
-                    (click)="showAllColumnsLongTerm()">
+                <input 
+                    id="all-rows__checkbox"
+                    class="form-block__input form-block__input--orders-all"
+                    type="checkbox"
+                    (click)="showAllColumnsLongTerm()"
+                >
             </div>
             <div class="hidden-columns">
                 <div class="hidden-column-block" *ngFor="let hidingColumnLongTerm of hidingColumnsLongTerm">
-                    <label class="hidden-column-block__label" for="{{hidingColumnLongTerm}}">
+                    <label 
+                        class="hidden-column-block__label"
+                        for="{{hidingColumnLongTerm}}"
+                    >
                         {{hidingColumnLongTerm}}
                     </label>
-                    <input id="{{hidingColumnLongTerm}}" class="form-block__input form-block__input--orders-all"
-                        type="checkbox" (click)="showColumnLongTerm(hidingColumnLongTerm)">
+                    <input 
+                        id="{{hidingColumnLongTerm}}"
+                        class="form-block__input form-block__input--orders-all"
+                        type="checkbox"
+                        (click)="showColumnLongTerm(hidingColumnLongTerm)"
+                    >
                 </div>
             </div>
         </div>
@@ -292,108 +398,170 @@
             <thead>
                 <tr class="app-table__tr">
                     <th class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Статус')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Статус')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Статус')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Дата с')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Дата с')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Дата с')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Дата по')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Дата по')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Дата по')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Клиент')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Клиент')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Клиент')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Адрес доставки')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Адрес доставки')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Адрес доставки')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Объем, тн')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Объем, тн')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Объем, тн')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Товар')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Товар')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Товар')"
+                        >
                             X
                         </button>
                     </th>
                     <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Поставщик')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Поставщик')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Поставщик')"
+                        >
                             X
                         </button>
                     </th>
                     <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Цена закупки')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Цена закупки')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Цена закупки')"
+                        >
                             X
                         </button>
                     </th>
                     <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Перевозчик')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Перевозчик')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Перевозчик')"
+                        >
                             X
                         </button>
                     </th>
                     <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Еденица измерения')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Еденица измерения')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Еденица измерения')"
+                        >
                             X
                         </button>
                     </th>
                     <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Цена перевозки')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Цена перевозки')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Цена перевозки')"
+                        >
                             X
                         </button>
                     </th>
                     <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Категория авто')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Категория авто')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Категория авто')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Цена продажи')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Цена продажи')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Цена продажи')"
+                        >
                             X
                         </button>
                     </th>
                     <th hidden nclass="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Вход, тн')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Вход, тн')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Вход, тн')"
+                        >
                             X
                         </button>
                     </th>
                     <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Выход, тн')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Выход, тн')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Выход, тн')"
+                        >
                             X
                         </button>
                     </th>
-                    <th hidden class="app-table__btns-th"
-                        *ngIf="!hidingColumnsLongTerm.includes('Стоимость перевозки')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Стоимость перевозки')">
+                    <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Стоимость перевозки')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Стоимость перевозки')"
+                        >
                             X
                         </button>
                     </th>
                     <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Доход')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Доход')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Доход')"
+                        >
                             X
                         </button>
                     </th>
                     <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Прибыль')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Прибыль')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Прибыль')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Вознаграждение')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Вознаграждение')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Вознаграждение')"
+                        >
                             X
                         </button>
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Комментарии')">
-                        <button class="hide-column-btn" (click)="hideColumnLongTerm('Комментарии')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Комментарии')"
+                        >
                             X
                         </button>
                     </th>
@@ -403,85 +571,70 @@
                     <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Дата с')">Дата с </th>
                     <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Дата по')">Дата по </th>
                     <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Клиент')">Клиент </th>
-                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Адрес доставки')">Адрес доставки
-                    </th>
+                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Адрес доставки')">Адрес доставки</th>
                     <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Объем, тн')">Объем, тн</th>
                     <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Товар')">Товар </th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Поставщик')">Поставщик
-                    </th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Цена закупки')">Цена
-                        закупки </th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Перевозчик')">Перевозчик
-                    </th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Еденица измерения')">
-                        Еденица измерения</th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Цена перевозки ')">Цена
-                        перевозки </th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Категория авто')">Категория
-                        авто </th>
+                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Поставщик')">Поставщик </th>
+                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Цена закупки')">Цена закупки </th>
+                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Перевозчик')">Перевозчик</th>
+                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Еденица измерения')">Еденица измерения</th>
+                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Цена перевозки ')">Цена перевозки </th>
+                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Категория авто')">Категория авто </th>
                     <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Цена продажи')">Цена продажи </th>
                     <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Вход, тн')">Вход, тн</th>
                     <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Выход, тн')">Выход, тн</th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Стоимость перевозки')">
-                        Стоимость перевозки</th>
+                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Стоимость перевозки')">Стоимость перевозки</th>
                     <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Доход')">Доход</th>
                     <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Прибыль')">Прибыль</th>
-                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Вознаграждение')">Вознаграждение
-                    </th>
+                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Вознаграждение')">Вознаграждение</th>
                     <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Комментарии')">Комментарии</th>
                     <th class="app-table__th" *ngIf="hidingColumnsLongTerm.length !== 10"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="app-table__tr" *ngFor="let req of longRequests">
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Статус')">
-                        {{req.amountComplete}}/{{req.amount}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Дата с')">
-                        {{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Дата по')">
-                        {{req.deliveryEnd | date: "dd.MM.yyyy"}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Клиент')">{{req.client?.name}}
-                    </td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Адрес доставки')">
-                        {{req.deliveryAddress?.name}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Статус')">{{req.amountComplete}}/{{req.amount}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Дата с')">{{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Дата по')">{{req.deliveryEnd | date: "dd.MM.yyyy"}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Клиент')">{{req.client?.name}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Адрес доставки')">{{req.deliveryAddress?.name}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Объем, тн')">{{req.amount}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Товар')">{{req.product?.name}}
-                    </td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Поставщик')">
-                        {{req.supplier?.name}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Цена закупки')">
-                        {{req.purchasePrice}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Перевозчик')">
-                        {{req.car?.owner}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Еденица измерения')">
-                        {{req.unit}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Цена перевозки ')">
-                        {{req.freightPrice}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Категория авто')">
-                        {{req.carCategory?.name}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Цена продажи')">
-                        {{req.sellingPrice}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Вход, тн')">
-                        {{req.amountIn}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Выход, тн')">
-                        {{req.amountOut}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Стоимость перевозки')">
-                        {{req.freightCost}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Доход')">
-                        {{req.sellingPrice}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Прибыль')">{{req.profit}}
-                    </td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Вознаграждение')">{{req.reward}}
-                    </td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Комментарии')">{{req.comment}}
-                    </td>
+                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Товар')">{{req.product?.name}}</td>
+                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Поставщик')">{{req.supplier?.name}}</td>
+                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Цена закупки')">{{req.purchasePrice}}</td>
+                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Перевозчик')">{{req.car?.owner}}</td>
+                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Еденица измерения')">{{req.unit}}</td>
+                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Цена перевозки ')">{{req.freightPrice}}</td>
+                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Категория авто')">{{req.carCategory?.name}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Цена продажи')">{{req.sellingPrice}}</td>
+                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Вход, тн')">{{req.amountIn}}</td>
+                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Выход, тн')">{{req.amountOut}}</td>
+                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Стоимость перевозки')">{{req.freightCost}}</td>
+                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Доход')">{{req.sellingPrice}}</td>
+                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Прибыль')">{{req.profit}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Вознаграждение')">{{req.reward}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Комментарии')">{{req.comment}}</td>
                     <td class="app-table__td" *ngIf="hidingColumnsLongTerm.length !== 10">
                         <div class="btn-container btn-container--centered">
-                            <button (click)="edit(req)" class="edit-btn">
-                                <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
+                            <button
+                              class="edit-btn"
+                              hidden
+                            >
+                              <img 
+                                class="edit-btn__img"
+                                src="assets/img/icons/edit.svg" 
+                                alt="изменить"
+                              >
                             </button>
-                            <button (click)="del(req)" class="delete-btn">
-                                <img class="edit-btn__img" src="assets/img/icons/delete.svg" alt="удалить">
+                            <button
+                              (click)="del(req)"
+                              class="delete-btn"
+                            >
+                              <img 
+                                class="edit-btn__img"
+                                src="assets/img/icons/delete.svg" 
+                                alt="удалить"
+                              >
                             </button>
                         </div>
                     </td>
@@ -542,4 +695,4 @@
         </table>
     </div>
 </div>
-<app-order-add (changed)="getData()"></app-order-add>
+<app-order-add (changed)="getData(pickedDay)"></app-order-add>

@@ -32,13 +32,27 @@ export class CarCategoryComponent implements OnInit {
     this.httpSrv.getCarCategories().subscribe(x => this.categories = x);
   }
 
+  add() {
+    this.ngxSmartModalService.toggle(EditCarCategoryComponent.MODAL_NAME);
+  }
+
+  confirm(category: CarCategory) {
+    this.ngxSmartModalService.setModalData(
+      {
+        title: 'Подтвердите действие',
+        btnAction: () => this.delete(category),
+        btnActionColor: 'red',
+        btnActionName: 'Удалить категорию'
+      }, 
+      'confirmModal', 
+      true
+    );
+    this.ngxSmartModalService.toggle('confirmModal');
+  }
+
   async delete(category: CarCategory) {
     await this.httpSrv.deleteCarCategory(category.id).toPromise();
     this.getData();
-  }
-
-  add() {
-    this.ngxSmartModalService.toggle(EditCarCategoryComponent.MODAL_NAME);
   }
 
   async edit(item: CarCategory) {

@@ -59,7 +59,12 @@ export class OrderAddComponent implements OnInit {
   }
 
   onOpen() {
-    this.reset();
+    // this.reset();
+    const transferred = this.ngxSmartModalService.getModalData(OrderAddComponent.MODAL_NAME);
+    this.ngxSmartModalService.resetModalData(EditorComponent.MODAL_NAME);
+    if (transferred) {
+      this.request = transferred;
+    }
     this.clientHttp.getClients().subscribe(
       x => this.clients = x);
 
@@ -74,12 +79,6 @@ export class OrderAddComponent implements OnInit {
 
     this.carHttp.getCars().subscribe(
       x => this.cars = x);
-
-    // this.request = this.ngxSmartModalService.getModalData(OrderAddComponent.MODAL_NAME);
-  }
-
-  byId(a: any, b: any) {
-    return a && b ? a.id === b.id : a === b;
   }
 
   reset() {
@@ -154,14 +153,17 @@ export class OrderAddComponent implements OnInit {
     this.ngxSmartModalService.getModal(EditorComponent.MODAL_NAME).open();
   }
 
-  async add(req: Request) {
-    if (this.request.id) {
+  async createOrUpdate(req: Request) {
+    console.log('this.request', this.request);
+    console.log('req', req);
+    if (req.id) {
+      console.log('333', req);
       await this.reqService.edit(req).toPromise();
     } else {
+      console.log('222', req);
       await this.reqService.add(req).toPromise();
     }
     this.changed.emit();
-    this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).close();
+    this.ngxSmartModalService.toggle(OrderAddComponent.MODAL_NAME);
   }
-
 }

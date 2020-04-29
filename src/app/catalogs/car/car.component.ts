@@ -52,6 +52,20 @@ export class CarComponent implements OnInit {
     this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
   }
 
+  confirm(item: Car) {
+    this.ngxSmartModalService.setModalData(
+      {
+        title: 'Подтвердите действие',
+        btnAction: () => this.delete(item),
+        btnActionColor: 'red',
+        btnActionName: 'Удалить перевозчика'
+      }, 
+      'confirmModal', 
+      true
+    );
+    this.ngxSmartModalService.toggle('confirmModal');
+  }
+
   delete(item: Car) {
     if (item.id) {
       this.http.delete(item.id).subscribe(
