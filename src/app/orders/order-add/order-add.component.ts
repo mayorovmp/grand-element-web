@@ -59,10 +59,10 @@ export class OrderAddComponent implements OnInit {
   }
 
   onOpen() {
-    // this.reset();
+    this.reset();
     const transferred = this.ngxSmartModalService.getModalData(OrderAddComponent.MODAL_NAME);
     console.log('transferred', transferred);
-    this.ngxSmartModalService.resetModalData(EditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.resetModalData(OrderAddComponent.MODAL_NAME);
     if (transferred) {
       this.request = transferred;
     }
