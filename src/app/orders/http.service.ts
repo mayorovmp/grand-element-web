@@ -51,6 +51,11 @@ export class HttpService {
     return this.http.get<Request[]>(url);
   }
 
+  getLastRequest(): Observable<Request> {
+    const url = this.baseUrl + `/request/last`;
+    return this.http.get<Request>(url);
+  }
+
   getFile(dt: Date): Observable<HttpResponse<Blob>> {
     const path = this.baseUrl + `/request/excel/${dt.toISOString()}`;
     return this.http.get(path, { observe: 'response', responseType: 'blob' });
