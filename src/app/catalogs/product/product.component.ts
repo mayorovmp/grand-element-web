@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from "@angular/platform-browser";
+import { Title } from '@angular/platform-browser';
 import { Product } from 'src/app/models/Product';
 import { HttpService } from './http.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
@@ -13,13 +13,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];
-  nameSorting: string = 'none';
+  nameSorting = 'none';
   constructor(
-    private httpSrv: HttpService, 
-    private toastr: ToastrService, 
+    private httpSrv: HttpService,
+    private toastr: ToastrService,
     private ngxSmartModalService: NgxSmartModalService,
     private title: Title) {
-        title.setTitle("Товары");    
+        title.setTitle('Товары');
     }
 
   async ngOnInit() {
@@ -41,8 +41,8 @@ export class ProductComponent implements OnInit {
         btnAction: () => this.delete(product),
         btnActionColor: 'red',
         btnActionName: 'Удалить товар'
-      }, 
-      'confirmModal', 
+      },
+      'confirmModal',
       true
     );
     this.ngxSmartModalService.toggle('confirmModal');
@@ -61,17 +61,17 @@ export class ProductComponent implements OnInit {
   }
 
   sortedByName = () => {
-    if (this.nameSorting === 'none' || this.nameSorting === 'reverse'){
+    if (this.nameSorting === 'none' || this.nameSorting === 'reverse') {
       this.products.sort((a, b) => {
-        if (!a.name) { a.name = ''}
-        if (!b.name) { b.name = ''}
+        if (!a.name) { a.name = ''; }
+        if (!b.name) { b.name = ''; }
         return a.name.localeCompare(b.name);
       });
       this.nameSorting = 'direct';
-    } else if (this.nameSorting === 'direct'){
+    } else if (this.nameSorting === 'direct') {
       this.products.sort((a, b) => {
-        if (!a.name) { a.name = ''}
-        if (!b.name) { b.name = ''}
+        if (!a.name) { a.name = ''; }
+        if (!b.name) { b.name = ''; }
         return b.name.localeCompare(a.name);
       });
       this.nameSorting = 'reverse';

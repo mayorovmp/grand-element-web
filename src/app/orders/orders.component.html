@@ -293,7 +293,7 @@
                               >
                             </button>
                             <button
-                              (click)="del(req)"
+                              (click)="confirm(req)"
                               class="delete-btn"
                             >
                               <img 
@@ -627,7 +627,7 @@
                               >
                             </button>
                             <button
-                              (click)="del(req)"
+                              (click)="confirm(req)"
                               class="delete-btn"
                             >
                               <img 
@@ -696,3 +696,4 @@
     </div>
 </div>
 <app-order-add (changed)="getData(pickedDay)"></app-order-add>
+<app-modal-confirm (changed)="getData(pickedDay)"></app-modal-confirm>

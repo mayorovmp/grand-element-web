@@ -80,6 +80,20 @@ export class OrdersComponent implements OnInit {
     this.DateChanged.next(this.curDate);
   }
 
+  confirm(req: Request) {
+    this.ngxSmartModalService.setModalData(
+      {
+        title: 'Подтвердите действие',
+        btnAction: () => this.del(req),
+        btnActionColor: 'red',
+        btnActionName: 'Удалить заказ'
+      },
+      'confirmModal',
+      true
+    );
+    this.ngxSmartModalService.toggle('confirmModal');
+  }
+
   async del(req: Request) {
     await this.http.del(req).toPromise();
     this.getData(this.pickedDay);
