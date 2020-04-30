@@ -7,13 +7,6 @@ import { CarCategory } from './CarCategory';
 
 
 export class Request {
-  clientId?: number;
-  productId?: number;
-  deliveryAddressId?: number;
-  supplierId?: number;
-  carId?: number;
-  carCategoryId?: number;
-
   id?: number;
   client?: Client;
   product?: Product;
