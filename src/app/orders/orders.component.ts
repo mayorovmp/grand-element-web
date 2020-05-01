@@ -29,6 +29,14 @@ export class OrdersComponent implements OnInit {
 
   hidingColumnsLongTerm: string[] = [];
 
+  sortingValue: {
+    column: string
+    type: string,
+  } = {
+    column: 'none',
+    type: 'direct',
+  };
+
   constructor(
     public http: HttpService,
     private toastr: ToastrService,
@@ -40,11 +48,12 @@ export class OrdersComponent implements OnInit {
     return Math.floor((Math.random() * 3)) + 0;
   }
 
-  add() {
+  add(dt: Date) {
+    this.ngxSmartModalService.setModalData({type: 'add', date: dt}, OrderAddComponent.MODAL_NAME, true);
     this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
   }
   edit(request: Request) {
-    this.ngxSmartModalService.setModalData(request, OrderAddComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.setModalData({type: 'edit', request}, OrderAddComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(OrderAddComponent.MODAL_NAME);
   }
   ngOnInit() {

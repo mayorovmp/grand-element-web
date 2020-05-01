@@ -3,7 +3,7 @@
         <input type="date" name="bday" [ngModel]="pickedDay | date:'yyyy-MM-dd'" (ngModelChange)="onChangeDate($event)"
             min="1000-01-01" max="3000-12-31" class="app-text-input export-order__input">
         <div class="export-order__buttons">
-            <button (click)="add()" class="app-btn gray-btn export-order__button">
+            <button (click)="add(curDate)" class="app-btn gray-btn export-order__button">
                 Добавить
             </button>
             <button (click)="DownloadFile(curDate)" class="app-btn gray-btn export-order__button">
@@ -214,7 +214,11 @@
                     </th>
                 </tr>
                 <tr class="app-table__tr">
-                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Статус')">
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumns.includes('Статус')"
+                        (click)="sorting('Status')"
+                    >
                         Статус
                         <img
                             src="assets/img/icons/sort-none.svg"
@@ -222,7 +226,12 @@
                             alt=""
                         >
                     </th>
-                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Дата')">Дата </th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumns.includes('Дата')"
+                    >
+                        Дата
+                    </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Клиент')">Клиент </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Адрес доставки')">Адрес доставки</th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Объем, тн')">Объем, тн</th>
