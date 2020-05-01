@@ -56,6 +56,34 @@ export class OrdersComponent implements OnInit {
     this.ngxSmartModalService.setModalData({type: 'edit', request}, OrderAddComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(OrderAddComponent.MODAL_NAME);
   }
+  sorting(sortingCol: string, nested: number) {
+    const alphabeticalCols = [
+      'status',
+      'client.name',
+      'deliveryAddress.name',
+      'product.name',
+      'supplier.name',
+      'car.owner',
+      'carCategory.name',
+      'comment'
+    ];
+    if (alphabeticalCols.includes(sortingCol)) {
+        this.requests.sort((a, b) => {
+          let aValue = a[sortingCol];
+          let bValue = b[sortingCol];
+          if (nested === 1) {
+            const splitedCol = sortingCol.split('.');
+            aValue = a[splitedCol[0]];
+            bValue = b[splitedCol[0]];
+            aValue = aValue[splitedCol[1]];
+            bValue = bValue[splitedCol[1]];
+          }
+          if (!aValue) { aValue = ''; }
+          if (!bValue ) { bValue  = ''; }
+          return aValue.localeCompare(bValue);
+        });
+    }
+  }
   ngOnInit() {
     this.getData(this.pickedDay);
 

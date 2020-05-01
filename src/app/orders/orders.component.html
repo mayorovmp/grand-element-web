@@ -217,7 +217,7 @@
                     <th 
                         class="app-table__th" 
                         *ngIf="!hidingColumns.includes('Статус')"
-                        (click)="sorting('Status')"
+                        (click)="sorting('status', 0)"
                     >
                         Статус
                         <img
@@ -226,22 +226,53 @@
                             alt=""
                         >
                     </th>
+                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Дата')"> Дата </th>
                     <th 
                         class="app-table__th" 
-                        *ngIf="!hidingColumns.includes('Дата')"
+                        *ngIf="!hidingColumns.includes('Клиент')"
+                        (click)="sorting('client.name', 1)"
                     >
-                        Дата
+                        Клиент 
                     </th>
-                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Клиент')">Клиент </th>
-                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Адрес доставки')">Адрес доставки</th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumns.includes('Адрес доставки')"
+                        (click)="sorting('deliveryAddress.name', 1)"
+                    >
+                        Адрес доставки
+                    </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Объем, тн')">Объем, тн</th>
-                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Товар')">Товар </th>
-                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Поставщик')">Поставщик </th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumns.includes('Товар')"
+                        (click)="sorting('product.name', 1)"
+                    >
+                        Товар 
+                    </th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumns.includes('Поставщик')"
+                        (click)="sorting('supplier.name', 1)"
+                    >
+                        Поставщик 
+                    </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Цена закупки')">Цена закупки </th>
-                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Перевозчик')">Перевозчик</th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumns.includes('Перевозчик')"
+                        (click)="sorting('car.owner', 1)"
+                    >
+                        Перевозчик
+                    </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Еденица измерения')">Еденица измерения</th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Цена перевозки')">Цена перевозки </th>
-                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Категория авто')">Категория авто </th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumns.includes('Категория авто')"
+                        (click)="sorting('carCategory.name', 1)"
+                    >
+                        Категория авто 
+                    </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Цена продажи')">Цена продажи </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Вход, тн')">Вход, тн</th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Выход, тн')">Выход, тн</th>
@@ -249,7 +280,13 @@
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Доход')">Доход</th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Прибыль')">Прибыль</th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Вознаграждение')">Вознаграждение</th>
-                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Комментарии')">Комментарии</th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumns.includes('Комментарии')"
+                        (click)="sorting('comment', 0)"
+                    >
+                        Комментарии
+                    </th>
                     <th class="app-table__th" *ngIf="hidingColumns.length !== 20"></th>
                 </tr>
             </thead>
