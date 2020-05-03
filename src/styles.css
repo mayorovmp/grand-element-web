@@ -113,6 +113,7 @@ a:hover {
     border-top: 1px solid #dee2e6;
     padding: 8px;
     text-align: center;
+    cursor: pointer;
 }
 .app-table__btns-th {
     border-right: 1px solid #dee2e6;

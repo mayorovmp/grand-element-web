@@ -34,7 +34,15 @@ export class OrdersComponent implements OnInit {
     type: string,
   } = {
     column: 'none',
-    type: 'direct',
+    type: 'none',
+  };
+
+  sortingValueLongTerm: {
+    column: string
+    type: string,
+  } = {
+    column: 'none',
+    type: 'none',
   };
 
   constructor(
@@ -56,6 +64,80 @@ export class OrdersComponent implements OnInit {
     this.ngxSmartModalService.setModalData({type: 'edit', request}, OrderAddComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(OrderAddComponent.MODAL_NAME);
   }
+  sortingLongTerm(sortingCol: string, nested: number) {
+    const alphabeticalCols = [
+      'status',
+      'client.name',
+      'deliveryAddress.name',
+      'product.name',
+      'supplier.name',
+      'car.owner',
+      'carCategory.name',
+      'comment',
+      'unit'
+    ];
+    const numeralCols = [
+      'amount',
+      'purchasePrice',
+      'freightPrice',
+      'amountIn',
+      'amountOut',
+      'sellingPrice',
+      'profit',
+      'reward'
+    ];
+    if (this.sortingValueLongTerm.column !== sortingCol) {
+      this.sortingValueLongTerm.column = sortingCol;
+      this.sortingValueLongTerm.type = 'direct';
+    } else {
+      if (this.sortingValueLongTerm.type === 'direct') {
+        this.sortingValueLongTerm.type = 'reverse';
+      } else {
+        this.sortingValueLongTerm.type = 'direct';
+      }
+    }
+    if (alphabeticalCols.includes(sortingCol)) {
+        this.longRequests.sort((a, b) => {
+          let aValue = a[sortingCol];
+          let bValue = b[sortingCol];
+          if (nested === 1) {
+            const splitedCol = sortingCol.split('.');
+            aValue = a[splitedCol[0]];
+            bValue = b[splitedCol[0]];
+            aValue = aValue[splitedCol[1]];
+            bValue = bValue[splitedCol[1]];
+          }
+          if (!aValue) { aValue = ''; }
+          if (!bValue ) { bValue  = ''; }
+          if (this.sortingValueLongTerm.type === 'direct') {
+            return aValue.localeCompare(bValue);
+          } else if (this.sortingValueLongTerm.type === 'reverse') {
+            return bValue.localeCompare(aValue);
+          }
+        });
+    }
+
+    if (numeralCols.includes(sortingCol)) {
+      this.longRequests.sort((a, b): any => {
+        let aValue = a[sortingCol];
+        let bValue = b[sortingCol];
+        if (nested === 1) {
+          const splitedCol = sortingCol.split('.');
+          aValue = a[splitedCol[0]];
+          bValue = b[splitedCol[0]];
+          aValue = aValue[splitedCol[1]];
+          bValue = bValue[splitedCol[1]];
+        }
+        if (!aValue) { aValue = 0; }
+        if (!bValue ) { bValue  = 0; }
+        if (this.sortingValueLongTerm.type === 'direct') {
+          return aValue - bValue;
+        } else if (this.sortingValueLongTerm.type === 'reverse') {
+          return bValue - aValue;
+        }
+      });
+    }
+  }
   sorting(sortingCol: string, nested: number) {
     const alphabeticalCols = [
       'status',
@@ -65,8 +147,29 @@ export class OrdersComponent implements OnInit {
       'supplier.name',
       'car.owner',
       'carCategory.name',
-      'comment'
+      'comment',
+      'unit'
     ];
+    const numeralCols = [
+      'amount',
+      'purchasePrice',
+      'freightPrice',
+      'amountIn',
+      'amountOut',
+      'sellingPrice',
+      'profit',
+      'reward'
+    ];
+    if (this.sortingValue.column !== sortingCol) {
+      this.sortingValue.column = sortingCol;
+      this.sortingValue.type = 'direct';
+    } else {
+      if (this.sortingValue.type === 'direct') {
+        this.sortingValue.type = 'reverse';
+      } else {
+        this.sortingValue.type = 'direct';
+      }
+    }
     if (alphabeticalCols.includes(sortingCol)) {
         this.requests.sort((a, b) => {
           let aValue = a[sortingCol];
@@ -80,8 +183,33 @@ export class OrdersComponent implements OnInit {
           }
           if (!aValue) { aValue = ''; }
           if (!bValue ) { bValue  = ''; }
-          return aValue.localeCompare(bValue);
+          if (this.sortingValue.type === 'direct') {
+            return aValue.localeCompare(bValue);
+          } else if (this.sortingValue.type === 'reverse') {
+            return bValue.localeCompare(aValue);
+          }
         });
+    }
+
+    if (numeralCols.includes(sortingCol)) {
+      this.requests.sort((a, b): any => {
+        let aValue = a[sortingCol];
+        let bValue = b[sortingCol];
+        if (nested === 1) {
+          const splitedCol = sortingCol.split('.');
+          aValue = a[splitedCol[0]];
+          bValue = b[splitedCol[0]];
+          aValue = aValue[splitedCol[1]];
+          bValue = bValue[splitedCol[1]];
+        }
+        if (!aValue) { aValue = 0; }
+        if (!bValue ) { bValue  = 0; }
+        if (this.sortingValue.type === 'direct') {
+          return aValue - bValue;
+        } else if (this.sortingValue.type === 'reverse') {
+          return bValue - aValue;
+        }
+      });
     }
   }
   ngOnInit() {

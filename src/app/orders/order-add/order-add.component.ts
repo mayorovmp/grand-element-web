@@ -192,8 +192,6 @@ export class OrderAddComponent implements OnInit {
       req.supplierId = req.supplier.id;
     }
 
-    console.log('this.request', req);
-
     if (req.id) {
       await this.reqService.edit(req).toPromise();
     } else {
