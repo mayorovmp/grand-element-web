@@ -327,12 +327,12 @@
                         <div class="label">Стоимость перевозки</div>
                     </span>
                 </div>
-                <input 
-                    disabled 
-                    type="number" 
+                <input
+                    disabled
+                    type="number"
                     class="form-control" 
-                    aria-label="Small" 
-                    [ngModel]="request.freightCost"
+                    aria-label="Small"
+                    [(ngModel)]="request.amountOut * request.freightPrice"
                     aria-describedby="inputGroup-sizing-sm"
                 >
             </div>
@@ -349,7 +349,7 @@
                     type="number" 
                     class="form-control" 
                     aria-label="Small" 
-                    [ngModel]="request.sellingCost"
+                    [ngModel]="(request.sellingPrice - request.purchasePrice) * request.amountOut | number:'.0-2'"
                     aria-describedby="inputGroup-sizing-sm"
                 >
             </div>
@@ -360,13 +360,26 @@
                         <div class="label">Прибыль</div>
                     </span>
                 </div>
-                <input 
-                    type="number" 
-                    class="form-control" 
-                    aria-label="Small" 
-                    [(ngModel)]="request.profit"
-                    aria-describedby="inputGroup-sizing-sm"
-                >
+                <ng-container *ngIf="!request.supplierVat || !request.carVat">
+                    <input 
+                        disabled
+                        type="number" 
+                        class="form-control" 
+                        aria-label="Small" 
+                        [ngModel]="(request.sellingPrice - request.purchasePrice) * request.amountOut - request.reward - (request.amountOut * request.freightPrice * ndsConst) | number:'.0-2'"
+                        aria-describedby="inputGroup-sizing-sm"
+                    >
+                </ng-container>
+                <ng-container *ngIf="request.supplierVat && request.carVat">
+                    <input 
+                        disabled
+                        type="number" 
+                        class="form-control" 
+                        aria-label="Small" 
+                        [ngModel]="(request.sellingPrice - request.purchasePrice) * request.amountOut - request.reward | number:'.0-2'"
+                        aria-describedby="inputGroup-sizing-sm"
+                    >
+                </ng-container>
             </div>
         </div>
 

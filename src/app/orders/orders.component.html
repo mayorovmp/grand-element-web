@@ -496,9 +496,16 @@
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Цена продажи')">{{req.purchasePrice}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Вход, тн')">{{req.amountIn}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Выход, тн')">{{req.amountOut}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Стоимость перевозки')">{{req.freightCost}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Доход')">{{req.sellingPrice}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Прибыль')">{{req.profit}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Стоимость перевозки')">{{req.amountOut * req.freightPrice | number:'.0-2'}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Доход')">{{(req.sellingPrice - req.purchasePrice) * req.amountOut | number:'.0-2'}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Прибыль')">
+                        <ng-container *ngIf="!req.supplierVat || !req.carVat">
+                            {{ (req.sellingPrice - req.purchasePrice) * req.amountOut - req.reward - (req.amountOut * req.freightPrice * 0.1525) | number:'.0-2'}}
+                        </ng-container>
+                        <ng-container *ngIf="req.supplierVat && req.carVat">
+                            {{ (req.sellingPrice - req.purchasePrice) * req.amountOut - req.reward | number:'.0-2'}}
+                        </ng-container>
+                    </td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Вознаграждение')">{{req.reward}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Комментарии')">{{req.comment}}</td>
                     <td class="app-table__td" *ngIf="hidingColumns.length !== 20">

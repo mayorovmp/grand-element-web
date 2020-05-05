@@ -44,6 +44,8 @@ export class OrderAddComponent implements OnInit {
   selectedCarCategory?: CarCategory = undefined;
   carCategories: CarCategory[] = [];
 
+  ndsConst = 0.1525;
+
   constructor(
     private ngxSmartModalService: NgxSmartModalService,
     private clientHttp: ClientHttp,
@@ -90,7 +92,6 @@ export class OrderAddComponent implements OnInit {
     this.carHttp.getCars().subscribe(
       x => this.cars = x);
   }
-
   reset() {
     this.request = new Request();
     this.selectedClient = undefined;
