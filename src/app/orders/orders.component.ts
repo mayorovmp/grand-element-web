@@ -164,7 +164,9 @@ export class OrdersComponent implements OnInit {
       'amountOut',
       'sellingPrice',
       'reward',
-      'sellingPrice'
+      'sellingCost',
+      'freightCost',
+      'profit'
     ];
     if (this.sortingValue.column !== sortingCol) {
       this.sortingValue.column = sortingCol;
@@ -177,24 +179,24 @@ export class OrdersComponent implements OnInit {
       }
     }
     if (alphabeticalCols.includes(sortingCol)) {
-        this.requests.sort((a, b) => {
-          let aValue = a[sortingCol];
-          let bValue = b[sortingCol];
-          if (nested === 1) {
-            const splitedCol = sortingCol.split('.');
-            aValue = a[splitedCol[0]];
-            bValue = b[splitedCol[0]];
-            aValue = aValue[splitedCol[1]];
-            bValue = bValue[splitedCol[1]];
-          }
-          if (!aValue) { aValue = ''; }
-          if (!bValue ) { bValue  = ''; }
-          if (this.sortingValue.type === 'direct') {
-            return aValue.localeCompare(bValue);
-          } else if (this.sortingValue.type === 'reverse') {
-            return bValue.localeCompare(aValue);
-          }
-        });
+      this.requests.sort((a, b) => {
+        let aValue = a[sortingCol];
+        let bValue = b[sortingCol];
+        if (nested === 1) {
+          const splitedCol = sortingCol.split('.');
+          aValue = a[splitedCol[0]];
+          bValue = b[splitedCol[0]];
+          aValue = aValue[splitedCol[1]];
+          bValue = bValue[splitedCol[1]];
+        }
+        if (!aValue) { aValue = ''; }
+        if (!bValue ) { bValue  = ''; }
+        if (this.sortingValue.type === 'direct') {
+          return aValue.localeCompare(bValue);
+        } else if (this.sortingValue.type === 'reverse') {
+          return bValue.localeCompare(aValue);
+        }
+      });
     }
 
     if (numeralCols.includes(sortingCol)) {
@@ -210,102 +212,6 @@ export class OrdersComponent implements OnInit {
         }
         if (!aValue) { aValue = 0; }
         if (!bValue ) { bValue  = 0; }
-        if (this.sortingValue.type === 'direct') {
-          return aValue - bValue;
-        } else if (this.sortingValue.type === 'reverse') {
-          return bValue - aValue;
-        }
-      });
-    }
-    if (this.sortingValue.column === 'transportationCost') {
-      this.requests.sort((a, b): any => {
-        let aValue = 0;
-        let bValue = 0;
-        if (!a.amountOut || !a.freightPrice) { aValue = 0; } else {
-          aValue = a.amountOut * a.freightPrice;
-        }
-        if (!b.amountOut || !b.freightPrice) { bValue  = 0; } else {
-          bValue = b.amountOut * b.freightPrice;
-        }
-        if (this.sortingValue.type === 'direct') {
-          return aValue - bValue;
-        } else if (this.sortingValue.type === 'reverse') {
-          return bValue - aValue;
-        }
-      });
-    }
-    if (this.sortingValue.column === 'income') {
-      this.requests.sort((a, b): any => {
-        let aValue = 0;
-        let bValue = 0;
-        if (!a.sellingPrice || !a.purchasePrice || !a.amountOut) { aValue = 0; } else {
-          aValue = a.sellingPrice * a.purchasePrice * a.amountOut;
-        }
-        if (!b.sellingPrice || !b.purchasePrice || !b.amountOut) { bValue  = 0; } else {
-          bValue = b.sellingPrice * b.purchasePrice * b.amountOut;
-        }
-        if (this.sortingValue.type === 'direct') {
-          return aValue - bValue;
-        } else if (this.sortingValue.type === 'reverse') {
-          return bValue - aValue;
-        }
-      });
-    }
-    // (req.sellingPrice - req.purchasePrice) * req.amountOut - req.reward - (req.amountOut * req.freightPrice * 0.1525)
-    if (this.sortingValue.column === 'profit') {
-      this.requests.sort((a, b): any => {
-        let aValue = 0;
-        let aSellingPrice = 0;
-        if (a.sellingPrice) {
-          aSellingPrice = a.sellingPrice;
-        }
-        let aPurchasePrice = 0;
-        if (a.purchasePrice) {
-          aPurchasePrice = a.purchasePrice;
-        }
-        let aAmountOut = 0;
-        if (a.amountOut) {
-          aAmountOut = a.amountOut;
-        }
-        let aReward = 0;
-        if (a.reward) {
-          aReward = a.reward;
-        }
-        let aFreightPrice = 0;
-        if (a.freightPrice) {
-          aFreightPrice = a.freightPrice;
-        }
-        let bValue = 0;
-        let bSellingPrice = 0;
-        if (b.sellingPrice) {
-          bSellingPrice = b.sellingPrice;
-        }
-        let bPurchasePrice = 0;
-        if (b.purchasePrice) {
-          bPurchasePrice = b.purchasePrice;
-        }
-        let bAmountOut = 0;
-        if (b.amountOut) {
-          bAmountOut = b.amountOut;
-        }
-        let bReward = 0;
-        if (b.reward) {
-          bReward = b.reward;
-        }
-        let bFreightPrice = 0;
-        if (b.freightPrice) {
-          bFreightPrice = b.freightPrice;
-        }
-        if (!a.supplierVat || !a.carVat) {
-          aValue = (aSellingPrice - aPurchasePrice) * aAmountOut - aReward - (aAmountOut * aFreightPrice * 0.1525);
-        } else {
-          aValue = (aSellingPrice - aPurchasePrice) * aAmountOut - aReward;
-        }
-        if (!b.supplierVat || !b.carVat) {
-          bValue = (bSellingPrice - bPurchasePrice) * bAmountOut - bReward - (bAmountOut * bFreightPrice * 0.1525);
-        } else {
-          bValue = (bSellingPrice - bPurchasePrice) * bAmountOut - bReward;
-        }
         if (this.sortingValue.type === 'direct') {
           return aValue - bValue;
         } else if (this.sortingValue.type === 'reverse') {

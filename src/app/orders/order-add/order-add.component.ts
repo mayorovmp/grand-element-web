@@ -66,6 +66,9 @@ export class OrderAddComponent implements OnInit {
     this.ngxSmartModalService.resetModalData(OrderAddComponent.MODAL_NAME);
     if (transferred.type === 'edit') {
       this.request = transferred.request;
+      this.calcFreigthCost();
+      this.calcSellingCost();
+      this.calcProfit();
     } else {
       this.reqService.getLastRequest().subscribe(
         lastReq => {
@@ -73,6 +76,9 @@ export class OrderAddComponent implements OnInit {
           this.request.id = 0;
           this.request.deliveryEnd = new Date(transferred.date);
           this.request.deliveryStart = new Date(transferred.date);
+          this.calcFreigthCost();
+          this.calcSellingCost();
+          this.calcProfit();
         }
       );
 
@@ -135,6 +141,7 @@ export class OrderAddComponent implements OnInit {
       this.request.carCategory = newCar.carCategory;
       this.request.unit = newCar.unit;
       this.request.carVat = newCar.vat;
+      this.calcFreigthCost();
     } else {
       this.request.freightPrice = undefined;
       this.request.carCategory = undefined;
@@ -166,9 +173,49 @@ export class OrderAddComponent implements OnInit {
     this.ngxSmartModalService.getModal(EditorComponent.MODAL_NAME).open();
   }
 
-  async createOrUpdate(req: Request) {
-    // console.log('this.request', this.request);
+  onAmountChange() {
+    this.calcFreigthCost();
+    this.calcSellingCost();
+    this.calcProfit();
+  }
 
+  onFreightPriceChange() {
+    this.calcFreigthCost();
+    this.calcProfit();
+  }
+
+  onFreightCostChange() {
+    this.calcProfit();
+  }
+
+  onSellingPriceChange() {
+    this.calcProfit();
+    this.calcSellingCost();
+  }
+
+  calcFreigthCost() {
+    if (this.request.amountOut && this.request.freightPrice) {
+      this.request.freightCost = this.request.amountOut * this.request.freightPrice;
+    }
+  }
+  calcSellingCost() {
+    if (this.request.sellingPrice && this.request.purchasePrice && this.request.amountOut) {
+      this.request.sellingCost = this.request.sellingPrice * this.request.amountOut;
+    }
+  }
+  calcProfit() {
+    if (this.request.sellingCost &&
+        this.request.freightCost &&
+        this.request.reward
+    ) {
+      if (this.request.carVat && this.request.supplierVat) {
+        this.request.profit = this.request.sellingCost - this.request.reward - this.request.freightCost;
+      } else {
+        this.request.profit = this.request.sellingCost - this.request.reward - this.request.freightCost - (this.request.freightCost * this.ndsConst);
+      }
+    }
+  }
+  async createOrUpdate(req: Request) {
     if (req.car) {
       req.carId = req.car.id;
     }

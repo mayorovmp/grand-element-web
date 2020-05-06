@@ -125,6 +125,7 @@
                 class="form-control" 
                 aria-label="Small"
                 aria-describedby="inputGroup-sizing-sm"
+                (change)="onSellingPriceChange()"
             >
         </div>
 
@@ -200,6 +201,7 @@
                     class="form-control" 
                     aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm"
+                    (change)="calcSellingCost()"
                 >
             </div>
 
@@ -263,6 +265,7 @@
                     [ngModel]="request.freightPrice" 
                     aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm"
+                    (change)="onFreightPriceChange()"
                 >
             </div>
             <div class="mb-2">
@@ -318,6 +321,7 @@
                     [(ngModel)]="request.amountOut" 
                     aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm"
+                    (change)="onAmountChange()"
                 >
             </div>
 
@@ -328,12 +332,13 @@
                     </span>
                 </div>
                 <input
-                    disabled
+                    disabled    
                     type="number"
                     class="form-control" 
                     aria-label="Small"
-                    [(ngModel)]="request.amountOut * request.freightPrice"
+                    [ngModel]="request.freightCost"
                     aria-describedby="inputGroup-sizing-sm"
+                    (change)="calcProfit()"
                 >
             </div>
 
@@ -341,7 +346,7 @@
             <div class=" input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">
-                        <div class="label">Доход</div>
+                        <div class="label">Выручка</div>
                     </span>
                 </div>
                 <input 
@@ -349,7 +354,7 @@
                     type="number" 
                     class="form-control" 
                     aria-label="Small" 
-                    [ngModel]="(request.sellingPrice - request.purchasePrice) * request.amountOut | number:'.0-2'"
+                    [ngModel]="request.sellingCost"
                     aria-describedby="inputGroup-sizing-sm"
                 >
             </div>
@@ -366,18 +371,9 @@
                         type="number" 
                         class="form-control" 
                         aria-label="Small" 
-                        [ngModel]="(request.sellingPrice - request.purchasePrice) * request.amountOut - request.reward - (request.amountOut * request.freightPrice * ndsConst) | number:'.0-2'"
+                        [ngModel]="request.profit"
                         aria-describedby="inputGroup-sizing-sm"
-                    >
-                </ng-container>
-                <ng-container *ngIf="request.supplierVat && request.carVat">
-                    <input 
-                        disabled
-                        type="number" 
-                        class="form-control" 
-                        aria-label="Small" 
-                        [ngModel]="(request.sellingPrice - request.purchasePrice) * request.amountOut - request.reward | number:'.0-2'"
-                        aria-describedby="inputGroup-sizing-sm"
+                        (change)="calcProfit()"
                     >
                 </ng-container>
             </div>
@@ -395,6 +391,7 @@
                 aria-label="Small" 
                 [(ngModel)]="request.reward"
                 aria-describedby="inputGroup-sizing-sm"
+                (change)="calcProfit()"
             >
         </div>
 
