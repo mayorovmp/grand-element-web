@@ -361,14 +361,14 @@
                     <th 
                         class="app-table__th" 
                         *ngIf="!hidingColumns.includes('Цена продажи')"
-                        (click)="sorting('purchasePrice', 0)"
+                        (click)="sorting('sellingPrice', 0)"
                     >
                         Цена продажи
                         <img
                             src="assets/img/icons/sort-{{sortingValue.type}}.svg"
                             class="app-table__sorting-img app-table__sorting-img--orders" 
                             alt=""
-                            *ngIf="sortingValue.column === 'purchasePrice'"
+                            *ngIf="sortingValue.column === 'sellingPrice'"
                         >
                     </th>
                     <th 
@@ -400,27 +400,27 @@
                     <th 
                         class="app-table__th" 
                         *ngIf="!hidingColumns.includes('Стоимость перевозки')"
-                        (click)="sorting('freightCost', 0)"
+                        (click)="sorting('transportationCost', 0)"
                     >
                         Стоимость перевозки
                         <img
                             src="assets/img/icons/sort-{{sortingValue.type}}.svg"
                             class="app-table__sorting-img app-table__sorting-img--orders" 
                             alt=""
-                            *ngIf="sortingValue.column === 'freightCost'"
+                            *ngIf="sortingValue.column === 'transportationCost'"
                         >
                     </th>
                     <th 
                         class="app-table__th" 
                         *ngIf="!hidingColumns.includes('Доход')"
-                        (click)="sorting('sellingPrice', 0)"
+                        (click)="sorting('income', 0)"
                     >
                         Доход
                         <img
                             src="assets/img/icons/sort-{{sortingValue.type}}.svg"
                             class="app-table__sorting-img app-table__sorting-img--orders" 
                             alt=""
-                            *ngIf="sortingValue.column === 'sellingPrice'"
+                            *ngIf="sortingValue.column === 'income'"
                         >
                     </th>
                     <th 
@@ -493,7 +493,7 @@
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Еденица измерения')">{{req.unit}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Цена перевозки')">{{req.freightPrice}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Категория авто')">{{req.carCategory?.name}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Цена продажи')">{{req.purchasePrice}}</td>
+                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Цена продажи')">{{req.sellingPrice}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Вход, тн')">{{req.amountIn}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Выход, тн')">{{req.amountOut}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Стоимость перевозки')">{{req.amountOut * req.freightPrice | number:'.0-2'}}</td>
@@ -821,7 +821,23 @@
             </thead>
             <tbody>
                 <tr class="app-table__tr" *ngFor="let req of longRequests">
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Статус')">{{req.amountComplete}}/{{req.amount}}</td>
+                    <td 
+                        class="app-table__td" 
+                        *ngIf="!hidingColumnsLongTerm.includes('Статус')"
+                    >
+                        {{req.amountComplete}}/{{req.amount}}
+                        <button
+                            title="Добавить заявку"
+                            class="finish-order"
+                            (click)="addShortRequest(curDate, req.id)"
+                        > 
+                            <img 
+                                class="finish-order__icon"
+                                src="assets/img/icons/truck.svg" 
+                                alt="Добавить заявку" 
+                            >
+                        </button>
+                    </td>
                     <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Дата с')">{{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Дата по')">{{req.deliveryEnd | date: "dd.MM.yyyy"}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Клиент')">{{req.client?.name}}</td>
