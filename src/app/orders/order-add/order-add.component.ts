@@ -204,7 +204,7 @@ export class OrderAddComponent implements OnInit {
     } else {
       param = `clientId=${clientId}`;
     }
-    this.reqService.getLastRequest(`clientId=${clientId}&addressId=${addressId}`).subscribe(
+    this.reqService.getLastRequest(param).subscribe(
       lastReq => {
         if (!lastReq) {
           return;
