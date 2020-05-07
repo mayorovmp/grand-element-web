@@ -90,6 +90,10 @@ export class OrdersComponent implements OnInit {
       'profit',
       'reward'
     ];
+    const dateCols = [
+      'deliveryStart',
+      'deliveryEnd'
+    ];
     if (this.sortingValueLongTerm.column !== sortingCol) {
       this.sortingValueLongTerm.column = sortingCol;
       this.sortingValueLongTerm.type = 'direct';
@@ -134,6 +138,34 @@ export class OrdersComponent implements OnInit {
         }
         if (!aValue) { aValue = 0; }
         if (!bValue ) { bValue  = 0; }
+        if (this.sortingValueLongTerm.type === 'direct') {
+          return aValue - bValue;
+        } else if (this.sortingValueLongTerm.type === 'reverse') {
+          return bValue - aValue;
+        }
+      });
+    }
+    if (dateCols.includes(sortingCol)) {
+      this.longRequests.sort((a, b): any => {
+        let aValue = 0;
+        let bValue = 0;
+        if (a[sortingCol]) { aValue = Date.parse(a[sortingCol]); }
+        if (b[sortingCol]) { bValue  = Date.parse(b[sortingCol]); }
+
+        if (this.sortingValueLongTerm.type === 'direct') {
+          return aValue - bValue;
+        } else if (this.sortingValueLongTerm.type === 'reverse') {
+          return bValue - aValue;
+        }
+      });
+    }
+    if (sortingCol === 'progress') {
+      this.longRequests.sort((a, b): any => {
+        let aValue = 0;
+        let bValue = 0;
+        if (a.amountComplete && a.amount) { aValue = a.amountComplete / a.amount; }
+        if (b.amountComplete && b.amount) { bValue  = b.amountComplete / b.amount; }
+
         if (this.sortingValueLongTerm.type === 'direct') {
           return aValue - bValue;
         } else if (this.sortingValueLongTerm.type === 'reverse') {

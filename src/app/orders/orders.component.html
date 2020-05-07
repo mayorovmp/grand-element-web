@@ -656,28 +656,149 @@
                     </th>
                 </tr>
                 <tr class="app-table__tr">
-                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Статус')">Статус</th>
-                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Прогресс')">Прогресс</th>
-                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Дата с')">Дата с </th>
-                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Дата по')">Дата по </th>
-                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Клиент')">Клиент </th>
-                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Адрес доставки')">Адрес доставки</th>
-                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Объем, тн')">Объем, тн</th>
-                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Товар')">Товар </th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Поставщик')">Поставщик </th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Цена закупки')">Цена закупки </th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Перевозчик')">Перевозчик</th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Еденица измерения')">Еденица измерения</th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Цена перевозки ')">Цена перевозки </th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Категория авто')">Категория авто </th>
-                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Цена продажи')">Цена продажи </th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Вход, тн')">Вход, тн</th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Выход, тн')">Выход, тн</th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Стоимость перевозки')">Стоимость перевозки</th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Доход')">Доход</th>
-                    <th hidden class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Прибыль')">Прибыль</th>
-                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Вознаграждение')">Вознаграждение</th>
-                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Комментарии')">Комментарии</th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumnsLongTerm.includes('Статус')"
+                        (click)="sortingLongTerm('status', 0)"
+                    >
+                        Статус
+                        <img
+                            src="assets/img/icons/sort-{{sortingValueLongTerm.type}}.svg"
+                            class="app-table__sorting-img app-table__sorting-img--orders" 
+                            alt=""
+                            *ngIf="sortingValueLongTerm.column === 'status'"
+                        >
+                    </th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumnsLongTerm.includes('Прогресс')"
+                        (click)="sortingLongTerm('progress', 0)"
+                    >
+                        Прогресс
+                        <img
+                            src="assets/img/icons/sort-{{sortingValueLongTerm.type}}.svg"
+                            class="app-table__sorting-img app-table__sorting-img--orders" 
+                            alt=""
+                            *ngIf="sortingValueLongTerm.column === 'progress'"
+                        >
+                    </th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumnsLongTerm.includes('Дата с')"
+                        (click)="sortingLongTerm('deliveryStart', 1)"
+                    >
+                        Дата с 
+                        <img
+                            src="assets/img/icons/sort-{{sortingValueLongTerm.type}}.svg"
+                            class="app-table__sorting-img app-table__sorting-img--orders" 
+                            alt=""
+                            *ngIf="sortingValueLongTerm.column === 'deliveryStart'"
+                        >
+                    </th>
+                    <th 
+                        class="app-table__th"
+                        *ngIf="!hidingColumnsLongTerm.includes('Дата по')"
+                        (click)="sortingLongTerm('deliveryEnd', 1)"
+                    >
+                        Дата по
+                        <img
+                            src="assets/img/icons/sort-{{sortingValueLongTerm.type}}.svg"
+                            class="app-table__sorting-img app-table__sorting-img--orders" 
+                            alt=""
+                            *ngIf="sortingValueLongTerm.column === 'deliveryEnd'"
+                        >
+                    </th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumnsLongTerm.includes('Клиент')"
+                        (click)="sortingLongTerm('client.name', 1)"
+                    >
+                        Клиент 
+                        <img
+                            src="assets/img/icons/sort-{{sortingValueLongTerm.type}}.svg"
+                            class="app-table__sorting-img app-table__sorting-img--orders" 
+                            alt=""
+                            *ngIf="sortingValueLongTerm.column === 'client.name'"
+                        >
+                    </th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumnsLongTerm.includes('Адрес доставки')"
+                        (click)="sortingLongTerm('deliveryAddress.name', 1)"
+                    >
+                        Адрес доставки
+                        <img
+                            src="assets/img/icons/sort-{{sortingValueLongTerm.type}}.svg"
+                            class="app-table__sorting-img app-table__sorting-img--orders" 
+                            alt=""
+                            *ngIf="sortingValueLongTerm.column === 'deliveryAddress.name'"
+                        >
+                    </th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumnsLongTerm.includes('Объем, тн')"
+                        (click)="sortingLongTerm('amount', 0)"
+                    >
+                        Объем, тн
+                        <img
+                            src="assets/img/icons/sort-{{sortingValueLongTerm.type}}.svg"
+                            class="app-table__sorting-img app-table__sorting-img--orders" 
+                            alt=""
+                            *ngIf="sortingValueLongTerm.column === 'amount'"
+                        >
+                    </th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumnsLongTerm.includes('Товар')"
+                        (click)="sortingLongTerm('product.name', 1)"
+                    >
+                        Товар 
+                        <img
+                            src="assets/img/icons/sort-{{sortingValueLongTerm.type}}.svg"
+                            class="app-table__sorting-img app-table__sorting-img--orders" 
+                            alt=""
+                            *ngIf="sortingValueLongTerm.column === 'product.name'"
+                        >
+                    </th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumnsLongTerm.includes('Цена продажи')" 
+                        (click)="sortingLongTerm('sellingPrice', 0)"
+                    >
+                        Цена продажи 
+                        <img
+                            src="assets/img/icons/sort-{{sortingValueLongTerm.type}}.svg"
+                            class="app-table__sorting-img app-table__sorting-img--orders" 
+                            alt=""
+                            *ngIf="sortingValueLongTerm.column === 'sellingPrice'"
+                        >
+                    </th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumnsLongTerm.includes('Вознаграждение')"
+                        (click)="sortingLongTerm('reward', 0)"
+                    >
+                        Вознаграждение
+                        <img
+                            src="assets/img/icons/sort-{{sortingValueLongTerm.type}}.svg"
+                            class="app-table__sorting-img app-table__sorting-img--orders" 
+                            alt=""
+                            *ngIf="sortingValueLongTerm.column === 'reward'"
+                        >
+                    </th>
+                    <th 
+                        class="app-table__th" 
+                        *ngIf="!hidingColumnsLongTerm.includes('Комментарии')"
+                        (click)="sortingLongTerm('comment', 0)"
+                    >
+                        Комментарии
+                        <img
+                            src="assets/img/icons/sort-{{sortingValueLongTerm.type}}.svg"
+                            class="app-table__sorting-img app-table__sorting-img--orders" 
+                            alt=""
+                            *ngIf="sortingValueLongTerm.column === 'comment'"
+                        >
+                    </th>
                     <th class="app-table__th" *ngIf="hidingColumnsLongTerm.length !== 10"></th>
                 </tr>
             </thead>
