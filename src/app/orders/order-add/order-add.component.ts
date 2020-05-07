@@ -46,6 +46,8 @@ export class OrderAddComponent implements OnInit {
 
   ndsConst = 0.1525;
 
+  parentRequestId = null;
+
   constructor(
     private ngxSmartModalService: NgxSmartModalService,
     private clientHttp: ClientHttp,
@@ -81,7 +83,9 @@ export class OrderAddComponent implements OnInit {
           this.calcProfit();
         }
       );
-
+      if (transferred.type === 'addShortReq') {
+        this.parentRequestId = transferred.parentId;
+      }
     }
     this.clientHttp.getClients().subscribe(
       x => this.clients = x);
@@ -215,7 +219,7 @@ export class OrderAddComponent implements OnInit {
       }
     }
   }
-  async createOrUpdate(req: Request) {
+  async createOrUpdate(req: Request, parentId: number) {
     if (req.car) {
       req.carId = req.car.id;
     }
@@ -240,7 +244,11 @@ export class OrderAddComponent implements OnInit {
       req.supplierId = req.supplier.id;
     }
 
-    if (req.id) {
+    console.log('parenId', parentId);
+    console.log('req', req);
+    if (parentId) {
+      await this.reqService.addShortReq(req, parentId).toPromise();
+    } else if (req.id) {
       await this.reqService.edit(req).toPromise();
     } else {
       await this.reqService.add(req).toPromise();

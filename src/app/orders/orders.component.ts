@@ -65,10 +65,8 @@ export class OrdersComponent implements OnInit {
     this.ngxSmartModalService.toggle(OrderAddComponent.MODAL_NAME);
   }
   addShortRequest(dt: Date, parentId: number) {
-    console.log('parentId', parentId);
-    console.log('dt', dt);
-    // this.ngxSmartModalService.setModalData({type: 'add', date: dt}, OrderAddComponent.MODAL_NAME, true);
-    // this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
+    this.ngxSmartModalService.setModalData({type: 'addShortReq', date: dt, parentId}, OrderAddComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
   }
   sortingLongTerm(sortingCol: string, nested: number) {
     const alphabeticalCols = [

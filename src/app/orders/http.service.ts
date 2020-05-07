@@ -20,6 +20,11 @@ export class HttpService {
     return this.http.post<any>(url, request);
   }
 
+  addShortReq(request: Request, parentId: number): Observable<Request> {
+    const url = this.baseUrl + `/request/${parentId}`;
+    return this.http.post<any>(url, request);
+  }
+
   edit(request: Request): Observable<Request> {
     const url = this.baseUrl + '/request';
     return this.http.put<any>(url, request);

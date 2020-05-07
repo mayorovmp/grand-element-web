@@ -411,7 +411,7 @@
         </div>
 
     </div>
-    <button (click)="createOrUpdate(request)" class="mt-2">Создать</button>
+    <button (click)="createOrUpdate(request, parentRequestId)" class="mt-2">Создать</button>
 </ngx-smart-modal>
 <app-client-editor (changed)="onClientAdd()"></app-client-editor>
 <app-supplier-editor (changed)="onSupplierAdd()"></app-supplier-editor>
