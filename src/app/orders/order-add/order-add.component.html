@@ -16,6 +16,7 @@
                 id="exampleFormControlSelect1" 
                 [(ngModel)]="request.client"
                 [compareWith]="byId"
+                (change)="onReqModelChange('clientId='+request.client.id)"
             >
                 <option [ngValue]="undefined"></option>
                 <option 
@@ -41,6 +42,7 @@
                 [(ngModel)]="request.deliveryAddress"
                 id="exampleFormControlSelect1"
                 [compareWith]="byId"
+                (change)="onReqModelChange('clientId='+request.client.id+'&addressId='+request.deliveryAddress.id)"
             >
                 <option 
                     *ngFor="let address of request.client?.addresses" 
@@ -142,6 +144,7 @@
                 (ngModelChange)="onProductChange(request.product?.id)" 
                 id="exampleFormControlSelect1" 
                 [compareWith]="byId"
+                (change)="onReqModelChange('clientId='+request.client.id+'&addressId='+request.deliveryAddress.id+'&productId='+request.product?.id)"
             >
                 <option [ngValue]="undefined"></option>
                 <option 
@@ -166,6 +169,7 @@
                     id="exampleFormControlSelect1"
                     (ngModelChange)="onSupplierChange()"
                     [compareWith]="byId"
+                    (change)="onReqModelChange('clientId='+request.client.id+'&addressId='+request.deliveryAddress.id+'&productId='+request.product?.id+'&supplierId='+request.supplier.id)"
                 >
                     <option [ngValue]="undefined"></option>
                     <option 

@@ -46,6 +46,8 @@ export class OrderAddComponent implements OnInit {
 
   ndsConst = 0.1525;
 
+  curDate = new Date();
+
   parentRequestId = null;
 
   constructor(
@@ -65,6 +67,7 @@ export class OrderAddComponent implements OnInit {
   onOpen() {
     this.reset();
     const transferred = this.ngxSmartModalService.getModalData(OrderAddComponent.MODAL_NAME);
+    this.curDate = transferred.date;
     this.ngxSmartModalService.resetModalData(OrderAddComponent.MODAL_NAME);
     if (transferred.type === 'edit') {
       this.request = transferred.request;
@@ -72,7 +75,7 @@ export class OrderAddComponent implements OnInit {
       this.calcSellingCost();
       this.calcProfit();
     } else {
-      this.reqService.getLastRequest().subscribe(
+      this.reqService.getLastRequest('').subscribe(
         lastReq => {
           this.request = lastReq;
           this.request.id = 0;
@@ -81,6 +84,9 @@ export class OrderAddComponent implements OnInit {
           this.calcFreigthCost();
           this.calcSellingCost();
           this.calcProfit();
+        },
+        err => {
+          console.log(err);
         }
       );
       if (transferred.type === 'addShortReq') {
@@ -159,6 +165,22 @@ export class OrderAddComponent implements OnInit {
       return;
     }
     this.suppliers = await this.supplierHttp.getSuppliersByProdId(prodId).toPromise();
+  }
+
+  async onReqModelChange(params: string) {
+    const transferred = this.ngxSmartModalService.getModalData(OrderAddComponent.MODAL_NAME);
+    console.log('params', params);
+    this.reqService.getLastRequest(params).subscribe(
+      lastReq => {
+        this.request = lastReq;
+        this.request.id = 0;
+        this.request.deliveryEnd = new Date(this.curDate);
+        this.request.deliveryStart = new Date(this.curDate);
+        this.calcFreigthCost();
+        this.calcSellingCost();
+        this.calcProfit();
+      }
+    );
   }
 
   onClientAdd() {

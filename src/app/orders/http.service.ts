@@ -56,8 +56,8 @@ export class HttpService {
     return this.http.get<Request[]>(url);
   }
 
-  getLastRequest(): Observable<Request> {
-    const url = this.baseUrl + `/request/last`;
+  getLastRequest(params: string): Observable<Request> {
+    const url = this.baseUrl + `/request/last?${params}`;
     return this.http.get<Request>(url);
   }
 
