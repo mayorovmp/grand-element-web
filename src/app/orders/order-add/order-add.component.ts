@@ -196,8 +196,15 @@ export class OrderAddComponent implements OnInit {
     this.suppliers = await this.supplierHttp.getSuppliersByProdId(prodId).toPromise();
   }
 
-  async onReqModelChange(clientId: number, addressId: number) {
-    const transferred = this.ngxSmartModalService.getModalData(OrderAddComponent.MODAL_NAME);
+  async onReqModelChange() {
+    let clientId: number | undefined;
+    let addressId: number | undefined;
+    if (this && this.request && this.request.client && this.request.client.id) {
+      clientId = this.request.client.id;
+    }
+    if (this && this.request && this.request.deliveryAddress && this.request.deliveryAddress.id) {
+      addressId = this.request.deliveryAddress.id;
+    }
     let param = '';
     if (clientId && addressId) {
       param = `clientId=${clientId}&addressId=${addressId}`;

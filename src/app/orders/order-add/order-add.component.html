@@ -8,8 +8,7 @@
                 </span>
             </div>
             <select [disabled]="isShort" class="form-control" id="exampleFormControlSelect1"
-                [(ngModel)]="request.client" [compareWith]="byId"
-                (change)="onReqModelChange(request.client.id, '')">
+                [(ngModel)]="request.client" [compareWith]="byId" (change)="onReqModelChange()">
                 <option [ngValue]="undefined"></option>
                 <option *ngFor="let client of clients" [ngValue]="client">
                     {{client.name}}
@@ -26,9 +25,7 @@
             </div>
 
             <select [disabled]="!request.client || isShort" class="form-control" [(ngModel)]="request.deliveryAddress"
-                id="exampleFormControlSelect1" [compareWith]="byId"
-                (change)="onReqModelChange(request.client.id, request.deliveryAddress.id)"
-            >
+                id="exampleFormControlSelect1" [compareWith]="byId" (change)="onReqModelChange()">
                 <option *ngFor="let address of request.client?.addresses" [ngValue]="address">
                     {{address.name}}
                 </option>
