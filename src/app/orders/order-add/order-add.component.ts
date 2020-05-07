@@ -16,6 +16,7 @@ import { ClientEditorComponent } from 'src/app/catalogs/clients/editor/editor.co
 import { EditorComponent } from 'src/app/catalogs/suppliers/editor/editor.component';
 import { Car } from 'src/app/models/Car';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-order-add',
@@ -45,13 +46,15 @@ export class OrderAddComponent implements OnInit {
   selectedCarCategory?: CarCategory = undefined;
   carCategories: CarCategory[] = [];
 
-  ndsConst = 0.1525;
+  ndsConst = 0.1525; // value added tax
 
   curDate = new Date();
 
   parentRequestId = 0;
 
   isParentOrderLong = false;
+
+  isShort = false;
 
   constructor(
     private ngxSmartModalService: NgxSmartModalService,
@@ -67,9 +70,25 @@ export class OrderAddComponent implements OnInit {
   ngOnInit() {
   }
 
-  onOpen() {
+  async onOpen() {
     this.reset();
     const transferred = this.ngxSmartModalService.getModalData(OrderAddComponent.MODAL_NAME);
+    const promises: Promise<any>[] = [];
+    promises.push(this.clientHttp.getClients().toPromise().then(x => this.clients = x));
+
+    promises.push(this.productHttp.getProducts().toPromise().then(x => this.products = x));
+
+    promises.push(this.supplierHttp.getSuppliers().toPromise().then(
+      x => this.suppliers = x));
+
+    promises.push(this.carCategoryHttp.getCarCategories().toPromise().then(
+      x => this.carCategories = x));
+
+    promises.push(this.carHttp.getCars().toPromise().then(
+      x => this.cars = x));
+
+    await Promise.all(promises);
+
     this.curDate = transferred.date;
     this.ngxSmartModalService.resetModalData(OrderAddComponent.MODAL_NAME);
     if (transferred.type === 'edit') {
@@ -95,31 +114,27 @@ export class OrderAddComponent implements OnInit {
         }
       );
     } else if (transferred.type === 'addShortReq') {
+      this.request = new Request();
+      this.isShort = true;
       this.parentRequestId = transferred.parent.id;
-      this.request = transferred.parent;
-      this.request.id = 0;
+      this.request.product = transferred.parent.product;
+      this.request.client = transferred.parent.client;
+      this.request.sellingPrice = transferred.parent.sellingPrice;
+      this.request.deliveryAddress = transferred.parent.deliveryAddress;
+      if (this.request.product) {
+        this.onProductChange(this.request.product.id);
+      }
+      // this.request.supplier = transferred.parent.supplier;
+
+      // this.request = transferred.parent;
       this.request.deliveryEnd = new Date(transferred.date);
       this.request.deliveryStart = new Date(transferred.date);
-      this.request.isLong = undefined;
+      this.request.isLong = false;
       this.calcFreigthCost();
       this.calcSellingCost();
       this.calcProfit();
       this.isParentOrderLong = true;
     }
-    this.clientHttp.getClients().subscribe(
-      x => this.clients = x);
-
-    this.productHttp.getProducts().subscribe(
-      x => this.products = x);
-
-    this.supplierHttp.getSuppliers().subscribe(
-      x => this.suppliers = x);
-
-    this.carCategoryHttp.getCarCategories().subscribe(
-      x => this.carCategories = x);
-
-    this.carHttp.getCars().subscribe(
-      x => this.cars = x);
   }
   reset() {
     this.request = new Request();
@@ -134,6 +149,7 @@ export class OrderAddComponent implements OnInit {
     this.selectedCarCategory = undefined;
     this.carCategories = [];
   }
+
   byId(a: any, b: any) {
     return a && b ? a.id === b.id : a === b;
   }
@@ -173,7 +189,7 @@ export class OrderAddComponent implements OnInit {
     }
   }
 
-  async onProductChange(prodId: number) {
+  async onProductChange(prodId: number | undefined) {
     if (!prodId) {
       return;
     }
@@ -246,9 +262,10 @@ export class OrderAddComponent implements OnInit {
     }
   }
   calcProfit() {
-    if (this.request.sellingCost &&
-      this.request.freightCost &&
-      this.request.reward
+    console.log(this.request);
+    if (this.request.sellingCost !== undefined &&
+      this.request.freightCost !== undefined &&
+      this.request.reward !== undefined
     ) {
       if (this.request.carVat && this.request.supplierVat) {
         this.request.profit = this.request.sellingCost - this.request.reward - this.request.freightCost;
@@ -281,11 +298,10 @@ export class OrderAddComponent implements OnInit {
     if (req.supplier) {
       req.supplierId = req.supplier.id;
     }
-
-    if (this.parentRequestId) {
-      await this.reqService.addShortReq(req, this.parentRequestId).toPromise();
-    } else if (req.id) {
+    if (req.id) {
       await this.reqService.edit(req).toPromise();
+    } else if (this.parentRequestId) {
+      await this.reqService.addShortReq(req, this.parentRequestId).toPromise();
     } else {
       await this.reqService.add(req).toPromise();
     }
