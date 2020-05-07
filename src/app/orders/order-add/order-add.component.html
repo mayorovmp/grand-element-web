@@ -52,8 +52,8 @@
                 </option>
             </select>
         </div>
-        <div class="form-check">
-            <input 
+        <div class="form-check" *ngIf="!isParentOrderLong">
+            <input
                 type="checkbox" 
                 class="form-check-input" 
                 id="exampleCheck1" 

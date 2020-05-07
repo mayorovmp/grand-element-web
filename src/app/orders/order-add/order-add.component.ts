@@ -48,7 +48,9 @@ export class OrderAddComponent implements OnInit {
 
   curDate = new Date();
 
-  parentRequestId = null;
+  parentRequestId = 0;
+
+  isParentOrderLong = false;
 
   constructor(
     private ngxSmartModalService: NgxSmartModalService,
@@ -74,7 +76,8 @@ export class OrderAddComponent implements OnInit {
       this.calcFreigthCost();
       this.calcSellingCost();
       this.calcProfit();
-    } else {
+      this.isParentOrderLong = false;
+    } else if (transferred.type === 'edit') {
       this.reqService.getLastRequest('').subscribe(
         lastReq => {
           this.request = lastReq;
@@ -84,14 +87,23 @@ export class OrderAddComponent implements OnInit {
           this.calcFreigthCost();
           this.calcSellingCost();
           this.calcProfit();
+          this.isParentOrderLong = false;
         },
         err => {
           console.log(err);
         }
       );
-      if (transferred.type === 'addShortReq') {
-        this.parentRequestId = transferred.parentId;
-      }
+    } else if (transferred.type === 'addShortReq') {
+      this.parentRequestId = transferred.parent.id;
+      this.request = transferred.parent;
+      this.request.id = 0;
+      this.request.deliveryEnd = new Date(transferred.date);
+      this.request.deliveryStart = new Date(transferred.date);
+      this.request.isLong = undefined;
+      this.calcFreigthCost();
+      this.calcSellingCost();
+      this.calcProfit();
+      this.isParentOrderLong = true;
     }
     this.clientHttp.getClients().subscribe(
       x => this.clients = x);
@@ -266,10 +278,8 @@ export class OrderAddComponent implements OnInit {
       req.supplierId = req.supplier.id;
     }
 
-    console.log('parenId', parentId);
-    console.log('req', req);
-    if (parentId) {
-      await this.reqService.addShortReq(req, parentId).toPromise();
+    if (this.parentRequestId) {
+      await this.reqService.addShortReq(req, this.parentRequestId).toPromise();
     } else if (req.id) {
       await this.reqService.edit(req).toPromise();
     } else {
