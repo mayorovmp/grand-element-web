@@ -15,6 +15,7 @@ import { Request } from 'src/app/models/Request';
 import { ClientEditorComponent } from 'src/app/catalogs/clients/editor/editor.component';
 import { EditorComponent } from 'src/app/catalogs/suppliers/editor/editor.component';
 import { Car } from 'src/app/models/Car';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-order-add',
@@ -77,7 +78,7 @@ export class OrderAddComponent implements OnInit {
       this.calcSellingCost();
       this.calcProfit();
       this.isParentOrderLong = false;
-    } else if (transferred.type === 'edit') {
+    } else if (transferred.type === 'add') {
       this.reqService.getLastRequest('').subscribe(
         lastReq => {
           this.request = lastReq;
@@ -184,6 +185,9 @@ export class OrderAddComponent implements OnInit {
     console.log('params', params);
     this.reqService.getLastRequest(params).subscribe(
       lastReq => {
+        if (!lastReq) {
+          return;
+        }
         this.request = lastReq;
         this.request.id = 0;
         this.request.deliveryEnd = new Date(this.curDate);
@@ -243,8 +247,8 @@ export class OrderAddComponent implements OnInit {
   }
   calcProfit() {
     if (this.request.sellingCost &&
-        this.request.freightCost &&
-        this.request.reward
+      this.request.freightCost &&
+      this.request.reward
     ) {
       if (this.request.carVat && this.request.supplierVat) {
         this.request.profit = this.request.sellingCost - this.request.reward - this.request.freightCost;
