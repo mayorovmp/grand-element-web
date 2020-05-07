@@ -526,58 +526,6 @@
                         </div>
                     </td>
                 </tr>
-                <ng-container *ngFor="let order of []">
-                    <ng-container *ngIf="order.expanded">
-                        <ng-container *ngFor="let req of order.requests">
-                            <tr>
-                                <td>
-                                    <i class="fa fa-edit"></i>
-                                </td>
-                                <td>
-                                    {{ req.startDate }}
-                                </td>
-                                <td>
-                                    {{ req.status }}
-                                </td>
-                                <td>{{ req.client?.name }}</td>
-                                <td>{{ req.client?.address }}</td>
-                                <td>
-                                    {{ req.product }}
-                                </td>
-                                <td>
-                                    {{ req.quantity }}
-                                </td>
-                            </tr>
-
-                            <ng-container *ngIf="req.expanded">
-                                <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th>Статус</th>
-                                    <th>Категория авто</th>
-                                    <th>Рейсов</th>
-                                    <th>Гос.номер</th>
-                                    <th>Контакты</th>
-                                    <th>Загрузка</th>
-                                </tr>
-                                <ng-container *ngFor="let car of req.cars">
-                                    <tr>
-                                        <td></td>
-                                        <td style="text-align: right;">
-                                            <i class="fa fa-edit"></i>
-                                        </td>
-                                        <td>Выпонен</td>
-                                        <td>{{ car.category }}</td>
-                                        <td>{{ car.amount }}</td>
-                                        <td>{{ car.num }}</td>
-                                        <td>{{ car.contact }}</td>
-                                        <td>1</td>
-                                    </tr>
-                                </ng-container>
-                            </ng-container>
-                        </ng-container>
-                    </ng-container>
-                </ng-container>
             </tbody>
         </table>
     </div>
@@ -622,6 +570,14 @@
                         <button 
                             class="hide-column-btn" 
                             (click)="hideColumnLongTerm('Статус')"
+                        >
+                            X
+                        </button>
+                    </th>
+                    <th class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Прогресс')">
+                        <button 
+                            class="hide-column-btn" 
+                            (click)="hideColumnLongTerm('Прогресс')"
                         >
                             X
                         </button>
@@ -674,98 +630,10 @@
                             X
                         </button>
                     </th>
-                    <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Поставщик')">
-                        <button 
-                            class="hide-column-btn" 
-                            (click)="hideColumnLongTerm('Поставщик')"
-                        >
-                            X
-                        </button>
-                    </th>
-                    <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Цена закупки')">
-                        <button 
-                            class="hide-column-btn" 
-                            (click)="hideColumnLongTerm('Цена закупки')"
-                        >
-                            X
-                        </button>
-                    </th>
-                    <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Перевозчик')">
-                        <button 
-                            class="hide-column-btn" 
-                            (click)="hideColumnLongTerm('Перевозчик')"
-                        >
-                            X
-                        </button>
-                    </th>
-                    <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Еденица измерения')">
-                        <button 
-                            class="hide-column-btn" 
-                            (click)="hideColumnLongTerm('Еденица измерения')"
-                        >
-                            X
-                        </button>
-                    </th>
-                    <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Цена перевозки')">
-                        <button 
-                            class="hide-column-btn" 
-                            (click)="hideColumnLongTerm('Цена перевозки')"
-                        >
-                            X
-                        </button>
-                    </th>
-                    <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Категория авто')">
-                        <button 
-                            class="hide-column-btn" 
-                            (click)="hideColumnLongTerm('Категория авто')"
-                        >
-                            X
-                        </button>
-                    </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Цена продажи')">
                         <button 
                             class="hide-column-btn" 
                             (click)="hideColumnLongTerm('Цена продажи')"
-                        >
-                            X
-                        </button>
-                    </th>
-                    <th hidden nclass="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Вход, тн')">
-                        <button 
-                            class="hide-column-btn" 
-                            (click)="hideColumnLongTerm('Вход, тн')"
-                        >
-                            X
-                        </button>
-                    </th>
-                    <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Выход, тн')">
-                        <button 
-                            class="hide-column-btn" 
-                            (click)="hideColumnLongTerm('Выход, тн')"
-                        >
-                            X
-                        </button>
-                    </th>
-                    <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Стоимость перевозки')">
-                        <button 
-                            class="hide-column-btn" 
-                            (click)="hideColumnLongTerm('Стоимость перевозки')"
-                        >
-                            X
-                        </button>
-                    </th>
-                    <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Доход')">
-                        <button 
-                            class="hide-column-btn" 
-                            (click)="hideColumnLongTerm('Доход')"
-                        >
-                            X
-                        </button>
-                    </th>
-                    <th hidden class="app-table__btns-th" *ngIf="!hidingColumnsLongTerm.includes('Прибыль')">
-                        <button 
-                            class="hide-column-btn" 
-                            (click)="hideColumnLongTerm('Прибыль')"
                         >
                             X
                         </button>
@@ -789,6 +657,7 @@
                 </tr>
                 <tr class="app-table__tr">
                     <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Статус')">Статус</th>
+                    <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Прогресс')">Прогресс</th>
                     <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Дата с')">Дата с </th>
                     <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Дата по')">Дата по </th>
                     <th class="app-table__th" *ngIf="!hidingColumnsLongTerm.includes('Клиент')">Клиент </th>
@@ -814,9 +683,24 @@
             </thead>
             <tbody>
                 <tr class="app-table__tr" *ngFor="let req of longRequests">
+                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Статус')">
+                        {{req.status}}
+                        <button 
+                            *ngIf="!req.statusId"
+                            title="Завершить заявку"
+                            class="finish-order"
+                            (click)="finishRequest(req.id)"
+                        > 
+                            <img 
+                                class="finish-order__icon"
+                                src="assets/img/icons/finish.svg" 
+                                alt="Завершить заявку" 
+                            >
+                        </button>
+                    </td>
                     <td 
                         class="app-table__td" 
-                        *ngIf="!hidingColumnsLongTerm.includes('Статус')"
+                        *ngIf="!hidingColumnsLongTerm.includes('Прогресс')"
                     >
                         {{req.amountComplete}}/{{req.amount}}
                         <button
@@ -876,58 +760,6 @@
                         </div>
                     </td>
                 </tr>
-                <ng-container *ngFor="let order of []">
-                    <ng-container *ngIf="order.expanded">
-                        <ng-container *ngFor="let req of order.requests">
-                            <tr>
-                                <td>
-                                    <i class="fa fa-edit"></i>
-                                </td>
-                                <td>
-                                    {{ req.startDate }}
-                                </td>
-                                <td>
-                                    {{ req.status }}
-                                </td>
-                                <td>{{ req.client?.name }}</td>
-                                <td>{{ req.client?.address }}</td>
-                                <td>
-                                    {{ req.product }}
-                                </td>
-                                <td>
-                                    {{ req.quantity }}
-                                </td>
-                            </tr>
-
-                            <ng-container *ngIf="req.expanded">
-                                <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th>Статус</th>
-                                    <th>Категория авто</th>
-                                    <th>Рейсов</th>
-                                    <th>Гос.номер</th>
-                                    <th>Контакты</th>
-                                    <th>Загрузка</th>
-                                </tr>
-                                <ng-container *ngFor="let car of req.cars">
-                                    <tr>
-                                        <td></td>
-                                        <td style="text-align: right;">
-                                            <i class="fa fa-edit"></i>
-                                        </td>
-                                        <td>Выпонен</td>
-                                        <td>{{ car.category }}</td>
-                                        <td>{{ car.amount }}</td>
-                                        <td>{{ car.num }}</td>
-                                        <td>{{ car.contact }}</td>
-                                        <td>1</td>
-                                    </tr>
-                                </ng-container>
-                            </ng-container>
-                        </ng-container>
-                    </ng-container>
-                </ng-container>
             </tbody>
         </table>
     </div>
