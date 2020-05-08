@@ -197,6 +197,9 @@ a:hover {
     flex: 1;
     background-color: #fff;
 }
+.form-block__input[disabled]{
+    background-color: #e9ecef;
+}
 .form-block__input[type="checkbox"].form-block__input--orders-all{
     margin-top: 0;
     max-width: 20px;
@@ -224,6 +227,9 @@ a:hover {
     position: relative;
     background-color: #fff;
     margin-top: 2px;
+}
+.form-block__input[type="checkbox"][disabled]{
+    background-color: #e9ecef;
 }
 .form-block__input[type="checkbox"]:checked{
     background-color: #343a40;
