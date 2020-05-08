@@ -8,15 +8,12 @@ import { HttpService as SupplierHttp } from 'src/app/catalogs/suppliers/http.ser
 import { HttpService as CarHttp } from 'src/app/catalogs/car/http.service';
 import { HttpService as CarCategoryHttp } from 'src/app/catalogs/car-category/http.service';
 import { Product } from 'src/app/models/Product';
-import { Address } from 'src/app/models/Address';
 import { Supplier } from 'src/app/models/Supplier';
 import { CarCategory } from 'src/app/models/CarCategory';
 import { Request } from 'src/app/models/Request';
 import { ClientEditorComponent } from 'src/app/catalogs/clients/editor/editor.component';
 import { EditorComponent } from 'src/app/catalogs/suppliers/editor/editor.component';
 import { Car } from 'src/app/models/Car';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-order-add',
@@ -203,10 +200,8 @@ export class OrderAddComponent implements OnInit {
   }
 
   onSupplierAdd() {
-
     this.supplierHttp.getSuppliers().subscribe(
       x => this.suppliers = x);
-
   }
 
   addSupplier() {
