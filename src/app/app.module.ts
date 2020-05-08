@@ -11,7 +11,6 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
 
 import { FooterModule } from './footer/footer.module';
 import { NavbarModule } from './header/header.module';
-import { WelcomeModule } from './welcome/welcome.module';
 import { LoginModule } from './login/login.module';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -68,7 +67,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   imports: [
     NgxSmartModalModule.forRoot(),
     HttpClientModule,
-    WelcomeModule,
     LoginModule,
     NavbarModule,
     BrowserModule,
