@@ -1,14 +1,22 @@
-<ngx-smart-modal #orderAddModal identifier="orderAddModal" (onOpen)="onOpen()">
-    <div>
-        <h1>Редактор</h1>
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">
-                    <div class="label">Клиент</div>
-                </span>
-            </div>
-            <select [disabled]="isShort" class="form-control" id="exampleFormControlSelect1"
-                [(ngModel)]="request.client" [compareWith]="byId" (change)="onReqModelChange()">
+<ngx-smart-modal 
+    #orderAddModal 
+    identifier="orderAddModal" 
+    (onOpen)="onOpen()"
+>
+    <div class="form-container">
+        <h2 class="form-title">Редактор</h2>
+        <div class="form-block">
+            <label for="clients" class="form-block__label">
+              Клиент
+            </label>
+            <select 
+                [disabled]="isShort" 
+                class="form-block__select"
+                id="clients"
+                [(ngModel)]="request.client" 
+                [compareWith]="byId" 
+                (change)="onReqModelChange()"
+            >
                 <option [ngValue]="undefined"></option>
                 <option *ngFor="let client of clients" [ngValue]="client">
                     {{client.name}}
@@ -16,78 +24,104 @@
             </select>
             <i (click)="addClient()" class="ml-2 fa fa-plus" aria-hidden="true"></i>
         </div>
-
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">
-                    <div class="label">Адрес доставки</div>
-                </span>
-            </div>
-
-            <select [disabled]="!request.client || isShort" class="form-control" [(ngModel)]="request.deliveryAddress"
-                id="exampleFormControlSelect1" [compareWith]="byId" (change)="onReqModelChange()">
+        <div class="form-block">
+            <label for="deliveryAddress" class="form-block__label">
+                Адрес доставки
+            </label>
+            <select 
+                [disabled]="!request.client || isShort" 
+                class="form-block__select" 
+                [(ngModel)]="request.deliveryAddress"
+                id="deliveryAddress" 
+                [compareWith]="byId" 
+                (change)="onReqModelChange()"
+            >
                 <option *ngFor="let address of request.client?.addresses" [ngValue]="address">
                     {{address.name}}
                 </option>
             </select>
         </div>
-        <div class="form-check">
-            <input [disabled]="isShort" type="checkbox" class="form-check-input" id="exampleCheck1"
-                [(ngModel)]="request.isLong">
-            <label class="form-check-label" for="exampleCheck1">
+        <div class="form-block">
+            <label for="longTermCheckbox" class="form-block__label">
                 Долгосрочная заявка
             </label>
+            <input 
+                [disabled]="isShort" 
+                type="checkbox" 
+                class="form-block__input" 
+                id="longTermCheckbox"
+                [(ngModel)]="request.isLong"
+            >
         </div>
-
-        <div *ngIf="request.isLong" class=" input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">
-                    <div class="label">Дата с</div>
-                </span>
-            </div>
-
-            <input type="date" name="bday" [ngModel]="request.deliveryStart | date:'yyyy-MM-dd'"
-                (ngModelChange)="request.deliveryStart = $event" min="1000-01-01" max="3000-12-31" class="">
+        <div class="form-block" *ngIf="request.isLong">
+            <label for="deliveryStart" class="form-block__label">
+                Дата с
+            </label>
+            <input 
+                type="date" 
+                name="bday" 
+                [ngModel]="request.deliveryStart | date:'yyyy-MM-dd'"
+                (ngModelChange)="request.deliveryStart = $event" 
+                min="1000-01-01" 
+                max="3000-12-31" 
+                id="deliveryStart"
+                class="form-block__input" 
+            >
         </div>
-
-        <div *ngIf="request.isLong" class=" input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">
-                    <div class="label">Дата по</div>
-                </span>
-            </div>
-            <input type="date" name="bday" [ngModel]="request.deliveryEnd | date:'yyyy-MM-dd'"
-                (ngModelChange)="request.deliveryEnd = $event" min="1000-01-01" max="3000-12-31" class="">
+        <div class="form-block" *ngIf="request.isLong">
+            <label for="deliveryEnd" class="form-block__label">
+                Дата по
+            </label>
+            <input 
+                type="date" 
+                name="bday" 
+                [ngModel]="request.deliveryEnd | date:'yyyy-MM-dd'"
+                (ngModelChange)="request.deliveryEnd = $event" 
+                min="1000-01-01" 
+                max="3000-12-31" 
+                id="deliveryEnd"
+                class="form-block__input" 
+            >
         </div>
-        <div class=" input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">
-                    <div class="label">Объем, тн</div>
-                </span>
-            </div>
-            <input type="number" [(ngModel)]="request.amount" class="form-control" aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm">
+        <div class="form-block">
+            <label for="amount" class="form-block__label">
+                Объем, тн
+            </label>
+            <input 
+                type="number" 
+                [(ngModel)]="request.amount" 
+                id="amount"
+                class="form-block__input" 
+                aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm"
+            >
         </div>
-        <div class=" input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">
-                    <div class="label">Цена продажи</div>
-                </span>
-            </div>
-            <input type="number" [(ngModel)]="request.sellingPrice" class="form-control" aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm" (change)="onSellingPriceChange()">
+        <div class="form-block">
+            <label for="sellingPrice" class="form-block__label">
+                Цена продажи
+            </label>
+            <input 
+                type="number" 
+                [(ngModel)]="request.sellingPrice" 
+                class="form-block__input" 
+                id="sellingPrice"
+                aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm"
+                (change)="onSellingPriceChange()"
+            >
         </div>
-
-
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">
-                    <div class="label">Товар</div>
-                </span>
-            </div>
-            <select [disabled]="isShort" class="form-control" [(ngModel)]="request.product"
-                (ngModelChange)="onProductChange(request.product?.id)" id="exampleFormControlSelect1"
-                [compareWith]="byId">
+        <div class="form-block">
+            <label for="product" class="form-block__label">
+                Товар
+            </label>
+            <select 
+                [disabled]="isShort" 
+                class="form-block__input" 
+                [(ngModel)]="request.product"
+                (ngModelChange)="onProductChange(request.product?.id)" 
+                id="product"
+                [compareWith]="byId"
+            >
                 <option [ngValue]="undefined"></option>
                 <option *ngFor="let product of products" [ngValue]="product">
                     {{product.name}}
@@ -239,28 +273,40 @@
             </div>
         </div>
 
-        <div class="mt-2 input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">
-                    <div class="label">Вознаграждение</div>
-                </span>
-            </div>
-            <input type="number" class="form-control" aria-label="Small" [(ngModel)]="request.reward"
-                aria-describedby="inputGroup-sizing-sm" (change)="calcProfit()">
+        <div class="form-block">
+            <label for="reward" class="form-block__label">
+                Вознаграждение
+            </label>
+            <input 
+                type="number" 
+                class="form-block__input"
+                id="reward"
+                aria-label="Small" 
+                [(ngModel)]="request.reward"
+                aria-describedby="inputGroup-sizing-sm" 
+                (change)="calcProfit()"
+            > 
         </div>
-
-        <div class=" input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">
-                    <div class="label">Комментарий</div>
-                </span>
-            </div>
-            <input type="text" class="form-control" [(ngModel)]="request.comment" aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm">
+        <div class="form-block">
+            <label for="comment" class="form-block__label">
+                Комментарий
+            </label>
+            <input 
+                type="text" 
+                class="form-block__input"
+                id="comment"
+                [(ngModel)]="request.comment" 
+                aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm"
+            >   
         </div>
-
     </div>
-    <button (click)="createOrUpdate(request, parentRequestId)" class="mt-2">Создать</button>
+    <button 
+        (click)="createOrUpdate(request, parentRequestId)"
+        class="app-btn gray-btn"
+    >
+        Создать
+    </button>
 </ngx-smart-modal>
 <app-client-editor (changed)="onClientAdd()"></app-client-editor>
 <app-supplier-editor (changed)="onSupplierAdd()"></app-supplier-editor>
