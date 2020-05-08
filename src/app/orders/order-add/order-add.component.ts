@@ -24,35 +24,26 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./order-add.component.css']
 })
 export class OrderAddComponent implements OnInit {
-  static MODAL_NAME = 'orderAddModal';
+  static readonly MODAL_NAME = 'orderAddModal';
+  readonly ndsConst = 0.1525; // value added tax
 
   request: Request = new Request();
 
-  selectedClient?: Client = undefined;
   clients: Client[] = [];
 
   cars: Car[] = [];
 
-  selectedAddress?: Address = undefined;
-
-  selectedProduct?: Product = undefined;
   products: Product[] = [];
 
-  selectedSupplier?: Supplier = undefined;
   suppliers: Supplier[] = [];
 
-  isLong = false;
-
-  selectedCarCategory?: CarCategory = undefined;
   carCategories: CarCategory[] = [];
 
-  ndsConst = 0.1525; // value added tax
+  isLong = false;
 
   curDate = new Date();
 
   parentRequestId = 0;
-
-  isParentOrderLong = false;
 
   isShort = false;
 
@@ -70,9 +61,7 @@ export class OrderAddComponent implements OnInit {
   ngOnInit() {
   }
 
-  async onOpen() {
-    this.reset();
-    const transferred = this.ngxSmartModalService.getModalData(OrderAddComponent.MODAL_NAME);
+  async getCatalogs(): Promise<any[]> {
     const promises: Promise<any>[] = [];
     promises.push(this.clientHttp.getClients().toPromise().then(x => this.clients = x));
 
@@ -87,27 +76,27 @@ export class OrderAddComponent implements OnInit {
     promises.push(this.carHttp.getCars().toPromise().then(
       x => this.cars = x));
 
-    await Promise.all(promises);
+    return Promise.all(promises);
+  }
+
+  async onOpen() {
+    this.reset();
+    const transferred = this.ngxSmartModalService.getModalData(OrderAddComponent.MODAL_NAME);
+    this.ngxSmartModalService.resetModalData(OrderAddComponent.MODAL_NAME);
+
+    await this.getCatalogs();
 
     this.curDate = transferred.date;
-    this.ngxSmartModalService.resetModalData(OrderAddComponent.MODAL_NAME);
+
     if (transferred.type === 'edit') {
       this.request = transferred.request;
-      this.calcFreigthCost();
-      this.calcSellingCost();
-      this.calcProfit();
-      this.isParentOrderLong = false;
     } else if (transferred.type === 'add') {
-      this.reqService.getLastRequest('').subscribe(
+      this.reqService.getLastRequest(this.request).subscribe(
         lastReq => {
           this.request = lastReq;
-          this.request.id = 0;
-          this.request.deliveryEnd = new Date(transferred.date);
+          this.request.id = undefined;
           this.request.deliveryStart = new Date(transferred.date);
-          this.calcFreigthCost();
-          this.calcSellingCost();
-          this.calcProfit();
-          this.isParentOrderLong = false;
+          this.request.deliveryEnd = new Date(transferred.date);
         },
         err => {
           console.log(err);
@@ -117,6 +106,7 @@ export class OrderAddComponent implements OnInit {
       this.request = new Request();
       this.isShort = true;
       this.parentRequestId = transferred.parent.id;
+
       this.request.product = transferred.parent.product;
       this.request.client = transferred.parent.client;
       this.request.sellingPrice = transferred.parent.sellingPrice;
@@ -130,29 +120,23 @@ export class OrderAddComponent implements OnInit {
       this.request.deliveryEnd = new Date(transferred.date);
       this.request.deliveryStart = new Date(transferred.date);
       this.request.isLong = false;
-      this.calcFreigthCost();
-      this.calcSellingCost();
-      this.calcProfit();
-      this.isParentOrderLong = true;
     }
   }
+
   reset() {
     this.request = new Request();
-    this.selectedClient = undefined;
+    this.isShort = false;
+
     this.clients = [];
-
-    this.selectedAddress = undefined;
-
-    this.selectedProduct = undefined;
     this.products = [];
-
-    this.selectedCarCategory = undefined;
     this.carCategories = [];
+
   }
 
   byId(a: any, b: any) {
     return a && b ? a.id === b.id : a === b;
   }
+
   addClient() {
     this.ngxSmartModalService.getModal(ClientEditorComponent.MODAL_NAME).open();
   }
@@ -197,32 +181,18 @@ export class OrderAddComponent implements OnInit {
   }
 
   async onReqModelChange() {
-    let clientId: number | undefined;
-    let addressId: number | undefined;
-    if (this && this.request && this.request.client && this.request.client.id) {
-      clientId = this.request.client.id;
-    }
-    if (this && this.request && this.request.deliveryAddress && this.request.deliveryAddress.id) {
-      addressId = this.request.deliveryAddress.id;
-    }
-    let param = '';
-    if (clientId && addressId) {
-      param = `clientId=${clientId}&addressId=${addressId}`;
-    } else {
-      param = `clientId=${clientId}`;
-    }
-    this.reqService.getLastRequest(param).subscribe(
+    this.reqService.getLastRequest(this.request).subscribe(
       lastReq => {
         if (!lastReq) {
           return;
         }
-        this.request = lastReq;
-        this.request.id = 0;
-        this.request.deliveryEnd = new Date(this.curDate);
-        this.request.deliveryStart = new Date(this.curDate);
-        this.calcFreigthCost();
-        this.calcSellingCost();
-        this.calcProfit();
+        // this.request = lastReq;
+        // this.request.id = 0;
+        // this.request.deliveryEnd = new Date(this.curDate);
+        // this.request.deliveryStart = new Date(this.curDate);
+        // this.calcFreigthCost();
+        // this.calcSellingCost();
+        // this.calcProfit();
       }
     );
   }
@@ -310,6 +280,7 @@ export class OrderAddComponent implements OnInit {
     if (req.supplier) {
       req.supplierId = req.supplier.id;
     }
+
     if (req.id) {
       await this.reqService.edit(req).toPromise();
     } else if (this.parentRequestId) {

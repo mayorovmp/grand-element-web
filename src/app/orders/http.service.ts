@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
-import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Request } from '../models/Request';
 
@@ -56,9 +55,19 @@ export class HttpService {
     return this.http.get<Request[]>(url);
   }
 
-  getLastRequest(params: string): Observable<Request> {
-    const url = this.baseUrl + `/request/last?${params}`;
-    return this.http.get<Request>(url);
+  getLastRequest(req: Request): Observable<Request> {
+    const url = this.baseUrl + `/request/last`;
+
+    let params = new HttpParams();
+
+    if (req.client?.id) {
+      params = params.append('clientId', req.client.id.toString());
+    }
+    if (req.deliveryAddress?.id) {
+      params = params.append('addressId', req.deliveryAddress.id.toString());
+    }
+
+    return this.http.get<Request>(url, { params });
   }
 
   getFile(dt: Date): Observable<HttpResponse<Blob>> {

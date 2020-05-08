@@ -33,39 +33,39 @@ export class OrdersComponent implements OnInit {
     column: string
     type: string,
   } = {
-    column: 'none',
-    type: 'none',
-  };
+      column: 'none',
+      type: 'none',
+    };
 
   sortingValueLongTerm: {
     column: string
     type: string,
   } = {
-    column: 'none',
-    type: 'none',
-  };
+      column: 'none',
+      type: 'none',
+    };
 
   constructor(
     public http: HttpService,
     private toastr: ToastrService,
     public ngxSmartModalService: NgxSmartModalService,
     private title: Title) {
-      title.setTitle('Заказы');
+    title.setTitle('Заказы');
   }
   getRand(): number {
     return Math.floor((Math.random() * 3)) + 0;
   }
 
   add(dt: Date) {
-    this.ngxSmartModalService.setModalData({type: 'add', date: dt}, OrderAddComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.setModalData({ type: 'add', date: dt }, OrderAddComponent.MODAL_NAME, true);
     this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
   }
   edit(request: Request) {
-    this.ngxSmartModalService.setModalData({type: 'edit', request}, OrderAddComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.setModalData({ type: 'edit', request }, OrderAddComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(OrderAddComponent.MODAL_NAME);
   }
   addShortRequest(dt: Date, parent: Request) {
-    this.ngxSmartModalService.setModalData({type: 'addShortReq', date: dt, parent}, OrderAddComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.setModalData({ type: 'addShortReq', date: dt, parent }, OrderAddComponent.MODAL_NAME, true);
     this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
   }
   sortingLongTerm(sortingCol: string, nested: number) {
@@ -105,24 +105,24 @@ export class OrdersComponent implements OnInit {
       }
     }
     if (alphabeticalCols.includes(sortingCol)) {
-        this.longRequests.sort((a, b) => {
-          let aValue = a[sortingCol];
-          let bValue = b[sortingCol];
-          if (nested === 1) {
-            const splitedCol = sortingCol.split('.');
-            aValue = a[splitedCol[0]];
-            bValue = b[splitedCol[0]];
-            aValue = aValue[splitedCol[1]];
-            bValue = bValue[splitedCol[1]];
-          }
-          if (!aValue) { aValue = ''; }
-          if (!bValue ) { bValue  = ''; }
-          if (this.sortingValueLongTerm.type === 'direct') {
-            return aValue.localeCompare(bValue);
-          } else if (this.sortingValueLongTerm.type === 'reverse') {
-            return bValue.localeCompare(aValue);
-          }
-        });
+      this.longRequests.sort((a, b) => {
+        let aValue = a[sortingCol];
+        let bValue = b[sortingCol];
+        if (nested === 1) {
+          const splitedCol = sortingCol.split('.');
+          aValue = a[splitedCol[0]];
+          bValue = b[splitedCol[0]];
+          aValue = aValue[splitedCol[1]];
+          bValue = bValue[splitedCol[1]];
+        }
+        if (!aValue) { aValue = ''; }
+        if (!bValue) { bValue = ''; }
+        if (this.sortingValueLongTerm.type === 'direct') {
+          return aValue.localeCompare(bValue);
+        } else if (this.sortingValueLongTerm.type === 'reverse') {
+          return bValue.localeCompare(aValue);
+        }
+      });
     }
 
     if (numeralCols.includes(sortingCol)) {
@@ -137,7 +137,7 @@ export class OrdersComponent implements OnInit {
           bValue = bValue[splitedCol[1]];
         }
         if (!aValue) { aValue = 0; }
-        if (!bValue ) { bValue  = 0; }
+        if (!bValue) { bValue = 0; }
         if (this.sortingValueLongTerm.type === 'direct') {
           return aValue - bValue;
         } else if (this.sortingValueLongTerm.type === 'reverse') {
@@ -150,7 +150,7 @@ export class OrdersComponent implements OnInit {
         let aValue = 0;
         let bValue = 0;
         if (a[sortingCol]) { aValue = Date.parse(a[sortingCol]); }
-        if (b[sortingCol]) { bValue  = Date.parse(b[sortingCol]); }
+        if (b[sortingCol]) { bValue = Date.parse(b[sortingCol]); }
 
         if (this.sortingValueLongTerm.type === 'direct') {
           return aValue - bValue;
@@ -164,7 +164,7 @@ export class OrdersComponent implements OnInit {
         let aValue = 0;
         let bValue = 0;
         if (a.amountComplete && a.amount) { aValue = a.amountComplete / a.amount; }
-        if (b.amountComplete && b.amount) { bValue  = b.amountComplete / b.amount; }
+        if (b.amountComplete && b.amount) { bValue = b.amountComplete / b.amount; }
 
         if (this.sortingValueLongTerm.type === 'direct') {
           return aValue - bValue;
@@ -174,6 +174,7 @@ export class OrdersComponent implements OnInit {
       });
     }
   }
+
   sorting(sortingCol: string, nested: number) {
     const alphabeticalCols = [
       'status',
@@ -220,7 +221,7 @@ export class OrdersComponent implements OnInit {
           bValue = bValue[splitedCol[1]];
         }
         if (!aValue) { aValue = ''; }
-        if (!bValue ) { bValue  = ''; }
+        if (!bValue) { bValue = ''; }
         if (this.sortingValue.type === 'direct') {
           return aValue.localeCompare(bValue);
         } else if (this.sortingValue.type === 'reverse') {
@@ -241,7 +242,7 @@ export class OrdersComponent implements OnInit {
           bValue = bValue[splitedCol[1]];
         }
         if (!aValue) { aValue = 0; }
-        if (!bValue ) { bValue  = 0; }
+        if (!bValue) { bValue = 0; }
         if (this.sortingValue.type === 'direct') {
           return aValue - bValue;
         } else if (this.sortingValue.type === 'reverse') {
@@ -250,9 +251,9 @@ export class OrdersComponent implements OnInit {
       });
     }
   }
+
   ngOnInit() {
     this.getData(this.pickedDay);
-
 
     this.DateChanged.pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe(dt => {
@@ -278,6 +279,7 @@ export class OrdersComponent implements OnInit {
     await this.http.finishRequest(orderId).toPromise();
     this.getData(this.pickedDay);
   }
+
   onChangeDate($event: number) {
     this.curDate = new Date($event);
     this.DateChanged.next(this.curDate);
@@ -297,7 +299,7 @@ export class OrdersComponent implements OnInit {
     this.ngxSmartModalService.toggle('confirmModal');
   }
 
-  async del(req: Request) {
+  private async del(req: Request) {
     await this.http.del(req).toPromise();
     this.getData(this.pickedDay);
   }
