@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Client } from '../models/Client';
 import { Request } from '../models/Request';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/internal/operators';
@@ -8,7 +7,7 @@ import { OrderAddComponent } from './order-add/order-add.component';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from './http.service';
 import { ToastrService } from 'ngx-toastr';
-import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
+import { Goal } from './order-add/Goal';
 
 @Component({
   selector: 'app-orders',
@@ -52,22 +51,24 @@ export class OrdersComponent implements OnInit {
     private title: Title) {
     title.setTitle('Заказы');
   }
+
   getRand(): number {
     return Math.floor((Math.random() * 3)) + 0;
   }
 
   add(dt: Date) {
-    this.ngxSmartModalService.setModalData({ type: 'add', date: dt }, OrderAddComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.setModalData({ type: Goal.Add, date: dt }, OrderAddComponent.MODAL_NAME, true);
     this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
   }
   edit(request: Request) {
-    this.ngxSmartModalService.setModalData({ type: 'edit', request }, OrderAddComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.setModalData({ type: Goal.Edit, request }, OrderAddComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(OrderAddComponent.MODAL_NAME);
   }
   addShortRequest(dt: Date, parent: Request) {
-    this.ngxSmartModalService.setModalData({ type: 'addShortReq', date: dt, parent }, OrderAddComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.setModalData({ type: Goal.AddChildRequest, date: dt, parent }, OrderAddComponent.MODAL_NAME, true);
     this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
   }
+
   sortingLongTerm(sortingCol: string, nested: number) {
     const alphabeticalCols = [
       'status',

@@ -15,6 +15,7 @@ import { Request } from 'src/app/models/Request';
 import { Supplier } from 'src/app/models/Supplier';
 import { HttpService as ReqService } from 'src/app/orders/http.service';
 import { Address } from 'src/app/models/Address';
+import { Goal } from './Goal';
 
 @Component({
   selector: 'app-order-add',
@@ -22,8 +23,11 @@ import { Address } from 'src/app/models/Address';
   styleUrls: ['./order-add.component.css']
 })
 export class OrderAddComponent implements OnInit {
+
   static readonly MODAL_NAME = 'orderAddModal';
   readonly ndsConst = 0.1525; // value added tax
+
+  goal: Goal;
 
   request: Request = new Request();
 
@@ -86,11 +90,13 @@ export class OrderAddComponent implements OnInit {
 
     this.curDate = transferred.date;
 
-    if (transferred.type === 'edit') {
+    this.goal = transferred.type;
+
+    if (transferred.type === Goal.Edit) {
       this.request = transferred.request;
-    } else if (transferred.type === 'add') {
+    } else if (transferred.type === Goal.Add) {
       // this.processLastReq();
-    } else if (transferred.type === 'addShortReq') {
+    } else if (transferred.type === Goal.AddChildRequest) {
       this.request = new Request();
       this.isShort = true;
       this.parentRequestId = transferred.parent.id;
@@ -102,9 +108,6 @@ export class OrderAddComponent implements OnInit {
       if (this.request.product) {
         this.onProductChange(this.request.product.id);
       }
-      // this.request.supplier = transferred.parent.supplier;
-
-      // this.request = transferred.parent;
       this.request.deliveryEnd = new Date(transferred.date);
       this.request.deliveryStart = new Date(transferred.date);
       this.request.isLong = false;
@@ -137,7 +140,6 @@ export class OrderAddComponent implements OnInit {
           this.request.isLong = false;
           this.request.amount = undefined;
           this.request.sellingPrice = undefined;
-          // this.request. = undefined;
           this.request.product = undefined;
           this.request.supplier = undefined;
           this.request.car = undefined;
@@ -206,7 +208,6 @@ export class OrderAddComponent implements OnInit {
   onClientChange() {
     this.processLastReq(this.request.client, undefined);
   }
-
 
   onAddrChange() {
     this.reqService.getLastRequest(this.request.client, this.request.deliveryAddress).subscribe(
@@ -318,13 +319,14 @@ export class OrderAddComponent implements OnInit {
       req.supplierId = req.supplier.id;
     }
 
-    if (req.id) {
+    if (this.goal === Goal.Edit) {
       await this.reqService.edit(req).toPromise();
-    } else if (this.parentRequestId) {
-      await this.reqService.addShortReq(req, this.parentRequestId).toPromise();
-    } else {
+    } else if (this.goal === Goal.Add) {
       await this.reqService.add(req).toPromise();
+    } else if (this.goal === Goal.AddChildRequest) {
+      await this.reqService.addShortReq(req, this.parentRequestId).toPromise();
     }
+
     this.changed.emit();
     this.ngxSmartModalService.toggle(OrderAddComponent.MODAL_NAME);
   }
