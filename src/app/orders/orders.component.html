@@ -310,7 +310,7 @@
                     </td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Вознаграждение')">{{req.reward}}</td>
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Комментарии')">{{req.comment}}</td>
-                    <td class="app-table__td" *ngIf="hidingColumns.length !== 20">
+                    <td class="app-table__td" *ngIf="hidingColumns.length !== 20 && req.statusId == 0">
                         <div class="btn-container btn-container--centered">
                             <button class="edit-btn" (click)="edit(req)">
                                 <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
@@ -539,7 +539,7 @@
                     </td>
                     <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Комментарии')">{{req.comment}}
                     </td>
-                    <td class="app-table__td" *ngIf="hidingColumnsLongTerm.length !== 10">
+                    <td class="app-table__td" *ngIf="hidingColumnsLongTerm.length !== 10 && req.statusId == 0">
                         <div class="btn-container btn-container--centered">
                             <button class="edit-btn" (click)="edit(req)">
                                 <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
