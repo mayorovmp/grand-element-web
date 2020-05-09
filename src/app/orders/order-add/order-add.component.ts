@@ -23,7 +23,6 @@ import { Goal } from './Goal';
   styleUrls: ['./order-add.component.css']
 })
 export class OrderAddComponent implements OnInit {
-
   static readonly MODAL_NAME = 'orderAddModal';
   readonly ndsConst = 0.1525; // value added tax
 
@@ -105,9 +104,7 @@ export class OrderAddComponent implements OnInit {
       this.request.client = transferred.parent.client;
       this.request.sellingPrice = transferred.parent.sellingPrice;
       this.request.deliveryAddress = transferred.parent.deliveryAddress;
-      if (this.request.product) {
-        this.onProductChange(this.request.product.id);
-      }
+      await this.getSuppliersByProd(this.request.product?.id);
       this.request.deliveryEnd = new Date(transferred.date);
       this.request.deliveryStart = new Date(transferred.date);
       this.request.isLong = false;
@@ -199,6 +196,10 @@ export class OrderAddComponent implements OnInit {
   }
 
   async onProductChange(prodId: number | undefined) {
+    this.getSuppliersByProd(prodId);
+  }
+
+  private async getSuppliersByProd(prodId: number | undefined) {
     if (!prodId) {
       return;
     }
@@ -206,16 +207,10 @@ export class OrderAddComponent implements OnInit {
   }
 
   onClientChange() {
-    this.processLastReq(this.request.client, undefined);
+    // this.processLastReq(this.request.client, undefined);
   }
 
   onAddrChange() {
-    this.reqService.getLastRequest(this.request.client, this.request.deliveryAddress).subscribe(
-      lastReq => {
-        if (!lastReq) {
-          return;
-        }
-      });
   }
 
   async onReqModelChange() {
@@ -274,11 +269,13 @@ export class OrderAddComponent implements OnInit {
       this.request.freightCost = this.request.amountOut * this.request.freightPrice;
     }
   }
+
   calcSellingCost() {
     if (this.request.sellingPrice && this.request.purchasePrice && this.request.amountOut) {
       this.request.sellingCost = this.request.sellingPrice * this.request.amountOut;
     }
   }
+
   calcProfit() {
     console.log(this.request);
     if (this.request.sellingCost !== undefined &&
@@ -294,6 +291,7 @@ export class OrderAddComponent implements OnInit {
       this.request.profit = profit;
     }
   }
+
   async createOrUpdate(req: Request, parentId: number) {
     if (req.car) {
       req.carId = req.car.id;
