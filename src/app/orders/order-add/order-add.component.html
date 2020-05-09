@@ -32,10 +32,11 @@
                 [disabled]="!request.client || isShort" 
                 class="form-block__select" 
                 [(ngModel)]="request.deliveryAddress"
-                id="deliveryAddress" 
-                [compareWith]="byId" 
+                id="deliveryAddress"
+                [compareWith]="byId"
                 (change)="onAddrChange()"
             >
+                <option [ngValue]="undefined"></option>
                 <option *ngFor="let address of request.client?.addresses" [ngValue]="address">
                     {{address.name}}
                 </option>
@@ -297,7 +298,6 @@
                     class="form-block__input"
                     id="profit"
                     [ngModel]="request.profit"
-                    (change)="calcProfit()"
                 >
             </div>
         </div>
