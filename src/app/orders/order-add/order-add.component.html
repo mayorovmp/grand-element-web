@@ -15,7 +15,7 @@
                 id="clients"
                 [(ngModel)]="request.client" 
                 [compareWith]="byId" 
-                (change)="onReqModelChange()"
+                (change)="onClientChange()"
             >
                 <option [ngValue]="undefined"></option>
                 <option *ngFor="let client of clients" [ngValue]="client">
@@ -34,7 +34,7 @@
                 [(ngModel)]="request.deliveryAddress"
                 id="deliveryAddress" 
                 [compareWith]="byId" 
-                (change)="onReqModelChange()"
+                (change)="onAddrChange()"
             >
                 <option *ngFor="let address of request.client?.addresses" [ngValue]="address">
                     {{address.name}}

@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
 import { environment } from 'src/environments/environment';
 import { Request } from '../models/Request';
+import { Client } from '../models/Client';
+import { Address } from '../models/Address';
 
 
 @Injectable({
@@ -55,16 +57,16 @@ export class HttpService {
     return this.http.get<Request[]>(url);
   }
 
-  getLastRequest(req: Request): Observable<Request> {
+  getLastRequest(client: Client | undefined, deliveryAddress: Address | undefined): Observable<Request> {
     const url = this.baseUrl + `/request/last`;
 
     let params = new HttpParams();
 
-    if (req.client?.id) {
-      params = params.append('clientId', req.client.id.toString());
+    if (client?.id) {
+      params = params.append('clientId', client.id.toString());
     }
-    if (req.deliveryAddress?.id) {
-      params = params.append('addressId', req.deliveryAddress.id.toString());
+    if (deliveryAddress?.id) {
+      params = params.append('addressId', deliveryAddress.id.toString());
     }
 
     return this.http.get<Request>(url, { params });

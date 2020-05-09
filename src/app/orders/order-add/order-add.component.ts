@@ -1,19 +1,20 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { Client } from 'src/app/models/Client';
+import { HttpService as CarCategoryHttp } from 'src/app/catalogs/car-category/http.service';
+import { HttpService as CarHttp } from 'src/app/catalogs/car/http.service';
+import { ClientEditorComponent } from 'src/app/catalogs/clients/editor/editor.component';
 import { HttpService as ClientHttp } from 'src/app/catalogs/clients/http.service';
 import { HttpService as ProductHttp } from 'src/app/catalogs/product/http.service';
-import { HttpService as ReqService } from 'src/app/orders/http.service';
-import { HttpService as SupplierHttp } from 'src/app/catalogs/suppliers/http.service';
-import { HttpService as CarHttp } from 'src/app/catalogs/car/http.service';
-import { HttpService as CarCategoryHttp } from 'src/app/catalogs/car-category/http.service';
-import { Product } from 'src/app/models/Product';
-import { Supplier } from 'src/app/models/Supplier';
-import { CarCategory } from 'src/app/models/CarCategory';
-import { Request } from 'src/app/models/Request';
-import { ClientEditorComponent } from 'src/app/catalogs/clients/editor/editor.component';
 import { EditorComponent } from 'src/app/catalogs/suppliers/editor/editor.component';
+import { HttpService as SupplierHttp } from 'src/app/catalogs/suppliers/http.service';
 import { Car } from 'src/app/models/Car';
+import { CarCategory } from 'src/app/models/CarCategory';
+import { Client } from 'src/app/models/Client';
+import { Product } from 'src/app/models/Product';
+import { Request } from 'src/app/models/Request';
+import { Supplier } from 'src/app/models/Supplier';
+import { HttpService as ReqService } from 'src/app/orders/http.service';
+import { Address } from 'src/app/models/Address';
 
 @Component({
   selector: 'app-order-add',
@@ -88,17 +89,7 @@ export class OrderAddComponent implements OnInit {
     if (transferred.type === 'edit') {
       this.request = transferred.request;
     } else if (transferred.type === 'add') {
-      this.reqService.getLastRequest(this.request).subscribe(
-        lastReq => {
-          this.request = lastReq;
-          this.request.id = undefined;
-          this.request.deliveryStart = new Date(transferred.date);
-          this.request.deliveryEnd = new Date(transferred.date);
-        },
-        err => {
-          console.log(err);
-        }
-      );
+      // this.processLastReq();
     } else if (transferred.type === 'addShortReq') {
       this.request = new Request();
       this.isShort = true;
@@ -127,7 +118,42 @@ export class OrderAddComponent implements OnInit {
     this.clients = [];
     this.products = [];
     this.carCategories = [];
+  }
 
+  processLastReq(client: Client | undefined, addr: Address | undefined) {
+    this.reqService.getLastRequest(client, addr).subscribe(
+      lastReq => {
+        if (lastReq) {
+          this.request = lastReq;
+          this.request.id = undefined;
+          this.request.deliveryStart = this.curDate;
+          this.request.deliveryEnd = this.curDate;
+        } else {
+          // Если прошлой заявки не нашли, то сбросим поля у текущей,
+          // так как если мы переприсвоем заявку, то перестанут работать события на шаблоне (ngModelChange).
+          // this.request = new Request();
+          this.request.client = client;
+          this.request.deliveryAddress = addr;
+          this.request.isLong = false;
+          this.request.amount = undefined;
+          this.request.sellingPrice = undefined;
+          // this.request. = undefined;
+          this.request.product = undefined;
+          this.request.supplier = undefined;
+          this.request.car = undefined;
+          this.request.amountIn = undefined;
+          this.request.amountOut = undefined;
+          this.request.freightCost = 0;
+          this.request.sellingCost = undefined;
+          this.request.profit = undefined;
+          this.request.comment = undefined;
+          this.request.unit = undefined;
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   byId(a: any, b: any) {
@@ -177,21 +203,35 @@ export class OrderAddComponent implements OnInit {
     this.suppliers = await this.supplierHttp.getSuppliersByProdId(prodId).toPromise();
   }
 
-  async onReqModelChange() {
-    this.reqService.getLastRequest(this.request).subscribe(
+  onClientChange() {
+    this.processLastReq(this.request.client, undefined);
+  }
+
+
+  onAddrChange() {
+    this.reqService.getLastRequest(this.request.client, this.request.deliveryAddress).subscribe(
       lastReq => {
         if (!lastReq) {
           return;
         }
-        // this.request = lastReq;
-        // this.request.id = 0;
-        // this.request.deliveryEnd = new Date(this.curDate);
-        // this.request.deliveryStart = new Date(this.curDate);
-        // this.calcFreigthCost();
-        // this.calcSellingCost();
-        // this.calcProfit();
-      }
-    );
+      });
+  }
+
+  async onReqModelChange() {
+    // this.reqService.getLastRequest(this.request).subscribe(
+    //   lastReq => {
+    //     if (!lastReq) {
+    //       return;
+    //     }
+    // this.request = lastReq;
+    // this.request.id = 0;
+    // this.request.deliveryEnd = new Date(this.curDate);
+    // this.request.deliveryStart = new Date(this.curDate);
+    // this.calcFreigthCost();
+    // this.calcSellingCost();
+    // this.calcProfit();
+    // }
+    // );
   }
 
   onClientAdd() {
@@ -242,13 +282,15 @@ export class OrderAddComponent implements OnInit {
     console.log(this.request);
     if (this.request.sellingCost !== undefined &&
       this.request.freightCost !== undefined &&
-      this.request.reward !== undefined
+      this.request.reward !== undefined &&
+      this.request.purchasePrice !== undefined &&
+      this.request.amountOut !== undefined
     ) {
-      if (this.request.carVat && this.request.supplierVat) {
-        this.request.profit = this.request.sellingCost - this.request.reward - this.request.freightCost;
-      } else {
-        this.request.profit = this.request.sellingCost - this.request.reward - this.request.freightCost - (this.request.freightCost * this.ndsConst);
+      let profit = this.request.sellingCost - this.request.purchasePrice * this.request.amountOut - this.request.reward - this.request.freightCost;
+      if (this.request.carVat) {
+        profit -= this.request.freightCost * this.ndsConst;
       }
+      this.request.profit = profit;
     }
   }
   async createOrUpdate(req: Request, parentId: number) {
