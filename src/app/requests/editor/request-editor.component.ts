@@ -267,12 +267,16 @@ export class RequestEditorComponent implements OnInit {
   calcFreigthCost() {
     if (this.request.amountOut && this.request.freightPrice) {
       this.request.freightCost = this.request.amountOut * this.request.freightPrice;
+    } else {
+      this.request.freightCost = undefined;
     }
   }
 
   calcSellingCost() {
-    if (this.request.sellingPrice && this.request.purchasePrice && this.request.amountOut) {
+    if (this.request.sellingPrice && this.request.amountOut) {
       this.request.sellingCost = this.request.sellingPrice * this.request.amountOut;
+    } else {
+      this.request.sellingCost = undefined;
     }
   }
 
@@ -284,11 +288,17 @@ export class RequestEditorComponent implements OnInit {
       this.request.purchasePrice !== undefined &&
       this.request.amountOut !== undefined
     ) {
-      let profit = this.request.sellingCost - this.request.purchasePrice * this.request.amountOut - this.request.reward - this.request.freightCost;
+      let profit = this.request.sellingCost
+                  - this.request.purchasePrice * this.request.amountOut
+                  - this.request.reward
+                  - this.request.freightCost;
       if (this.request.carVat) {
         profit -= this.request.freightCost * this.ndsConst;
       }
       this.request.profit = profit;
+    } else {
+      // Не достаточно данных для подсчета
+      this.request.profit = undefined;
     }
   }
 
