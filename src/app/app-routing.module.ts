@@ -6,19 +6,19 @@ import { AuthGuard } from './auth/auth.guard';
 import { CatalogsComponent } from './catalogs/catalogs.component';
 import { CarCategoryComponent } from './catalogs/car-category/car-category.component';
 import { CarComponent } from './catalogs/car/car.component';
-import { OrdersComponent } from './orders/orders.component';
 import { ClientsComponent } from './catalogs/clients/clients.component';
 import { SuppliersComponent } from './catalogs/suppliers/suppliers.component';
 import { ProductComponent } from './catalogs/product/product.component';
+import { RequestsComponent } from './requests/requests.component';
 
 // { path: 'plots', loadChildren: () => import('./plot/plot.module').then(mod => mod.PlotModule), canActivate: [AuthGuard] },
 const routes: Routes = [
   { path: 'catalog/suppliers', component: SuppliersComponent, canActivate: [AuthGuard] },
   { path: 'catalog/clients', component: ClientsComponent, canActivate: [AuthGuard] },
-  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+  { path: 'requests', component: RequestsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'catalog/car', component: CarComponent, canActivate: [AuthGuard] },
-  { path: '', component: OrdersComponent, canActivate: [AuthGuard] },
+  { path: '', component: RequestsComponent, canActivate: [AuthGuard] },
   { path: 'catalog', component: CatalogsComponent, canActivate: [AuthGuard] },
   { path: 'catalog/car-category', component: CarCategoryComponent, canActivate: [AuthGuard] },
   { path: 'catalog/product', component: ProductComponent, canActivate: [AuthGuard] },

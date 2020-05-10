@@ -3,18 +3,18 @@ import { Title } from '@angular/platform-browser';
 import { Request } from '../models/Request';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/internal/operators';
-import { OrderAddComponent } from './order-add/order-add.component';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from './http.service';
 import { ToastrService } from 'ngx-toastr';
-import { Goal } from './order-add/Goal';
+import { RequestEditorComponent } from './editor/request-editor.component';
+import { Goal } from './editor/Goal';
 
 @Component({
-  selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
+  selector: 'app-requests',
+  templateUrl: './requests.component.html',
+  styleUrls: ['./requests.component.css']
 })
-export class OrdersComponent implements OnInit {
+export class RequestsComponent implements OnInit {
   pickedDay = new Date(Date.now());
   DateChanged: Subject<Date> = new Subject<Date>();
 
@@ -57,16 +57,16 @@ export class OrdersComponent implements OnInit {
   }
 
   add(dt: Date) {
-    this.ngxSmartModalService.setModalData({ type: Goal.Add, date: dt }, OrderAddComponent.MODAL_NAME, true);
-    this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
+    this.ngxSmartModalService.setModalData({ type: Goal.Add, date: dt }, RequestEditorComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.getModal(RequestEditorComponent.MODAL_NAME).open();
   }
   edit(request: Request) {
-    this.ngxSmartModalService.setModalData({ type: Goal.Edit, request }, OrderAddComponent.MODAL_NAME, true);
-    this.ngxSmartModalService.toggle(OrderAddComponent.MODAL_NAME);
+    this.ngxSmartModalService.setModalData({ type: Goal.Edit, request }, RequestEditorComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.toggle(RequestEditorComponent.MODAL_NAME);
   }
   addShortRequest(dt: Date, parent: Request) {
-    this.ngxSmartModalService.setModalData({ type: Goal.AddChildRequest, date: dt, parent }, OrderAddComponent.MODAL_NAME, true);
-    this.ngxSmartModalService.getModal(OrderAddComponent.MODAL_NAME).open();
+    this.ngxSmartModalService.setModalData({ type: Goal.AddChildRequest, date: dt, parent }, RequestEditorComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.getModal(RequestEditorComponent.MODAL_NAME).open();
   }
 
   sortingLongTerm(sortingCol: string, nested: number) {

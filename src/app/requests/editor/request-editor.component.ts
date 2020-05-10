@@ -13,7 +13,7 @@ import { Client } from 'src/app/models/Client';
 import { Product } from 'src/app/models/Product';
 import { Request } from 'src/app/models/Request';
 import { Supplier } from 'src/app/models/Supplier';
-import { HttpService as ReqService } from 'src/app/orders/http.service';
+import { HttpService as ReqService } from 'src/app/requests/http.service';
 import { Address } from 'src/app/models/Address';
 import { Goal } from './Goal';
 
