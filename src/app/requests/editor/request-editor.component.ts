@@ -91,23 +91,32 @@ export class RequestEditorComponent implements OnInit {
 
     this.goal = transferred.type;
 
-    if (transferred.type === Goal.Edit) {
-      this.request = transferred.request;
-    } else if (transferred.type === Goal.Add) {
-      // this.processLastReq();
-    } else if (transferred.type === Goal.AddChildRequest) {
-      this.request = new Request();
-      this.isShort = true;
-      this.parentRequestId = transferred.parent.id;
-
-      this.request.product = transferred.parent.product;
-      this.request.client = transferred.parent.client;
-      this.request.sellingPrice = transferred.parent.sellingPrice;
-      this.request.deliveryAddress = transferred.parent.deliveryAddress;
-      await this.getSuppliersByProd(this.request.product?.id);
-      this.request.deliveryEnd = new Date(transferred.date);
-      this.request.deliveryStart = new Date(transferred.date);
-      this.request.isLong = false;
+    switch (this.goal) {
+      case Goal.Add: {
+        break;
+      }
+      case Goal.AddChildRequest: {
+        this.request = new Request();
+        this.isShort = true;
+        this.parentRequestId = transferred.parent.id;
+        this.request.product = transferred.parent.product;
+        this.request.client = transferred.parent.client;
+        this.request.sellingPrice = transferred.parent.sellingPrice;
+        this.request.deliveryAddress = transferred.parent.deliveryAddress;
+        await this.getSuppliersByProd(this.request.product?.id);
+        this.request.deliveryEnd = new Date(transferred.date);
+        this.request.deliveryStart = new Date(transferred.date);
+        this.request.isLong = false;
+        break;
+      }
+      case Goal.Edit: {
+        this.request = transferred.request;
+        break;
+      }
+      default: {
+        console.error('Не найден метод.');
+        break;
+      }
     }
   }
 
@@ -131,9 +140,6 @@ export class RequestEditorComponent implements OnInit {
           this.request.deliveryStart = this.curDate;
           this.request.deliveryEnd = this.curDate;
         } else {
-          // Если прошлой заявки не нашли, то сбросим поля у текущей,
-          // так как если мы переприсвоем заявку, то перестанут работать события на шаблоне (ngModelChange).
-          // this.request = new Request();
           this.request.client = client;
           this.request.deliveryAddress = addr;
           this.request.isLong = false;
@@ -141,7 +147,11 @@ export class RequestEditorComponent implements OnInit {
           this.request.sellingPrice = undefined;
           this.request.product = undefined;
           this.request.supplier = undefined;
+          this.request.supplierVat = undefined;
+          this.request.purchasePrice = undefined;
           this.request.car = undefined;
+          this.request.carVat = undefined;
+          this.request.freightPrice = undefined;
           this.request.amountIn = undefined;
           this.request.amountOut = undefined;
           this.request.freightCost = 0;
@@ -209,10 +219,11 @@ export class RequestEditorComponent implements OnInit {
   }
 
   onClientChange() {
-    // this.processLastReq(this.request.client, undefined);
+    this.processLastReq(this.request.client, undefined);
   }
 
   onAddrChange() {
+    this.processLastReq(this.request.client, this.request.deliveryAddress);
   }
 
   async onReqModelChange() {
