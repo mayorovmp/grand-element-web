@@ -317,12 +317,23 @@ export class OrderAddComponent implements OnInit {
       req.supplierId = req.supplier.id;
     }
 
-    if (this.goal === Goal.Edit) {
-      await this.reqService.edit(req).toPromise();
-    } else if (this.goal === Goal.Add) {
-      await this.reqService.add(req).toPromise();
-    } else if (this.goal === Goal.AddChildRequest) {
-      await this.reqService.addShortReq(req, this.parentRequestId).toPromise();
+    switch (this.goal) {
+      case Goal.Add: {
+        await this.reqService.add(req).toPromise();
+        break;
+      }
+      case Goal.AddChildRequest: {
+        await this.reqService.addShortReq(req, this.parentRequestId).toPromise();
+        break;
+      }
+      case Goal.Edit: {
+        await this.reqService.edit(req).toPromise();
+        break;
+      }
+      default: {
+        console.error('Не найден метод.');
+        break;
+      }
     }
 
     this.changed.emit();
