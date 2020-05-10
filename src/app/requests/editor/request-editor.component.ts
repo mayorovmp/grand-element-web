@@ -116,7 +116,9 @@ export class RequestEditorComponent implements OnInit {
     this.isShort = false;
 
     this.clients = [];
+    this.cars = [];
     this.products = [];
+    this.suppliers = [];
     this.carCategories = [];
   }
 
