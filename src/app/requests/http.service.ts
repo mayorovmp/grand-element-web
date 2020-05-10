@@ -21,7 +21,7 @@ export class HttpService {
     return this.http.post<any>(url, request);
   }
 
-  addShortReq(request: Request, parentId: number): Observable<Request> {
+  addChildReq(request: Request, parentId: number): Observable<Request> {
     const url = this.baseUrl + `/request/${parentId}`;
     return this.http.post<any>(url, request);
   }

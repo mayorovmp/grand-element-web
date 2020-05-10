@@ -346,7 +346,7 @@ export class RequestEditorComponent implements OnInit {
         break;
       }
       case Goal.AddChildRequest: {
-        await this.reqService.addShortReq(req, this.parentRequestId).toPromise();
+        await this.reqService.addChildReq(req, this.parentRequestId).toPromise();
         break;
       }
       case Goal.Edit: {
