@@ -262,8 +262,8 @@ export class RequestEditorComponent implements OnInit {
   }
 
   onSellingPriceChange() {
-    this.calcProfit();
     this.calcSellingCost();
+    this.calcProfit();
   }
 
   calcFreigthCost() {
