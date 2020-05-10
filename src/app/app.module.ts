@@ -31,7 +31,6 @@ import { CarCategoryComponent } from './catalogs/car-category/car-category.compo
 import { CarComponent } from './catalogs/car/car.component';
 import { EditCarCategoryComponent } from './catalogs/car-category/editor/edit.component';
 import { OrdersComponent } from './orders/orders.component';
-import { OrderAddComponent } from './orders/order-add/order-add.component';
 import { ClientsComponent } from './catalogs/clients/clients.component';
 import { SuppliersComponent } from './catalogs/suppliers/suppliers.component';
 import { EditorComponent as SupplierEditorComponent } from './catalogs/suppliers/editor/editor.component';
@@ -40,6 +39,7 @@ import { ProductComponent } from './catalogs/product/product.component';
 import { EditProductComponent } from './catalogs/product/editor-product/edit-product.component';
 import { EditorComponent } from './catalogs/car/editor/editor.component';
 import { ConfirmModalComponent } from './common/confirm-modal/confirm.component';
+import { RequestEditorComponent } from './orders/editor/request-editor.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.ballScaleMultiple,
   // threshold: 1
@@ -56,7 +56,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     CarComponent,
     EditCarCategoryComponent,
     OrdersComponent,
-    OrderAddComponent,
+    RequestEditorComponent,
     ClientsComponent,
     SuppliersComponent,
     ProductComponent,

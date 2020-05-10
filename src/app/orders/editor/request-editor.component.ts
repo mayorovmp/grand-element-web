@@ -18,12 +18,12 @@ import { Address } from 'src/app/models/Address';
 import { Goal } from './Goal';
 
 @Component({
-  selector: 'app-order-add',
-  templateUrl: './order-add.component.html',
-  styleUrls: ['./order-add.component.css']
+  selector: 'app-request-editor',
+  templateUrl: './request-editor.component.html',
+  styleUrls: ['./request-editor.component.css']
 })
-export class OrderAddComponent implements OnInit {
-  static readonly MODAL_NAME = 'orderAddModal';
+export class RequestEditorComponent implements OnInit {
+  static readonly MODAL_NAME = 'requestEditorModal';
   readonly ndsConst = 0.1525; // value added tax
 
   goal: Goal;
@@ -82,8 +82,8 @@ export class OrderAddComponent implements OnInit {
 
   async onOpen() {
     this.reset();
-    const transferred = this.ngxSmartModalService.getModalData(OrderAddComponent.MODAL_NAME);
-    this.ngxSmartModalService.resetModalData(OrderAddComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(RequestEditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.resetModalData(RequestEditorComponent.MODAL_NAME);
 
     await this.getCatalogs();
 
@@ -337,6 +337,6 @@ export class OrderAddComponent implements OnInit {
     }
 
     this.changed.emit();
-    this.ngxSmartModalService.toggle(OrderAddComponent.MODAL_NAME);
+    this.ngxSmartModalService.toggle(RequestEditorComponent.MODAL_NAME);
   }
 }
