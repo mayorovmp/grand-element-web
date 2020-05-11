@@ -52,10 +52,6 @@ export class RequestsComponent implements OnInit {
     title.setTitle('Заказы');
   }
 
-  getRand(): number {
-    return Math.floor((Math.random() * 3)) + 0;
-  }
-
   add(dt: Date) {
     this.ngxSmartModalService.setModalData({ type: Goal.Add, date: dt }, RequestEditorComponent.MODAL_NAME, true);
     this.ngxSmartModalService.getModal(RequestEditorComponent.MODAL_NAME).open();
