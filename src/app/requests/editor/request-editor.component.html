@@ -10,7 +10,7 @@
               Клиент
             </label>
             <select 
-                [disabled]="isShort" 
+                [disabled]="hasParent" 
                 class="form-block__select"
                 id="clients"
                 [(ngModel)]="request.client" 
@@ -29,7 +29,7 @@
                 Адрес доставки
             </label>
             <select 
-                [disabled]="!request.client || isShort" 
+                [disabled]="!request.client || hasParent" 
                 class="form-block__select" 
                 [(ngModel)]="request.deliveryAddress"
                 id="deliveryAddress"
@@ -47,7 +47,7 @@
                 Долгосрочная заявка
             </label>
             <input 
-                [disabled]="isShort" 
+                [disabled]="hasParent" 
                 type="checkbox" 
                 class="form-block__input" 
                 id="longTermCheckbox"
@@ -112,7 +112,7 @@
                 Товар
             </label>
             <select 
-                [disabled]="isShort" 
+                [disabled]="hasParent" 
                 class="form-block__select" 
                 [(ngModel)]="request.product"
                 (ngModelChange)="onProductChange(request.product?.id)" 

@@ -26,7 +26,7 @@ export class RequestEditorComponent implements OnInit {
   static readonly MODAL_NAME = 'requestEditorModal';
   readonly ndsConst = 0.1525; // value added tax
 
-  goal: Goal;
+  goal: Goal; // Цель открытия формы(редактирование и тд).
 
   request: Request = new Request();
 
@@ -42,11 +42,11 @@ export class RequestEditorComponent implements OnInit {
 
   isLong = false;
 
+  hasParent = false;
+
   curDate = new Date();
 
   parentRequestId = 0;
-
-  isShort = false;
 
   constructor(
     private ngxSmartModalService: NgxSmartModalService,
@@ -97,7 +97,6 @@ export class RequestEditorComponent implements OnInit {
       }
       case Goal.AddChildRequest: {
         this.request = new Request();
-        this.isShort = true;
         this.parentRequestId = transferred.parent.id;
         this.request.product = transferred.parent.product;
         this.request.client = transferred.parent.client;
@@ -107,6 +106,7 @@ export class RequestEditorComponent implements OnInit {
         this.request.deliveryEnd = new Date(transferred.date);
         this.request.deliveryStart = new Date(transferred.date);
         this.request.isLong = false;
+        this.hasParent = true;
         break;
       }
       case Goal.Edit: {
@@ -122,7 +122,8 @@ export class RequestEditorComponent implements OnInit {
 
   reset() {
     this.request = new Request();
-    this.isShort = false;
+    this.isLong = false;
+    this.hasParent = false;
 
     this.clients = [];
     this.cars = [];
