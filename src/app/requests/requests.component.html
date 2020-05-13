@@ -1,7 +1,7 @@
 <div class="app-container-fluid">
     <div class="export-order">
         <input type="date" name="bday" [ngModel]="pickedDay | date:'yyyy-MM-dd'" (ngModelChange)="onChangeDate($event)"
-            min="1000-01-01" max="3000-12-31" class="app-text-input export-order__input">
+            min="1000-01-01" max="3000-12-31" class="app-text-input export-order__input date-input">
         <div class="export-order__buttons">
             <button (click)="add(curDate)" class="app-btn gray-btn export-order__button">
                 Добавить

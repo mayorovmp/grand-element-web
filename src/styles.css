@@ -275,6 +275,40 @@ a:hover {
 .label-icon-img{
     width: 20px;
 }
+.date-input[type="date"] {
+    position: relative;
+}
+
+.date-input[type="date"]:after {
+    content: "\25BC"; 
+    color: #555;
+    padding: 0 5px;
+}
+
+.date-input[type="date"]:hover:after {
+    color: #555;
+}
+
+.date-input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    color: transparent;
+    background: transparent;
+}
+
+.date-input[type="date"]::-webkit-inner-spin-button {
+    z-index: 1;
+}
+
+.date-input[type="date"]::-webkit-clear-button {
+    z-index: 1;
+}
+ 
 @media (max-width: 996px){
     .app-container-fluid {
         padding: 24px
