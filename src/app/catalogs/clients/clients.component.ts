@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from "@angular/platform-browser";
+import { Title } from '@angular/platform-browser';
 import { Client } from 'src/app/models/Client';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from 'src/app/catalogs/clients/http.service';
@@ -12,12 +12,12 @@ import { ClientEditorComponent } from './editor/editor.component';
 })
 export class ClientsComponent implements OnInit {
   clients: Client[] = [];
-  nameSorting: string = 'none';
+  nameSorting = 'none';
   constructor(
-    private httpClient: HttpService, 
+    private httpClient: HttpService,
     public ngxSmartModalService: NgxSmartModalService,
-    private title: Title) { 
-      title.setTitle("Клиенты");  
+    private title: Title) {
+      title.setTitle('Клиенты');
     }
 
   ngOnInit() {
@@ -45,8 +45,8 @@ export class ClientsComponent implements OnInit {
         btnAction: () => this.delete(item),
         btnActionColor: 'red',
         btnActionName: 'Удалить клиента'
-      }, 
-      'confirmModal', 
+      },
+      'confirmModal',
       true
     );
     this.ngxSmartModalService.toggle('confirmModal');
@@ -62,15 +62,15 @@ export class ClientsComponent implements OnInit {
   sortedByName = () => {
     if (this.nameSorting === 'none' || this.nameSorting === 'reverse'){
       this.clients.sort((a, b) => {
-        if (!a.name) { a.name = ''}
-        if (!b.name) { b.name = ''}
+        if (!a.name) { a.name = ''; }
+        if (!b.name) { b.name = ''; }
         return a.name.localeCompare(b.name);
       });
       this.nameSorting = 'direct';
-    } else if (this.nameSorting === 'direct'){
+    } else if (this.nameSorting === 'direct') {
       this.clients.sort((a, b) => {
-        if (!a.name) { a.name = ''}
-        if (!b.name) { b.name = ''}
+        if (!a.name) { a.name = ''; }
+        if (!b.name) { b.name = ''; }
         return b.name.localeCompare(a.name);
       });
       this.nameSorting = 'reverse';

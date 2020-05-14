@@ -312,7 +312,6 @@ export class RequestsComponent implements OnInit {
   async getData(dt: Date) {
     this.http.getRequestsByDate(dt).subscribe(
       allRequests => {
-        console.log('allRequests', allRequests);
         this.requests = allRequests.filter(req => !req.isLong);
         this.longRequests = allRequests.filter(req => req.isLong);
       },
