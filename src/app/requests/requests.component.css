@@ -10,6 +10,7 @@
 }
 .export-order__button{
   margin-right: 20px;
+  margin-bottom: 12px;
 }
 .longTerm-order,
 .orders-block{
@@ -61,5 +62,19 @@
   .export-order__input{
     margin-bottom: 20px;
     min-width: 250px;
+  }
+}
+
+@media (max-width: 375px){
+  .export-order__input{
+    margin-bottom: 12px;
+    min-width: 220px;
+  }
+  .refresh-btn{
+    margin-left: 10px;
+  }
+  .refresh-btn__icon{
+    width: 28px;
+    height: 28px;
   }
 }

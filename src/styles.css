@@ -352,3 +352,33 @@ a:hover {
         padding: 4px;
     }
 }
+
+@media (max-width: 520px){
+    .form-block {
+        flex-direction: column;
+        margin-bottom: 12px;
+    }
+    .form-block__label{
+        background: transparent;
+        border: none;
+        text-align: left;
+        width: auto;
+        padding-left: 0;
+    }
+    .form-block__select,
+    .form-block__input{
+        width: 100%;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+    }
+    .form-block__input[type="checkbox"]{
+        position: absolute;
+        right: 20px;
+        margin-top: 0;
+    }
+}
+@media (max-width: 340px){
+    .form-block__label{
+        font-size: 13px;
+    }
+}
