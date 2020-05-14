@@ -528,7 +528,7 @@
                     </td>
                     <td class="app-table__td" *ngIf="hidingColumnsLongTerm.length !== 10">
                         <div *ngIf="req.statusId === 0" class="btn-container btn-container--centered">
-                            <button class="edit-btn" (click)="edit(req)">
+                            <button hidden class="edit-btn" (click)="edit(req)">
                                 <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
                             </button>
                             <button (click)="confirm(req)" class="delete-btn">
