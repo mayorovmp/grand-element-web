@@ -288,40 +288,40 @@
                 <tr *ngFor="let req of requests" class="app-table__tr">
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
                         {{req.status}}
-                        <button *ngIf="!req.statusId" title="Завершить заявку" class="finish-order"
+                        <button *ngIf="req.statusId === 0" title="Завершить заявку" class="finish-order"
                             (click)="finishRequest(req.id)">
                             <img class="finish-order__icon" src="assets/img/icons/finish.svg" alt="Завершить заявку">
                         </button>
                     </td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Дата')">
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Дата')">
                         {{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Адрес доставки')">
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Адрес доставки')">
                         {{req.deliveryAddress?.name}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Объем, тн')">{{req.amount}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Цена закупки')">{{req.purchasePrice}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Перевозчик')">{{req.car?.owner}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Еденица измерения')">{{req.unit}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Цена перевозки')">{{req.freightPrice}}
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Объем, тн')">{{req.amount}}</td>
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Цена закупки')">{{req.purchasePrice}}</td>
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Перевозчик')">{{req.car?.owner}}</td>
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Еденица измерения')">{{req.unit}}</td>
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Цена перевозки')">{{req.freightPrice}}
                     </td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Категория авто')">
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Категория авто')">
                         {{req.carCategory?.name}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Цена продажи')">{{req.sellingPrice}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Вход, тн')">{{req.amountIn}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Выход, тн')">{{req.amountOut}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Стоимость перевозки')">
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Цена продажи')">{{req.sellingPrice}}</td>
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Вход, тн')">{{req.amountIn}}</td>
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Выход, тн')">{{req.amountOut}}</td>
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Стоимость перевозки')">
                         {{req.freightCost | number:'.0-2'}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Доход')">
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Доход')">
                         {{req.sellingCost | number:'.0-2'}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Прибыль')">{{ req.profit | number:'.0-2'}}
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Прибыль')">{{ req.profit | number:'.0-2'}}
                     </td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Вознаграждение')">{{req.reward}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumns.includes('Комментарии')">{{req.comment}}</td>
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Вознаграждение')">{{req.reward}}</td>
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Комментарии')">{{req.comment}}</td>
                     <td class="app-table__td" *ngIf="hidingColumns.length !== 20">
-                        <div *ngIf="req.statusId == 0" class="btn-container btn-container--centered">
-                            <button class="edit-btn" (click)="edit(req)">
+                        <div *ngIf="req.statusId === 0" class="btn-container btn-container--centered">
+                            <button hidden class="edit-btn" (click)="edit(req)">
                                 <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
                             </button>
                             <button (click)="confirm(req)" class="delete-btn">
@@ -497,59 +497,37 @@
                 <tr class="app-table__tr" *ngFor="let req of longRequests">
                     <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Статус')">
                         {{req.status}}
-                        <button *ngIf="!req.statusId" title="Завершить заявку" class="finish-order"
+                        <button *ngIf="req.statusId === 0" title="Завершить заявку" class="finish-order"
                             (click)="finishRequest(req.id)">
                             <img class="finish-order__icon" src="assets/img/icons/finish.svg" alt="Завершить заявку">
                         </button>
                     </td>
                     <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Прогресс')">
                         {{req.amountComplete}}/{{req.amount}}
-                        <button *ngIf="!req.statusId" title="Добавить заявку" class="finish-order"
+                        <button *ngIf="req.statusId === 0" title="Добавить заявку" class="finish-order"
                             (click)="addShortRequest(curDate, req)">
                             <img class="finish-order__icon" src="assets/img/icons/truck.svg" alt="Добавить заявку">
                         </button>
                     </td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Дата с')">
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Дата с')">
                         {{req.deliveryStart | date: "dd.MM.yyyy"}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Дата по')">
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Дата по')">
                         {{req.deliveryEnd | date: "dd.MM.yyyy"}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Клиент')">{{req.client?.name}}
+                    <td (click)="edit(req)" class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Клиент')">{{req.client?.name}}
                     </td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Адрес доставки')">
+                    <td (click)="edit(req)" class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Адрес доставки')">
                         {{req.deliveryAddress?.name}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Объем, тн')">{{req.amount}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Товар')">{{req.product?.name}}
+                    <td (click)="edit(req)" class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Объем, тн')">{{req.amount}}</td>
+                    <td (click)="edit(req)" class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Товар')">{{req.product?.name}}
                     </td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Поставщик')">
-                        {{req.supplier?.name}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Цена закупки')">
-                        {{req.purchasePrice}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Перевозчик')">
-                        {{req.car?.owner}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Еденица измерения')">
-                        {{req.unit}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Цена перевозки ')">
-                        {{req.freightPrice}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Категория авто')">
-                        {{req.carCategory?.name}}</td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Цена продажи')">
+                    <td (click)="edit(req)" class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Цена продажи')">
                         {{req.sellingPrice}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Вход, тн')">
-                        {{req.amountIn}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Выход, тн')">
-                        {{req.amountOut}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Стоимость перевозки')">
-                        {{req.freightCost}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Доход')">
-                        {{req.sellingPrice}}</td>
-                    <td hidden class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Прибыль')">{{req.profit}}
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Вознаграждение')">{{req.reward}}
                     </td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Вознаграждение')">{{req.reward}}
-                    </td>
-                    <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Комментарии')">{{req.comment}}
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Комментарии')">{{req.comment}}
                     </td>
                     <td class="app-table__td" *ngIf="hidingColumnsLongTerm.length !== 10">
-                        <div *ngIf="req.statusId == 0" class="btn-container btn-container--centered">
+                        <div *ngIf="req.statusId === 0" class="btn-container btn-container--centered">
                             <button class="edit-btn" (click)="edit(req)">
                                 <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
                             </button>

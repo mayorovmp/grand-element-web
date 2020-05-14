@@ -33,7 +33,7 @@ export class Request {
   status?: string;
   comment?: string;
   isLong?: boolean;
-  statusId?: boolean;
+  statusId?: number;
   carId?: number;
   productId?: number;
   deliveryAddressId?: number;
