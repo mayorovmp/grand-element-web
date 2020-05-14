@@ -23,6 +23,7 @@ export class RequestsComponent implements OnInit {
   longRequests: Request[] = [];
 
   curDate = new Date();
+  nextDay = new Date();
 
   hidingColumns: string[] = [];
 
@@ -251,7 +252,7 @@ export class RequestsComponent implements OnInit {
 
   ngOnInit() {
     this.getData(this.pickedDay);
-
+    this.nextDay.setDate(new Date().getDate() + 1);
     this.DateChanged.pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe(dt => {
         this.pickedDay = dt;
@@ -279,6 +280,8 @@ export class RequestsComponent implements OnInit {
 
   onChangeDate($event: number) {
     this.curDate = new Date($event);
+    this.nextDay = new Date($event);
+    this.nextDay.setDate(new Date($event).getDate() + 1);
     this.DateChanged.next(this.curDate);
   }
 
