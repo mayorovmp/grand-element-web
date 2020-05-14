@@ -280,9 +280,15 @@ export class RequestsComponent implements OnInit {
 
   onChangeDate($event: number) {
     this.curDate = new Date($event);
-    this.nextDay = new Date($event);
-    this.nextDay.setDate(new Date($event).getDate() + 1);
     this.DateChanged.next(this.curDate);
+  }
+
+  refreshDate() {
+    console.log('123');
+    this.curDate = new Date();
+    this.nextDay = new Date();
+    this.pickedDay = new Date();
+    this.nextDay.setDate(new Date().getDate() + 1);
   }
 
   confirm(req: Request) {
