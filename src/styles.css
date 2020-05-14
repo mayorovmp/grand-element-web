@@ -169,6 +169,7 @@ a:hover {
     flex-direction: row;
     flex-wrap: wrap;
     margin-bottom: 16px;
+    position: relative;
 }
 .form-block__label{
     padding: 4px 8px;
@@ -373,7 +374,7 @@ a:hover {
     }
     .form-block__input[type="checkbox"]{
         position: absolute;
-        right: 20px;
+        right: 0;
         margin-top: 0;
     }
 }

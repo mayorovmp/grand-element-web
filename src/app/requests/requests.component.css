@@ -7,6 +7,7 @@
 .export-order__input{
   margin-bottom: 20px;
   min-width: 300px;
+  background: transparent;
 }
 .export-order__button{
   margin-right: 20px;

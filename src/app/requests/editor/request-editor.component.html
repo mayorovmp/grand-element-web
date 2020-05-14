@@ -23,7 +23,12 @@
                     {{client.name}}
                 </option>
             </select>
-            <i (click)="addClient()" class="ml-2 fa fa-plus" aria-hidden="true"></i>
+            <button class="add-entity-btn" (click)="addClient()">
+                <img src="assets/img/icons/add.svg"
+                    class="add-entity-btn__icon"
+                    alt="add"
+                >
+            </button>
         </div>
         <div class="form-block">
             <label for="deliveryAddress" class="form-block__label">
@@ -144,7 +149,12 @@
                         {{supplier.name}}
                     </option>
                 </select>
-                <i (click)="addSupplier()" class="ml-2 fa fa-plus" aria-hidden="true"></i>
+                <button class="add-entity-btn" (click)="addSupplier()">
+                    <img src="assets/img/icons/add.svg"
+                        class="add-entity-btn__icon"
+                        alt="add"
+                    >
+                </button>
             </div>
             <div class="form-block">
                 <label for="supplierVat" class="form-block__label">
