@@ -58,6 +58,10 @@ export class RequestsComponent implements OnInit {
     this.ngxSmartModalService.getModal(RequestEditorComponent.MODAL_NAME).open();
   }
   edit(request: Request) {
+    // Завершенные заявки редактировать нельзя.
+    if (request.statusId === 1) {
+      return;
+    }
     this.ngxSmartModalService.setModalData({ type: Goal.Edit, request }, RequestEditorComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(RequestEditorComponent.MODAL_NAME);
   }
