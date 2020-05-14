@@ -278,17 +278,16 @@ export class RequestsComponent implements OnInit {
     this.getData(this.pickedDay);
   }
 
-  onChangeDate($event: number) {
+  onChangeDate($event: string) {
     this.curDate = new Date($event);
     this.DateChanged.next(this.curDate);
   }
 
   refreshDate() {
-    console.log('123');
-    this.curDate = new Date();
-    this.nextDay = new Date();
+    const formatedNewDate = new Date().toISOString();
+    const newDateWithOutTime = formatedNewDate.split('T')[0];
+    this.onChangeDate(newDateWithOutTime);
     this.pickedDay = new Date();
-    this.nextDay.setDate(new Date().getDate() + 1);
   }
 
   confirm(req: Request) {

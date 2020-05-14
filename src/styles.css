@@ -308,6 +308,18 @@ a:hover {
 .date-input[type="date"]::-webkit-clear-button {
     z-index: 1;
 }
+
+.refresh-btn{
+    background: transparent;
+    border: none;
+    margin-left: 20px;
+    position: relative;
+
+}
+.refresh-btn__icon{
+    width: 32px;
+    height: 32px;
+}
  
 @media (max-width: 996px){
     .app-container-fluid {
