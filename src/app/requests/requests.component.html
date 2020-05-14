@@ -25,8 +25,8 @@
             Заказы на {{pickedDay | date: "dd.MM.yyyy"}}
         </h2>
 
-        <div class="additional-rows">
-            <div class="all-rows" *ngIf="hidingColumns.length">
+        <div class="additional-rows" *ngIf="hidingColumns.length">
+            <div class="all-rows">
                 <label class="all-rows__label" for="all-rows__checkbox">
                     Показать все поля
                 </label>
@@ -335,8 +335,8 @@
     </div>
     <div class="longTerm-order">
         <h2 class="block-title">Долгосрочные заказы</h2>
-        <div class="additional-rows">
-            <div class="all-rows" *ngIf="hidingColumnsLongTerm.length">
+        <div class="additional-rows" *ngIf="hidingColumnsLongTerm.length">
+            <div class="all-rows">
                 <label class="all-rows__label" for="all-rows__checkbox">
                     Показать все поля
                 </label>
