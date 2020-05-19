@@ -1,4 +1,9 @@
-<ngx-smart-modal #editCarModal identifier="editCarModal" (onOpen)="onOpen()" (onAnyCloseEvent)="onClose()">
+<ngx-smart-modal 
+  #editCarModal 
+  identifier="editCarModal" 
+  (onOpen)="onOpen()" 
+  (onAnyCloseEvent)="onClose()"
+>
   <div class="form-container">
     <h2 class="form-title">Редактор</h2>
 
@@ -6,15 +11,29 @@
       <label for="owner" class="form-block__label">
         Собственник
       </label>
-      <input type="text" [(ngModel)]="car.owner" class="form-block__input" name="owner" id="owner">
+      <input 
+        type="text" 
+        [(ngModel)]="car.owner" 
+        class="form-block__input"
+        name="owner"
+        id="owner"
+      >
     </div>
     <div class="form-block">
       <label for="selectCarCategory" class="form-block__label">
         Категория автомобиля
       </label>
-      <select class="form-block__select" id="selectCarCategory" [(ngModel)]="car.carCategory" [compareWith]="byId">
+      <select 
+        class="form-block__select"
+        id="selectCarCategory" 
+        [(ngModel)]="car.carCategory" 
+        [compareWith]="byId"
+      >
         <option [ngValue]="undefined"></option>
-        <option *ngFor="let opt of carCategories" [ngValue]="opt">
+        <option 
+          *ngFor="let opt of carCategories" 
+          [ngValue]="opt"
+        >
           {{opt.name}}
         </option>
       </select>
@@ -24,38 +43,72 @@
       <label for="freightPrice" class="form-block__label">
         Цена перевозки
       </label>
-      <input type="text" [(ngModel)]="car.freightPrice" class="form-block__input" name="freightPrice" id="freightPrice">
+      <input 
+        type="number" 
+        [(ngModel)]="car.freightPrice" 
+        class="form-block__input"
+        name="freightPrice"
+        id="freightPrice"
+      >
     </div>
 
     <div class="form-block">
       <label for="nds" class="form-block__label">
         НДС
       </label>
-      <input type="checkbox" [(ngModel)]="car.vat" class="form-block__input" name="nds" id="nds">
+      <input 
+        type="checkbox" 
+        [(ngModel)]="car.vat"
+        class="form-block__input"
+        name="nds"
+        id="nds"
+      >
     </div>
 
     <div class="form-block">
       <label for="unit" class="form-block__label">
         Еденица измерения
       </label>
-      <input type="text" [(ngModel)]="car.unit" class="form-block__input" name="unit" id="unit">
+      <input 
+        type="text" 
+        [(ngModel)]="car.unit" 
+        class="form-block__input"
+        name="unit"
+        id="unit"
+      >
     </div>
 
     <div class="form-block">
       <label for="contacts" class="form-block__label">
         Контакты
       </label>
-      <input type="text" [(ngModel)]="car.contacts" class="form-block__input" name="contacts" id="contacts">
+      <input 
+        type="text" 
+        [(ngModel)]="car.contacts" 
+        class="form-block__input"
+        name="contacts"
+        id="contacts"
+      >
     </div>
 
     <div class="form-block">
       <label for="comments" class="form-block__label">
         Комментарий
       </label>
-      <input type="text" [(ngModel)]="car.comments" class="form-block__input" name="comments" id="comments">
+      <input 
+        type="text" 
+        [(ngModel)]="car.comments" 
+        class="form-block__input"
+        name="comments"
+        id="comments"
+      >
     </div>
 
-    <button type="submit" class="app-btn gray-btn" (click)="createOrUpdate(car)">
+    <button 
+      type="submit" 
+      class="app-btn gray-btn" 
+      (click)="createOrUpdate(car)"
+    >
       Сохранить
     </button>
   </div>

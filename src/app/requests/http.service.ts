@@ -1,10 +1,11 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
-import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Request } from '../models/Request';
+import { Client } from '../models/Client';
+import { Address } from '../models/Address';
 
 
 @Injectable({
@@ -38,6 +39,11 @@ export class HttpService {
     return this.http.post<any>(url, r);
   }
 
+  addChildReq(request: Request, parentId: number): Observable<Request> {
+    const url = this.baseUrl + `/request/${parentId}`;
+    return this.http.post<any>(url, request);
+  }
+
   edit(request: Request): Observable<Request> {
     const url = this.baseUrl + '/request';
     return this.http.put<any>(url, request);
@@ -67,6 +73,21 @@ export class HttpService {
   getRequestsByDate(dt: Date): Observable<Request[]> {
     const url = this.baseUrl + `/request/${dt.toISOString()}`;
     return this.http.get<Request[]>(url);
+  }
+
+  getLastRequest(client: Client | undefined, deliveryAddress: Address | undefined): Observable<Request> {
+    const url = this.baseUrl + `/request/last`;
+
+    let params = new HttpParams();
+
+    if (client?.id) {
+      params = params.append('clientId', client.id.toString());
+    }
+    if (deliveryAddress?.id) {
+      params = params.append('addressId', deliveryAddress.id.toString());
+    }
+
+    return this.http.get<Request>(url, { params });
   }
 
   getFile(dt: Date): Observable<HttpResponse<Blob>> {

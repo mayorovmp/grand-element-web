@@ -26,14 +26,14 @@ export class Request {
   freightCost?: number;
   sellingCost?: number;
   profit?: number;
-  reward?: number;
+  reward = 0;
   supplierVat?: boolean;
   carVat?: boolean;
   carCategory?: CarCategory;
   status?: string;
   comment?: string;
-  isLong?: number;
-  statusId?: boolean;
+  isLong?: boolean;
+  statusId?: number;
   carId?: number;
   productId?: number;
   deliveryAddressId?: number;

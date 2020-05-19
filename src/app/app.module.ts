@@ -11,7 +11,6 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
 
 import { FooterModule } from './footer/footer.module';
 import { NavbarModule } from './header/header.module';
-import { WelcomeModule } from './welcome/welcome.module';
 import { LoginModule } from './login/login.module';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,8 +30,6 @@ import { CatalogsComponent } from './catalogs/catalogs.component';
 import { CarCategoryComponent } from './catalogs/car-category/car-category.component';
 import { CarComponent } from './catalogs/car/car.component';
 import { EditCarCategoryComponent } from './catalogs/car-category/editor/edit.component';
-import { OrdersComponent } from './orders/orders.component';
-import { OrderAddComponent } from './orders/order-add/order-add.component';
 import { ClientsComponent } from './catalogs/clients/clients.component';
 import { SuppliersComponent } from './catalogs/suppliers/suppliers.component';
 import { EditorComponent as SupplierEditorComponent } from './catalogs/suppliers/editor/editor.component';
@@ -41,6 +38,8 @@ import { ProductComponent } from './catalogs/product/product.component';
 import { EditProductComponent } from './catalogs/product/editor-product/edit-product.component';
 import { EditorComponent } from './catalogs/car/editor/editor.component';
 import { ConfirmModalComponent } from './common/confirm-modal/confirm.component';
+import { RequestEditorComponent } from './requests/editor/request-editor.component';
+import { RequestsComponent } from './requests/requests.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.ballScaleMultiple,
   // threshold: 1
@@ -56,8 +55,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     CarCategoryComponent,
     CarComponent,
     EditCarCategoryComponent,
-    OrdersComponent,
-    OrderAddComponent,
+    RequestsComponent,
+    RequestEditorComponent,
     ClientsComponent,
     SuppliersComponent,
     ProductComponent,
@@ -68,7 +67,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   imports: [
     NgxSmartModalModule.forRoot(),
     HttpClientModule,
-    WelcomeModule,
     LoginModule,
     NavbarModule,
     BrowserModule,

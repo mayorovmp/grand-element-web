@@ -113,6 +113,7 @@ a:hover {
     border-top: 1px solid #dee2e6;
     padding: 8px;
     text-align: center;
+    cursor: pointer;
 }
 .app-table__btns-th {
     border-right: 1px solid #dee2e6;
@@ -168,6 +169,7 @@ a:hover {
     flex-direction: row;
     flex-wrap: wrap;
     margin-bottom: 16px;
+    position: relative;
 }
 .form-block__label{
     padding: 4px 8px;
@@ -196,6 +198,9 @@ a:hover {
     flex: 1;
     background-color: #fff;
 }
+.form-block__input[disabled]{
+    background-color: #e9ecef;
+}
 .form-block__input[type="checkbox"].form-block__input--orders-all{
     margin-top: 0;
     max-width: 20px;
@@ -223,6 +228,9 @@ a:hover {
     position: relative;
     background-color: #fff;
     margin-top: 2px;
+}
+.form-block__input[type="checkbox"][disabled]{
+    background-color: #e9ecef;
 }
 .form-block__input[type="checkbox"]:checked{
     background-color: #343a40;
@@ -268,6 +276,52 @@ a:hover {
 .label-icon-img{
     width: 20px;
 }
+.date-input[type="date"] {
+    position: relative;
+}
+
+.date-input[type="date"]:after {
+    content: "\25BC"; 
+    color: #555;
+    padding: 0 5px;
+}
+
+.date-input[type="date"]:hover:after {
+    color: #555;
+}
+
+.date-input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    color: transparent;
+    background: transparent;
+}
+
+.date-input[type="date"]::-webkit-inner-spin-button {
+    z-index: 1;
+}
+
+.date-input[type="date"]::-webkit-clear-button {
+    z-index: 1;
+}
+
+.refresh-btn{
+    background: transparent;
+    border: none;
+    margin-left: 20px;
+    position: relative;
+
+}
+.refresh-btn__icon{
+    width: 32px;
+    height: 32px;
+}
+ 
 @media (max-width: 996px){
     .app-container-fluid {
         padding: 24px
@@ -297,5 +351,35 @@ a:hover {
     .delete-btn, 
     .edit-btn{
         padding: 4px;
+    }
+}
+
+@media (max-width: 520px){
+    .form-block {
+        flex-direction: column;
+        margin-bottom: 12px;
+    }
+    .form-block__label{
+        background: transparent;
+        border: none;
+        text-align: left;
+        width: auto;
+        padding-left: 0;
+    }
+    .form-block__select,
+    .form-block__input{
+        width: 100%;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+    }
+    .form-block__input[type="checkbox"]{
+        position: absolute;
+        right: 0;
+        margin-top: 0;
+    }
+}
+@media (max-width: 340px){
+    .form-block__label{
+        font-size: 13px;
     }
 }
