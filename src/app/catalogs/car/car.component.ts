@@ -16,7 +16,6 @@ export class CarComponent implements OnInit {
   cars: Car[] = [];
   ownerCarSorting = 'none';
   categoryCarSorting = 'none';
-  priceSorting = 'none';
 
   constructor(
     public http: HttpService,
@@ -33,7 +32,6 @@ export class CarComponent implements OnInit {
   getData() {
     this.ownerCarSorting = 'none';
     this.categoryCarSorting = 'none';
-    this.priceSorting = 'none';
     this.http.getCars().subscribe(
       m =>
         this.cars = m,
@@ -80,7 +78,6 @@ export class CarComponent implements OnInit {
   }
 
   sortedByOwnerName = () => {
-    this.priceSorting = 'none';
     if (this.ownerCarSorting === 'none' || this.ownerCarSorting === 'reverse') {
       this.cars.sort((a, b) => {
         if (!a.owner) { a.owner = ''; }
@@ -95,25 +92,6 @@ export class CarComponent implements OnInit {
         return b.owner.localeCompare(a.owner);
       });
       this.ownerCarSorting = 'reverse';
-    }
-  }
-
-  sortedByPrice = () => {
-    this.ownerCarSorting = 'none';
-    if (this.priceSorting === 'none' || this.priceSorting === 'reverse') {
-      this.cars.sort((a, b) => {
-        if (!a.freightPrice) { a.freightPrice = 0; }
-        if (!b.freightPrice) { b.freightPrice = 0; }
-        return a.freightPrice - b.freightPrice;
-      });
-      this.priceSorting = 'direct';
-    } else if (this.priceSorting === 'direct') {
-      this.cars.sort((a, b) => {
-        if (!a.freightPrice) { a.freightPrice = 0; }
-        if (!b.freightPrice) { b.freightPrice = 0; }
-        return b.freightPrice - a.freightPrice;
-      });
-      this.priceSorting = 'reverse';
     }
   }
 
