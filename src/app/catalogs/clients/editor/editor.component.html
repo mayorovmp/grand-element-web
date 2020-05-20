@@ -34,6 +34,18 @@
           id="address-name"
         >
       </div>
+      <div class="form-block">
+        <label for="freightPrice" class="form-block__label">
+          Цена перевозки
+        </label>
+        <input 
+          type="number" 
+          [(ngModel)]="addr.freightPrice" 
+          class="form-block__input"
+          name="freightPrice"
+          id="freightPrice"
+        >
+      </div>
 
       <button 
         (click)="addContact(addr)"

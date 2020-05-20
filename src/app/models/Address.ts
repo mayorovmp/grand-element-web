@@ -4,4 +4,5 @@ export class Address {
   id?: number;
   name?: string;
   contacts: Contact[] = [];
+  freightPrice?: number;
 }
