@@ -140,7 +140,7 @@ export class RequestEditorComponent implements OnInit {
           this.request.deliveryStart = this.curDate;
           this.request.deliveryEnd = this.curDate;
           this.request.client = client;
-          this.request.deliveryAddress = addr;
+          this.request.deliveryAddress = lastReq.deliveryAddress;
           this.request.isLong = lastReq.isLong;
           this.request.amount = lastReq.amount;
           this.request.sellingPrice = lastReq.sellingPrice;
