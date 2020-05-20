@@ -67,6 +67,11 @@
                             X
                         </button>
                     </th>
+                    <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Цена перевозки')">
+                        <button class="hide-column-btn" (click)="hideColumn('Цена перевозки')">
+                            X
+                        </button>
+                    </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Объем, тн')">
                         <button class="hide-column-btn" (click)="hideColumn('Объем, тн')">
                             X
@@ -94,11 +99,6 @@
                     </th>
                     <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Еденица измерения')">
                         <button class="hide-column-btn" (click)="hideColumn('Еденица измерения')">
-                            X
-                        </button>
-                    </th>
-                    <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Цена перевозки')">
-                        <button class="hide-column-btn" (click)="hideColumn('Цена перевозки')">
                             X
                         </button>
                     </th>
@@ -170,6 +170,13 @@
                             class="app-table__sorting-img app-table__sorting-img--orders" alt=""
                             *ngIf="sortingValue.column === 'deliveryAddress.name'">
                     </th>
+                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Цена перевозки')"
+                        (click)="sorting('freightPrice', 0)">
+                        Цена перевозки
+                        <img src="assets/img/icons/sort-{{sortingValue.type}}.svg"
+                            class="app-table__sorting-img app-table__sorting-img--orders" alt=""
+                            *ngIf="sortingValue.column === 'freightPrice'">
+                    </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Объем, тн')"
                         (click)="sorting('amount', 0)">
                         Объем, тн
@@ -211,13 +218,6 @@
                         <img src="assets/img/icons/sort-{{sortingValue.type}}.svg"
                             class="app-table__sorting-img app-table__sorting-img--orders" alt=""
                             *ngIf="sortingValue.column === 'unit'">
-                    </th>
-                    <th class="app-table__th" *ngIf="!hidingColumns.includes('Цена перевозки')"
-                        (click)="sorting('freightPrice', 0)">
-                        Цена перевозки
-                        <img src="assets/img/icons/sort-{{sortingValue.type}}.svg"
-                            class="app-table__sorting-img app-table__sorting-img--orders" alt=""
-                            *ngIf="sortingValue.column === 'freightPrice'">
                     </th>
                     <th class="app-table__th" *ngIf="!hidingColumns.includes('Категория авто')"
                         (click)="sorting('carCategory.name', 1)">
@@ -298,14 +298,13 @@
                     <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
                     <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Адрес доставки')">
                         {{req.deliveryAddress?.name}}</td>
+                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Цена перевозки')">{{req.freightPrice}}</td>
                     <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Объем, тн')">{{req.amount}}</td>
                     <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>
                     <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>
                     <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Цена закупки')">{{req.purchasePrice}}</td>
                     <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Перевозчик')">{{req.car?.owner}}</td>
                     <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Еденица измерения')">{{req.unit}}</td>
-                    <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Цена перевозки')">{{req.freightPrice}}
-                    </td>
                     <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Категория авто')">
                         {{req.carCategory?.name}}</td>
                     <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Цена продажи')">{{req.sellingPrice}}</td>

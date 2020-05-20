@@ -161,6 +161,10 @@ export class RequestEditorComponent implements OnInit {
           this.request.comment = undefined;
           this.request.unit = undefined;
         }
+        if (this.request.deliveryAddress){
+          this.request.freightPrice = this.request.deliveryAddress.freightPrice;
+        }
+        console.log('ths', this.request);
       },
       err => {
         console.log(err);
@@ -195,13 +199,11 @@ export class RequestEditorComponent implements OnInit {
   onCarChange() {
     if (this.request.car) {
       const newCar = this.request.car;
-      this.request.freightPrice = newCar.freightPrice;
       this.request.carCategory = newCar.carCategory;
       this.request.unit = newCar.unit;
       this.request.carVat = newCar.vat;
       this.calcFreigthCost();
     } else {
-      this.request.freightPrice = undefined;
       this.request.carCategory = undefined;
       this.request.unit = undefined;
       this.request.carVat = undefined;

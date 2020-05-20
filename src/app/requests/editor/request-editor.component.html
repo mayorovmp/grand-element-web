@@ -49,6 +49,19 @@
             </select>
         </div>
         <div class="form-block">
+            <label for="freightPrice" class="form-block__label">
+                Цена перевозки за ед.
+            </label>
+            <input 
+                disabled 
+                type="number" 
+                class="form-block__input"
+                id="freightPrice"
+                [ngModel]="request.freightPrice"
+                (change)="onFreightPriceChange()"
+            >
+        </div>
+        <div class="form-block">
             <label for="longTermCheckbox" class="form-block__label">
                 Долгосрочная заявка
             </label>
@@ -219,19 +232,6 @@
                     class="form-block__input"
                     id="unit"
                     [(ngModel)]="request.unit"
-                >
-            </div>
-            <div class="form-block">
-                <label for="freightPrice" class="form-block__label">
-                    Цена перевозки за ед.
-                </label>
-                <input 
-                    disabled 
-                    type="number" 
-                    class="form-block__input"
-                    id="freightPrice"
-                    [ngModel]="request.freightPrice"
-                    (change)="onFreightPriceChange()"
                 >
             </div>
             <div class="form-block">
