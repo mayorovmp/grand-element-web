@@ -52,13 +52,12 @@
             <label for="freightPrice" class="form-block__label">
                 Цена перевозки за ед.
             </label>
-            <input 
-                disabled 
+            <input
                 type="number" 
                 class="form-block__input"
                 id="freightPrice"
                 [ngModel]="request.freightPrice"
-                (change)="onFreightPriceChange()"
+                (change)="onFreightPriceChange($event)"
             >
         </div>
         <div class="form-block">
