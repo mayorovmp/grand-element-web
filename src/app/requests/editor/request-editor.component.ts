@@ -284,7 +284,6 @@ export class RequestEditorComponent implements OnInit {
   }
 
   onFreightPriceChange(event) {
-    console.log('event', parseFloat(event.target.value));
     this.request.freightPrice = parseFloat(event.target.value);
     this.calcFreigthCost();
     this.calcProfit();

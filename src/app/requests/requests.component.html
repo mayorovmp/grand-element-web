@@ -285,7 +285,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let req of requests" class="app-table__tr">
+                <tr *ngFor="let req of requests" class="app-table__tr app-table__tr--editable">
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
                         {{req.status}}
                         <button *ngIf="req.statusId === 0" title="Завершить заявку" class="finish-order"
@@ -493,7 +493,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="app-table__tr" *ngFor="let req of longRequests">
+                <tr class="app-table__tr app-table__tr--editable" *ngFor="let req of longRequests">
                     <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Статус')">
                         {{req.status}}
                         <button *ngIf="req.statusId === 0" title="Завершить заявку" class="finish-order"

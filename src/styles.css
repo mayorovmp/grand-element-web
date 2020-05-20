@@ -107,6 +107,17 @@ a:hover {
 .app-table__tr {
     border-bottom: 1px solid #dee2e6;
 }
+.app-table__tr--editable{
+    cursor: pointer;   
+}
+.app-table__tr--editable:hover{
+    background-color: #6e6e6e;
+    color: #fff;
+}
+.app-table__tr--editable:hover .delete-btn,
+.app-table__tr--editable:hover .finish-order{
+    background-color: #fff;
+}
 .app-table__th {
     border-right: 1px solid #dee2e6;
     border-left: 1px solid #dee2e6;
