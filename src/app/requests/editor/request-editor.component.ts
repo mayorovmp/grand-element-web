@@ -246,9 +246,13 @@ export class RequestEditorComponent implements OnInit {
     // );
   }
 
-  onClientAdd() {
+  onClientAdd(client: Client) {
     this.clientHttp.getClients().subscribe(
-      x => this.clients = x);
+      x => {
+        this.clients = x;
+        this.request.client = client;
+      }
+    );
   }
 
   onSupplierAdd() {

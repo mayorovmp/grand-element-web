@@ -16,9 +16,27 @@ export class HttpService {
 
   private baseUrl = environment.baseUrl;
 
-  add(request: Request): Observable<Request> {
+  add(r: Request): Observable<Request> {
     const url = this.baseUrl + '/request';
-    return this.http.post<any>(url, request);
+    if (r.product) {
+      r.productId = r.product.id;
+    }
+    if (r.car) {
+      r.carId = r.car.id;
+    }
+    if (r.client) {
+      r.clientId = r.client.id;
+    }
+    if (r.supplier) {
+      r.supplierId = r.supplier.id;
+    }
+    if (r.deliveryAddress) {
+      r.deliveryAddressId = r.deliveryAddress.id;
+    }
+    if (r.carCategory) {
+      r.carCategoryId = r.carCategory.id;
+    }
+    return this.http.post<any>(url, r);
   }
 
   addChildReq(request: Request, parentId: number): Observable<Request> {
