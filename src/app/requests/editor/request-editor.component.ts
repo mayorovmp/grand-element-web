@@ -132,14 +132,32 @@ export class RequestEditorComponent implements OnInit {
     this.carCategories = [];
   }
 
-  processLastReq(client: Client | undefined, addr: Address | undefined) {
-    this.reqService.getLastRequest(client, addr).subscribe(
-      lastReq => {
-        if (lastReq) {
-          this.request = lastReq;
+  async processLastReq(client: Client | undefined, addr: Address | undefined) {
+    const lastReq = await this.reqService.getLastRequest(client, addr).toPromise();
+
+    if (lastReq) {
           this.request.id = undefined;
           this.request.deliveryStart = this.curDate;
           this.request.deliveryEnd = this.curDate;
+          this.request.client = client;
+          this.request.deliveryAddress = addr;
+          this.request.isLong = lastReq.isLong;
+          this.request.amount = lastReq.amount;
+          this.request.sellingPrice = lastReq.sellingPrice;
+          this.request.product = lastReq.product;
+          this.request.supplier = lastReq.supplier;
+          this.request.supplierVat = lastReq.supplierVat;
+          this.request.purchasePrice = lastReq.purchasePrice;
+          this.request.car = lastReq.car;
+          this.request.carVat = lastReq.carVat;
+          this.request.freightPrice = lastReq.freightPrice;
+          this.request.amountIn = lastReq.amountIn;
+          this.request.amountOut = lastReq.amountOut;
+          this.request.freightCost = lastReq.freightCost;
+          this.request.sellingCost = lastReq.sellingCost;
+          this.request.profit = lastReq.profit;
+          this.request.comment = lastReq.comment;
+          this.request.unit = lastReq.unit;
         } else {
           this.request.client = client;
           this.request.deliveryAddress = addr;
@@ -161,15 +179,6 @@ export class RequestEditorComponent implements OnInit {
           this.request.comment = undefined;
           this.request.unit = undefined;
         }
-        if (this.request.deliveryAddress){
-          this.request.freightPrice = this.request.deliveryAddress.freightPrice;
-        }
-        console.log('ths', this.request);
-      },
-      err => {
-        console.log(err);
-      }
-    );
   }
 
   byId(a: any, b: any) {
@@ -225,8 +234,12 @@ export class RequestEditorComponent implements OnInit {
     this.processLastReq(this.request.client, undefined);
   }
 
-  onAddrChange() {
-    this.processLastReq(this.request.client, this.request.deliveryAddress);
+  async onAddrChange() {
+    await this.processLastReq(this.request.client, this.request.deliveryAddress);
+
+    if (this.request.deliveryAddress) {
+      this.request.freightPrice = this.request.deliveryAddress.freightPrice;
+    }
   }
 
   async onReqModelChange() {
