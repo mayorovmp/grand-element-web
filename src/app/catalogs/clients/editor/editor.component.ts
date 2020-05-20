@@ -14,7 +14,7 @@ import { Contact } from 'src/app/models/Contact';
 export class ClientEditorComponent implements OnInit {
   static MODAL_NAME = 'editClientModal';
 
-  @Output() changed = new EventEmitter<any>();
+  @Output() changed = new EventEmitter<Client>();
 
   client: Client = new Client();
 
@@ -36,7 +36,6 @@ export class ClientEditorComponent implements OnInit {
   }
 
   onClose() {
-    this.changed.emit();
   }
 
   addContact(addr: Address) {
@@ -59,13 +58,14 @@ export class ClientEditorComponent implements OnInit {
 
   async createOrUpdate(item: Client) {
     if (item.id) {
-      await this.httpSrv.edit(item).toPromise();
+      const client = await this.httpSrv.edit(item).toPromise();
       this.toastr.info('Изменено');
+      this.changed.emit(client);
     } else {
-      await this.httpSrv.add(item).toPromise();
+      const client = await this.httpSrv.add(item).toPromise();
       this.toastr.info('Создано');
+      this.changed.emit(client);
     }
-    this.changed.emit();
     this.ngxSmartModalService.toggle(ClientEditorComponent.MODAL_NAME);
   }
 }
