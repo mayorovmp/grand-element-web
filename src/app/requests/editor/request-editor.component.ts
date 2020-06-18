@@ -329,10 +329,10 @@ export class RequestEditorComponent implements OnInit {
       this.request.amountOut !== undefined
     ) {
       // Для расчета прибыли, посчитаем доход.
-      this.request.income = this.request.sellingCost
+      let income = this.request.sellingCost
                   - this.request.purchasePrice * this.request.amountOut
                   - this.request.freightCost;
-      let profit = this.request.income - this.request.reward;
+      let profit = income - this.request.reward;
 
       if (!this.request.carVat) {// НДС не включен в стоимость перевозки.
         profit -= this.request.freightCost * this.ndsConst;
@@ -340,7 +340,12 @@ export class RequestEditorComponent implements OnInit {
       if (!this.request.supplierVat) {// НДС не включен в стоимость товара.
         profit -= this.request.purchasePrice * this.ndsConst;
       }
+
+      profit = Number((profit).toFixed(2));
+      income = Number((income).toFixed(2));
+
       this.request.profit = profit;
+      this.request.income = income;
     } else {
       // Не достаточно данных для подсчета прибыли и дохода
       this.request.profit = undefined;
