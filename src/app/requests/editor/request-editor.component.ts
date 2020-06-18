@@ -326,8 +326,11 @@ export class RequestEditorComponent implements OnInit {
                   - this.request.purchasePrice * this.request.amountOut
                   - this.request.reward
                   - this.request.freightCost;
-      if (this.request.carVat) {
+      if (!this.request.carVat) {// НДС не включен в стоимость перевозки.
         profit -= this.request.freightCost * this.ndsConst;
+      }
+      if (!this.request.supplierVat) {// НДС не включен в стоимость товара.
+        profit -= this.request.sellingCost * this.ndsConst;
       }
       this.request.profit = profit;
     } else {
