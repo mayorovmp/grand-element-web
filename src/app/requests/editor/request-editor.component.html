@@ -307,6 +307,18 @@
                     type="number" 
                     class="form-block__input"
                     id="profit"
+                    [ngModel]="income"
+                >
+            </div>
+            <div class="form-block">
+                <label for="profit" class="form-block__label">
+                    Прибыль
+                </label>
+                <input 
+                    disabled 
+                    type="number" 
+                    class="form-block__input"
+                    id="profit"
                     [ngModel]="request.profit"
                 >
             </div>

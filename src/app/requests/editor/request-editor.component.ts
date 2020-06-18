@@ -26,6 +26,8 @@ export class RequestEditorComponent implements OnInit {
   static readonly MODAL_NAME = 'requestEditorModal';
   readonly ndsConst = 0.1525; // value added tax
 
+  income: number; // Доход
+
   goal: Goal; // Цель открытия формы(редактирование и тд).
 
   request: Request = new Request();
@@ -88,6 +90,8 @@ export class RequestEditorComponent implements OnInit {
     await this.getCatalogs();
 
     this.curDate = transferred.date;
+    this.request.deliveryStart = this.curDate;
+    this.request.deliveryEnd = this.curDate;
 
     this.goal = transferred.type;
 
@@ -322,15 +326,15 @@ export class RequestEditorComponent implements OnInit {
       this.request.purchasePrice !== undefined &&
       this.request.amountOut !== undefined
     ) {
-      let profit = this.request.sellingCost
+      this.income = this.request.sellingCost
                   - this.request.purchasePrice * this.request.amountOut
-                  - this.request.reward
                   - this.request.freightCost;
+      let profit = this.income - this.request.reward;
       if (!this.request.carVat) {// НДС не включен в стоимость перевозки.
         profit -= this.request.freightCost * this.ndsConst;
       }
       if (!this.request.supplierVat) {// НДС не включен в стоимость товара.
-        profit -= this.request.sellingCost * this.ndsConst;
+        profit -= this.request.purchasePrice * this.ndsConst;
       }
       this.request.profit = profit;
     } else {
