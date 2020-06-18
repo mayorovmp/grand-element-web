@@ -25,6 +25,7 @@ export class Request {
   unit?: string;
   freightCost?: number;
   sellingCost?: number;
+  income?: number;
   profit?: number;
   reward = 0;
   supplierVat?: boolean;

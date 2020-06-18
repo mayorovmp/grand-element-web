@@ -26,8 +26,6 @@ export class RequestEditorComponent implements OnInit {
   static readonly MODAL_NAME = 'requestEditorModal';
   readonly ndsConst = 0.1525; // value added tax
 
-  income: number; // Доход
-
   goal: Goal; // Цель открытия формы(редактирование и тд).
 
   request: Request = new Request();
@@ -122,6 +120,8 @@ export class RequestEditorComponent implements OnInit {
         break;
       }
     }
+
+    this.calcProfit();
   }
 
   reset() {
@@ -160,6 +160,7 @@ export class RequestEditorComponent implements OnInit {
           this.request.freightCost = lastReq.freightCost;
           this.request.sellingCost = lastReq.sellingCost;
           this.request.profit = lastReq.profit;
+          this.request.income = lastReq.income;
           this.request.comment = lastReq.comment;
           this.request.unit = lastReq.unit;
         } else {
@@ -180,6 +181,7 @@ export class RequestEditorComponent implements OnInit {
           this.request.freightCost = 0;
           this.request.sellingCost = undefined;
           this.request.profit = undefined;
+          this.request.income = undefined;
           this.request.comment = undefined;
           this.request.unit = undefined;
         }
@@ -326,10 +328,12 @@ export class RequestEditorComponent implements OnInit {
       this.request.purchasePrice !== undefined &&
       this.request.amountOut !== undefined
     ) {
-      this.income = this.request.sellingCost
+      // Для расчета прибыли, посчитаем доход.
+      this.request.income = this.request.sellingCost
                   - this.request.purchasePrice * this.request.amountOut
                   - this.request.freightCost;
-      let profit = this.income - this.request.reward;
+      let profit = this.request.income - this.request.reward;
+
       if (!this.request.carVat) {// НДС не включен в стоимость перевозки.
         profit -= this.request.freightCost * this.ndsConst;
       }
@@ -338,8 +342,9 @@ export class RequestEditorComponent implements OnInit {
       }
       this.request.profit = profit;
     } else {
-      // Не достаточно данных для подсчета
+      // Не достаточно данных для подсчета прибыли и дохода
       this.request.profit = undefined;
+      this.request.income = undefined;
     }
   }
 
