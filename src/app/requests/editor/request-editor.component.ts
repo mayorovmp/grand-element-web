@@ -306,7 +306,8 @@ export class RequestEditorComponent implements OnInit {
 
   calcFreigthCost() {
     if (this.request.amountOut && this.request.freightPrice) {
-      this.request.freightCost = this.request.amountOut * this.request.freightPrice;
+      const freightCost = this.request.amountOut * this.request.freightPrice;
+      this.request.freightCost = Number((freightCost).toFixed(2));
     } else {
       this.request.freightCost = undefined;
     }
@@ -314,7 +315,8 @@ export class RequestEditorComponent implements OnInit {
 
   calcSellingCost() {
     if (this.request.sellingPrice && this.request.amountOut) {
-      this.request.sellingCost = this.request.sellingPrice * this.request.amountOut;
+      const sellingCost = this.request.sellingPrice * this.request.amountOut;
+      this.request.sellingCost = Number((sellingCost).toFixed(2));
     } else {
       this.request.sellingCost = undefined;
     }
@@ -329,10 +331,10 @@ export class RequestEditorComponent implements OnInit {
       this.request.amountOut !== undefined
     ) {
       // Для расчета прибыли, посчитаем доход.
-      this.request.income = this.request.sellingCost
+      let income = this.request.sellingCost
                   - this.request.purchasePrice * this.request.amountOut
                   - this.request.freightCost;
-      let profit = this.request.income - this.request.reward;
+      let profit = income - this.request.reward;
 
       if (!this.request.carVat) {// НДС не включен в стоимость перевозки.
         profit -= this.request.freightCost * this.ndsConst;
@@ -340,7 +342,12 @@ export class RequestEditorComponent implements OnInit {
       if (!this.request.supplierVat) {// НДС не включен в стоимость товара.
         profit -= this.request.purchasePrice * this.ndsConst;
       }
+
+      profit = Number((profit).toFixed(2));
+      income = Number((income).toFixed(2));
+
       this.request.profit = profit;
+      this.request.income = income;
     } else {
       // Не достаточно данных для подсчета прибыли и дохода
       this.request.profit = undefined;
