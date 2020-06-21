@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { Supplier } from '../../models/Supplier';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from './http.service';
-import { EditorComponent } from './editor/editor.component';
+import { SupplierEditorComponent } from './editor/editor.component';
 import { ConfirmModalComponent } from '../../common/confirm-modal/confirm.component';
 
 @Component({
@@ -29,7 +29,7 @@ export class SuppliersComponent implements OnInit {
   }
 
   add() {
-    this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.toggle(SupplierEditorComponent.MODAL_NAME);
   }
 
   confirm(id: number) {
@@ -54,8 +54,8 @@ export class SuppliersComponent implements OnInit {
   }
 
   edit(supplier: Supplier) {
-    this.ngxSmartModalService.setModalData(supplier, EditorComponent.MODAL_NAME, true);
-    this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.setModalData(supplier, SupplierEditorComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.toggle(SupplierEditorComponent.MODAL_NAME);
   }
 
   async deleteSupplier(id: number) {

@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
-export class EditorComponent implements OnInit {
+export class SupplierEditorComponent implements OnInit {
   static MODAL_NAME = 'editSupplierModal';
   @Output() changed = new EventEmitter<any>();
 
@@ -34,8 +34,8 @@ export class EditorComponent implements OnInit {
   }
 
   async onOpen() {
-    const transferred = this.ngxSmartModalService.getModalData(EditorComponent.MODAL_NAME);
-    this.ngxSmartModalService.resetModalData(EditorComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(SupplierEditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.resetModalData(SupplierEditorComponent.MODAL_NAME);
     if (transferred) {
       this.supplier = transferred;
     } else {
@@ -74,6 +74,6 @@ export class EditorComponent implements OnInit {
       await this.httpSrv.add(item).toPromise();
     }
     this.changed.emit();
-    this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.toggle(SupplierEditorComponent.MODAL_NAME);
   }
 }

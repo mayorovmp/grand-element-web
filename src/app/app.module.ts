@@ -32,7 +32,7 @@ import { CarComponent } from './catalogs/car/car.component';
 import { EditCarCategoryComponent } from './catalogs/car-category/editor/edit.component';
 import { ClientsComponent } from './catalogs/clients/clients.component';
 import { SuppliersComponent } from './catalogs/suppliers/suppliers.component';
-import { EditorComponent as SupplierEditorComponent } from './catalogs/suppliers/editor/editor.component';
+import { SupplierEditorComponent } from './catalogs/suppliers/editor/editor.component';
 import { ClientEditorComponent } from './catalogs/clients/editor/editor.component';
 import { ProductComponent } from './catalogs/product/product.component';
 import { EditProductComponent } from './catalogs/product/editor-product/edit-product.component';
