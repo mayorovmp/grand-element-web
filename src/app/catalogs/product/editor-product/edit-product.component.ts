@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Product } from 'src/app/models/Product';
+import { ToastrService } from 'ngx-toastr';
 import { HttpService } from '../http.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 
@@ -12,7 +13,10 @@ export class EditProductComponent implements OnInit {
   static MODAL_NAME = 'editProductModal';
 
   @Output() changed = new EventEmitter<any>();
-  constructor(private httpSrv: HttpService, private ngxSmartModalService: NgxSmartModalService) { }
+  constructor(
+      private httpSrv: HttpService,
+      private toastr: ToastrService,
+      private ngxSmartModalService: NgxSmartModalService) { }
 
   product: Product = new Product();
 
@@ -36,8 +40,10 @@ export class EditProductComponent implements OnInit {
   async edit(product: Product) {
     if (product.id) {
       await this.httpSrv.editProduct(product).toPromise();
+      this.toastr.info('Товар изменен');
     } else {
       await this.httpSrv.addProduct(product).toPromise();
+      this.toastr.info('Товар создан');
     }
 
     this.ngxSmartModalService.toggle(EditProductComponent.MODAL_NAME);
