@@ -4,7 +4,7 @@ import { Car } from '../../models/Car';
 import { HttpService } from './http.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { ToastrService } from 'ngx-toastr';
-import { EditorComponent } from './editor/editor.component';
+import { CarEditorComponent } from './editor/editor.component';
 
 @Component({
   selector: 'app-car',
@@ -42,12 +42,12 @@ export class CarComponent implements OnInit {
   }
 
   add() {
-    this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.toggle(CarEditorComponent.MODAL_NAME);
   }
 
   async edit(item: Car) {
-    this.ngxSmartModalService.setModalData(item, EditorComponent.MODAL_NAME, true);
-    this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.setModalData(item, CarEditorComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.toggle(CarEditorComponent.MODAL_NAME);
   }
 
   confirm(item: Car) {
