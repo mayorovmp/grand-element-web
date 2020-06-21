@@ -142,6 +142,12 @@
                     {{product.name}}
                 </option>
             </select>
+            <button class="add-entity-btn" (click)="addProduct()">
+                <img src="assets/img/icons/add.svg"
+                    class="add-entity-btn__icon"
+                    alt="add"
+                >
+            </button>
         </div>
 
         <div *ngIf="!request.isLong" class="form-block-adding-block">
@@ -208,6 +214,12 @@
                         {{car.owner}}
                     </option>
                 </select>
+                <button class="add-entity-btn" (click)="addCarOwner()">
+                    <img src="assets/img/icons/add.svg"
+                        class="add-entity-btn__icon"
+                        alt="add"
+                    >
+                </button>
             </div>
             <div class="form-block">
                 <label for="carVat" class="form-block__label">
@@ -355,5 +367,7 @@
         </button>
     </div>
 </ngx-smart-modal>
+<app-edit-product (changed)="onProductAdd($event)"></app-edit-product>
 <app-client-editor (changed)="onClientAdd($event)"></app-client-editor>
+<app-car-editor (changed)="onCarOwnerAdd($event)"></app-car-editor>
 <app-supplier-editor (changed)="onSupplierAdd()"></app-supplier-editor>

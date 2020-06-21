@@ -1,11 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService as CarCategoryHttp } from 'src/app/catalogs/car-category/http.service';
+import { CarEditorComponent } from 'src/app/catalogs/car/editor/editor.component';
 import { HttpService as CarHttp } from 'src/app/catalogs/car/http.service';
 import { ClientEditorComponent } from 'src/app/catalogs/clients/editor/editor.component';
 import { HttpService as ClientHttp } from 'src/app/catalogs/clients/http.service';
+import { EditProductComponent } from 'src/app/catalogs/product/editor-product/edit-product.component';
 import { HttpService as ProductHttp } from 'src/app/catalogs/product/http.service';
-import { EditorComponent } from 'src/app/catalogs/suppliers/editor/editor.component';
+import { SupplierEditorComponent } from 'src/app/catalogs/suppliers/editor/editor.component';
 import { HttpService as SupplierHttp } from 'src/app/catalogs/suppliers/http.service';
 import { Car } from 'src/app/models/Car';
 import { CarCategory } from 'src/app/models/CarCategory';
@@ -194,6 +196,15 @@ export class RequestEditorComponent implements OnInit {
   addClient() {
     this.ngxSmartModalService.getModal(ClientEditorComponent.MODAL_NAME).open();
   }
+  addSupplier() {
+    this.ngxSmartModalService.getModal(SupplierEditorComponent.MODAL_NAME).open();
+  }
+  addProduct() {
+    this.ngxSmartModalService.getModal(EditProductComponent.MODAL_NAME).open();
+  }
+  addCarOwner() {
+    this.ngxSmartModalService.getModal(CarEditorComponent.MODAL_NAME).open();
+  }
 
   onSupplierChange() {
     if (this.request.supplier) {
@@ -274,13 +285,27 @@ export class RequestEditorComponent implements OnInit {
     );
   }
 
+  onProductAdd(product: Product) {
+    this.productHttp.getProducts().subscribe(
+      x => {
+        this.products = x;
+        this.request.product = product;
+      }
+    );
+  }
+
+  onCarOwnerAdd(car: Car) {
+    this.carHttp.getCars().subscribe(
+      x => {
+        this.cars = x;
+        this.request.car = car;
+      }
+    );
+  }
+
   onSupplierAdd() {
     this.supplierHttp.getSuppliers().subscribe(
       x => this.suppliers = x);
-  }
-
-  addSupplier() {
-    this.ngxSmartModalService.getModal(EditorComponent.MODAL_NAME).open();
   }
 
   onAmountChange() {
