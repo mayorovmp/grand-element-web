@@ -373,7 +373,7 @@ export class RequestEditorComponent implements OnInit {
         freightVat = this.request.freightCost * this.ndsConst;
       }
       if (!this.request.supplierVat) {// НДС не включен в стоимость товара.
-        purchaseVat = this.request.purchasePrice * this.ndsConst;
+        purchaseVat = this.request.purchasePrice * this.request.amountOut * this.ndsConst;
       }
 
       let profit = income - incomeVat - freightVat - purchaseVat - this.request.reward;
