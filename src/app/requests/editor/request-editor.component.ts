@@ -308,6 +308,9 @@ export class RequestEditorComponent implements OnInit {
       x => {
         this.suppliers = x;
         this.request.supplier = supplier;
+        if (supplier.products.length) {
+          this.request.product = supplier.products[0];
+        }
       }
     );
   }
