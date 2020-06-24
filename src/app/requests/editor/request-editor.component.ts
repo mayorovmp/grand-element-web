@@ -26,7 +26,7 @@ import { Goal } from './Goal';
 })
 export class RequestEditorComponent implements OnInit {
   static readonly MODAL_NAME = 'requestEditorModal';
-  readonly ndsConst = 0.1525; // value added tax
+  readonly ndsConst = 20 / 120; // value added tax
 
   goal: Goal; // Цель открытия формы(редактирование и тд).
 
@@ -359,14 +359,17 @@ export class RequestEditorComponent implements OnInit {
       let income = this.request.sellingCost
                   - this.request.purchasePrice * this.request.amountOut
                   - this.request.freightCost;
-      let profit = income - this.request.reward;
-
+      const incomeVat = (income + this.request.reward) * this.ndsConst;
+      let freightVat = 0; // НДС перевозки
+      let purchaseVat = 0; // НДС закупки
       if (!this.request.carVat) {// НДС не включен в стоимость перевозки.
-        profit -= this.request.freightCost * this.ndsConst;
+        freightVat = this.request.freightCost * this.ndsConst;
       }
       if (!this.request.supplierVat) {// НДС не включен в стоимость товара.
-        profit -= this.request.purchasePrice * this.ndsConst;
+        purchaseVat = this.request.purchasePrice * this.ndsConst;
       }
+
+      let profit = income - incomeVat - freightVat - purchaseVat - this.request.reward;
 
       profit = Number((profit).toFixed(2));
       income = Number((income).toFixed(2));
