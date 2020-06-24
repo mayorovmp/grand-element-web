@@ -12,7 +12,7 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 export class EditProductComponent implements OnInit {
   static MODAL_NAME = 'editProductModal';
 
-  @Output() changed = new EventEmitter<any>();
+  @Output() changed = new EventEmitter<Product>();
   constructor(
       private httpSrv: HttpService,
       private toastr: ToastrService,
@@ -34,18 +34,18 @@ export class EditProductComponent implements OnInit {
   }
 
   onClose() {
-    this.changed.emit();
   }
 
-  async edit(product: Product) {
-    if (product.id) {
-      await this.httpSrv.editProduct(product).toPromise();
+  async createOrUpdate(item: Product) {
+    let product = new Product();
+    if (item.id) {
+      product = await this.httpSrv.editProduct(item).toPromise();
       this.toastr.info('Товар изменен');
     } else {
-      await this.httpSrv.addProduct(product).toPromise();
+      product = await this.httpSrv.addProduct(item).toPromise();
       this.toastr.info('Товар создан');
     }
-
+    this.changed.emit(product);
     this.ngxSmartModalService.toggle(EditProductComponent.MODAL_NAME);
   }
 
