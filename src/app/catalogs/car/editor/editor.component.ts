@@ -12,7 +12,7 @@ import { Car } from 'src/app/models/Car';
 })
 export class CarEditorComponent implements OnInit {
   static MODAL_NAME = 'editCarModal';
-  @Output() changed = new EventEmitter<any>();
+  @Output() changed = new EventEmitter<Car>();
 
   car: Car = new Car();
 
@@ -49,7 +49,6 @@ export class CarEditorComponent implements OnInit {
   }
 
   onClose() {
-    this.changed.emit();
   }
 
   byId(a: Car, b: Car) {
@@ -57,14 +56,15 @@ export class CarEditorComponent implements OnInit {
   }
 
   async createOrUpdate(item: Car) {
+    let car = new Car();
     if (item.id) {
-      await this.httpSrv.edit(item).toPromise();
+      car = await this.httpSrv.edit(item).toPromise();
       this.toastr.info('Перевозчик изменен');
     } else {
-      await this.httpSrv.add(item).toPromise();
+      car = await this.httpSrv.add(item).toPromise();
       this.toastr.info('Перевозчик создан');
     }
-    this.changed.emit();
+    this.changed.emit(car);
     this.ngxSmartModalService.toggle(CarEditorComponent.MODAL_NAME);
   }
 }

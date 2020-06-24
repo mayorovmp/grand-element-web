@@ -303,9 +303,13 @@ export class RequestEditorComponent implements OnInit {
     );
   }
 
-  onSupplierAdd() {
+  onSupplierAdd(supplier: Supplier) {
     this.supplierHttp.getSuppliers().subscribe(
-      x => this.suppliers = x);
+      x => {
+        this.suppliers = x;
+        this.request.supplier = supplier;
+      }
+    );
   }
 
   onAmountChange() {

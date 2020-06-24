@@ -14,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class SupplierEditorComponent implements OnInit {
   static MODAL_NAME = 'editSupplierModal';
-  @Output() changed = new EventEmitter<any>();
+  @Output() changed = new EventEmitter<Supplier>();
 
   supplier: Supplier = new Supplier();
 
@@ -22,7 +22,8 @@ export class SupplierEditorComponent implements OnInit {
 
   constructor(
     private httpSrv: HttpService,
-    private productHttpService: ProductHttpService, private toastr: ToastrService,
+    private productHttpService: ProductHttpService,
+    private toastr: ToastrService,
     private ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
@@ -55,7 +56,6 @@ export class SupplierEditorComponent implements OnInit {
   }
 
   onClose() {
-    this.changed.emit();
   }
 
   byId(a: Product, b: Product) {
@@ -68,12 +68,15 @@ export class SupplierEditorComponent implements OnInit {
   }
 
   async createOrUpdate(item: Supplier) {
+    let supplier = new Supplier();
     if (item.id) {
-      await this.httpSrv.edit(item).toPromise();
+      supplier = await this.httpSrv.edit(item).toPromise();
+      this.toastr.info('Поставщик изменен');
     } else {
-      await this.httpSrv.add(item).toPromise();
+      supplier = await this.httpSrv.add(item).toPromise();
+      this.toastr.info('Поставщик создан');
     }
-    this.changed.emit();
+    this.changed.emit(supplier);
     this.ngxSmartModalService.toggle(SupplierEditorComponent.MODAL_NAME);
   }
 }
