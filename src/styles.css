@@ -343,6 +343,8 @@ a:hover {
     border: 1px solid #ced4da;
     border-radius: 4px;
     padding: 0;
+    max-height: 300px;
+    overflow-y: scroll;
 }
 .form-block__searching-list-item{
     cursor: pointer;
