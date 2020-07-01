@@ -144,6 +144,7 @@ export class RequestEditorComponent implements OnInit {
     this.products = [];
     this.suppliers = [];
     this.carCategories = [];
+    this.clientNameText = '';
   }
 
   async processLastReq(client: Client | undefined, addr: Address | undefined) {
