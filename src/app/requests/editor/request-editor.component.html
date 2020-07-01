@@ -10,19 +10,26 @@
             <label for="clients" class="form-block__label">
               Клиент
             </label>
-            <select 
-                [disabled]="hasParent" 
-                class="form-block__select"
-                id="clients"
-                [(ngModel)]="request.client" 
-                [compareWith]="byId" 
-                (change)="onClientChange()"
+            <input
+                type="text"
+                class="form-block__input"
+                [(ngModel)]="clientNameText"
+                (keyup)="clientListVisible = true"
+                name="clientNameText"
             >
-                <option [ngValue]="undefined"></option>
-                <option *ngFor="let client of clients" [ngValue]="client">
+            <ul
+                class="form-block__searching-list"
+                *ngIf="clientNameText.length > 0 && clientListVisible"
+            >
+                <li 
+                    *ngFor="let client of clients | appFilter: clientNameText: 'client.name'"
+                    (click)="selectClient(client)"
+                    class="form-block__searching-list-item"
+                    [ngValue]="client"
+                >
                     {{client.name}}
-                </option>
-            </select>
+                </li>
+            </ul>
             <button class="add-entity-btn" (click)="addClient()">
                 <img src="assets/img/icons/add.svg"
                     class="add-entity-btn__icon"

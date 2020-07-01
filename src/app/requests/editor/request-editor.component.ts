@@ -1,4 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output
+} from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService as CarCategoryHttp } from 'src/app/catalogs/car-category/http.service';
 import { CarEditorComponent } from 'src/app/catalogs/car/editor/editor.component';
@@ -49,6 +54,9 @@ export class RequestEditorComponent implements OnInit {
   curDate = new Date();
 
   parentRequestId = 0;
+
+  clientNameText = '';
+  clientListVisible = false;
 
   constructor(
     private ngxSmartModalService: NgxSmartModalService,
@@ -191,6 +199,15 @@ export class RequestEditorComponent implements OnInit {
 
   byId(a: any, b: any) {
     return a && b ? a.id === b.id : a === b;
+  }
+
+  selectClient(client: Client) {
+    this.clientListVisible = false;
+    if (client.name) {
+      this.clientNameText = client.name;
+    }
+    this.request.client = client;
+    this.onClientChange();
   }
 
   addClient() {

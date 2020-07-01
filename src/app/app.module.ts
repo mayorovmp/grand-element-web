@@ -40,6 +40,7 @@ import { CarEditorComponent } from './catalogs/car/editor/editor.component';
 import { ConfirmModalComponent } from './common/confirm-modal/confirm.component';
 import { RequestEditorComponent } from './requests/editor/request-editor.component';
 import { RequestsComponent } from './requests/requests.component';
+import { FilterPipe } from './core/pipes/filter.pipe';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.ballScaleMultiple,
   // threshold: 1
@@ -62,7 +63,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ProductComponent,
     EditProductComponent,
     CarEditorComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    FilterPipe
   ],
   imports: [
     NgxSmartModalModule.forRoot(),
