@@ -58,6 +58,8 @@ export class RequestEditorComponent implements OnInit {
   clientNameText = '';
   clientListVisible = false;
 
+  additionalCarOwners: Car[] = [];
+
   constructor(
     private ngxSmartModalService: NgxSmartModalService,
     private clientHttp: ClientHttp,
@@ -96,7 +98,6 @@ export class RequestEditorComponent implements OnInit {
     this.ngxSmartModalService.resetModalData(RequestEditorComponent.MODAL_NAME);
 
     await this.getCatalogs();
-
     this.curDate = transferred.date;
     this.request.deliveryStart = this.curDate;
     this.request.deliveryEnd = this.curDate;
@@ -136,6 +137,7 @@ export class RequestEditorComponent implements OnInit {
 
   reset() {
     this.request = new Request();
+    this.additionalCarOwners = [];
     this.isLong = false;
     this.hasParent = false;
 
@@ -224,6 +226,15 @@ export class RequestEditorComponent implements OnInit {
     this.ngxSmartModalService.getModal(CarEditorComponent.MODAL_NAME).open();
   }
 
+  addCarOwnerToReq() {
+    const newCarOwner = new Car();
+    this.additionalCarOwners.push(newCarOwner);
+  }
+
+  delCarOwnerFromReq(index: number) {
+    this.additionalCarOwners.splice(index, 1);
+  }
+
   onSupplierChange() {
     if (this.request.supplier) {
       this.request.supplierVat = this.request.supplier.vat;
@@ -252,6 +263,19 @@ export class RequestEditorComponent implements OnInit {
       this.request.unit = undefined;
       this.request.carVat = undefined;
     }
+  }
+  onAdditionalCarChange(event: any, index: number) {
+    let elem = new Car();
+    this.cars.forEach((el) => {
+      if (event.target.value === el.owner) {
+        return elem = el;
+      }
+    });
+    this.additionalCarOwners[index] = elem;
+  }
+
+  canAddCarOwner() {
+    return !this.goal && this.request.car;
   }
 
   async onProductChange(prodId: number | undefined) {
@@ -373,7 +397,6 @@ export class RequestEditorComponent implements OnInit {
   }
 
   calcProfit() {
-    console.log(this.request);
     if (this.request.sellingCost !== undefined &&
       this.request.freightCost !== undefined &&
       this.request.reward !== undefined &&
@@ -435,8 +458,22 @@ export class RequestEditorComponent implements OnInit {
 
     switch (this.goal) {
       case Goal.Add: {
-        await this.reqService.add(req).toPromise();
-        break;
+        const isFirstAdded = await this.reqService.add(req).toPromise();
+        if (this.additionalCarOwners.length > 0 && isFirstAdded) {
+          this.additionalCarOwners.forEach(async (car) => {
+            const newReq = JSON.parse(JSON.stringify(this.request));
+            newReq.car = car;
+            newReq.carId = car.id;
+            newReq.carCategoryId = car.carCategory?.id;
+            newReq.carCategory = car.carCategory;
+            newReq.unit = car.unit;
+            newReq.supplierVat = car.vat;
+            await this.reqService.add(newReq).toPromise();
+          });
+          break;
+        } else {
+          break;
+        }
       }
       case Goal.AddChildRequest: {
         await this.reqService.addChildReq(req, this.parentRequestId).toPromise();

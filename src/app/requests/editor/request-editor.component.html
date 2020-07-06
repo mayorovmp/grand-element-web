@@ -156,7 +156,6 @@
                 >
             </button>
         </div>
-
         <div *ngIf="!request.isLong" class="form-block-adding-block">
             <div class="form-block">
                 <label for="supplier" class="form-block__label">
@@ -205,6 +204,8 @@
                     (change)="calcSellingCost()"
                 >
             </div>
+        </div>
+        <div class="form-block-adding-block">
             <div class="form-block">
                 <label for="carOwner" class="form-block__label">
                     Перевозчик
@@ -268,6 +269,76 @@
                 </select>
             </div>
         </div>
+            <div *ngFor="let carOwnerSingle of additionalCarOwners; let i = index" class="form-block-adding-block">
+                <div class="form-block">
+                    <label class="form-block__label">
+                        Перевозчик
+                    </label>
+                    <select 
+                        class="form-block__input"
+                        (change)="onAdditionalCarChange($event, i)"
+                        [ngModel]="carOwnerSingle.owner"
+                    >
+                        <option [ngValue]="undefined"></option>
+                        <option *ngFor="let car of cars">
+                            {{car.owner}}
+                        </option>
+                    </select>
+                    <button class="add-entity-btn" (click)="addCarOwner()">
+                        <img src="assets/img/icons/add.svg"
+                            class="add-entity-btn__icon"
+                            alt="add"
+                        >
+                    </button>
+                </div>
+                <div class="form-block">
+                    <label class="form-block__label">
+                        Перевозка НДС включен
+                    </label>
+                    <input 
+                        disabled 
+                        type="checkbox"
+                        class="form-block__input"
+                        [ngModel]="carOwnerSingle.vat"
+                    >
+                </div>
+                <div class="form-block">
+                    <label for="unit" class="form-block__label">
+                        Единицы измерения
+                    </label>
+                    <input 
+                        disabled 
+                        type="text" 
+                        class="form-block__input"
+                        id="unit"
+                        [ngModel]="carOwnerSingle.unit"
+                    >
+                </div>
+                <div class="form-block">
+                    <label for="carCategoryName" class="form-block__label">
+                        Категория машины
+                    </label>
+                    <input 
+                        disabled 
+                        class="form-block__input"
+                        id="carCategoryName"
+                        [ngModel]="carOwnerSingle.carCategory?.name"
+                    >
+                </div>
+                <button 
+                    class="app-btn gray-btn"
+                    (click)="delCarOwnerFromReq(i)"
+                >
+                    Удалить
+                </button>
+            </div>
+            <button
+                class="app-btn gray-btn"
+                (click)="addCarOwnerToReq()"
+                *ngIf="canAddCarOwner()"
+            >
+                Добавить перевозчика
+            </button>
         <div *ngIf="!request.isLong" class="form-block-adding-block">
             <div class="form-block">
                 <label for="amountIn" class="form-block__label">
