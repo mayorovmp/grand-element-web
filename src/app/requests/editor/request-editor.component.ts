@@ -124,6 +124,9 @@ export class RequestEditorComponent implements OnInit {
       }
       case Goal.Edit: {
         this.request = transferred.request;
+        if (this.request.client?.name) {
+          this.clientNameText = this.request.client.name;
+        }
         break;
       }
       default: {
