@@ -472,6 +472,7 @@ export class RequestEditorComponent implements OnInit {
             newReq.unit = car.unit;
             newReq.supplierVat = car.vat;
             await this.reqService.add(newReq).toPromise();
+            this.changed.emit();
           });
           break;
         } else {
