@@ -127,6 +127,9 @@ export class RequestEditorComponent implements OnInit {
         if (this.request.client?.name) {
           this.clientNameText = this.request.client.name;
         }
+        if (this.request.product?.id) {
+          await this.getSuppliersByProd(this.request.product?.id);
+        }
         break;
       }
       default: {
@@ -290,6 +293,9 @@ export class RequestEditorComponent implements OnInit {
       return;
     }
     this.suppliers = await this.supplierHttp.getSuppliersByProdId(prodId).toPromise();
+    console.log('prodId', prodId);
+    console.log('this.suppliers', this.suppliers);
+
   }
 
   onClientChange() {
