@@ -285,7 +285,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let req of requests" class="app-table__tr app-table__tr--editable">
+                <tr
+                    *ngFor="let req of requests"
+                    class="app-table__tr app-table__tr--editable"
+                    (contextmenu)="open($event, req); $event.preventDefault();"
+                >
                     <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
                         {{req.status}}
                         <button *ngIf="req.statusId === 0" title="Завершить заявку" class="finish-order"
@@ -329,6 +333,12 @@
                         </div>
                     </td>
                 </tr>
+                <ng-template #reqMenu let-req>
+                    <section class="user-menu">
+                        <div>Delete {{req.status}}</div>
+                        <div>Send to</div>
+                    </section>
+                </ng-template>
             </tbody>
         </table>
     </div>
@@ -493,7 +503,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="app-table__tr app-table__tr--editable" *ngFor="let req of longRequests">
+                <tr 
+                    class="app-table__tr app-table__tr--editable"
+                    *ngFor="let req of longRequests"
+                >
                     <td class="app-table__td" *ngIf="!hidingColumnsLongTerm.includes('Статус')">
                         {{req.status}}
                         <button *ngIf="req.statusId === 0" title="Завершить заявку" class="finish-order"

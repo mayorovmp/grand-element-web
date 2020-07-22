@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Request } from '../models/Request';
-import { Subject } from 'rxjs';
+import { Subject, fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/internal/operators';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from './http.service';
 import { ToastrService } from 'ngx-toastr';
 import { RequestEditorComponent } from './editor/request-editor.component';
 import { Goal } from './editor/Goal';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { take, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-requests',
@@ -19,6 +22,9 @@ export class RequestsComponent implements OnInit {
   DateChanged: Subject<Date> = new Subject<Date>();
 
   requests: Request[] = [];
+  sub: Subscription;
+  @ViewChild('reqMenu') reqMenu: TemplateRef<any>;
+  overlayRef: OverlayRef | null;
 
   longRequests: Request[] = [];
 
@@ -49,7 +55,10 @@ export class RequestsComponent implements OnInit {
     public http: HttpService,
     private toastr: ToastrService,
     public ngxSmartModalService: NgxSmartModalService,
-    private title: Title) {
+    private title: Title,
+    public overlay: Overlay,
+    public viewContainerRef: ViewContainerRef
+    ) {
     title.setTitle('Заказы');
   }
 
@@ -342,5 +351,56 @@ export class RequestsComponent implements OnInit {
 
   showAllColumnsLongTerm() {
     this.hidingColumnsLongTerm = [];
+  }
+
+  open({ x, y }: MouseEvent, req) {
+    console.log('x', x);
+    console.log('y', y);
+
+    this.close();
+    const positionStrategy = this.overlay.position()
+      .flexibleConnectedTo({ x, y })
+      .withPositions([
+        {
+          originX: 'end',
+          originY: 'bottom',
+          overlayX: 'end',
+          overlayY: 'top',
+        }
+      ]);
+
+    this.overlayRef = this.overlay.create({
+      positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.close()
+    });
+
+    this.overlayRef.attach(new TemplatePortal(this.reqMenu, this.viewContainerRef, {
+      $implicit: req
+    }));
+
+    this.sub = fromEvent<MouseEvent>(document, 'click')
+      .pipe(
+        filter(event => {
+          const clickTarget = event.target as HTMLElement;
+          return !!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget);
+        }),
+        take(1)
+      ).subscribe(() => this.close());
+
+  }
+
+  // delete(user) {
+  //   // delete user
+  //   this.close();
+  // }
+
+  close() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+      this.overlayRef = null;
+    }
   }
 }

@@ -41,6 +41,7 @@ import { ConfirmModalComponent } from './common/confirm-modal/confirm.component'
 import { RequestEditorComponent } from './requests/editor/request-editor.component';
 import { RequestsComponent } from './requests/requests.component';
 import { FilterPipe } from './core/pipes/filter.pipe';
+import { OverlayModule } from '@angular/cdk/overlay';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.ballScaleMultiple,
   // threshold: 1
@@ -78,6 +79,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderHttpModule.forRoot({ showForeground: true }), // Показывать лоадер на все http запросы
     FooterModule,
+    OverlayModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       closeButton: true,
