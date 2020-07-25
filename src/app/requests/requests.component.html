@@ -281,7 +281,6 @@
                             class="app-table__sorting-img app-table__sorting-img--orders" alt=""
                             *ngIf="sortingValue.column === 'comment'">
                     </th>
-                    <th class="app-table__th" *ngIf="hidingColumns.length !== 20"></th>
                 </tr>
             </thead>
             <tbody>
@@ -322,22 +321,26 @@
                     </td>
                     <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Вознаграждение')">{{req.reward}}</td>
                     <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Комментарии')">{{req.comment}}</td>
-                    <td class="app-table__td" *ngIf="hidingColumns.length !== 20">
-                        <div *ngIf="req.statusId === 0" class="btn-container btn-container--centered">
-                            <button hidden class="edit-btn" (click)="edit(req)">
-                                <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
-                            </button>
-                            <button (click)="confirm(req)" class="delete-btn">
-                                <img class="edit-btn__img" src="assets/img/icons/delete.svg" alt="удалить">
-                            </button>
-                        </div>
-                    </td>
                 </tr>
                 <ng-template #reqMenu let-req>
-                    <section class="user-menu">
-                        <div>Delete {{req.status}}</div>
-                        <div>Send to</div>
-                    </section>
+                    <div class="requestContextMenu">
+                        <button class="requestContextMenu__btn" (click)="edit(req)">
+                            <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
+                            Редактировать
+                        </button>
+                        <button (click)="closeContextMenu()" class=" requestContextMenu__btn">
+                            <img class="edit-btn__img" src="assets/img/icons/copy.svg" alt="копировать">
+                            Копировать
+                        </button>
+                        <button (click)="confirm(req)" class="requestContextMenu__btn">
+                            <img class="edit-btn__img" src="assets/img/icons/delete.svg" alt="удалить">
+                            Удалить
+                        </button>
+                        <button (click)="closeContextMenu()" class=" requestContextMenu__btn">
+                            <img class="edit-btn__img" src="assets/img/icons/close.svg" alt="отмена">
+                            Отмена
+                        </button>
+                    </div>
                 </ng-template>
             </tbody>
         </table>

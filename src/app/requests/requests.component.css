@@ -80,53 +80,37 @@
   }
 }
 
-.user-menu {
+.requestContextMenu{
   background-color: #fafafa;
-  padding: 4pt;
-  font-size: 10pt;
+  padding: 8px;
   z-index: 1000;
   box-shadow: 0 0 12pt rgba(0, 0, 0, 0.25);
-  border-radius: 4pt;
-  padding: 0.5em 0 0.5em 0;
+  border-radius: 6px;
   animation: fadeIn 0.1s ease-out;
-  opacity:1.0;
   display:block;
+  position: absolute;
+  list-style-type: none;
 }
-
-
-.user-menu hr {
+.requestContextMenu__btn{
+  display: flex;
+  align-items: center;
+  padding: 7px;
+  background-color: transparent;
   border: none;
-  border-bottom: 1px solid #eee;
+  width: 178px;
+  text-align: left;
+  transition: .4s;
+  border-radius: 6px;
 }
-
-.user-menu div {
-  cursor: pointer;
-  display: block;
-  text-decoration: none;
-  color: #333;
-  padding: 0.5em 2em 0.5em 0.75em;
-  max-width: 18em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.delete-btn__img,
+.edit-btn__img{
+  margin-right: 12px;
 }
-
-.user-menu div:hover {
-  background-color: #333;
-  color: #fff;
+.requestContextMenu__btn:hover{
+  opacity: 1;
+  transition: .4s;
+  box-shadow: 0 0 12pt rgba(0, 0, 0, 0.25);
 }
-
-
-.user-menu div::before {
-  content: '';
-  float: left;
-  margin-right: 0.75em;
-  width: 0.5em;
-  height: 1em;
-  display: inline-block;
-}
-
-
 
 /* Animatinons */
 @-webkit-keyframes fadeIn {

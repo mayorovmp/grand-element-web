@@ -354,20 +354,9 @@ export class RequestsComponent implements OnInit {
   }
 
   open({ x, y }: MouseEvent, req) {
-    console.log('x', x);
-    console.log('y', y);
-
-    this.close();
-    const positionStrategy = this.overlay.position()
-      .flexibleConnectedTo({ x, y })
-      .withPositions([
-        {
-          originX: 'end',
-          originY: 'bottom',
-          overlayX: 'end',
-          overlayY: 'top',
-        }
-      ]);
+    this.closeContextMenu();
+    const positionStrategy = this.overlay.position().global()
+    .centerHorizontally().centerVertically();
 
     this.overlayRef = this.overlay.create({
       positionStrategy,
@@ -377,7 +366,9 @@ export class RequestsComponent implements OnInit {
     this.overlayRef.attach(new TemplatePortal(this.reqMenu, this.viewContainerRef, {
       $implicit: req
     }));
-
+    (document.querySelector('.requestContextMenu') as HTMLElement).style.left =  `${x}px`;
+    (document.querySelector('.requestContextMenu') as HTMLElement).style.top =  `${y}px`;
+    console.log('this.overlayRef', this.overlayRef);
     this.sub = fromEvent<MouseEvent>(document, 'click')
       .pipe(
         filter(event => {
@@ -385,16 +376,10 @@ export class RequestsComponent implements OnInit {
           return !!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget);
         }),
         take(1)
-      ).subscribe(() => this.close());
+      ).subscribe(() => this.closeContextMenu());
 
   }
-
-  // delete(user) {
-  //   // delete user
-  //   this.close();
-  // }
-
-  close() {
+  closeContextMenu() {
     if (this.sub) {
       this.sub.unsubscribe();
     }
