@@ -1,5 +1,6 @@
 export enum Goal {
   Add,
   Edit,
-  AddChildRequest
+  AddChildRequest,
+  Copy
 }

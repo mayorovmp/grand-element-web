@@ -70,6 +70,10 @@ export class RequestsComponent implements OnInit {
     this.ngxSmartModalService.setModalData({ type: Goal.Edit, request }, RequestEditorComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(RequestEditorComponent.MODAL_NAME);
   }
+  copy(request: Request, dt: Date) {
+    this.ngxSmartModalService.setModalData({ type: Goal.Copy, request, date: dt }, RequestEditorComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.getModal(RequestEditorComponent.MODAL_NAME).open();
+  }
   addShortRequest(dt: Date, parent: Request) {
     this.ngxSmartModalService.setModalData({ type: Goal.AddChildRequest, date: dt, parent }, RequestEditorComponent.MODAL_NAME, true);
     this.ngxSmartModalService.getModal(RequestEditorComponent.MODAL_NAME).open();
@@ -368,7 +372,6 @@ export class RequestsComponent implements OnInit {
     }));
     (document.querySelector('.requestContextMenu') as HTMLElement).style.left =  `${x}px`;
     (document.querySelector('.requestContextMenu') as HTMLElement).style.top =  `${y}px`;
-    console.log('this.overlayRef', this.overlayRef);
     this.sub = fromEvent<MouseEvent>(document, 'click')
       .pipe(
         filter(event => {

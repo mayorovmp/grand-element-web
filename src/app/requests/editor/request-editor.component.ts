@@ -108,6 +108,37 @@ export class RequestEditorComponent implements OnInit {
       case Goal.Add: {
         break;
       }
+      case Goal.Copy: {
+        this.request = new Request();
+        const copyingReq = transferred.request;
+        this.request.deliveryStart = this.curDate;
+        this.request.deliveryEnd = this.curDate;
+        this.request.client = copyingReq.client;
+        this.request.deliveryAddress = copyingReq.deliveryAddress;
+        this.request.isLong = copyingReq.isLong;
+        this.request.amount = copyingReq.amount;
+        this.request.sellingPrice = copyingReq.sellingPrice;
+        this.request.product = copyingReq.product;
+        this.request.supplier = copyingReq.supplier;
+        this.request.supplierVat = copyingReq.supplierVat;
+        this.request.purchasePrice = copyingReq.purchasePrice;
+        this.request.car = copyingReq.car;
+        this.request.carVat = copyingReq.carVat;
+        this.request.freightPrice = copyingReq.freightPrice;
+        this.request.amountIn = copyingReq.amountIn;
+        this.request.amountOut = copyingReq.amountOut;
+        this.request.freightCost = copyingReq.freightCost;
+        this.request.sellingCost = copyingReq.sellingCost;
+        this.request.profit = copyingReq.profit;
+        this.request.income = copyingReq.income;
+        this.request.comment = copyingReq.comment;
+        this.request.unit = copyingReq.unit;
+        if (copyingReq.client?.name) {
+          this.clientNameText = copyingReq.client.name;
+        }
+        await this.getSuppliersByProd(this.request.product?.id);
+        break;
+      }
       case Goal.AddChildRequest: {
         this.request = new Request();
         this.parentRequestId = transferred.parent.id;
@@ -463,8 +494,8 @@ export class RequestEditorComponent implements OnInit {
     if (req.supplier) {
       req.supplierId = req.supplier.id;
     }
-
     switch (this.goal) {
+      case Goal.Copy:
       case Goal.Add: {
         const isFirstAdded = await this.reqService.add(req).toPromise();
         if (this.additionalCarOwners.length > 0 && isFirstAdded) {
