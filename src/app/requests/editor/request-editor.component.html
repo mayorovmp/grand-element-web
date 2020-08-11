@@ -38,6 +38,87 @@
             </button>
         </div>
         <div class="form-block">
+            <label for="product" class="form-block__label">
+                Товар
+            </label>
+            <select 
+                [disabled]="hasParent" 
+                class="form-block__select" 
+                [(ngModel)]="request.product"
+                (ngModelChange)="onProductChange(request.product?.id)" 
+                id="product"
+                [compareWith]="byId"
+            >
+                <option [ngValue]="undefined"></option>
+                <option *ngFor="let product of products" [ngValue]="product">
+                    {{product.name}}
+                </option>
+            </select>
+            <button class="add-entity-btn" (click)="addProduct()">
+                <img src="assets/img/icons/add.svg"
+                    class="add-entity-btn__icon"
+                    alt="add"
+                >
+            </button>
+        </div>
+        <div *ngIf="!request.isLong" class="form-block">
+            <label for="supplier" class="form-block__label">
+                Поставщик
+            </label>
+            <select 
+                class="form-block__input" 
+                [(ngModel)]="request.supplier" 
+                id="exampleFormControlSelect1"
+                (ngModelChange)="onSupplierChange()" 
+                [compareWith]="byId"
+            >
+                <option [ngValue]="undefined"></option>
+                <option *ngFor="let supplier of suppliers" [ngValue]="supplier">
+                    {{supplier.name}}
+                </option>
+            </select>
+            <button class="add-entity-btn" (click)="addSupplier()">
+                <img src="assets/img/icons/add.svg"
+                    class="add-entity-btn__icon"
+                    alt="add"
+                >
+            </button>
+        </div>
+        <div class="form-block">
+            <label for="carOwner" class="form-block__label">
+                Перевозчик
+            </label>
+            <select 
+                class="form-block__input" 
+                id="carOwner"
+                [(ngModel)]="request.car" 
+                (change)="onCarChange()" 
+                [compareWith]="byId"
+            >
+                <option [ngValue]="undefined"></option>
+                <option *ngFor="let car of cars" [ngValue]="car">
+                    {{car.owner}}
+                </option>
+            </select>
+            <button class="add-entity-btn" (click)="addCarOwner()">
+                <img src="assets/img/icons/add.svg"
+                    class="add-entity-btn__icon"
+                    alt="add"
+                >
+            </button>
+        </div>
+        <div class="form-block">
+            <label for="amount" class="form-block__label">
+                Объем, тн
+            </label>
+            <input 
+                type="number" 
+                [(ngModel)]="request.amount" 
+                id="amount"
+                class="form-block__input"
+            >
+        </div>
+        <div class="form-block">
             <label for="deliveryAddress" class="form-block__label">
                 Адрес доставки
             </label>
@@ -54,18 +135,6 @@
                     {{address.name}}
                 </option>
             </select>
-        </div>
-        <div class="form-block">
-            <label for="freightPrice" class="form-block__label">
-                Цена перевозки за ед.
-            </label>
-            <input
-                type="number" 
-                class="form-block__input"
-                id="freightPrice"
-                [ngModel]="request.freightPrice"
-                (change)="onFreightPriceChange($event)"
-            >
         </div>
         <div class="form-block">
             <label for="longTermCheckbox" class="form-block__label">
@@ -108,334 +177,6 @@
                 id="deliveryEnd"
                 class="form-block__input" 
             >
-        </div>
-        <div class="form-block">
-            <label for="amount" class="form-block__label">
-                Объем, тн
-            </label>
-            <input 
-                type="number" 
-                [(ngModel)]="request.amount" 
-                id="amount"
-                class="form-block__input"
-            >
-        </div>
-        <div class="form-block">
-            <label for="sellingPrice" class="form-block__label">
-                Цена продажи
-            </label>
-            <input 
-                type="number" 
-                [(ngModel)]="request.sellingPrice" 
-                class="form-block__input" 
-                id="sellingPrice"
-                (change)="onSellingPriceChange()"
-            >
-        </div>
-        <div class="form-block">
-            <label for="product" class="form-block__label">
-                Товар
-            </label>
-            <select 
-                [disabled]="hasParent" 
-                class="form-block__select" 
-                [(ngModel)]="request.product"
-                (ngModelChange)="onProductChange(request.product?.id)" 
-                id="product"
-                [compareWith]="byId"
-            >
-                <option [ngValue]="undefined"></option>
-                <option *ngFor="let product of products" [ngValue]="product">
-                    {{product.name}}
-                </option>
-            </select>
-            <button class="add-entity-btn" (click)="addProduct()">
-                <img src="assets/img/icons/add.svg"
-                    class="add-entity-btn__icon"
-                    alt="add"
-                >
-            </button>
-        </div>
-        <div *ngIf="!request.isLong" class="form-block-adding-block">
-            <div class="form-block">
-                <label for="supplier" class="form-block__label">
-                    Поставщик
-                </label>
-                <select 
-                    class="form-block__input" 
-                    [(ngModel)]="request.supplier" 
-                    id="exampleFormControlSelect1"
-                    (ngModelChange)="onSupplierChange()" 
-                    [compareWith]="byId"
-                >
-                    <option [ngValue]="undefined"></option>
-                    <option *ngFor="let supplier of suppliers" [ngValue]="supplier">
-                        {{supplier.name}}
-                    </option>
-                </select>
-                <button class="add-entity-btn" (click)="addSupplier()">
-                    <img src="assets/img/icons/add.svg"
-                        class="add-entity-btn__icon"
-                        alt="add"
-                    >
-                </button>
-            </div>
-            <div class="form-block">
-                <label for="supplierVat" class="form-block__label">
-                    Поставщик НДС включен
-                </label>
-                <input 
-                    disabled 
-                    type="checkbox" 
-                    [ngModel]="request.supplierVat" 
-                    id="supplierVat"
-                    class="form-block__input"
-                >
-            </div>
-            <div class="form-block">
-                <label for="purchasePrice" class="form-block__label">
-                    Цена закупки
-                </label>
-                <input 
-                    disabled 
-                    type="number" 
-                    [ngModel]="request.purchasePrice" 
-                    class="form-block__input"
-                    (change)="calcSellingCost()"
-                >
-            </div>
-        </div>
-        <div class="form-block-adding-block">
-            <div class="form-block">
-                <label for="carOwner" class="form-block__label">
-                    Перевозчик
-                </label>
-                <select 
-                    class="form-block__input" 
-                    id="carOwner"
-                    [(ngModel)]="request.car" 
-                    (change)="onCarChange()" 
-                    [compareWith]="byId"
-                >
-                    <option [ngValue]="undefined"></option>
-                    <option *ngFor="let car of cars" [ngValue]="car">
-                        {{car.owner}}
-                    </option>
-                </select>
-                <button class="add-entity-btn" (click)="addCarOwner()">
-                    <img src="assets/img/icons/add.svg"
-                        class="add-entity-btn__icon"
-                        alt="add"
-                    >
-                </button>
-            </div>
-            <div class="form-block">
-                <label for="carVat" class="form-block__label">
-                    Перевозка НДС включен
-                </label>
-                <input 
-                    disabled 
-                    type="checkbox" 
-                    [ngModel]="request.carVat" 
-                    class="form-block__input" 
-                    id="carVat"
-                >
-            </div>
-            <div class="form-block">
-                <label for="unit" class="form-block__label">
-                    Единицы измерения
-                </label>
-                <input 
-                    disabled 
-                    type="text" 
-                    class="form-block__input"
-                    id="unit"
-                    [(ngModel)]="request.unit"
-                >
-            </div>
-            <div class="form-block">
-                <label for="carCategoryName" class="form-block__label">
-                    Категория машины
-                </label>
-                <select 
-                    disabled 
-                    class="form-block__input"
-                    id="carCategoryName"
-                    [ngModel]="request.car?.carCategory?.id"
-                >
-                    <option *ngFor="let carCategory of carCategories" [ngValue]="carCategory.id">
-                        {{carCategory.name}}
-                    </option>
-                </select>
-            </div>
-        </div>
-            <div *ngFor="let carOwnerSingle of additionalCarOwners; let i = index" class="form-block-adding-block">
-                <div class="form-block">
-                    <label class="form-block__label">
-                        Перевозчик
-                    </label>
-                    <select 
-                        class="form-block__input"
-                        (change)="onAdditionalCarChange($event, i)"
-                        [ngModel]="carOwnerSingle.owner"
-                    >
-                        <option [ngValue]="undefined"></option>
-                        <option *ngFor="let car of cars">
-                            {{car.owner}}
-                        </option>
-                    </select>
-                    <button class="add-entity-btn" (click)="addCarOwner()">
-                        <img src="assets/img/icons/add.svg"
-                            class="add-entity-btn__icon"
-                            alt="add"
-                        >
-                    </button>
-                </div>
-                <div class="form-block">
-                    <label class="form-block__label">
-                        Перевозка НДС включен
-                    </label>
-                    <input 
-                        disabled 
-                        type="checkbox"
-                        class="form-block__input"
-                        [ngModel]="carOwnerSingle.vat"
-                    >
-                </div>
-                <div class="form-block">
-                    <label for="unit" class="form-block__label">
-                        Единицы измерения
-                    </label>
-                    <input 
-                        disabled 
-                        type="text" 
-                        class="form-block__input"
-                        id="unit"
-                        [ngModel]="carOwnerSingle.unit"
-                    >
-                </div>
-                <div class="form-block">
-                    <label for="carCategoryName" class="form-block__label">
-                        Категория машины
-                    </label>
-                    <input 
-                        disabled 
-                        class="form-block__input"
-                        id="carCategoryName"
-                        [ngModel]="carOwnerSingle.carCategory?.name"
-                    >
-                </div>
-                <button 
-                    class="app-btn gray-btn"
-                    (click)="delCarOwnerFromReq(i)"
-                >
-                    Удалить
-                </button>
-            </div>
-            <button
-                class="app-btn gray-btn"
-                (click)="addCarOwnerToReq()"
-                *ngIf="canAddCarOwner()"
-            >
-                Добавить перевозчика
-            </button>
-        <div *ngIf="!request.isLong" class="form-block-adding-block">
-            <div class="form-block">
-                <label for="amountIn" class="form-block__label">
-                    Вход, тн
-                </label>
-                <input 
-                    type="number" 
-                    class="form-block__input"
-                    id="amountIn"
-                    [(ngModel)]="request.amountIn"
-                >
-            </div>
-            <div class="form-block">
-                <label for="amountOut" class="form-block__label">
-                    Выход, тн
-                </label>
-                <input 
-                    type="number" 
-                    class="form-block__input"
-                    id="amountOut"
-                    [(ngModel)]="request.amountOut"
-                    (change)="onAmountChange()"
-                >
-            </div>
-            <div class="form-block">
-                <label for="freightCost" class="form-block__label">
-                    Стоимость перевозки
-                </label>
-                <input 
-                    disabled 
-                    type="number" 
-                    class="form-block__input"
-                    id="freightCost"
-                    [ngModel]="request.freightCost"
-                    (change)="calcProfit()"
-                >
-            </div>
-            <div class="form-block">
-                <label for="sellingCost" class="form-block__label">
-                    Выручка
-                </label>
-                <input 
-                    disabled 
-                    type="number" 
-                    class="form-block__input"
-                    id="sellingCost"
-                    [ngModel]="request.sellingCost"
-                >
-            </div>
-            <div class="form-block">
-                <label for="income" class="form-block__label">
-                    Доход
-                </label>
-                <input 
-                    disabled 
-                    type="number" 
-                    class="form-block__input"
-                    id="income"
-                    [ngModel]="request.income"
-                >
-            </div>
-            <div class="form-block">
-                <label for="profit" class="form-block__label">
-                    Прибыль
-                </label>
-                <input 
-                    disabled 
-                    type="number" 
-                    class="form-block__input"
-                    id="profit"
-                    [ngModel]="request.profit"
-                >
-            </div>
-        </div>
-
-        <div class="form-block">
-            <label for="reward" class="form-block__label">
-                Вознаграждение
-            </label>
-            <input 
-                type="number" 
-                class="form-block__input"
-                id="reward"
-                [(ngModel)]="request.reward"
-                (change)="calcProfit()"
-            > 
-        </div>
-        <div class="form-block">
-            <label for="comment" class="form-block__label">
-                Комментарий
-            </label>
-            <input 
-                type="text" 
-                class="form-block__input"
-                id="comment"
-                [(ngModel)]="request.comment"
-            >   
         </div>
         <button 
             (click)="createOrUpdate(request, parentRequestId)"
