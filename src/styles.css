@@ -30,7 +30,11 @@ a:hover {
 }
 .app-container-fluid {
     width: 100%;
-    padding: 48px 24px;
+    padding: 48px 0;
+}
+.half-container{
+    width: 50%;
+    padding: 0 24px;
 }
 .app-container {
     width: 100%;
@@ -358,7 +362,11 @@ a:hover {
  
 @media (max-width: 996px){
     .app-container-fluid {
-        padding: 24px
+        padding: 24px 0;
+    }
+    .half-container{
+        width: 100%;
+        padding: 0 12px;
     }
     .app-container {
         padding: 24px
