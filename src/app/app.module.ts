@@ -44,7 +44,7 @@ import { FilterPipe } from './core/pipes/filter.pipe';
 import { OverlayModule } from '@angular/cdk/overlay';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.ballScaleMultiple,
-  // threshold: 1
+  minTime: 100,
 };
 
 @NgModule({
