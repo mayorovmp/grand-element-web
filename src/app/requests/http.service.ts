@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Request } from '../models/Request';
 import { Client } from '../models/Client';
 import { Address } from '../models/Address';
+import { Status } from '../models/Status';
 
 
 @Injectable({
@@ -70,6 +71,12 @@ export class HttpService {
     const url = this.baseUrl + '/request';
     return this.http.get<Request[]>(url);
   }
+
+  getStatuses(): Observable<Status[]> {
+    const url = this.baseUrl + '/RequestStatus';
+    return this.http.get<Status[]>(url);
+  }
+
   getRequestsByDate(dt: Date): Observable<Request[]> {
     const url = this.baseUrl + `/request/${dt.toISOString()}`;
     return this.http.get<Request[]>(url);

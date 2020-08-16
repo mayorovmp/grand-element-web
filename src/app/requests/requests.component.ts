@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Request } from '../models/Request';
+import { Status } from '../models/Status';
 import { Subject, fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/internal/operators';
 import { NgxSmartModalService } from 'ngx-smart-modal';
@@ -34,6 +35,7 @@ export class RequestsComponent implements OnInit {
   hidingColumns: string[] = [];
 
   hidingColumnsLongTerm: string[] = [];
+  statuses: Status[] = [];
 
   sortingValue: {
     column: string
@@ -264,6 +266,7 @@ export class RequestsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getStatuses();
     this.getData(this.pickedDay);
     this.nextDay.setDate(new Date().getDate() + 1);
     this.DateChanged.pipe(debounceTime(1000), distinctUntilChanged())
@@ -284,6 +287,16 @@ export class RequestsComponent implements OnInit {
           link.click();
         }
       );
+  }
+
+  getStatuses() {
+    this.http.getStatuses().subscribe(
+      statuses =>
+        this.statuses = statuses,
+      err => {
+        this.toastr.error(err.message);
+      }
+    );
   }
 
   async finishRequest(orderId: number) {
@@ -330,7 +343,6 @@ export class RequestsComponent implements OnInit {
       },
       error => this.toastr.error(error.message)
     );
-
   }
 
   hideColumn(column: string) {

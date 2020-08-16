@@ -149,11 +149,19 @@
                             {{req.deliveryAddress?.name}}
                         </td>
                         <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
-                            {{req.status}}
-                            <button *ngIf="req.statusId === 0" title="Завершить заявку" class="finish-order"
-                                (click)="finishRequest(req.id)">
-                                <img class="finish-order__icon" src="assets/img/icons/finish.svg" alt="Завершить заявку">
-                            </button>
+                            <select 
+                                class="form-block__select"
+                                id="selectCarCategory"
+                                [compareWith]="byId"
+                            >
+                                <option [ngValue]="undefined"></option>
+                                <option 
+                                    *ngFor="let status of statuses" 
+                                    [ngValue]="opt"
+                                >
+                                {{status.description}}
+                                </option>
+                            </select>
                         </td>
                     </tr>
                     <ng-template #reqMenu let-req>
