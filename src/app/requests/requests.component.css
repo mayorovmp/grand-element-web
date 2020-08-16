@@ -53,7 +53,7 @@
 }
 .finish-order{
   background-color: transparent;
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--light-gray);
 }
 .finish-order__icon{
   width: 24px;

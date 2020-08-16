@@ -1,5 +1,5 @@
 <div class="app-container-fluid">
-    <div class="half-container">
+    <div class="half-container half-container--left-part">
         <div class="export-order">
             <input type="date" name="bday" [ngModel]="pickedDay | date:'yyyy-MM-dd'" (ngModelChange)="onChangeDate($event)"
                 min="1000-01-01" max="3000-12-31" class="app-text-input export-order__input date-input">
@@ -24,6 +24,172 @@
         <h2 class="block-title">
             Заказы на {{pickedDay | date: "dd.MM.yyyy"}}
         </h2>
+        <div class="orders-block">
+            <div class="additional-rows" *ngIf="hidingColumns.length">
+                <div class="all-rows">
+                    <label class="all-rows__label" for="all-rows__checkbox">
+                        Показать все поля
+                    </label>
+                    <input id="all-rows__checkbox" class="form-block__input form-block__input--orders-all" type="checkbox"
+                        (click)="showAllColumns()">
+                </div>
+                <div class="hidden-columns">
+                    <div class="hidden-column-block" *ngFor="let hidingColumn of hidingColumns">
+                        <label class="hidden-column-block__label" for="{{hidingColumn}}">
+                            {{hidingColumn}}
+                        </label>
+                        <input id="{{hidingColumn}}" class="form-block__input form-block__input--orders-all" type="checkbox"
+                            (click)="showColumn(hidingColumn)">
+                    </div>
+                </div>
+            </div>
+    
+            <table class="app-table">
+                <thead>
+                    <tr class="app-table__tr">
+                        <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Клиент')">
+                            <button class="hide-column-btn" (click)="hideColumn('Клиент')">
+                                X
+                            </button>
+                        </th>
+                        <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Товар')">
+                            <button class="hide-column-btn" (click)="hideColumn('Товар')">
+                                X
+                            </button>
+                        </th>
+                        <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Поставщик')">
+                            <button class="hide-column-btn" (click)="hideColumn('Поставщик')">
+                                X
+                            </button>
+                        </th>
+                        <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Перевозчик')">
+                            <button class="hide-column-btn" (click)="hideColumn('Перевозчик')">
+                                X
+                            </button>
+                        </th>
+                        <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Объем, тн')">
+                            <button class="hide-column-btn" (click)="hideColumn('Объем, тн')">
+                                X
+                            </button>
+                        </th>
+                        <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Адрес доставки')">
+                            <button class="hide-column-btn" (click)="hideColumn('Адрес доставки')">
+                                X
+                            </button>
+                        </th>
+                        <th class="app-table__btns-th" *ngIf="!hidingColumns.includes('Статус')">
+                            <button class="hide-column-btn" (click)="hideColumn('Статус')">
+                                X
+                            </button>
+                        </th>
+                    </tr>
+                    <tr class="app-table__tr">
+                        <th class="app-table__th" *ngIf="!hidingColumns.includes('Клиент')"
+                            (click)="sorting('client.name', 1)">
+                            Клиент
+                            <img src="assets/img/icons/sort-{{sortingValue.type}}.svg"
+                                class="app-table__sorting-img app-table__sorting-img--orders" alt=""
+                                *ngIf="sortingValue.column === 'client.name'">
+                        </th>
+                        <th class="app-table__th" *ngIf="!hidingColumns.includes('Товар')"
+                            (click)="sorting('product.name', 1)">
+                            Товар
+                            <img src="assets/img/icons/sort-{{sortingValue.type}}.svg"
+                                class="app-table__sorting-img app-table__sorting-img--orders" alt=""
+                                *ngIf="sortingValue.column === 'product.name'">
+                        </th>
+                        <th class="app-table__th" *ngIf="!hidingColumns.includes('Поставщик')"
+                            (click)="sorting('supplier.name', 1)">
+                            Поставщик
+                            <img src="assets/img/icons/sort-{{sortingValue.type}}.svg"
+                                class="app-table__sorting-img app-table__sorting-img--orders" alt=""
+                                *ngIf="sortingValue.column === 'supplier.name'">
+                        </th>
+                        <th class="app-table__th" *ngIf="!hidingColumns.includes('Перевозчик')"
+                            (click)="sorting('car.owner', 1)">
+                            Перевозчик
+                            <img src="assets/img/icons/sort-{{sortingValue.type}}.svg"
+                                class="app-table__sorting-img app-table__sorting-img--orders" alt=""
+                                *ngIf="sortingValue.column === 'car.owner'">
+                        </th>
+                        <th class="app-table__th" *ngIf="!hidingColumns.includes('Объем, тн')"
+                            (click)="sorting('amount', 0)">
+                            Объем, тн
+                            <img src="assets/img/icons/sort-{{sortingValue.type}}.svg"
+                                class="app-table__sorting-img app-table__sorting-img--orders" alt=""
+                                *ngIf="sortingValue.column === 'amount'">
+                        </th>
+                        <th class="app-table__th" *ngIf="!hidingColumns.includes('Адрес доставки')"
+                            (click)="sorting('deliveryAddress.name', 1)">
+                            Адрес доставки
+                            <img src="assets/img/icons/sort-{{sortingValue.type}}.svg"
+                                class="app-table__sorting-img app-table__sorting-img--orders" alt=""
+                                *ngIf="sortingValue.column === 'deliveryAddress.name'">
+                        </th>
+                        <th class="app-table__th" *ngIf="!hidingColumns.includes('Статус')" (click)="sorting('status', 0)">
+                            Статус
+                            <img src="assets/img/icons/sort-{{sortingValue.type}}.svg"
+                                class="app-table__sorting-img app-table__sorting-img--orders" alt=""
+                                *ngIf="sortingValue.column === 'status'">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let req of requests"
+                        class="app-table__tr app-table__tr--editable"
+                        (contextmenu)="open($event, req); $event.preventDefault();"
+                    >
+                        <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
+                        <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>
+                        <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>
+                        <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Перевозчик')">{{req.car?.owner}}</td>
+                        <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Объем, тн')">{{req.amount}}</td>
+                        <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Адрес доставки')">
+                            {{req.deliveryAddress?.name}}
+                        </td>
+                        <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
+                            <select 
+                                class="form-block__select"
+                                id="selectCarCategory"
+                                [compareWith]="byId"
+                            >
+                                <option [ngValue]="undefined"></option>
+                                <option 
+                                    *ngFor="let status of statuses" 
+                                    [ngValue]="opt"
+                                >
+                                {{status.description}}
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <ng-template #reqMenu let-req>
+                        <div class="requestContextMenu">
+                            <button class="requestContextMenu__btn" (click)="edit(req)">
+                                <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
+                                Редактировать
+                            </button>
+                            <button (click)="copy(req, curDate)" class=" requestContextMenu__btn">
+                                <img class="edit-btn__img" src="assets/img/icons/copy.svg" alt="копировать">
+                                Копировать
+                            </button>
+                            <button (click)="confirm(req)" class="requestContextMenu__btn">
+                                <img class="edit-btn__img" src="assets/img/icons/delete.svg" alt="удалить">
+                                Удалить
+                            </button>
+                            <button (click)="closeContextMenu()" class=" requestContextMenu__btn">
+                                <img class="edit-btn__img" src="assets/img/icons/close.svg" alt="отмена">
+                                Отмена
+                            </button>
+                        </div>
+                    </ng-template>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="half-container half-container--right-part">
         <div class="orders-block">
             <div class="additional-rows" *ngIf="hidingColumns.length">
                 <div class="all-rows">
