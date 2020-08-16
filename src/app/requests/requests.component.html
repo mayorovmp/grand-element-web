@@ -136,7 +136,7 @@
                 </thead>
                 <tbody>
                     <tr
-                        *ngFor="let req of requests"
+                        *ngFor="let req of actualRequests"
                         class="app-table__tr app-table__tr--editable"
                         (contextmenu)="open($event, req); $event.preventDefault();"
                     >
@@ -302,7 +302,7 @@
                 </thead>
                 <tbody>
                     <tr
-                        *ngFor="let req of requests"
+                        *ngFor="let req of completedRequests"
                         class="app-table__tr app-table__tr--editable"
                         (contextmenu)="open($event, req); $event.preventDefault();"
                     >
@@ -566,5 +566,5 @@
         </table>
     </div> -->
 </div>
-<app-request-editor (changed)="getData(pickedDay)"></app-request-editor>
-<app-modal-confirm (changed)="getData(pickedDay)"></app-modal-confirm>
+<app-request-editor (changed)="onModalChange()"></app-request-editor>
+<app-modal-confirm (changed)="onModalChange()"></app-modal-confirm>

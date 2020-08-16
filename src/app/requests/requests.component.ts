@@ -1,8 +1,20 @@
-import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  TemplateRef,
+  ViewContainerRef
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Request } from '../models/Request';
 import { Status } from '../models/Status';
-import { Subject, fromEvent, Subscription } from 'rxjs';
+import { alphaBeticalSorting, numeralSorting } from '../helpers/sortingHelper';
+import { alphabeticalCols, numeralCols } from '../helpers/consts';
+import {
+  Subject,
+  fromEvent,
+  Subscription
+} from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/internal/operators';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from './http.service';
@@ -22,12 +34,13 @@ export class RequestsComponent implements OnInit {
   pickedDay = new Date(Date.now());
   DateChanged: Subject<Date> = new Subject<Date>();
 
-  requests: Request[] = [];
+  actualRequests: Request[] = [];
+  completedRequests: Request[] = [];
+  statuses: Status[] = [];
+
   sub: Subscription;
   @ViewChild('reqMenu') reqMenu: TemplateRef<any>;
   overlayRef: OverlayRef | null;
-
-  longRequests: Request[] = [];
 
   curDate = new Date();
   nextDay = new Date();
@@ -35,7 +48,6 @@ export class RequestsComponent implements OnInit {
   hidingColumns: string[] = [];
 
   hidingColumnsLongTerm: string[] = [];
-  statuses: Status[] = [];
 
   sortingValue: {
     column: string
@@ -81,137 +93,7 @@ export class RequestsComponent implements OnInit {
     this.ngxSmartModalService.getModal(RequestEditorComponent.MODAL_NAME).open();
   }
 
-  sortingLongTerm(sortingCol: string, nested: number) {
-    const alphabeticalCols = [
-      'status',
-      'client.name',
-      'deliveryAddress.name',
-      'product.name',
-      'supplier.name',
-      'car.owner',
-      'carCategory.name',
-      'comment',
-      'unit'
-    ];
-    const numeralCols = [
-      'amount',
-      'purchasePrice',
-      'freightPrice',
-      'amountIn',
-      'amountOut',
-      'sellingPrice',
-      'profit',
-      'reward'
-    ];
-    const dateCols = [
-      'deliveryStart',
-      'deliveryEnd'
-    ];
-    if (this.sortingValueLongTerm.column !== sortingCol) {
-      this.sortingValueLongTerm.column = sortingCol;
-      this.sortingValueLongTerm.type = 'direct';
-    } else {
-      if (this.sortingValueLongTerm.type === 'direct') {
-        this.sortingValueLongTerm.type = 'reverse';
-      } else {
-        this.sortingValueLongTerm.type = 'direct';
-      }
-    }
-    if (alphabeticalCols.includes(sortingCol)) {
-      this.longRequests.sort((a, b) => {
-        let aValue = a[sortingCol];
-        let bValue = b[sortingCol];
-        if (nested === 1) {
-          const splitedCol = sortingCol.split('.');
-          aValue = a[splitedCol[0]];
-          bValue = b[splitedCol[0]];
-          aValue = aValue[splitedCol[1]];
-          bValue = bValue[splitedCol[1]];
-        }
-        if (!aValue) { aValue = ''; }
-        if (!bValue) { bValue = ''; }
-        if (this.sortingValueLongTerm.type === 'direct') {
-          return aValue.localeCompare(bValue);
-        } else if (this.sortingValueLongTerm.type === 'reverse') {
-          return bValue.localeCompare(aValue);
-        }
-      });
-    }
-
-    if (numeralCols.includes(sortingCol)) {
-      this.longRequests.sort((a, b): any => {
-        let aValue = a[sortingCol];
-        let bValue = b[sortingCol];
-        if (nested === 1) {
-          const splitedCol = sortingCol.split('.');
-          aValue = a[splitedCol[0]];
-          bValue = b[splitedCol[0]];
-          aValue = aValue[splitedCol[1]];
-          bValue = bValue[splitedCol[1]];
-        }
-        if (!aValue) { aValue = 0; }
-        if (!bValue) { bValue = 0; }
-        if (this.sortingValueLongTerm.type === 'direct') {
-          return aValue - bValue;
-        } else if (this.sortingValueLongTerm.type === 'reverse') {
-          return bValue - aValue;
-        }
-      });
-    }
-    if (dateCols.includes(sortingCol)) {
-      this.longRequests.sort((a, b): any => {
-        let aValue = 0;
-        let bValue = 0;
-        if (a[sortingCol]) { aValue = Date.parse(a[sortingCol]); }
-        if (b[sortingCol]) { bValue = Date.parse(b[sortingCol]); }
-
-        if (this.sortingValueLongTerm.type === 'direct') {
-          return aValue - bValue;
-        } else if (this.sortingValueLongTerm.type === 'reverse') {
-          return bValue - aValue;
-        }
-      });
-    }
-    if (sortingCol === 'progress') {
-      this.longRequests.sort((a, b): any => {
-        let aValue = 0;
-        let bValue = 0;
-        if (a.amountComplete && a.amount) { aValue = a.amountComplete / a.amount; }
-        if (b.amountComplete && b.amount) { bValue = b.amountComplete / b.amount; }
-
-        if (this.sortingValueLongTerm.type === 'direct') {
-          return aValue - bValue;
-        } else if (this.sortingValueLongTerm.type === 'reverse') {
-          return bValue - aValue;
-        }
-      });
-    }
-  }
-
   sorting(sortingCol: string, nested: number) {
-    const alphabeticalCols = [
-      'status',
-      'client.name',
-      'deliveryAddress.name',
-      'product.name',
-      'supplier.name',
-      'car.owner',
-      'carCategory.name',
-      'comment',
-      'unit'
-    ];
-    const numeralCols = [
-      'amount',
-      'purchasePrice',
-      'freightPrice',
-      'amountIn',
-      'amountOut',
-      'sellingPrice',
-      'reward',
-      'sellingCost',
-      'freightCost',
-      'profit'
-    ];
     if (this.sortingValue.column !== sortingCol) {
       this.sortingValue.column = sortingCol;
       this.sortingValue.type = 'direct';
@@ -223,56 +105,24 @@ export class RequestsComponent implements OnInit {
       }
     }
     if (alphabeticalCols.includes(sortingCol)) {
-      this.requests.sort((a, b) => {
-        let aValue = a[sortingCol];
-        let bValue = b[sortingCol];
-        if (nested === 1) {
-          const splitedCol = sortingCol.split('.');
-          aValue = a[splitedCol[0]];
-          bValue = b[splitedCol[0]];
-          aValue = aValue[splitedCol[1]];
-          bValue = bValue[splitedCol[1]];
-        }
-        if (!aValue) { aValue = ''; }
-        if (!bValue) { bValue = ''; }
-        if (this.sortingValue.type === 'direct') {
-          return aValue.localeCompare(bValue);
-        } else if (this.sortingValue.type === 'reverse') {
-          return bValue.localeCompare(aValue);
-        }
-      });
+      alphaBeticalSorting(this.actualRequests, sortingCol, nested, this.sortingValue.type);
     }
-
     if (numeralCols.includes(sortingCol)) {
-      this.requests.sort((a, b): any => {
-        let aValue = a[sortingCol];
-        let bValue = b[sortingCol];
-        if (nested === 1) {
-          const splitedCol = sortingCol.split('.');
-          aValue = a[splitedCol[0]];
-          bValue = b[splitedCol[0]];
-          aValue = aValue[splitedCol[1]];
-          bValue = bValue[splitedCol[1]];
-        }
-        if (!aValue) { aValue = 0; }
-        if (!bValue) { bValue = 0; }
-        if (this.sortingValue.type === 'direct') {
-          return aValue - bValue;
-        } else if (this.sortingValue.type === 'reverse') {
-          return bValue - aValue;
-        }
-      });
+      numeralSorting(this.actualRequests, sortingCol, nested, this.sortingValue.type);
     }
   }
 
   ngOnInit() {
     this.getStatuses();
-    this.getData(this.pickedDay);
+    this.getActualRequests(this.pickedDay);
+    this.getCompletedRequests(this.pickedDay);
     this.nextDay.setDate(new Date().getDate() + 1);
     this.DateChanged.pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe(dt => {
         this.pickedDay = dt;
-        this.getData(dt);
+        this.getActualRequests(dt);
+        this.getCompletedRequests(dt);
+
       });
   }
 
@@ -301,7 +151,9 @@ export class RequestsComponent implements OnInit {
 
   async finishRequest(orderId: number) {
     await this.http.finishRequest(orderId).toPromise();
-    this.getData(this.pickedDay);
+    this.getActualRequests(this.pickedDay);
+    this.getCompletedRequests(this.pickedDay);
+
   }
 
   onChangeDate($event: string) {
@@ -332,17 +184,28 @@ export class RequestsComponent implements OnInit {
 
   private async del(req: Request) {
     await this.http.del(req).toPromise();
-    this.getData(this.pickedDay);
+    this.getCompletedRequests(this.pickedDay);
+    this.getActualRequests(this.pickedDay);
   }
 
-  async getData(dt: Date) {
-    this.http.getRequestsByDate(dt).subscribe(
-      allRequests => {
-        this.requests = allRequests.filter(req => !req.isLong);
-        this.longRequests = allRequests.filter(req => req.isLong);
-      },
+  async getActualRequests(dt: Date) {
+    this.http.getActualRequests().subscribe(
+      allRequests => this.actualRequests = allRequests,
       error => this.toastr.error(error.message)
     );
+  }
+
+  async getCompletedRequests(dt: Date) {
+    this.http.getCompletedRequests().subscribe(
+      allRequests => this.completedRequests = allRequests,
+      error => this.toastr.error(error.message)
+    );
+  }
+
+  onModalChange() {
+    this.getActualRequests(this.pickedDay);
+    this.getCompletedRequests(this.pickedDay);
+
   }
 
   hideColumn(column: string) {

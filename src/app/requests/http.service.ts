@@ -67,8 +67,13 @@ export class HttpService {
     return this.http.post<any>(url, requestId);
   }
 
-  getRequests(): Observable<Request[]> {
-    const url = this.baseUrl + '/request';
+  getActualRequests(): Observable<Request[]> {
+    const url = this.baseUrl + '/Request/not_completed?limit=5&offset=0';
+    return this.http.get<Request[]>(url);
+  }
+
+  getCompletedRequests(): Observable<Request[]> {
+    const url = this.baseUrl + '/Request/completed?limit=5&offset=0';
     return this.http.get<Request[]>(url);
   }
 
