@@ -150,14 +150,14 @@
                         </td>
                         <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
                             <select 
-                                class="form-block__select"
+                                class="app-table__select"
                                 id="selectCarCategory"
                                 [compareWith]="byId"
                             >
-                                <option [ngValue]="undefined"></option>
                                 <option 
                                     *ngFor="let status of statuses" 
                                     [ngValue]="opt"
+                                    [selected]="status.description == req.requestStatus.description"
                                 >
                                 {{status.description}}
                                 </option>
@@ -316,14 +316,14 @@
                         </td>
                         <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
                             <select 
-                                class="form-block__select"
+                                class="app-table__select"
                                 id="selectCarCategory"
                                 [compareWith]="byId"
                             >
-                                <option [ngValue]="undefined"></option>
                                 <option 
                                     *ngFor="let status of statuses" 
                                     [ngValue]="opt"
+                                    [selected]="status.description == req.requestStatus.description"
                                 >
                                 {{status.description}}
                                 </option>

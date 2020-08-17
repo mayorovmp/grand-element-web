@@ -368,6 +368,10 @@ a:hover {
     color: #fff;
     transition: .4s;
 }
+
+.app-table__select{
+    padding: 4px;
+}
  
 @media (max-width: 996px){
     .app-container-fluid {
