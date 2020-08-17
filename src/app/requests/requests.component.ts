@@ -32,7 +32,6 @@ import { take, filter } from 'rxjs/operators';
 })
 export class RequestsComponent implements OnInit {
   pickedDay = new Date(Date.now());
-  DateChanged: Subject<Date> = new Subject<Date>();
 
   actualRequests: Request[] = [];
   completedRequests: Request[] = [];
@@ -93,6 +92,26 @@ export class RequestsComponent implements OnInit {
     this.ngxSmartModalService.getModal(RequestEditorComponent.MODAL_NAME).open();
   }
 
+  private async del(req: Request) {
+    await this.http.del(req).toPromise();
+    this.getCompletedRequests(this.pickedDay);
+    this.getActualRequests(this.pickedDay);
+  }
+
+  async getActualRequests(dt: Date) {
+    this.http.getActualRequests().subscribe(
+      allRequests => this.actualRequests = allRequests,
+      error => this.toastr.error(error.message)
+    );
+  }
+
+  async getCompletedRequests(dt: Date) {
+    this.http.getCompletedRequests().subscribe(
+      allRequests => this.completedRequests = allRequests,
+      error => this.toastr.error(error.message)
+    );
+  }
+
   sorting(sortingCol: string, nested: number) {
     if (this.sortingValue.column !== sortingCol) {
       this.sortingValue.column = sortingCol;
@@ -117,13 +136,6 @@ export class RequestsComponent implements OnInit {
     this.getActualRequests(this.pickedDay);
     this.getCompletedRequests(this.pickedDay);
     this.nextDay.setDate(new Date().getDate() + 1);
-    this.DateChanged.pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(dt => {
-        this.pickedDay = dt;
-        this.getActualRequests(dt);
-        this.getCompletedRequests(dt);
-
-      });
   }
 
   DownloadFile(dt: Date): void {
@@ -149,25 +161,6 @@ export class RequestsComponent implements OnInit {
     );
   }
 
-  async finishRequest(orderId: number) {
-    await this.http.finishRequest(orderId).toPromise();
-    this.getActualRequests(this.pickedDay);
-    this.getCompletedRequests(this.pickedDay);
-
-  }
-
-  onChangeDate($event: string) {
-    this.curDate = new Date($event);
-    this.DateChanged.next(this.curDate);
-  }
-
-  refreshDate() {
-    const formatedNewDate = new Date().toISOString();
-    const newDateWithOutTime = formatedNewDate.split('T')[0];
-    this.onChangeDate(newDateWithOutTime);
-    this.pickedDay = new Date();
-  }
-
   confirm(req: Request) {
     this.ngxSmartModalService.setModalData(
       {
@@ -180,26 +173,6 @@ export class RequestsComponent implements OnInit {
       true
     );
     this.ngxSmartModalService.toggle('confirmModal');
-  }
-
-  private async del(req: Request) {
-    await this.http.del(req).toPromise();
-    this.getCompletedRequests(this.pickedDay);
-    this.getActualRequests(this.pickedDay);
-  }
-
-  async getActualRequests(dt: Date) {
-    this.http.getActualRequests().subscribe(
-      allRequests => this.actualRequests = allRequests,
-      error => this.toastr.error(error.message)
-    );
-  }
-
-  async getCompletedRequests(dt: Date) {
-    this.http.getCompletedRequests().subscribe(
-      allRequests => this.completedRequests = allRequests,
-      error => this.toastr.error(error.message)
-    );
   }
 
   onModalChange() {
@@ -232,7 +205,7 @@ export class RequestsComponent implements OnInit {
     this.hidingColumnsLongTerm = [];
   }
 
-  open({ x, y }: MouseEvent, req) {
+  openContextMenu({ x, y }: MouseEvent, req) {
     this.closeContextMenu();
     const positionStrategy = this.overlay.position().global()
     .centerHorizontally().centerVertically();

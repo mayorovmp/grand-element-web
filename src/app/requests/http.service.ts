@@ -68,12 +68,12 @@ export class HttpService {
   }
 
   getActualRequests(): Observable<Request[]> {
-    const url = this.baseUrl + '/Request/not_completed?limit=10&offset=0';
+    const url = this.baseUrl + '/Request/not_completed?limit=100&offset=0';
     return this.http.get<Request[]>(url);
   }
 
   getCompletedRequests(): Observable<Request[]> {
-    const url = this.baseUrl + '/Request/completed?limit=10&offset=0';
+    const url = this.baseUrl + '/Request/completed?limit=100&offset=0';
     return this.http.get<Request[]>(url);
   }
 

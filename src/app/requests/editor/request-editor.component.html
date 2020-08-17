@@ -137,6 +137,22 @@
             </select>
         </div>
         <div class="form-block">
+            <label for="status" class="form-block__label">
+                Статус
+            </label>
+            <select
+                class="form-block__select"
+                id="status"
+                [compareWith]="byId"
+                [(ngModel)]="request.requestStatus"
+            >
+                <option [ngValue]="undefined"></option>
+                <option *ngFor="let status of statuses" [ngValue]="status">
+                    {{status.description}}
+                </option>
+            </select>
+        </div>
+        <div class="form-block">
             <label for="longTermCheckbox" class="form-block__label">
                 Долгосрочная заявка
             </label>

@@ -1,23 +1,9 @@
 <div class="app-container-fluid">
     <div class="half-container half-container--left-part">
         <div class="export-order">
-            <input type="date" name="bday" [ngModel]="pickedDay | date:'yyyy-MM-dd'" (ngModelChange)="onChangeDate($event)"
-                min="1000-01-01" max="3000-12-31" class="app-text-input export-order__input date-input">
-            <button class="refresh-btn" (click)="refreshDate()">
-                <img src="assets/img/icons/refresh.svg"
-                    class="refresh-btn__icon"
-                    alt="refresh"
-                >
-            </button>
             <div class="export-order__buttons">
                 <button (click)="add(curDate)" class="app-btn gray-btn export-order__button">
                     Добавить
-                </button>
-                <button (click)="add(nextDay)" class="app-btn gray-btn export-order__button">
-                    Добавить на завтра
-                </button>
-                <button (click)="DownloadFile(curDate)" class="app-btn gray-btn export-order__button">
-                    Скачать
                 </button>
             </div>
         </div>
@@ -156,7 +142,7 @@
                             >
                                 <option 
                                     *ngFor="let status of statuses" 
-                                    [ngValue]="opt"
+                                    [ngValue]="status"
                                     [selected]="status.description == req.requestStatus.description"
                                 >
                                 {{status.description}}
@@ -304,7 +290,7 @@
                     <tr
                         *ngFor="let req of completedRequests"
                         class="app-table__tr app-table__tr--editable"
-                        (contextmenu)="open($event, req); $event.preventDefault();"
+                        (contextmenu)="openContextMenu($event, req); $event.preventDefault();"
                     >
                         <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
                         <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>

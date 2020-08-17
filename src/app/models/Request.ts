@@ -4,6 +4,7 @@ import { Address } from './Address';
 import { Supplier } from './Supplier';
 import { Client } from './Client';
 import { CarCategory } from './CarCategory';
+import { Status } from './Status';
 
 
 export class Request {
@@ -41,5 +42,6 @@ export class Request {
   clientId?: number;
   carCategoryId?: number;
   supplierId?: number;
+  requestStatus?: Status;
 }
 

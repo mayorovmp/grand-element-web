@@ -20,6 +20,7 @@ import { Client } from 'src/app/models/Client';
 import { Product } from 'src/app/models/Product';
 import { Request } from 'src/app/models/Request';
 import { Supplier } from 'src/app/models/Supplier';
+import { Status } from 'src/app/models/Status';
 import { HttpService as ReqService } from 'src/app/requests/http.service';
 import { Address } from 'src/app/models/Address';
 import { Goal } from './Goal';
@@ -60,6 +61,8 @@ export class RequestEditorComponent implements OnInit {
 
   additionalCarOwners: Car[] = [];
 
+  statuses: Status[] = [];
+
   constructor(
     private ngxSmartModalService: NgxSmartModalService,
     private clientHttp: ClientHttp,
@@ -88,6 +91,9 @@ export class RequestEditorComponent implements OnInit {
 
     promises.push(this.carHttp.getCars().toPromise().then(
       x => this.cars = x));
+
+    promises.push(this.reqService.getStatuses().toPromise().then(
+      statuses => this.statuses = statuses));
 
     return Promise.all(promises);
   }
@@ -285,7 +291,7 @@ export class RequestEditorComponent implements OnInit {
       this.request.purchasePrice = undefined;
     }
   }
-
+  
   onCarChange() {
     if (this.request.car) {
       const newCar = this.request.car;
