@@ -2,7 +2,7 @@
     <div class="half-container half-container--left-part">
         <div class="export-order">
             <div class="export-order__buttons">
-                <button (click)="add(curDate)" class="app-btn gray-btn export-order__button">
+                <button (click)="add()" class="app-btn gray-btn">
                     Добавить
                 </button>
             </div>
@@ -124,7 +124,7 @@
                     <tr
                         *ngFor="let req of actualRequests"
                         class="app-table__tr app-table__tr--editable"
-                        (contextmenu)="open($event, req); $event.preventDefault();"
+                        (contextmenu)="openContextMenu($event, req); $event.preventDefault();"
                     >
                         <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
                         <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>
@@ -156,7 +156,7 @@
                                 <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
                                 Редактировать
                             </button>
-                            <button (click)="copy(req, curDate)" class=" requestContextMenu__btn">
+                            <button (click)="copy(req)" class=" requestContextMenu__btn">
                                 <img class="edit-btn__img" src="assets/img/icons/copy.svg" alt="копировать">
                                 Копировать
                             </button>
@@ -308,7 +308,7 @@
                             >
                                 <option 
                                     *ngFor="let status of statuses" 
-                                    [ngValue]="opt"
+                                    [ngValue]="status"
                                     [selected]="status.description == req.requestStatus.description"
                                 >
                                 {{status.description}}

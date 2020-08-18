@@ -75,16 +75,16 @@ export class RequestsComponent implements OnInit {
     title.setTitle('Заказы');
   }
 
-  add(dt: Date) {
-    this.ngxSmartModalService.setModalData({ type: Goal.Add, date: dt }, RequestEditorComponent.MODAL_NAME, true);
+  add() {
+    this.ngxSmartModalService.setModalData({ type: Goal.Add }, RequestEditorComponent.MODAL_NAME, true);
     this.ngxSmartModalService.getModal(RequestEditorComponent.MODAL_NAME).open();
   }
   edit(request: Request) {
     this.ngxSmartModalService.setModalData({ type: Goal.Edit, request }, RequestEditorComponent.MODAL_NAME, true);
     this.ngxSmartModalService.toggle(RequestEditorComponent.MODAL_NAME);
   }
-  copy(request: Request, dt: Date) {
-    this.ngxSmartModalService.setModalData({ type: Goal.Copy, request, date: dt }, RequestEditorComponent.MODAL_NAME, true);
+  copy(request: Request ) {
+    this.ngxSmartModalService.setModalData({ type: Goal.Copy, request }, RequestEditorComponent.MODAL_NAME, true);
     this.ngxSmartModalService.getModal(RequestEditorComponent.MODAL_NAME).open();
   }
   addShortRequest(dt: Date, parent: Request) {

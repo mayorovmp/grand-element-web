@@ -102,12 +102,12 @@ export class RequestEditorComponent implements OnInit {
     this.reset();
     const transferred = this.ngxSmartModalService.getModalData(RequestEditorComponent.MODAL_NAME);
     this.ngxSmartModalService.resetModalData(RequestEditorComponent.MODAL_NAME);
-
     await this.getCatalogs();
-    this.curDate = transferred.date;
-    this.request.deliveryStart = this.curDate;
-    this.request.deliveryEnd = this.curDate;
-
+    if (!this.curDate.getDay()) {
+      this.curDate.setDate(this.curDate.getDate() + 1);
+      this.request.deliveryStart = this.curDate;
+      this.request.deliveryEnd = this.curDate;
+    }
     this.goal = transferred.type;
 
     switch (this.goal) {
@@ -291,7 +291,6 @@ export class RequestEditorComponent implements OnInit {
       this.request.purchasePrice = undefined;
     }
   }
-  
   onCarChange() {
     if (this.request.car) {
       const newCar = this.request.car;
