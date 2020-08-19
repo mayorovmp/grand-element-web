@@ -139,6 +139,7 @@
                                 class="app-table__select"
                                 id="selectCarCategory"
                                 [compareWith]="byId"
+                                (change)="onStatusChange(req.id, $event)" 
                             >
                                 <option 
                                     *ngFor="let status of statuses" 

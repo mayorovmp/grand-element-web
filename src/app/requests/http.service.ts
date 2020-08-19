@@ -77,6 +77,11 @@ export class HttpService {
     return this.http.get<Request[]>(url);
   }
 
+  setStatus(id: number, statusId: number): Observable<Status[]> {
+    const url = this.baseUrl + `/Request/set_status/${id}?statusId=${statusId}`;
+    return this.http.post<any>(url, id);
+  }
+
   getStatuses(): Observable<Status[]> {
     const url = this.baseUrl + '/RequestStatus';
     return this.http.get<Status[]>(url);

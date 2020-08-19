@@ -94,21 +94,31 @@ export class RequestsComponent implements OnInit {
 
   private async del(req: Request) {
     await this.http.del(req).toPromise();
-    this.getCompletedRequests(this.pickedDay);
-    this.getActualRequests(this.pickedDay);
+    this.getCompletedRequests();
+    this.getActualRequests();
   }
 
-  async getActualRequests(dt: Date) {
+  async getActualRequests() {
     this.http.getActualRequests().subscribe(
       allRequests => this.actualRequests = allRequests,
       error => this.toastr.error(error.message)
     );
   }
 
-  async getCompletedRequests(dt: Date) {
+  async getCompletedRequests() {
     this.http.getCompletedRequests().subscribe(
       allRequests => this.completedRequests = allRequests,
       error => this.toastr.error(error.message)
+    );
+  }
+
+  onStatusChange(reqId: number, status: any) {
+    const statusId = status.target.selectedOptions[0].index;
+    this.http.setStatus(reqId, statusId).subscribe(
+      result => {},
+      err => {
+        this.toastr.error(err.message);
+      }
     );
   }
 
@@ -133,8 +143,8 @@ export class RequestsComponent implements OnInit {
 
   ngOnInit() {
     this.getStatuses();
-    this.getActualRequests(this.pickedDay);
-    this.getCompletedRequests(this.pickedDay);
+    this.getActualRequests();
+    this.getCompletedRequests();
     this.nextDay.setDate(new Date().getDate() + 1);
   }
 
@@ -176,8 +186,8 @@ export class RequestsComponent implements OnInit {
   }
 
   onModalChange() {
-    this.getActualRequests(this.pickedDay);
-    this.getCompletedRequests(this.pickedDay);
+    this.getActualRequests();
+    this.getCompletedRequests();
 
   }
 
