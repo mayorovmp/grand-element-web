@@ -112,8 +112,7 @@ export class RequestsComponent implements OnInit {
     );
   }
 
-  onStatusChange(reqId: number, status: any) {
-    const statusId = status.target.selectedOptions[0].index;
+  onStatusChange(reqId: number, statusId: number) {
     this.http.setStatus(reqId, statusId).subscribe(
       result => {},
       err => {

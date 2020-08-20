@@ -137,14 +137,12 @@
                         <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
                             <select 
                                 class="app-table__select"
-                                id="selectCarCategory"
-                                [compareWith]="byId"
-                                (change)="onStatusChange(req.id, $event)" 
+                                (change)="onStatusChange(req.id, $event.target.value)" 
                             >
                                 <option 
                                     *ngFor="let status of statuses" 
-                                    [ngValue]="status"
-                                    [selected]="status.description == req.requestStatus.description"
+                                    [selected]="status.id == req.requestStatus.id"
+                                    [value]="status.id"
                                 >
                                 {{status.description}}
                                 </option>
@@ -305,12 +303,11 @@
                             <select 
                                 class="app-table__select"
                                 id="selectCarCategory"
-                                [compareWith]="byId"
                             >
                                 <option 
                                     *ngFor="let status of statuses" 
                                     [ngValue]="status"
-                                    [selected]="status.description == req.requestStatus.description"
+                                    [selected]="status.id == req.requestStatus.id"
                                 >
                                 {{status.description}}
                                 </option>

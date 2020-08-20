@@ -42,6 +42,6 @@ export class Request {
   clientId?: number;
   carCategoryId?: number;
   supplierId?: number;
-  requestStatus?: Status;
+  requestStatus: Status;
 }
 
