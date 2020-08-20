@@ -35,7 +35,9 @@ export class RequestsComponent implements OnInit {
 
   actualRequests: Request[] = [];
   completedRequests: Request[] = [];
+  incidentRequests: Request[] = [];
   statuses: Status[] = [];
+  datePeriods: any[] = [];
 
   sub: Subscription;
   @ViewChild('reqMenu') reqMenu: TemplateRef<any>;
@@ -100,7 +102,30 @@ export class RequestsComponent implements OnInit {
 
   async getActualRequests() {
     this.http.getActualRequests().subscribe(
-      allRequests => this.actualRequests = allRequests,
+      allRequests => {
+        const dateArray: any[] = [];
+        allRequests.forEach(req => {
+          if (req.deliveryStart && !dateArray.includes(req.deliveryStart)) {
+            this.datePeriods.push({date: req.deliveryStart});
+            dateArray.push(req.deliveryStart);
+          }
+        });
+        this.datePeriods.forEach(period => {
+          period.requests = [];
+          allRequests.forEach(req => {
+            if (period.date === req.deliveryStart) {
+              period.requests.push(req);
+            }
+          });
+          const newRequests = period.requests.filter(r => r.requestStatus?.id === 1);
+          const onGoingRequests = period.requests.filter(r => r.requestStatus?.id === 3);
+          const complitingRequests = period.requests.filter(r => r.requestStatus?.id === 4);
+          const incidentRequests = period.requests.filter(r => r.requestStatus?.id === 5);
+          period.requests = [...newRequests, ...onGoingRequests, ...complitingRequests, ...incidentRequests];
+          console.log('incidentRequests', incidentRequests);
+          this.incidentRequests = [...incidentRequests];
+        });
+      },
       error => this.toastr.error(error.message)
     );
   }
@@ -114,7 +139,10 @@ export class RequestsComponent implements OnInit {
 
   onStatusChange(reqId: number, statusId: number) {
     this.http.setStatus(reqId, statusId).subscribe(
-      result => {},
+      result => {
+        this.getActualRequests();
+        this.getCompletedRequests();
+      },
       err => {
         this.toastr.error(err.message);
       }
