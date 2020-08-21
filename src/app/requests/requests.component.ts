@@ -125,6 +125,7 @@ export class RequestsComponent implements OnInit {
           console.log('incidentRequests', incidentRequests);
           this.incidentRequests = [...incidentRequests];
         });
+        this.datePeriods.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       },
       error => this.toastr.error(error.message)
     );
@@ -149,24 +150,24 @@ export class RequestsComponent implements OnInit {
     );
   }
 
-  sorting(sortingCol: string, nested: number) {
-    if (this.sortingValue.column !== sortingCol) {
-      this.sortingValue.column = sortingCol;
-      this.sortingValue.type = 'direct';
-    } else {
-      if (this.sortingValue.type === 'direct') {
-        this.sortingValue.type = 'reverse';
-      } else {
-        this.sortingValue.type = 'direct';
-      }
-    }
-    if (alphabeticalCols.includes(sortingCol)) {
-      alphaBeticalSorting(this.actualRequests, sortingCol, nested, this.sortingValue.type);
-    }
-    if (numeralCols.includes(sortingCol)) {
-      numeralSorting(this.actualRequests, sortingCol, nested, this.sortingValue.type);
-    }
-  }
+  // sorting(sortingCol: string, nested: number) {
+  //   if (this.sortingValue.column !== sortingCol) {
+  //     this.sortingValue.column = sortingCol;
+  //     this.sortingValue.type = 'direct';
+  //   } else {
+  //     if (this.sortingValue.type === 'direct') {
+  //       this.sortingValue.type = 'reverse';
+  //     } else {
+  //       this.sortingValue.type = 'direct';
+  //     }
+  //   }
+  //   if (alphabeticalCols.includes(sortingCol)) {
+  //     alphaBeticalSorting(this.completedRequests, sortingCol, nested, this.sortingValue.type);
+  //   }
+  //   if (numeralCols.includes(sortingCol)) {
+  //     numeralSorting(this.completedRequests, sortingCol, nested, this.sortingValue.type);
+  //   }
+  // }
 
   ngOnInit() {
     this.getStatuses();
