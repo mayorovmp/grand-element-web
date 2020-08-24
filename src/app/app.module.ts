@@ -42,6 +42,7 @@ import { RequestEditorComponent } from './requests/editor/request-editor.compone
 import { RequestsComponent } from './requests/requests.component';
 import { FilterPipe } from './core/pipes/filter.pipe';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.ballScaleMultiple,
   minTime: 100,
@@ -85,6 +86,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
       closeButton: true,
       timeOut: 50000
     }),
+    InfiniteScrollModule
   ],
   providers: [
     {

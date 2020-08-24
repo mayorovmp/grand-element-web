@@ -66,6 +66,17 @@ export class RequestsComponent implements OnInit {
       type: 'none',
     };
 
+  dateArray: any[] = [];
+
+  complitedRequestslimit = 13;
+  complitedRequestsOffset = 0;
+
+  actualRequestslimit = 10;
+  actualRequestsOffset = 0;
+
+  throttle = 300;
+  scrollDistance = 0.1;
+
   constructor(
     public http: HttpService,
     private toastr: ToastrService,
@@ -96,44 +107,60 @@ export class RequestsComponent implements OnInit {
 
   private async del(req: Request) {
     await this.http.del(req).toPromise();
-    this.getCompletedRequests();
-    this.getActualRequests();
+    this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
+    this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
   }
 
-  async getActualRequests() {
-    this.http.getActualRequests().subscribe(
-      allRequests => {
-        const dateArray: any[] = [];
-        allRequests.forEach(req => {
-          if (req.deliveryStart && !dateArray.includes(req.deliveryStart)) {
-            this.datePeriods.push({date: req.deliveryStart});
-            dateArray.push(req.deliveryStart);
-          }
-        });
-        this.datePeriods.forEach(period => {
-          period.requests = [];
-          allRequests.forEach(req => {
-            if (period.date === req.deliveryStart) {
-              period.requests.push(req);
-            }
-          });
-          const newRequests = period.requests.filter(r => r.requestStatus?.id === 1);
-          const onGoingRequests = period.requests.filter(r => r.requestStatus?.id === 3);
-          const complitingRequests = period.requests.filter(r => r.requestStatus?.id === 4);
-          const incidentRequests = period.requests.filter(r => r.requestStatus?.id === 5);
-          period.requests = [...newRequests, ...onGoingRequests, ...complitingRequests, ...incidentRequests];
-          console.log('incidentRequests', incidentRequests);
-          this.incidentRequests = [...incidentRequests];
-        });
-        this.datePeriods.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-      },
+  onScrollActualRequests() {
+    this.actualRequestsOffset += this.actualRequestslimit;
+    this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
+  }
+
+  onScrollComplitedRequests() {
+    this.complitedRequestsOffset += this.complitedRequestslimit;
+    this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
+  }
+
+  handleComplitedRequests(newVals: Request[]) {
+    newVals.forEach(req => this.completedRequests.push(req));
+  }
+
+  handleActualRequests(newVals: Request[]) {
+    newVals.forEach(req => this.actualRequests.push(req));
+    this.actualRequests.forEach(req => {
+      if (req.deliveryStart && !this.dateArray.includes(req.deliveryStart)) {
+        this.datePeriods.push({date: req.deliveryStart});
+        this.dateArray.push(req.deliveryStart);
+      }
+    });
+    this.datePeriods.forEach(period => {
+      period.requests = [];
+      this.actualRequests.forEach(req => {
+        if (period.date === req.deliveryStart) {
+          period.requests.push(req);
+        }
+      });
+      const newRequests = period.requests.filter(r => r.requestStatus?.id === 1);
+      const onGoingRequests = period.requests.filter(r => r.requestStatus?.id === 3);
+      const complitingRequests = period.requests.filter(r => r.requestStatus?.id === 4);
+      const incidentRequests = period.requests.filter(r => r.requestStatus?.id === 5);
+      period.requests = [...newRequests, ...onGoingRequests, ...complitingRequests, ...incidentRequests];
+      // console.log('incidentRequests', incidentRequests);
+      this.incidentRequests = [...incidentRequests];
+    });
+    this.datePeriods.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }
+
+  async getActualRequests(limit: number, offset: number) {
+    this.http.getActualRequests(limit, offset).subscribe(
+      allRequests => this.handleActualRequests(allRequests),
       error => this.toastr.error(error.message)
     );
   }
 
-  async getCompletedRequests() {
-    this.http.getCompletedRequests().subscribe(
-      allRequests => this.completedRequests = allRequests,
+  async getCompletedRequests(limit: number, offset: number) {
+    this.http.getCompletedRequests(limit, offset).subscribe(
+      allRequests => this.handleComplitedRequests(allRequests),
       error => this.toastr.error(error.message)
     );
   }
@@ -141,8 +168,8 @@ export class RequestsComponent implements OnInit {
   onStatusChange(reqId: number, statusId: number) {
     this.http.setStatus(reqId, statusId).subscribe(
       result => {
-        this.getActualRequests();
-        this.getCompletedRequests();
+        this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
+        this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
       },
       err => {
         this.toastr.error(err.message);
@@ -171,8 +198,8 @@ export class RequestsComponent implements OnInit {
 
   ngOnInit() {
     this.getStatuses();
-    this.getActualRequests();
-    this.getCompletedRequests();
+    this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
+    this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
     this.nextDay.setDate(new Date().getDate() + 1);
   }
 
@@ -214,8 +241,8 @@ export class RequestsComponent implements OnInit {
   }
 
   onModalChange() {
-    this.getActualRequests();
-    this.getCompletedRequests();
+    this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
+    this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
 
   }
 
