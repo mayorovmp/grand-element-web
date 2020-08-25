@@ -128,7 +128,7 @@ export class RequestsComponent implements OnInit {
   handleActualRequests(newVals: Request[]) {
     newVals.forEach(req => this.actualRequests.push(req));
     this.actualRequests.forEach(req => {
-      if (req.deliveryStart && !this.dateArray.includes(req.deliveryStart)) {
+      if (req.deliveryStart && !this.dateArray.includes(req.deliveryStart) && !(req.requestStatus?.id === 5)) {
         this.datePeriods.push({date: req.deliveryStart});
         this.dateArray.push(req.deliveryStart);
       }
@@ -143,11 +143,9 @@ export class RequestsComponent implements OnInit {
       const newRequests = period.requests.filter(r => r.requestStatus?.id === 1);
       const onGoingRequests = period.requests.filter(r => r.requestStatus?.id === 3);
       const complitingRequests = period.requests.filter(r => r.requestStatus?.id === 4);
-      const incidentRequests = period.requests.filter(r => r.requestStatus?.id === 5);
-      period.requests = [...newRequests, ...onGoingRequests, ...complitingRequests, ...incidentRequests];
-      // console.log('incidentRequests', incidentRequests);
-      this.incidentRequests = [...incidentRequests];
+      period.requests = [...newRequests, ...onGoingRequests, ...complitingRequests];
     });
+    this.incidentRequests = this.actualRequests.filter(r => r.requestStatus?.id === 5);
     this.datePeriods.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }
 
@@ -166,6 +164,7 @@ export class RequestsComponent implements OnInit {
   }
 
   onStatusChange(reqId: number, statusId: number) {
+    this.reset();
     this.http.setStatus(reqId, statusId).subscribe(
       result => {
         this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
@@ -175,6 +174,18 @@ export class RequestsComponent implements OnInit {
         this.toastr.error(err.message);
       }
     );
+  }
+
+  reset() {
+    this.actualRequests = [];
+    this.completedRequests = [];
+    this.incidentRequests = [];
+    this.datePeriods = [];
+    this.dateArray = [];
+    this.complitedRequestslimit = 13;
+    this.complitedRequestsOffset = 0;
+    this.actualRequestslimit = 10;
+    this.actualRequestsOffset = 0;
   }
 
   // sorting(sortingCol: string, nested: number) {
