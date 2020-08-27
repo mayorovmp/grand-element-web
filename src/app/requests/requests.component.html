@@ -62,7 +62,7 @@
                                 <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
                                     <select 
                                         class="app-table__select"
-                                        (change)="onStatusChange(req.id, $event.target.value)" 
+                                        (change)="onStatusChange(req.id, $event.target.value, 'incident')" 
                                     >
                                         <option 
                                             *ngFor="let status of statuses" 
@@ -146,7 +146,7 @@
                                 <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
                                     <select 
                                         class="app-table__select"
-                                        (change)="onStatusChange(req.id, $event.target.value)" 
+                                        (change)="onStatusChange(req.id, $event.target.value, 'actual')" 
                                     >
                                         <option 
                                             *ngFor="let status of statuses" 
@@ -244,7 +244,7 @@
                         <td class="app-table__td">
                             <select 
                                 class="app-table__select"
-                                (change)="onStatusChange(req.id, $event.target.value)"
+                                (change)="onStatusChange(req.id, $event.target.value, 'completed')"
                             >
                                 <option 
                                     *ngFor="let status of statuses"

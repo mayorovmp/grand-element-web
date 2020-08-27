@@ -163,12 +163,19 @@ export class RequestsComponent implements OnInit {
     );
   }
 
-  onStatusChange(reqId: number, statusId: number) {
-    this.reset();
-    this.http.setStatus(reqId, statusId).subscribe(
+  onStatusChange(reqId: number, statusId: string, oldStatus: string) {
+    this.http.setStatus(reqId, Number(statusId)).subscribe(
       result => {
-        this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
-        this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
+        console.log('oldStatus', typeof oldStatus);
+        console.log('statusId', typeof statusId);
+        if (oldStatus === 'completed' || (oldStatus === 'actual' && Number(statusId) === 2)) {
+          this.reset('all');
+          this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
+          this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
+        } else {
+          this.reset('actual');
+          this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
+        }
       },
       err => {
         this.toastr.error(err.message);
@@ -176,16 +183,25 @@ export class RequestsComponent implements OnInit {
     );
   }
 
-  reset() {
-    this.actualRequests = [];
-    this.completedRequests = [];
-    this.incidentRequests = [];
-    this.datePeriods = [];
-    this.dateArray = [];
-    this.complitedRequestslimit = 13;
-    this.complitedRequestsOffset = 0;
-    this.actualRequestslimit = 10;
-    this.actualRequestsOffset = 0;
+  reset(status: string) {
+    if (status === 'actual') {
+      this.actualRequests = [];
+      this.incidentRequests = [];
+      this.datePeriods = [];
+      this.dateArray = [];
+      this.actualRequestslimit = 10;
+      this.actualRequestsOffset = 0;
+    } else {
+      this.actualRequests = [];
+      this.completedRequests = [];
+      this.incidentRequests = [];
+      this.datePeriods = [];
+      this.dateArray = [];
+      this.complitedRequestslimit = 13;
+      this.complitedRequestsOffset = 0;
+      this.actualRequestslimit = 10;
+      this.actualRequestsOffset = 0;
+    }
   }
 
   // sorting(sortingCol: string, nested: number) {
