@@ -77,6 +77,14 @@ export class RequestEditorComponent implements OnInit {
   ngOnInit() {
   }
 
+  resetDate(dateType: string) {
+    if (dateType === 'start') {
+      this.request.deliveryStart = new Date();
+    } else {
+      this.request.deliveryEnd = new Date();
+    }
+  }
+
   async getCatalogs(): Promise<any[]> {
     const promises: Promise<any>[] = [];
     promises.push(this.clientHttp.getClients().toPromise().then(x => this.clients = x));

@@ -7,18 +7,20 @@
     <div class="form-container">
         <h2 class="form-title">Редактор</h2>
         <div class="form-block">
-            <label for="date" class="form-block__label">
+            <label for="deliveryStart" class="form-block__label">
                 Дата
             </label>
             <input
                 type="date"
-                name="bday"
+                name="deliveryStart"
+                id="deliveryStart"
                 [ngModel]="request.deliveryStart | date:'yyyy-MM-dd'"
+                (ngModelChange)="request.deliveryStart = $event"
                 min="1000-01-01"
                 max="3000-12-31"
                 class="form-block__input date-input"
             >
-            <button class="add-entity-btn" (click)="addProduct()">
+            <button class="add-entity-btn" (click)="resetDate('start')">
                 <img src="assets/img/icons/refresh.svg"
                     class="add-entity-btn__icon"
                     alt="refresh"
@@ -184,34 +186,25 @@
             >
         </div>
         <div class="form-block" *ngIf="request.isLong">
-            <label for="deliveryStart" class="form-block__label">
-                Дата с
-            </label>
-            <input 
-                type="date" 
-                name="bday" 
-                [ngModel]="request.deliveryStart | date:'yyyy-MM-dd'"
-                (ngModelChange)="request.deliveryStart = $event" 
-                min="1000-01-01" 
-                max="3000-12-31" 
-                id="deliveryStart"
-                class="form-block__input" 
-            >
-        </div>
-        <div class="form-block" *ngIf="request.isLong">
             <label for="deliveryEnd" class="form-block__label">
-                Дата по
+                Дата окончания
             </label>
-            <input 
-                type="date" 
-                name="bday" 
-                [ngModel]="request.deliveryEnd | date:'yyyy-MM-dd'"
-                (ngModelChange)="request.deliveryEnd = $event" 
-                min="1000-01-01" 
-                max="3000-12-31" 
+            <input
+                type="date"
+                name="deliveryEnd"
                 id="deliveryEnd"
-                class="form-block__input" 
+                [ngModel]="request.deliveryEnd | date:'yyyy-MM-dd'"
+                (ngModelChange)="request.deliveryEnd = $event"
+                min="1000-01-01"
+                max="3000-12-31"
+                class="form-block__input date-input"
             >
+            <button class="add-entity-btn" (click)="resetDate('end')">
+                <img src="assets/img/icons/refresh.svg"
+                    class="add-entity-btn__icon"
+                    alt="refresh"
+                >
+            </button>
         </div>
         <button 
             (click)="createOrUpdate(request, parentRequestId)"
