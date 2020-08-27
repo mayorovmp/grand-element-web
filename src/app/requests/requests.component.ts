@@ -146,7 +146,7 @@ export class RequestsComponent implements OnInit {
       period.requests = [...newRequests, ...onGoingRequests, ...complitingRequests];
     });
     this.incidentRequests = this.actualRequests.filter(r => r.requestStatus?.id === 5);
-    this.datePeriods.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    this.datePeriods.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }
 
   async getActualRequests(limit: number, offset: number) {
