@@ -123,6 +123,15 @@ export class RequestsComponent implements OnInit {
 
   handleComplitedRequests(newVals: Request[]) {
     newVals.forEach(req => this.completedRequests.push(req));
+    this.completedRequests.sort((a, b): any => {
+      if (!a.deliveryStart && b.deliveryStart) {
+        return 1;
+      } else if (a.deliveryStart && !b.deliveryStart) {
+        return -1;
+      } else if (a.deliveryStart && b.deliveryStart) {
+        return new Date(b.deliveryStart).getTime() - new Date(a.deliveryStart).getTime();
+      }
+    });
   }
 
   handleActualRequests(newVals: Request[]) {
