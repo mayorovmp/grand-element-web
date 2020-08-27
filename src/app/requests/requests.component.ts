@@ -166,8 +166,6 @@ export class RequestsComponent implements OnInit {
   onStatusChange(reqId: number, statusId: string, oldStatus: string) {
     this.http.setStatus(reqId, Number(statusId)).subscribe(
       result => {
-        console.log('oldStatus', typeof oldStatus);
-        console.log('statusId', typeof statusId);
         if (oldStatus === 'completed' || (oldStatus === 'actual' && Number(statusId) === 2)) {
           this.reset('all');
           this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
