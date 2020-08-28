@@ -259,7 +259,7 @@ export class RequestEditorComponent implements OnInit {
       this.clientNameText = client.name;
     }
     this.request.client = client;
-    this.onClientChange();
+    // this.onClientChange();
   }
 
   addClient() {
@@ -285,41 +285,41 @@ export class RequestEditorComponent implements OnInit {
   }
 
   onSupplierChange() {
-    if (this.request.supplier) {
-      this.request.supplierVat = this.request.supplier.vat;
-      const prod = this.request.product;
-      if (prod) {
-        const newProd = this.request.supplier.products.find(x => x.id === prod.id);
-        if (newProd) {
-          this.request.purchasePrice = newProd.price;
-        }
-      }
-    } else {
-      this.request.supplierVat = undefined;
-      this.request.purchasePrice = undefined;
-    }
+    // if (this.request.supplier) {
+    //   this.request.supplierVat = this.request.supplier.vat;
+    //   const prod = this.request.product;
+    //   if (prod) {
+    //     const newProd = this.request.supplier.products.find(x => x.id === prod.id);
+    //     if (newProd) {
+    //       this.request.purchasePrice = newProd.price;
+    //     }
+    //   }
+    // } else {
+    //   this.request.supplierVat = undefined;
+    //   this.request.purchasePrice = undefined;
+    // }
   }
   onCarChange() {
-    if (this.request.car) {
-      const newCar = this.request.car;
-      this.request.carCategory = newCar.carCategory;
-      this.request.unit = newCar.unit;
-      this.request.carVat = newCar.vat;
-      this.calcFreigthCost();
-    } else {
-      this.request.carCategory = undefined;
-      this.request.unit = undefined;
-      this.request.carVat = undefined;
-    }
+    // if (this.request.car) {
+    //   const newCar = this.request.car;
+    //   this.request.carCategory = newCar.carCategory;
+    //   this.request.unit = newCar.unit;
+    //   this.request.carVat = newCar.vat;
+    //   this.calcFreigthCost();
+    // } else {
+    //   this.request.carCategory = undefined;
+    //   this.request.unit = undefined;
+    //   this.request.carVat = undefined;
+    // }
   }
   onAdditionalCarChange(event: any, index: number) {
-    let elem = new Car();
-    this.cars.forEach((el) => {
-      if (event.target.value === el.owner) {
-        return elem = el;
-      }
-    });
-    this.additionalCarOwners[index] = elem;
+    // let elem = new Car();
+    // this.cars.forEach((el) => {
+    //   if (event.target.value === el.owner) {
+    //     return elem = el;
+    //   }
+    // });
+    // this.additionalCarOwners[index] = elem;
   }
 
   canAddCarOwner() {
@@ -327,10 +327,9 @@ export class RequestEditorComponent implements OnInit {
   }
 
   async onProductChange(prodId: number | undefined) {
-    this.getSuppliersByProd(prodId);
-    this.request.supplierVat = false;
-    this.request.purchasePrice = undefined;
-
+    // this.getSuppliersByProd(prodId);
+    // this.request.supplierVat = false;
+    // this.request.purchasePrice = undefined;
   }
 
   private async getSuppliersByProd(prodId: number | undefined) {
@@ -346,11 +345,11 @@ export class RequestEditorComponent implements OnInit {
   }
 
   async onAddrChange() {
-    await this.processLastReq(this.request.client, this.request.deliveryAddress);
+    // await this.processLastReq(this.request.client, this.request.deliveryAddress);
 
-    if (this.request.deliveryAddress) {
-      this.request.freightPrice = this.request.deliveryAddress.freightPrice;
-    }
+    // if (this.request.deliveryAddress) {
+    //   this.request.freightPrice = this.request.deliveryAddress.freightPrice;
+    // }
   }
 
   async onReqModelChange() {
