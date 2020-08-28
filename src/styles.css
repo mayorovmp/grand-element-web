@@ -26,6 +26,7 @@
     --light-gray: #cecece;
     --dark-gray: #343a40;
     --medium-gray: #6f6f6f;
+    --red: #ea1d1d;
 }
 body {
     font-family: 'Montserrat', sans-serif;
@@ -69,8 +70,8 @@ a:hover {
     justify-content: center;
 }
 .block-title{
-    font-size: 38px;
-    margin-bottom: 20px;
+    font-size: 28px;
+    margin-bottom: 12px;
 }
 .app-btn {
     padding: 0 18px;
@@ -91,7 +92,7 @@ a:hover {
     color: #fff;
 }
 .red-btn {
-    background-color: #ea1d1d;
+    background-color: var(--red);
     color: #fff;
 }
 .red-btn:hover {
@@ -114,13 +115,18 @@ a:hover {
 }
 .app-table {
     width: 100%;
-    margin-bottom: 1rem;
     color: #212529;
     border: 1px solid var(--light-gray);
     font-size: 13px;
+    margin-bottom: 12px;
 }
 .app-table__tr {
     border-bottom: 1px solid var(--light-gray);
+}
+.app-table__tr--dangerous{
+    background-color: var(--red);
+    opacity: .9;
+    color: #fff;
 }
 .app-table__tr--editable{
     cursor: pointer;   
@@ -152,7 +158,7 @@ a:hover {
 }
 .app-table__td {
     border-right: 1px solid var(--light-gray);
-    padding: 8px;
+    padding: 4px;
     text-align: center;
 }
 .app-table__sorting-img{

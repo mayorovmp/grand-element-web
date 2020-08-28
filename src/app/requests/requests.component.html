@@ -17,9 +17,9 @@
         >
             <div class="orders-block" *ngIf="incidentRequests.length">
                 <h2 class="block-title">
-                    Форс-мажор
+                    Долгосроки и форс-мажоры
                 </h2>
-                <div *ngFor="let req of incidentRequests">
+                <div>
                     <table class="app-table">
                         <thead>
                             <tr class="app-table__tr">
@@ -48,8 +48,37 @@
                         </thead>
                         <tbody>
                             <tr
+                                class="app-table__tr app-table__tr--editable app-table__tr--dangerous"
+                                (contextmenu)="openContextMenu($event, req); $event.preventDefault();"
+                                *ngFor="let req of incidentRequests"
+                            >
+                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
+                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>
+                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>
+                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Перевозчик')">{{req.car?.owner}}</td>
+                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Объем, тн')">{{req.amount}}</td>
+                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Адрес доставки')">
+                                    {{req.deliveryAddress?.name}}
+                                </td>
+                                <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
+                                    <select 
+                                        class="app-table__select"
+                                        (change)="onStatusChange(req.id, $event.target.value, 'incident')" 
+                                    >
+                                        <option 
+                                            *ngFor="let status of statuses" 
+                                            [selected]="status.id == req.requestStatus.id"
+                                            [value]="status.id"
+                                        >
+                                        {{status.description}}
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr
                                 class="app-table__tr app-table__tr--editable"
                                 (contextmenu)="openContextMenu($event, req); $event.preventDefault();"
+                                *ngFor="let req of longTermRequests"
                             >
                                 <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
                                 <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>

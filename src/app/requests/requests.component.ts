@@ -36,6 +36,7 @@ export class RequestsComponent implements OnInit {
   actualRequests: Request[] = [];
   completedRequests: Request[] = [];
   incidentRequests: Request[] = [];
+  longTermRequests: Request[] = [];
   statuses: Status[] = [];
   datePeriods: any[] = [];
 
@@ -154,6 +155,7 @@ export class RequestsComponent implements OnInit {
       const complitingRequests = period.requests.filter(r => r.requestStatus?.id === 4);
       period.requests = [...newRequests, ...onGoingRequests, ...complitingRequests];
     });
+    this.longTermRequests = this.actualRequests.filter(req => req.isLong);
     this.incidentRequests = this.actualRequests.filter(r => r.requestStatus?.id === 5);
     this.datePeriods.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }

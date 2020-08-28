@@ -2,7 +2,7 @@
   padding: 1px;
 }
 .export-order{
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 .export-order__button{
   margin-right: 20px;
@@ -11,6 +11,7 @@
 .longTerm-order,
 .orders-block{
   overflow-x: scroll;
+  padding: 12px 0;
 }
 
 .additional-rows{
