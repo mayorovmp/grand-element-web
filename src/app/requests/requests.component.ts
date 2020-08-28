@@ -69,10 +69,10 @@ export class RequestsComponent implements OnInit {
 
   dateArray: any[] = [];
 
-  complitedRequestslimit = 13;
+  complitedRequestslimit = 20;
   complitedRequestsOffset = 0;
 
-  actualRequestslimit = 10;
+  actualRequestslimit = 15;
   actualRequestsOffset = 0;
 
   throttle = 300;
