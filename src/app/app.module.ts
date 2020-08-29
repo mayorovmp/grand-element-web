@@ -40,7 +40,7 @@ import { CarEditorComponent } from './catalogs/car/editor/editor.component';
 import { ConfirmModalComponent } from './common/confirm-modal/confirm.component';
 import { RequestEditorComponent } from './requests/editor/request-editor.component';
 import { RequestsComponent } from './requests/requests.component';
-import { FilterPipe } from './core/pipes/filter.pipe';
+import { FilterPipe, CarOwnerPipe } from './core/pipes/filter.pipe';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AmountModalComponent } from './requests/amountModal/amountModal.component';
@@ -68,6 +68,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     CarEditorComponent,
     ConfirmModalComponent,
     FilterPipe,
+    CarOwnerPipe,
     AmountModalComponent
   ],
   imports: [
