@@ -232,7 +232,14 @@ export class RequestsComponent implements OnInit {
     }
   }
 
-  divideAmount() {
+  divideAmount(req: Request) {
+    this.ngxSmartModalService.setModalData(
+      {
+        req
+      },
+      'amountModal',
+      true
+    );
     this.ngxSmartModalService.toggle('amountModal');
   }
 

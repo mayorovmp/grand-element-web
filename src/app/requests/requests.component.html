@@ -177,8 +177,11 @@
                                 (contextmenu)="openContextMenu($event, req); $event.preventDefault();"
                             >
                                 <td class="app-table__td">
-                                    <button title="Разделить объем" class="finish-order"
-                                        (click)="divideAmount()">
+                                    <button
+                                        title="Разделить объем"
+                                        class="finish-order"
+                                        (click)="divideAmount(req)"
+                                    >
                                         <img class="finish-order__icon" src="assets/img/icons/truck.svg" alt="Разделить объем">
                                     </button>
                                 </td>
