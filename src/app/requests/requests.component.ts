@@ -137,28 +137,7 @@ export class RequestsComponent implements OnInit {
   }
 
   handleActualRequests(newVals: Request[]) {
-    newVals.forEach(req => this.actualRequests.push(req));
-    this.actualRequests.forEach(req => {
-      if (req.deliveryStart && !this.dateArray.includes(req.deliveryStart) && !(req.requestStatus?.id === 5)) {
-        this.datePeriods.push({date: req.deliveryStart});
-        this.dateArray.push(req.deliveryStart);
-      }
-    });
-    this.datePeriods.forEach(period => {
-      period.requests = [];
-      this.actualRequests.forEach(req => {
-        if (period.date === req.deliveryStart) {
-          period.requests.push(req);
-        }
-      });
-      const newRequests = period.requests.filter(r => r.requestStatus?.id === 1);
-      const onGoingRequests = period.requests.filter(r => r.requestStatus?.id === 3);
-      const complitingRequests = period.requests.filter(r => r.requestStatus?.id === 4);
-      period.requests = [...newRequests, ...onGoingRequests, ...complitingRequests];
-    });
-    this.longTermRequests = this.actualRequests.filter(req => req.isLong);
-    this.incidentRequests = this.actualRequests.filter(r => r.requestStatus?.id === 5);
-    this.datePeriods.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    this.actualRequests = newVals;
   }
 
   async getActualRequests(limit: number, offset: number) {

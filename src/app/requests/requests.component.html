@@ -7,14 +7,8 @@
                 </button>
             </div>
         </div>
-        <div
-            class="search-results"
-            infiniteScroll
-            [infiniteScrollDistance]="2"
-            [infiniteScrollThrottle]="50"
-            (scrolled)="onScrollActualRequests()"
-            [scrollWindow]="false"
-        >
+        <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+            (scrolled)="onScrollActualRequests()" [scrollWindow]="false">
             <div class="orders-block" *ngIf="incidentRequests.length">
                 <h2 class="block-title">
                     Долгосроки и форс-мажоры
@@ -50,64 +44,63 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                class="app-table__tr app-table__tr--editable app-table__tr--dangerous"
+                            <tr class="app-table__tr app-table__tr--editable app-table__tr--dangerous"
                                 (contextmenu)="openContextMenu($event, req); $event.preventDefault();"
-                                *ngFor="let req of incidentRequests"
-                            >
+                                *ngFor="let req of incidentRequests">
                                 <td class="app-table__td">
                                     <button title="Добавить заявку" class="finish-order"
                                         (click)="addShortRequest(curDate, req)">
-                                        <img class="finish-order__icon" src="assets/img/icons/truck.svg" alt="Добавить заявку">
+                                        <img class="finish-order__icon" src="assets/img/icons/truck.svg"
+                                            alt="Добавить заявку">
                                     </button>
                                 </td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Перевозчик')">{{req.car?.owner}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Объем, тн')">{{req.amount}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Адрес доставки')">
+                                <td (click)="edit(req)" class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">
+                                    {{req.client?.name}}</td>
+                                <td (click)="edit(req)" class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">
+                                    {{req.product?.name}}</td>
+                                <td (click)="edit(req)" class="app-table__td"
+                                    *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>
+                                <td (click)="edit(req)" class="app-table__td"
+                                    *ngIf="!hidingColumns.includes('Перевозчик')">{{req.car?.owner}}</td>
+                                <td (click)="edit(req)" class="app-table__td"
+                                    *ngIf="!hidingColumns.includes('Объем, тн')">{{req.amount}}</td>
+                                <td (click)="edit(req)" class="app-table__td"
+                                    *ngIf="!hidingColumns.includes('Адрес доставки')">
                                     {{req.deliveryAddress?.name}}
                                 </td>
                                 <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
-                                    <select 
-                                        class="app-table__select"
-                                        (change)="onStatusChange(req.id, $event.target.value, 'incident')" 
-                                    >
-                                        <option 
-                                            *ngFor="let status of statuses" 
-                                            [selected]="status.id == req.requestStatus.id"
-                                            [value]="status.id"
-                                        >
-                                        {{status.description}}
+                                    <select class="app-table__select"
+                                        (change)="onStatusChange(req.id, $event.target.value, 'incident')">
+                                        <option *ngFor="let status of statuses"
+                                            [selected]="status.id == req.requestStatus.id" [value]="status.id">
+                                            {{status.description}}
                                         </option>
                                     </select>
                                 </td>
                             </tr>
-                            <tr
-                                class="app-table__tr app-table__tr--editable"
+                            <tr class="app-table__tr app-table__tr--editable"
                                 (contextmenu)="openContextMenu($event, req); $event.preventDefault();"
-                                *ngFor="let req of longTermRequests"
-                            >
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Перевозчик')">{{req.car?.owner}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Объем, тн')">{{req.amount}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Адрес доставки')">
+                                *ngFor="let req of longTermRequests">
+                                <td (click)="edit(req)" class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">
+                                    {{req.client?.name}}</td>
+                                <td (click)="edit(req)" class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">
+                                    {{req.product?.name}}</td>
+                                <td (click)="edit(req)" class="app-table__td"
+                                    *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>
+                                <td (click)="edit(req)" class="app-table__td"
+                                    *ngIf="!hidingColumns.includes('Перевозчик')">{{req.car?.owner}}</td>
+                                <td (click)="edit(req)" class="app-table__td"
+                                    *ngIf="!hidingColumns.includes('Объем, тн')">{{req.amount}}</td>
+                                <td (click)="edit(req)" class="app-table__td"
+                                    *ngIf="!hidingColumns.includes('Адрес доставки')">
                                     {{req.deliveryAddress?.name}}
                                 </td>
                                 <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
-                                    <select 
-                                        class="app-table__select"
-                                        (change)="onStatusChange(req.id, $event.target.value, 'incident')" 
-                                    >
-                                        <option 
-                                            *ngFor="let status of statuses" 
-                                            [selected]="status.id == req.requestStatus.id"
-                                            [value]="status.id"
-                                        >
-                                        {{status.description}}
+                                    <select class="app-table__select"
+                                        (change)="onStatusChange(req.id, $event.target.value, 'incident')">
+                                        <option *ngFor="let status of statuses"
+                                            [selected]="status.id == req.requestStatus.id" [value]="status.id">
+                                            {{status.description}}
                                         </option>
                                     </select>
                                 </td>
@@ -137,73 +130,69 @@
                 </div>
             </div>
             <div class="orders-block">
-                <div *ngFor="let period of datePeriods">
-                    <h2 class="block-title">
-                        Заказы на {{period.date | date: "dd.MM.yyyy"}}
-                    </h2>
-                    <table class="app-table">
-                        <thead>
-                            <tr class="app-table__tr">
-                                <th class="app-table__th">
-
-                                </th>
-                                <th class="app-table__th" *ngIf="!hidingColumns.includes('Клиент')">
-                                    Клиент
-                                </th>
-                                <th class="app-table__th" *ngIf="!hidingColumns.includes('Товар')">
-                                    Товар
-                                </th>
-                                <th class="app-table__th" *ngIf="!hidingColumns.includes('Поставщик')">
-                                    Поставщик
-                                </th>
-                                <th class="app-table__th" *ngIf="!hidingColumns.includes('Перевозчик')">
-                                    Перевозчик
-                                </th>
-                                <th class="app-table__th" *ngIf="!hidingColumns.includes('Объем, тн')">
-                                    Объем, тн
-                                </th>
-                                <th class="app-table__th" *ngIf="!hidingColumns.includes('Адрес доставки')">
-                                    Адрес доставки
-                                </th>
-                                <th class="app-table__th" *ngIf="!hidingColumns.includes('Статус')">
-                                    Статус
-                                </th>
+                <table class="app-table">
+                    <thead>
+                        <tr class="app-table__tr">
+                            <th class="app-table__th">
+                            </th>
+                            <th class="app-table__th" *ngIf="!hidingColumns.includes('Клиент')">
+                                Клиент
+                            </th>
+                            <th class="app-table__th" *ngIf="!hidingColumns.includes('Товар')">
+                                Товар
+                            </th>
+                            <th class="app-table__th" *ngIf="!hidingColumns.includes('Поставщик')">
+                                Поставщик
+                            </th>
+                            <th class="app-table__th" *ngIf="!hidingColumns.includes('Перевозчик')">
+                                Перевозчик
+                            </th>
+                            <th class="app-table__th" *ngIf="!hidingColumns.includes('Объем, тн')">
+                                Объем, тн
+                            </th>
+                            <th class="app-table__th" *ngIf="!hidingColumns.includes('Адрес доставки')">
+                                Адрес доставки
+                            </th>
+                            <th class="app-table__th" *ngIf="!hidingColumns.includes('Статус')">
+                                Статус
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let req of actualRequests; let i = index;">
+                            <tr class="app-table__tr"
+                                *ngIf="i == 0 || req.deliveryStart != actualRequests[i-1].deliveryStart">
+                                <td colspan="7" ><strong>Заказы на
+                                        {{req.deliveryStart | date: "dd.MM.yyyy"}}</strong></td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                *ngFor="let req of period.requests"
-                                class="app-table__tr app-table__tr--editable"
-                                (contextmenu)="openContextMenu($event, req); $event.preventDefault();"
-                            >
+                            <tr class="app-table__tr app-table__tr--editable"
+                                (contextmenu)="openContextMenu($event, req); $event.preventDefault();">
                                 <td class="app-table__td">
-                                    <button
-                                        title="Разделить объем"
-                                        class="finish-order"
-                                        (click)="divideAmount(req)"
-                                    >
-                                        <img class="finish-order__icon" src="assets/img/icons/truck.svg" alt="Разделить объем">
+                                    <button title="Разделить объем" class="finish-order" (click)="divideAmount(req)">
+                                        <img class="finish-order__icon" src="assets/img/icons/truck.svg"
+                                            alt="Разделить объем">
                                     </button>
                                 </td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Перевозчик')">{{req.car?.owner}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Объем, тн')">{{req.amount}}</td>
-                                <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Адрес доставки')">
+                                <td (click)="edit(req)" class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">
+                                    {{req.client?.name}}</td>
+                                <td (click)="edit(req)" class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">
+                                    {{req.product?.name}}</td>
+                                <td (click)="edit(req)" class="app-table__td"
+                                    *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>
+                                <td (click)="edit(req)" class="app-table__td"
+                                    *ngIf="!hidingColumns.includes('Перевозчик')">{{req.car?.owner}}</td>
+                                <td (click)="edit(req)" class="app-table__td"
+                                    *ngIf="!hidingColumns.includes('Объем, тн')">{{req.amount}}</td>
+                                <td (click)="edit(req)" class="app-table__td"
+                                    *ngIf="!hidingColumns.includes('Адрес доставки')">
                                     {{req.deliveryAddress?.name}}
                                 </td>
                                 <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
-                                    <select 
-                                        class="app-table__select"
-                                        (change)="onStatusChange(req.id, $event.target.value, 'actual')" 
-                                    >
-                                        <option 
-                                            *ngFor="let status of statuses" 
-                                            [selected]="status.id == req.requestStatus.id"
-                                            [value]="status.id"
-                                        >
-                                        {{status.description}}
+                                    <select class="app-table__select"
+                                        (change)="onStatusChange(req.id, $event.target.value, 'actual')">
+                                        <option *ngFor="let status of statuses"
+                                            [selected]="status.id == req.requestStatus.id" [value]="status.id">
+                                            {{status.description}}
                                         </option>
                                     </select>
                                 </td>
@@ -228,113 +217,101 @@
                                     </button>
                                 </div>
                             </ng-template>
-                        </tbody>
-                    </table>
-                </div>
+
+                        </ng-container>
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
     <div class="half-container half-container--right-part">
-        <div
-            class="search-results"
-            infiniteScroll
-            [infiniteScrollDistance]="2"
-            [infiniteScrollThrottle]="50"
-            (scrolled)="onScrollComplitedRequests()"
-            [scrollWindow]="false"
-        >
-        <div class="orders-block">
-            <h2 class="block-title">
-                Завершенные заказы
-            </h2>
-            <table class="app-table">
-                <thead>
-                    <tr class="app-table__tr">
-                        <th class="app-table__th">
-                            Клиент
-                        </th>
-                        <th class="app-table__th">
-                            Товар
-                        </th>
-                        <th class="app-table__th">
-                            Поставщик
-                        </th>
-                        <th class="app-table__th">
-                            Перевозчик
-                        </th>
-                        <th class="app-table__th">
-                            Объем, тн
-                        </th>
-                        <th class="app-table__th">
-                            Адрес доставки
-                        </th>
-                        <th class="app-table__th">
-                            Статус
-                        </th>
-                        <th class="app-table__th">
-                            Дата
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        *ngFor="let req of completedRequests"
-                        class="app-table__tr app-table__tr--editable"
-                        (contextmenu)="openContextMenu($event, req); $event.preventDefault();"
-                    >
-                        <td (click)="edit(req)"  class="app-table__td">{{req.client?.name}}</td>
-                        <td (click)="edit(req)"  class="app-table__td">{{req.product?.name}}</td>
-                        <td (click)="edit(req)"  class="app-table__td">{{req.supplier?.name}}</td>
-                        <td (click)="edit(req)"  class="app-table__td">{{req.car?.owner}}</td>
-                        <td (click)="edit(req)"  class="app-table__td">{{req.amount}}</td>
-                        <td (click)="edit(req)"  class="app-table__td">
-                            {{req.deliveryAddress?.name}}
-                        </td>
-                        <td class="app-table__td">
-                            <select 
-                                class="app-table__select"
-                                (change)="onStatusChange(req.id, $event.target.value, 'completed')"
-                            >
-                                <option 
-                                    *ngFor="let status of statuses"
-                                    [selected]="status.id == req.requestStatus.id"
-                                    [value]="status.id"
-                                >
-                                {{status.description}}
-                                </option>
-                            </select>
-                        </td>
-                        <td (click)="edit(req)"  class="app-table__td">
-                            {{req.deliveryStart | date: "dd.MM.yyyy"}}
-                        </td>
-                    </tr>
-                    <ng-template #reqMenu let-req>
-                        <div class="requestContextMenu">
-                            <button class="requestContextMenu__btn" (click)="edit(req)">
-                                <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
-                                Редактировать
-                            </button>
-                            <button (click)="copy(req, curDate)" class=" requestContextMenu__btn">
-                                <img class="edit-btn__img" src="assets/img/icons/copy.svg" alt="копировать">
-                                Копировать
-                            </button>
-                            <button (click)="confirm(req)" class="requestContextMenu__btn">
-                                <img class="edit-btn__img" src="assets/img/icons/delete.svg" alt="удалить">
-                                Удалить
-                            </button>
-                            <button (click)="closeContextMenu()" class=" requestContextMenu__btn">
-                                <img class="edit-btn__img" src="assets/img/icons/close.svg" alt="отмена">
-                                Отмена
-                            </button>
-                        </div>
-                    </ng-template>
-                </tbody>
-            </table>
+        <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+            (scrolled)="onScrollComplitedRequests()" [scrollWindow]="false">
+            <div class="orders-block">
+                <h2 class="block-title">
+                    Завершенные заказы
+                </h2>
+                <table class="app-table">
+                    <thead>
+                        <tr class="app-table__tr">
+                            <th class="app-table__th">
+                                Клиент
+                            </th>
+                            <th class="app-table__th">
+                                Товар
+                            </th>
+                            <th class="app-table__th">
+                                Поставщик
+                            </th>
+                            <th class="app-table__th">
+                                Перевозчик
+                            </th>
+                            <th class="app-table__th">
+                                Объем, тн
+                            </th>
+                            <th class="app-table__th">
+                                Адрес доставки
+                            </th>
+                            <th class="app-table__th">
+                                Статус
+                            </th>
+                            <th class="app-table__th">
+                                Дата
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let req of completedRequests" class="app-table__tr app-table__tr--editable"
+                            (contextmenu)="openContextMenu($event, req); $event.preventDefault();">
+                            <td (click)="edit(req)" class="app-table__td">{{req.client?.name}}</td>
+                            <td (click)="edit(req)" class="app-table__td">{{req.product?.name}}</td>
+                            <td (click)="edit(req)" class="app-table__td">{{req.supplier?.name}}</td>
+                            <td (click)="edit(req)" class="app-table__td">{{req.car?.owner}}</td>
+                            <td (click)="edit(req)" class="app-table__td">{{req.amount}}</td>
+                            <td (click)="edit(req)" class="app-table__td">
+                                {{req.deliveryAddress?.name}}
+                            </td>
+                            <td class="app-table__td">
+                                <select class="app-table__select"
+                                    (change)="onStatusChange(req.id, $event.target.value, 'completed')">
+                                    <option *ngFor="let status of statuses"
+                                        [selected]="status.id == req.requestStatus.id" [value]="status.id">
+                                        {{status.description}}
+                                    </option>
+                                </select>
+                            </td>
+                            <td (click)="edit(req)" class="app-table__td">
+                                {{req.deliveryStart | date: "dd.MM.yyyy"}}
+                            </td>
+                        </tr>
+                        <ng-template #reqMenu let-req>
+                            <div class="requestContextMenu">
+                                <button class="requestContextMenu__btn" (click)="edit(req)">
+                                    <img class="edit-btn__img" src="assets/img/icons/edit.svg" alt="изменить">
+                                    Редактировать
+                                </button>
+                                <button (click)="copy(req, curDate)" class=" requestContextMenu__btn">
+                                    <img class="edit-btn__img" src="assets/img/icons/copy.svg" alt="копировать">
+                                    Копировать
+                                </button>
+                                <button (click)="confirm(req)" class="requestContextMenu__btn">
+                                    <img class="edit-btn__img" src="assets/img/icons/delete.svg" alt="удалить">
+                                    Удалить
+                                </button>
+                                <button (click)="closeContextMenu()" class=" requestContextMenu__btn">
+                                    <img class="edit-btn__img" src="assets/img/icons/close.svg" alt="отмена">
+                                    Отмена
+                                </button>
+                            </div>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-    
+
     <!-- <div class="longTerm-order">
         <h2 class="block-title">Долгосрочные заказы</h2>
         <div class="additional-rows" *ngIf="hidingColumnsLongTerm.length">

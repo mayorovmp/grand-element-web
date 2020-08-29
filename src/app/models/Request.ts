@@ -43,5 +43,6 @@ export class Request {
   carCategoryId?: number;
   supplierId?: number;
   requestStatus: Status;
+  requestStatusId: number;
 }
 

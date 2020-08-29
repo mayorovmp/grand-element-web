@@ -503,6 +503,14 @@ export class RequestEditorComponent implements OnInit {
       req.carCategoryId = req.carCategory.id;
     }
 
+    if (req.requestStatus?.id) {
+      req.requestStatusId = req.requestStatus.id;
+    } else {
+      // Если статус не установлен, то по умолчанию статус Новая
+      // TODO: Вынести в константу 1.
+      req.requestStatusId = 1;
+    }
+
     if (req.supplier) {
       req.supplierId = req.supplier.id;
     }
