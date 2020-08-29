@@ -48,7 +48,7 @@
   font-weight: 700;
 }
 .finish-order{
-  background-color: transparent;
+  background-color: #fff;
   border: 1px solid var(--light-gray);
 }
 .finish-order__icon{

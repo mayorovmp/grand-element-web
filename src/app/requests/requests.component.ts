@@ -193,7 +193,7 @@ export class RequestsComponent implements OnInit {
     }
   }
 
-  setStatus(reqId: number, statusId: string, oldStatus: string) {
+  setStatus(reqId: number, statusId: string | number, oldStatus: string | number) {
     this.http.setStatus(reqId, Number(statusId)).subscribe(
       result => {
         if (oldStatus === 'completed' || (oldStatus === 'actual' && Number(statusId) === 2)) {
@@ -235,7 +235,8 @@ export class RequestsComponent implements OnInit {
   divideAmount(req: Request) {
     this.ngxSmartModalService.setModalData(
       {
-        req
+        req,
+        setStatus: () => this.setStatus(req.id || 0, 3, req.requestStatus.id || 0)
       },
       'amountModal',
       true
