@@ -16,12 +16,13 @@
             class="form-block__input"
             [(ngModel)]="carOwnerText"
             (keyup)="carListVisible = true"
+            (click)="setFavoriteCars()"
             name="carOwnerText"
             id="carOwnerText"
         >
         <ul
             class="form-block__searching-list"
-            *ngIf="carOwnerText.length > 0 && carListVisible"
+            *ngIf="carListVisible"
         >
             <li 
                 *ngFor="let car of cars | carOwnerFilter: carOwnerText: 'car.owner'"

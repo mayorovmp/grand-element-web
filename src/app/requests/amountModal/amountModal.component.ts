@@ -18,6 +18,7 @@ export class AmountModalComponent implements OnInit {
   request: Request = new Request();
   parentReq: Request = new Request();
   cars: Car[] = [];
+  favoriteCars: Car[] = [];
   parentCarOwner: Car;
   carOwnerText = '';
   carListVisible = false;
@@ -35,6 +36,10 @@ export class AmountModalComponent implements OnInit {
   async onOpen() {
     this.reset();
     this.carHttp.getCars().toPromise().then(cars => this.cars = cars);
+    this.carHttp.getFavoriteCars(30, 5).subscribe(
+      cars => this.favoriteCars = cars,
+      error => this.toastr.error(error.message)
+    );
     const transferred = this.ngxSmartModalService.getModalData('amountModal');
     if (transferred) {
       const { req } = transferred;
@@ -64,8 +69,12 @@ export class AmountModalComponent implements OnInit {
       this.request.income = req.income;
       this.request.comment = req.comment;
       this.request.unit = req.unit;
-      this.reqService.add(this.request);
+      this.request.requestStatus = {id: 3, description: 'в работе'};
     }
+  }
+  setFavoriteCars() {
+    this.cars = this.favoriteCars;
+    this.carListVisible = true;
   }
   selectCarOwner(car: Car) {
     this.carListVisible = false;
