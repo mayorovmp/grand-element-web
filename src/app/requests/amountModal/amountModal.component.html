@@ -6,21 +6,59 @@
 >
   <div class="form-container">
     <h2 class="form-title">Разделить объем</h2>
-
-    <!-- <div class="confirm-modal-btns">
-      <button 
+    <div class="form-container">
+      <div class="form-block">
+        <label for="carOwnerText" class="form-block__label">
+          Перевозчик
+        </label>
+        <input
+            type="text"
+            class="form-block__input"
+            [(ngModel)]="carOwnerText"
+            (keyup)="carListVisible = true"
+            name="carOwnerText"
+            id="carOwnerText"
+        >
+        <ul
+            class="form-block__searching-list"
+            *ngIf="carOwnerText.length > 0 && carListVisible"
+        >
+            <li 
+                *ngFor="let car of cars | carOwnerFilter: carOwnerText: 'car.owner'"
+                (click)="selectCarOwner(car)"
+                class="form-block__searching-list-item"
+                [ngValue]="car"
+            >
+                {{car.owner}}
+            </li>
+        </ul>
+      </div>
+      <div class="form-block">
+        <label for="amount" class="form-block__label">
+            Объем, тн
+        </label>
+        <input 
+            type="number"
+            [(ngModel)]="request.amount" 
+            id="amount"
+            class="form-block__input"
+        >
+      </div>
+    </div>
+    <div class="confirm-modal-btns">
+      <!-- <button 
         class="app-btn {{modalBtnActionColor}}-btn confirm-modal-first-btn" 
         (click)="modalAction()"
       >
-        {{modalActionTitle}}
-      </button>
+        Ок
+      </button> -->
       <button 
         class="app-btn gray-btn" 
         (click)="onClose()"
       >
         Отмена
       </button>
-    </div> -->
+    </div>
   </div>
 
 </ngx-smart-modal>
