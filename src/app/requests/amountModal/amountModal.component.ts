@@ -3,6 +3,7 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 import { Request } from 'src/app/models/Request';
 import { Car } from 'src/app/models/Car';
 import { HttpService as CarHttp } from 'src/app/catalogs/car/http.service';
+import { HttpService as ReqService } from 'src/app/requests/http.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -15,6 +16,7 @@ export class AmountModalComponent implements OnInit {
   @Output() changed = new EventEmitter<any>();
 
   request: Request = new Request();
+  parentReq: Request = new Request();
   cars: Car[] = [];
   parentCarOwner: Car;
   carOwnerText = '';
@@ -24,6 +26,7 @@ export class AmountModalComponent implements OnInit {
   constructor(
     private ngxSmartModalService: NgxSmartModalService,
     private carHttp: CarHttp,
+    private reqService: ReqService,
     private toastr: ToastrService
   ) { }
 
@@ -35,9 +38,33 @@ export class AmountModalComponent implements OnInit {
     const transferred = this.ngxSmartModalService.getModalData('amountModal');
     if (transferred) {
       const { req } = transferred;
-      this.request = req;
+      this.parentReq = req;
       this.parentAmount = req.amount;
       this.parentCarOwner = req.car;
+
+      this.request = new Request();
+      this.request.deliveryStart = new Date();
+      this.request.client = req.client;
+      this.request.deliveryAddress = req.deliveryAddress;
+      this.request.isLong = req.isLong;
+      this.request.amount = req.amount;
+      this.request.sellingPrice = req.sellingPrice;
+      this.request.product = req.product;
+      this.request.supplier = req.supplier;
+      this.request.supplierVat = req.supplierVat;
+      this.request.purchasePrice = req.purchasePrice;
+      this.request.car = req.car;
+      this.request.carVat = req.carVat;
+      this.request.freightPrice = req.freightPrice;
+      this.request.amountIn = req.amountIn;
+      this.request.amountOut = req.amountOut;
+      this.request.freightCost = req.freightCost;
+      this.request.sellingCost = req.sellingCost;
+      this.request.profit = req.profit;
+      this.request.income = req.income;
+      this.request.comment = req.comment;
+      this.request.unit = req.unit;
+      this.reqService.add(this.request);
     }
   }
   selectCarOwner(car: Car) {
@@ -69,7 +96,47 @@ export class AmountModalComponent implements OnInit {
       } else if (this.parentAmount === this.request.amount && this.parentCarOwner.id === this.request.car?.id) {
         transferred.setStatus();
         this.ngxSmartModalService.close('amountModal');
+      } else if (this.parentAmount === this.request.amount && this.parentCarOwner.id !== this.request.car?.id) {
+        this.closeOldReq();
+        this.ngxSmartModalService.close('amountModal');
+      } else {
+        this.createReq();
+        this.ngxSmartModalService.close('amountModal');
       }
     }
+  }
+  async closeOldReq() {
+    await this.reqService.add(this.request).toPromise();
+    await this.reqService.del(this.parentReq).toPromise();
+  }
+  async createReq() {
+    if (this.parentReq.amount && this.request.amount) {
+      this.parentReq.amount = this.parentReq.amount - this.request.amount;
+    }
+    if (this.parentReq.car) {
+      this.parentReq.carId = this.parentReq.car.id;
+    }
+
+    if (this.parentReq.product) {
+      this.parentReq.productId = this.parentReq.product.id;
+    }
+
+    if (this.parentReq.deliveryAddress) {
+      this.parentReq.deliveryAddressId = this.parentReq.deliveryAddress.id;
+    }
+
+    if (this.parentReq.client) {
+      this.parentReq.clientId = this.parentReq.client.id;
+    }
+
+    if (this.parentReq.carCategory) {
+      this.parentReq.carCategoryId = this.parentReq.carCategory.id;
+    }
+
+    if (this.parentReq.supplier) {
+      this.parentReq.supplierId = this.parentReq.supplier.id;
+    }
+    await this.reqService.edit(this.parentReq).toPromise();
+    await this.reqService.add(this.request).toPromise();
   }
 }
