@@ -4,7 +4,6 @@ import { Supplier } from '../../models/Supplier';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from './http.service';
 import { SupplierEditorComponent } from './editor/editor.component';
-import { ConfirmModalComponent } from '../../common/confirm-modal/confirm.component';
 
 @Component({
   selector: 'app-suppliers',

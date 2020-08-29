@@ -108,6 +108,7 @@ export class RequestsComponent implements OnInit {
 
   private async del(req: Request) {
     await this.http.del(req).toPromise();
+    this.reset('all');
     this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
     this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
   }
@@ -175,6 +176,24 @@ export class RequestsComponent implements OnInit {
   }
 
   onStatusChange(reqId: number, statusId: string, oldStatus: string) {
+    if (oldStatus === 'actual' && Number(statusId) === 2) {
+      this.ngxSmartModalService.setModalData(
+        {
+          title: 'Запланированный тоннаж получен',
+          btnAction: () => this.setStatus(reqId, statusId, oldStatus),
+          btnActionColor: 'gray',
+          btnActionName: 'Подтвердить'
+        },
+        'confirmModal',
+        true
+      );
+      this.ngxSmartModalService.toggle('confirmModal');
+    } else {
+      this.setStatus(reqId, statusId, oldStatus);
+    }
+  }
+
+  setStatus(reqId: number, statusId: string, oldStatus: string) {
     this.http.setStatus(reqId, Number(statusId)).subscribe(
       result => {
         if (oldStatus === 'completed' || (oldStatus === 'actual' && Number(statusId) === 2)) {
@@ -211,6 +230,10 @@ export class RequestsComponent implements OnInit {
       this.actualRequestslimit = 10;
       this.actualRequestsOffset = 0;
     }
+  }
+
+  divideAmount() {
+    this.ngxSmartModalService.toggle('amountModal');
   }
 
   // sorting(sortingCol: string, nested: number) {

@@ -24,6 +24,9 @@
                         <thead>
                             <tr class="app-table__tr">
                                 <th class="app-table__th">
+
+                                </th>
+                                <th class="app-table__th">
                                     Клиент
                                 </th>
                                 <th class="app-table__th">
@@ -52,6 +55,12 @@
                                 (contextmenu)="openContextMenu($event, req); $event.preventDefault();"
                                 *ngFor="let req of incidentRequests"
                             >
+                                <td class="app-table__td">
+                                    <button title="Добавить заявку" class="finish-order"
+                                        (click)="addShortRequest(curDate, req)">
+                                        <img class="finish-order__icon" src="assets/img/icons/truck.svg" alt="Добавить заявку">
+                                    </button>
+                                </td>
                                 <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
                                 <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>
                                 <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>
@@ -135,6 +144,9 @@
                     <table class="app-table">
                         <thead>
                             <tr class="app-table__tr">
+                                <th class="app-table__th">
+
+                                </th>
                                 <th class="app-table__th" *ngIf="!hidingColumns.includes('Клиент')">
                                     Клиент
                                 </th>
@@ -164,6 +176,12 @@
                                 class="app-table__tr app-table__tr--editable"
                                 (contextmenu)="openContextMenu($event, req); $event.preventDefault();"
                             >
+                                <td class="app-table__td">
+                                    <button title="Разделить объем" class="finish-order"
+                                        (click)="divideAmount()">
+                                        <img class="finish-order__icon" src="assets/img/icons/truck.svg" alt="Разделить объем">
+                                    </button>
+                                </td>
                                 <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
                                 <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>
                                 <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>
@@ -527,3 +545,4 @@
 </div>
 <app-request-editor (changed)="onModalChange()"></app-request-editor>
 <app-modal-confirm (changed)="onModalChange()"></app-modal-confirm>
+<app-modal-amount (changed)="onModalChange()"></app-modal-amount>

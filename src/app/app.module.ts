@@ -43,6 +43,7 @@ import { RequestsComponent } from './requests/requests.component';
 import { FilterPipe } from './core/pipes/filter.pipe';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { AmountModalComponent } from './requests/amountModal/amountModal.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.ballScaleMultiple,
   minTime: 100,
@@ -66,7 +67,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     EditProductComponent,
     CarEditorComponent,
     ConfirmModalComponent,
-    FilterPipe
+    FilterPipe,
+    AmountModalComponent
   ],
   imports: [
     NgxSmartModalModule.forRoot(),
