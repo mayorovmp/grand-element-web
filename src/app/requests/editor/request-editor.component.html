@@ -206,12 +206,20 @@
                 >
             </button>
         </div>
-        <button 
-            (click)="createOrUpdate(request, parentRequestId)"
-            class="app-btn gray-btn"
-        >
-            Сохранить
-        </button>
+        <div class="footer-modal-btns">
+            <button 
+                (click)="createOrUpdate(request, parentRequestId)"
+                class="app-btn gray-btn footer-modal-btns__first-btn"
+            >
+                Ок
+            </button>
+            <button 
+              class="app-btn gray-btn" 
+              (click)="onClose()"
+            >
+              Отмена
+            </button>
+          </div>
     </div>
 </ngx-smart-modal>
 <app-edit-product (changed)="onProductAdd($event)"></app-edit-product>

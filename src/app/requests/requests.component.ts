@@ -108,7 +108,7 @@ export class RequestsComponent implements OnInit {
 
   private async del(req: Request) {
     await this.http.del(req).toPromise();
-    this.reset('all');
+    await this.reset('all');
     this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
     this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
   }

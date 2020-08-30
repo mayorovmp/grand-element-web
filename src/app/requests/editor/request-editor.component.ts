@@ -184,6 +184,10 @@ export class RequestEditorComponent implements OnInit {
     this.calcProfit();
   }
 
+  onClose() {
+    this.ngxSmartModalService.toggle(RequestEditorComponent.MODAL_NAME);
+  }
+
   reset() {
     this.request = new Request();
     this.additionalCarOwners = [];
