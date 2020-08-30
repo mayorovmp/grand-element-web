@@ -236,7 +236,7 @@ export class RequestsComponent implements OnInit {
     this.ngxSmartModalService.setModalData(
       {
         req,
-        setStatus: () => this.setStatus(req.id || 0, 3, req.requestStatus.id || 0)
+        setStatus: () => this.setStatus(req.id || 0, 3, req.requestStatus?.id || 0)
       },
       'amountModal',
       true
@@ -310,7 +310,6 @@ export class RequestsComponent implements OnInit {
   onModalChange() {
     this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
     this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
-
   }
 
   hideColumn(column: string) {

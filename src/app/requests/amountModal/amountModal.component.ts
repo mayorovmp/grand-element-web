@@ -69,7 +69,7 @@ export class AmountModalComponent implements OnInit {
       this.request.income = req.income;
       this.request.comment = req.comment;
       this.request.unit = req.unit;
-      this.request.requestStatus = {id: 3, description: 'в работе'};
+      this.request.requestStatusId = 3;
     }
   }
   setFavoriteCars() {
@@ -92,7 +92,6 @@ export class AmountModalComponent implements OnInit {
     this.parentAmount = 0;
   }
   onClose() {
-    this.changed.emit();
     this.ngxSmartModalService.close('amountModal');
   }
   apply() {
@@ -147,5 +146,6 @@ export class AmountModalComponent implements OnInit {
     }
     await this.reqService.edit(this.parentReq).toPromise();
     await this.reqService.add(this.request).toPromise();
+    this.changed.emit();
   }
 }
