@@ -315,8 +315,12 @@ export class RequestsComponent implements OnInit {
   }
 
   onModalChange() {
+    this.reset('actual');
+    this.getStatuses();
     this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
     this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
+    this.nextDay.setDate(new Date().getDate() + 1);
+
   }
 
   hideColumn(column: string) {
