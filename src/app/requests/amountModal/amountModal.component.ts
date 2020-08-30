@@ -20,8 +20,9 @@ export class AmountModalComponent implements OnInit {
   parentReq: Request = new Request();
   carOwnerText = '';
   cars: Car[] = [];
+  allCars: Car[] = [];
   favoriteCars: Car[] = [];
-  carListVisible = false;
+  carListVisible = true;
   amount = 0;
 
   constructor(
@@ -35,7 +36,7 @@ export class AmountModalComponent implements OnInit {
 
   async onOpen() {
     this.reset();
-    this.carHttp.getCars().toPromise().then(cars => this.cars = cars);
+    this.carHttp.getCars().toPromise().then(cars => this.allCars = cars);
     this.carHttp.getFavoriteCars(30, 5).subscribe(
       cars => this.favoriteCars = cars,
       error => this.toastr.error(error.message)
@@ -48,7 +49,7 @@ export class AmountModalComponent implements OnInit {
       this.request.deliveryStart = new Date();
       this.request.client = req.client;
       this.request.deliveryAddress = req.deliveryAddress;
-      this.request.isLong = req.isLong;
+      this.request.isLong = false;
       this.request.amount = req.amount;
       this.request.product = req.product;
       this.request.supplier = req.supplier;
@@ -60,6 +61,9 @@ export class AmountModalComponent implements OnInit {
       this.request.requestStatusId = 3;
     }
   }
+  onSearch() {
+    this.cars = this.allCars;
+  }
   setFavoriteCars() {
     this.cars = this.favoriteCars;
     this.carListVisible = true;
@@ -70,6 +74,9 @@ export class AmountModalComponent implements OnInit {
       this.carOwnerText = car.owner;
     }
     this.request.car = car;
+  }
+  clearAmount() {
+    this.request.amount = undefined;
   }
   reset() {
     this.request = new Request();
@@ -87,6 +94,7 @@ export class AmountModalComponent implements OnInit {
     } else {
       if (this.parentReq.amount === this.request.amount) {
         this.parentReq.car = this.request.car;
+        this.parentReq.isLong = false;
         await this.reqService.edit(this.parentReq).toPromise();
         if (this.parentReq.id) {
           await this.reqService.setStatus(this.parentReq.id, 3).toPromise();
@@ -95,7 +103,10 @@ export class AmountModalComponent implements OnInit {
       } else if (this.parentReq.amount && this.parentReq.amount > this.request.amount) {
         this.parentReq.amount -= this.request.amount;
         await this.reqService.edit(this.parentReq).toPromise();
-        await this.reqService.add(this.request).toPromise();
+        const newReq = await this.reqService.add(this.request).toPromise();
+        if (newReq.id) {
+          await this.reqService.setStatus(newReq.id, 3).toPromise();
+        }
         this.ngxSmartModalService.close('amountModal');
       } else {
         this.createReq();
