@@ -26,14 +26,16 @@ export class ConfirmModalComponent implements OnInit {
       this.modalTitle = title;
       this.modalAction = () => {
         btnAction();
-        this.onClose();
+        this.close();
       };
       this.modalActionTitle = btnActionName;
       this.modalBtnActionColor = btnActionColor;
     }
   }
+  close() {
+    this.ngxSmartModalService.close('confirmModal');
+  }
   onClose() {
     this.changed.emit();
-    this.ngxSmartModalService.close('confirmModal');
   }
 }

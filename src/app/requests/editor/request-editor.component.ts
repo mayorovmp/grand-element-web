@@ -113,9 +113,9 @@ export class RequestEditorComponent implements OnInit {
     await this.getCatalogs();
     if (!this.curDate.getDay()) {
       this.curDate.setDate(this.curDate.getDate() + 1);
-      this.request.deliveryStart = this.curDate;
-      this.request.deliveryEnd = this.curDate;
     }
+    this.request.deliveryStart = this.curDate;
+    this.request.deliveryEnd = this.curDate;
     this.goal = transferred.type;
 
     switch (this.goal) {
@@ -172,7 +172,8 @@ export class RequestEditorComponent implements OnInit {
         if (this.request.client?.name) {
           this.clientNameText = this.request.client.name;
         }
-        await this.getSuppliersByProd(this.request.product?.id);
+
+        // await this.getSuppliersByProd(this.request.product?.id);
         break;
       }
       default: {

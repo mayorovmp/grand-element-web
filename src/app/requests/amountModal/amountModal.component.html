@@ -28,7 +28,6 @@
                 *ngFor="let car of cars | carOwnerFilter: carOwnerText: 'car.owner'"
                 (click)="selectCarOwner(car)"
                 class="form-block__searching-list-item"
-                [ngValue]="car"
             >
                 {{car.owner}}
             </li>
