@@ -200,6 +200,12 @@ export class RequestEditorComponent implements OnInit {
     this.suppliers = [];
     this.carCategories = [];
     this.clientNameText = '';
+    this.curDate = new Date();
+    if (!this.curDate.getDay()) {
+      this.curDate.setDate(this.curDate.getDate() + 1);
+      this.request.deliveryStart = this.curDate;
+      this.request.deliveryEnd = this.curDate;
+    }
   }
 
   async processLastReq(client: Client | undefined, addr: Address | undefined) {
@@ -509,10 +515,6 @@ export class RequestEditorComponent implements OnInit {
 
     if (req.supplier) {
       req.supplierId = req.supplier.id;
-    }
-
-    if (req.requestStatus) {
-      req.requestStatusId = req.requestStatus.id;
     }
     switch (this.goal) {
       case Goal.Copy:
