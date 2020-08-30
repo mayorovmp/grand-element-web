@@ -193,6 +193,7 @@ export class RequestEditorComponent implements OnInit {
     this.additionalCarOwners = [];
     this.isLong = false;
     this.hasParent = false;
+    this.clientListVisible = false;
 
     this.clients = [];
     this.cars = [];

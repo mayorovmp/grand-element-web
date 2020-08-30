@@ -217,7 +217,7 @@ export class RequestsComponent implements OnInit {
       this.incidentRequests = [];
       this.datePeriods = [];
       this.dateArray = [];
-      this.actualRequestslimit = 10;
+      this.actualRequestslimit = 15;
       this.actualRequestsOffset = 0;
     } else {
       this.actualRequests = [];
@@ -225,9 +225,9 @@ export class RequestsComponent implements OnInit {
       this.incidentRequests = [];
       this.datePeriods = [];
       this.dateArray = [];
-      this.complitedRequestslimit = 13;
+      this.complitedRequestslimit = 20;
       this.complitedRequestsOffset = 0;
-      this.actualRequestslimit = 10;
+      this.actualRequestslimit = 15;
       this.actualRequestsOffset = 0;
     }
   }
@@ -270,10 +270,10 @@ export class RequestsComponent implements OnInit {
     this.nextDay.setDate(new Date().getDate() + 1);
   }
 
-  onAmountFuncFinish() {
+  async onAmountFuncFinish() {
     this.reset('actual');
-    this.getStatuses();
-    this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
+    await this.getStatuses();
+    await this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
     this.nextDay.setDate(new Date().getDate() + 1);
   }
 
@@ -314,11 +314,11 @@ export class RequestsComponent implements OnInit {
     this.ngxSmartModalService.toggle('confirmModal');
   }
 
-  onModalChange() {
+  async onModalChange() {
     this.reset('actual');
-    this.getStatuses();
-    this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
-    this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
+    await this.getStatuses();
+    await this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
+    await this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
     this.nextDay.setDate(new Date().getDate() + 1);
 
   }

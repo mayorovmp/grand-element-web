@@ -49,6 +49,11 @@ export class AmountModalComponent implements OnInit {
 
       this.request = new Request();
       this.request.deliveryStart = new Date();
+      if (!this.request.deliveryStart.getDay()) {
+        this.request.deliveryStart.setDate(this.request.deliveryStart.getDate() + 1);
+        this.request.deliveryStart = this.request.deliveryStart;
+        this.request.deliveryEnd = this.request.deliveryStart;
+      }
       this.request.client = req.client;
       this.request.deliveryAddress = req.deliveryAddress;
       this.request.isLong = req.isLong;
@@ -69,7 +74,7 @@ export class AmountModalComponent implements OnInit {
       this.request.income = req.income;
       this.request.comment = req.comment;
       this.request.unit = req.unit;
-      this.request.requestStatusId = 3;
+      this.request.requestStatusId = 1;
     }
   }
   setFavoriteCars() {
