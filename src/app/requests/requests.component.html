@@ -15,7 +15,7 @@
             (scrolled)="onScrollActualRequests()"
             [scrollWindow]="false"
         >
-            <div class="orders-block" *ngIf="incidentRequests.length">
+            <div class="orders-block" *ngIf="incidentRequests.length || longTermRequests.length">
                 <h2 class="block-title">
                     Долгосроки и форс-мажоры
                 </h2>
@@ -56,9 +56,12 @@
                                 *ngFor="let req of incidentRequests"
                             >
                                 <td class="app-table__td">
-                                    <button title="Добавить заявку" class="finish-order"
-                                        (click)="addShortRequest(curDate, req)">
-                                        <img class="finish-order__icon" src="assets/img/icons/truck.svg" alt="Добавить заявку">
+                                    <button
+                                        title="Разделить объем"
+                                        class="finish-order"
+                                        (click)="divideAmount(req)"
+                                    >
+                                        <img class="finish-order__icon" src="assets/img/icons/truck.svg" alt="Разделить объем">
                                     </button>
                                 </td>
                                 <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
@@ -89,6 +92,15 @@
                                 (contextmenu)="openContextMenu($event, req); $event.preventDefault();"
                                 *ngFor="let req of longTermRequests"
                             >
+                                <td class="app-table__td">
+                                    <button
+                                        title="Разделить объем"
+                                        class="finish-order"
+                                        (click)="divideAmount(req)"
+                                    >
+                                        <img class="finish-order__icon" src="assets/img/icons/truck.svg" alt="Разделить объем">
+                                    </button>
+                                </td>
                                 <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Клиент')">{{req.client?.name}}</td>
                                 <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Товар')">{{req.product?.name}}</td>
                                 <td (click)="edit(req)"  class="app-table__td" *ngIf="!hidingColumns.includes('Поставщик')">{{req.supplier?.name}}</td>

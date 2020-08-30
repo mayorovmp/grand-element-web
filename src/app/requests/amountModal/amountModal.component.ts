@@ -56,7 +56,7 @@ export class AmountModalComponent implements OnInit {
       }
       this.request.client = req.client;
       this.request.deliveryAddress = req.deliveryAddress;
-      this.request.isLong = req.isLong;
+      this.request.isLong = false;
       this.request.amount = req.amount;
       this.request.sellingPrice = req.sellingPrice;
       this.request.product = req.product;
