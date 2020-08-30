@@ -126,6 +126,7 @@ export class AmountModalComponent implements OnInit {
   async closeOldReq() {
     await this.reqService.add(this.request).toPromise();
     await this.reqService.del(this.parentReq).toPromise();
+    this.changed.emit();
   }
   async createReq() {
     if (this.parentReq.amount && this.request.amount) {
