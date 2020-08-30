@@ -93,6 +93,7 @@ export class AmountModalComponent implements OnInit {
       this.toastr.error('Заполните поля');
     } else {
       if (this.parentReq.amount === this.request.amount) {
+        this.parentReq.deliveryStart = new Date();
         this.parentReq.car = this.request.car;
         this.parentReq.isLong = false;
         await this.reqService.edit(this.parentReq).toPromise();
