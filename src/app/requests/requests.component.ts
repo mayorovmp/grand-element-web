@@ -31,8 +31,6 @@ import { take, filter } from 'rxjs/operators';
   styleUrls: ['./requests.component.css']
 })
 export class RequestsComponent implements OnInit {
-  pickedDay = new Date(Date.now());
-
   actualRequests: Request[] = [];
   completedRequests: Request[] = [];
   incidentRequests: Request[] = [];
@@ -43,9 +41,6 @@ export class RequestsComponent implements OnInit {
   sub: Subscription;
   @ViewChild('reqMenu') reqMenu: TemplateRef<any>;
   overlayRef: OverlayRef | null;
-
-  curDate = new Date();
-  nextDay = new Date();
 
   hidingColumns: string[] = [];
 
@@ -101,16 +96,15 @@ export class RequestsComponent implements OnInit {
     this.ngxSmartModalService.setModalData({ type: Goal.Copy, request }, RequestEditorComponent.MODAL_NAME, true);
     this.ngxSmartModalService.getModal(RequestEditorComponent.MODAL_NAME).open();
   }
-  addShortRequest(dt: Date, parent: Request) {
-    this.ngxSmartModalService.setModalData({ type: Goal.AddChildRequest, date: dt, parent }, RequestEditorComponent.MODAL_NAME, true);
-    this.ngxSmartModalService.getModal(RequestEditorComponent.MODAL_NAME).open();
-  }
 
-  private async del(req: Request) {
+  private async del(req: Request, requestsType: string) {
     await this.http.del(req).toPromise();
-    await this.reset('all');
-    this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
-    this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
+    await this.reset(requestsType);
+    if (requestsType === 'completed') {
+      await this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
+    } else {
+      await this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
+    }
   }
 
   onScrollActualRequests() {
@@ -215,14 +209,20 @@ export class RequestsComponent implements OnInit {
     if (status === 'actual') {
       this.actualRequests = [];
       this.incidentRequests = [];
-      this.datePeriods = [];
+      this.longTermRequests = [];
       this.dateArray = [];
+      this.datePeriods = [];
       this.actualRequestslimit = 15;
       this.actualRequestsOffset = 0;
-    } else {
+    } else if (status === 'completed') {
+      this.completedRequests = [];
+      this.complitedRequestslimit = 20;
+      this.complitedRequestsOffset = 0;
+    } else if (status === 'all') {
       this.actualRequests = [];
       this.completedRequests = [];
       this.incidentRequests = [];
+      this.longTermRequests = [];
       this.datePeriods = [];
       this.dateArray = [];
       this.complitedRequestslimit = 20;
@@ -267,14 +267,12 @@ export class RequestsComponent implements OnInit {
     this.getStatuses();
     this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
     this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
-    this.nextDay.setDate(new Date().getDate() + 1);
   }
 
   async onAmountFuncFinish() {
     this.reset('actual');
     await this.getStatuses();
     await this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
-    this.nextDay.setDate(new Date().getDate() + 1);
   }
 
   DownloadFile(dt: Date): void {
@@ -300,11 +298,15 @@ export class RequestsComponent implements OnInit {
     );
   }
 
-  confirm(req: Request) {
+  confirmDeleting(req: Request) {
+    let requestsType = 'actual';
+    if (req.requestStatus?.id === 2) {
+      requestsType = 'completed';
+    }
     this.ngxSmartModalService.setModalData(
       {
         title: 'Подтвердите действие',
-        btnAction: () => this.del(req),
+        btnAction: () => this.del(req, requestsType),
         btnActionColor: 'red',
         btnActionName: 'Удалить заказ'
       },
@@ -315,12 +317,10 @@ export class RequestsComponent implements OnInit {
   }
 
   async onModalChange() {
-    this.reset('actual');
+    this.reset('all');
     await this.getStatuses();
     await this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
     await this.getCompletedRequests(this.complitedRequestslimit, this.complitedRequestsOffset);
-    this.nextDay.setDate(new Date().getDate() + 1);
-
   }
 
   hideColumn(column: string) {
