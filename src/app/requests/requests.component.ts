@@ -270,6 +270,13 @@ export class RequestsComponent implements OnInit {
     this.nextDay.setDate(new Date().getDate() + 1);
   }
 
+  onAmountFuncFinish() {
+    this.reset('actual');
+    this.getStatuses();
+    this.getActualRequests(this.actualRequestslimit, this.actualRequestsOffset);
+    this.nextDay.setDate(new Date().getDate() + 1);
+  }
+
   DownloadFile(dt: Date): void {
     this.http.getFile(dt)
       .subscribe(

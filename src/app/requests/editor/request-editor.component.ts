@@ -506,6 +506,10 @@ export class RequestEditorComponent implements OnInit {
     if (req.supplier) {
       req.supplierId = req.supplier.id;
     }
+
+    if (req.requestStatus) {
+      req.requestStatusId = req.requestStatus.id;
+    }
     switch (this.goal) {
       case Goal.Copy:
       case Goal.Add: {
