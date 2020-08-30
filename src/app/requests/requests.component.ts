@@ -174,7 +174,7 @@ export class RequestsComponent implements OnInit {
     if (oldStatus === 'actual' && Number(statusId) === 2) {
       this.ngxSmartModalService.setModalData(
         {
-          title: 'Запланированный тоннаж получен',
+          title: 'Запланированный тоннаж',
           btnAction: () => this.setStatus(reqId, statusId, oldStatus),
           btnActionColor: 'gray',
           btnActionName: 'Подтвердить',
