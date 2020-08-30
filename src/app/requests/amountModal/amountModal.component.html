@@ -15,7 +15,7 @@
             type="text"
             class="form-block__input"
             [(ngModel)]="carOwnerText"
-            (keyup)="carListVisible = true"
+            (keyup)="onChangeCarOwner()"
             (click)="setFavoriteCars()"
             name="carOwnerText"
             id="carOwnerText"

@@ -18,6 +18,7 @@ export class AmountModalComponent implements OnInit {
   request: Request = new Request();
   parentReq: Request = new Request();
   cars: Car[] = [];
+  allCars: Car[];
   favoriteCars: Car[] = [];
   parentCarOwner: Car;
   carOwnerText = '';
@@ -35,7 +36,7 @@ export class AmountModalComponent implements OnInit {
 
   async onOpen() {
     this.reset();
-    this.carHttp.getCars().toPromise().then(cars => this.cars = cars);
+    this.carHttp.getCars().toPromise().then(cars => this.allCars = cars);
     this.carHttp.getFavoriteCars(30, 5).subscribe(
       cars => this.favoriteCars = cars,
       error => this.toastr.error(error.message)
@@ -80,6 +81,10 @@ export class AmountModalComponent implements OnInit {
   setFavoriteCars() {
     this.cars = this.favoriteCars;
     this.carListVisible = true;
+  }
+  onChangeCarOwner() {
+    this.carListVisible = true;
+    this.cars = this.allCars;
   }
   selectCarOwner(car: Car) {
     this.carListVisible = false;
