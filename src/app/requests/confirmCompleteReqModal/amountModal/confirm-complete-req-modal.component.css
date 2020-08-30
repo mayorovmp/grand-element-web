@@ -1,0 +1,7 @@
+.confirm-modal-btns{
+  display: flex;
+  justify-content: flex-end;
+}
+.apply-btn{
+  margin-right: 12px;
+}

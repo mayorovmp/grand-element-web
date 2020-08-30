@@ -23,6 +23,7 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { take, filter } from 'rxjs/operators';
 import { AmountModalComponent } from './amountModal/amountModal.component';
+import { ConfirmCompleteReqModalComponent } from './confirmCompleteReqModal/amountModal/confirm-complete-req-modal.component';
 
 @Component({
   selector: 'app-requests',
@@ -121,9 +122,15 @@ export class RequestsComponent implements OnInit {
     );
   }
 
-  onActualRequestStatusChange(reqId: number, statusId: number) {
+  onActualRequestStatusChange(req: Request, statusIdStr: string) {
+    const statusId = Number(statusIdStr);
     // TODO: Проверить установленный объем if(statusId == 2)
-    this.setStatus(reqId, statusId);
+    if (statusId === 2) {
+      this.ngxSmartModalService.setModalData(req, ConfirmCompleteReqModalComponent.MODAL_NAME, true);
+      this.ngxSmartModalService.toggle(ConfirmCompleteReqModalComponent.MODAL_NAME);
+    } else if (req.id) {
+      this.setStatus(req.id, statusId);
+    }
   }
 
   setStatus(reqId: number, statusId: number) {
