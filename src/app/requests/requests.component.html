@@ -75,7 +75,7 @@
                                 <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
                                     <select 
                                         class="app-table__select"
-                                        (change)="onStatusChange(req.id, $event.target.value, 'incident')" 
+                                        (change)="onStatusChange(req, $event.target.value, 'incident')" 
                                     >
                                         <option 
                                             *ngFor="let status of statuses" 
@@ -112,7 +112,7 @@
                                 <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
                                     <select 
                                         class="app-table__select"
-                                        (change)="onStatusChange(req.id, $event.target.value, 'incident')" 
+                                        (change)="onStatusChange(req, $event.target.value, 'incident')" 
                                     >
                                         <option 
                                             *ngFor="let status of statuses" 
@@ -188,7 +188,7 @@
                                 <td class="app-table__td" *ngIf="!hidingColumns.includes('Статус')">
                                     <select 
                                         class="app-table__select"
-                                        (change)="onStatusChange(req.id, $event.target.value, 'actual')" 
+                                        (change)="onStatusChange(req, $event.target.value, 'actual')" 
                                     >
                                         <option 
                                             *ngFor="let status of statuses" 
@@ -266,7 +266,7 @@
                             <td class="app-table__td">
                                 <select 
                                     class="app-table__select"
-                                    (change)="onStatusChange(req.id, $event.target.value, 'completed')"
+                                    (change)="onStatusChange(req, $event.target.value, 'completed')"
                                 >
                                     <option 
                                         *ngFor="let status of statuses"
@@ -310,3 +310,4 @@
 <app-request-editor (changed)="onModalChange()"></app-request-editor>
 <app-modal-confirm></app-modal-confirm>
 <app-modal-amount (changed)="onAmountFuncFinish()"></app-modal-amount>
+<app-modal-finis-req></app-modal-finis-req>

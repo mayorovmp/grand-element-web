@@ -1,0 +1,36 @@
+<ngx-smart-modal 
+  #finishReqModal
+  identifier="finishReqModal" 
+  (onOpen)="onOpen()" 
+  (onAnyCloseEvent)="onClose()"
+>
+  <div class="form-container">
+    <h2 class="form-title">{{modalTitle}}</h2>
+    <div class="form-block">
+      <label for="amount" class="form-block__label">
+          Объем, тн
+      </label>
+      <input 
+          type="number"
+          [(ngModel)]="request.amount" 
+          id="amount"
+          class="form-block__input"
+      >
+    </div>
+    <div class="footer-modal-btns">
+      <button 
+        class="app-btn {{modalBtnActionColor}}-btn footer-modal-btns__first-btn" 
+        (click)="modalAction()"
+      >
+        {{modalActionTitle}}
+      </button>
+      <button 
+        class="app-btn gray-btn" 
+        (click)="onClose()"
+      >
+        Отмена
+      </button>
+    </div>
+  </div>
+
+</ngx-smart-modal>

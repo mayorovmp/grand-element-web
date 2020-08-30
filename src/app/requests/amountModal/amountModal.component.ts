@@ -112,7 +112,6 @@ export class AmountModalComponent implements OnInit {
       if (this.parentAmount < this.request.amount) {
         this.toastr.error('Введенный объем больше объема заказа');
       } else if (this.parentAmount === this.request.amount && this.parentCarOwner.id === this.request.car?.id) {
-        transferred.setStatus();
         this.ngxSmartModalService.close('amountModal');
       } else if (this.parentAmount === this.request.amount && this.parentCarOwner.id !== this.request.car?.id) {
         this.closeOldReq();

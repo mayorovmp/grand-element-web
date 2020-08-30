@@ -44,6 +44,7 @@ import { FilterPipe, CarOwnerPipe } from './core/pipes/filter.pipe';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AmountModalComponent } from './requests/amountModal/amountModal.component';
+import { FinishReqModalComponent } from './requests/finishReqModal/finishReq.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.ballScaleMultiple,
   minTime: 100,
@@ -69,7 +70,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ConfirmModalComponent,
     FilterPipe,
     CarOwnerPipe,
-    AmountModalComponent
+    AmountModalComponent,
+    FinishReqModalComponent
   ],
   imports: [
     NgxSmartModalModule.forRoot(),

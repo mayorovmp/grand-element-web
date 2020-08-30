@@ -169,19 +169,21 @@ export class RequestsComponent implements OnInit {
     );
   }
 
-  onStatusChange(reqId: number, statusId: string, oldStatus: string) {
+  onStatusChange(req: Request, statusId: string, oldStatus: string) {
+    const reqId = req.id || 0;
     if (oldStatus === 'actual' && Number(statusId) === 2) {
       this.ngxSmartModalService.setModalData(
         {
           title: 'Запланированный тоннаж получен',
           btnAction: () => this.setStatus(reqId, statusId, oldStatus),
           btnActionColor: 'gray',
-          btnActionName: 'Подтвердить'
+          btnActionName: 'Подтвердить',
+          request: req
         },
-        'confirmModal',
+        'finishReqModal',
         true
       );
-      this.ngxSmartModalService.toggle('confirmModal');
+      this.ngxSmartModalService.toggle('finishReqModal');
     } else {
       this.setStatus(reqId, statusId, oldStatus);
     }
@@ -235,8 +237,7 @@ export class RequestsComponent implements OnInit {
   divideAmount(req: Request) {
     this.ngxSmartModalService.setModalData(
       {
-        req,
-        setStatus: () => this.setStatus(req.id || 0, 3, req.requestStatus?.id || 0)
+        req
       },
       'amountModal',
       true
