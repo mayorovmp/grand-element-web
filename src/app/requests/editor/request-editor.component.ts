@@ -150,7 +150,7 @@ export class RequestEditorComponent implements OnInit {
         if (copyingReq.client?.name) {
           this.clientNameText = copyingReq.client.name;
         }
-        await this.getSuppliersByProd(this.request.product?.id);
+        // await this.getSuppliersByProd(this.request.product?.id);
         break;
       }
       case Goal.AddChildRequest: {
@@ -169,10 +169,11 @@ export class RequestEditorComponent implements OnInit {
       }
       case Goal.Edit: {
         this.request = transferred.request;
+        console.log('request', this.request);
         if (this.request.client?.name) {
           this.clientNameText = this.request.client.name;
         }
-        await this.getSuppliersByProd(this.request.product?.id);
+        // await this.getSuppliersByProd(this.request.product?.id);
         break;
       }
       default: {
@@ -212,52 +213,52 @@ export class RequestEditorComponent implements OnInit {
   async processLastReq(client: Client | undefined, addr: Address | undefined) {
     const lastReq = await this.reqService.getLastRequest(client, addr).toPromise();
 
-    if (lastReq) {
-          this.request.id = undefined;
-          this.request.deliveryStart = this.curDate;
-          this.request.deliveryEnd = this.curDate;
-          this.request.client = client;
-          this.request.deliveryAddress = lastReq.deliveryAddress;
-          this.request.isLong = lastReq.isLong;
-          this.request.amount = lastReq.amount;
-          this.request.sellingPrice = lastReq.sellingPrice;
-          this.request.product = lastReq.product;
-          this.request.supplier = lastReq.supplier;
-          this.request.supplierVat = lastReq.supplierVat;
-          this.request.purchasePrice = lastReq.purchasePrice;
-          this.request.car = lastReq.car;
-          this.request.carVat = lastReq.carVat;
-          this.request.freightPrice = lastReq.freightPrice;
-          this.request.amountIn = lastReq.amountIn;
-          this.request.amountOut = lastReq.amountOut;
-          this.request.freightCost = lastReq.freightCost;
-          this.request.sellingCost = lastReq.sellingCost;
-          this.request.profit = lastReq.profit;
-          this.request.income = lastReq.income;
-          this.request.comment = lastReq.comment;
-          this.request.unit = lastReq.unit;
-        } else {
-          this.request.client = client;
-          this.request.deliveryAddress = addr;
-          this.request.isLong = false;
-          this.request.amount = undefined;
-          this.request.sellingPrice = undefined;
-          this.request.product = undefined;
-          this.request.supplier = undefined;
-          this.request.supplierVat = undefined;
-          this.request.purchasePrice = undefined;
-          this.request.car = undefined;
-          this.request.carVat = undefined;
-          this.request.freightPrice = undefined;
-          this.request.amountIn = undefined;
-          this.request.amountOut = undefined;
-          this.request.freightCost = 0;
-          this.request.sellingCost = undefined;
-          this.request.profit = undefined;
-          this.request.income = undefined;
-          this.request.comment = undefined;
-          this.request.unit = undefined;
-        }
+    // if (lastReq) {
+    //       this.request.id = undefined;
+    //       this.request.deliveryStart = this.curDate;
+    //       this.request.deliveryEnd = this.curDate;
+    //       this.request.client = client;
+    //       this.request.deliveryAddress = lastReq.deliveryAddress;
+    //       this.request.isLong = lastReq.isLong;
+    //       this.request.amount = lastReq.amount;
+    //       this.request.sellingPrice = lastReq.sellingPrice;
+    //       this.request.product = lastReq.product;
+    //       this.request.supplier = lastReq.supplier;
+    //       this.request.supplierVat = lastReq.supplierVat;
+    //       this.request.purchasePrice = lastReq.purchasePrice;
+    //       this.request.car = lastReq.car;
+    //       this.request.carVat = lastReq.carVat;
+    //       this.request.freightPrice = lastReq.freightPrice;
+    //       this.request.amountIn = lastReq.amountIn;
+    //       this.request.amountOut = lastReq.amountOut;
+    //       this.request.freightCost = lastReq.freightCost;
+    //       this.request.sellingCost = lastReq.sellingCost;
+    //       this.request.profit = lastReq.profit;
+    //       this.request.income = lastReq.income;
+    //       this.request.comment = lastReq.comment;
+    //       this.request.unit = lastReq.unit;
+    //     } else {
+    //       this.request.client = client;
+    //       this.request.deliveryAddress = addr;
+    //       this.request.isLong = false;
+    //       this.request.amount = undefined;
+    //       this.request.sellingPrice = undefined;
+    //       this.request.product = undefined;
+    //       this.request.supplier = undefined;
+    //       this.request.supplierVat = undefined;
+    //       this.request.purchasePrice = undefined;
+    //       this.request.car = undefined;
+    //       this.request.carVat = undefined;
+    //       this.request.freightPrice = undefined;
+    //       this.request.amountIn = undefined;
+    //       this.request.amountOut = undefined;
+    //       this.request.freightCost = 0;
+    //       this.request.sellingCost = undefined;
+    //       this.request.profit = undefined;
+    //       this.request.income = undefined;
+    //       this.request.comment = undefined;
+    //       this.request.unit = undefined;
+    //     }
   }
 
   byId(a: any, b: any) {
@@ -338,9 +339,9 @@ export class RequestEditorComponent implements OnInit {
   }
 
   async onProductChange(prodId: number | undefined) {
-    // this.getSuppliersByProd(prodId);
-    // this.request.supplierVat = false;
-    // this.request.purchasePrice = undefined;
+    this.getSuppliersByProd(prodId);
+    this.request.supplierVat = false;
+    this.request.purchasePrice = undefined;
   }
 
   private async getSuppliersByProd(prodId: number | undefined) {
