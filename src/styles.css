@@ -41,13 +41,13 @@ a:hover {
     height: calc(100vh - 76px);
     position: relative;
     overflow: hidden;
-
+    padding-bottom: 24px;
 }
 .half-container{
     width: 50%;
-    padding: 24px;
     height: 100%;
     overflow: hidden;
+    padding: 6px 6px 0 6px;
 }
 .half-container--left-part{
     border-right: 1px solid var(--light-gray);
@@ -117,7 +117,7 @@ a:hover {
     width: 100%;
     color: #212529;
     border: 1px solid var(--light-gray);
-    font-size: 13px;
+    font-size: 12px;
     margin-bottom: 12px;
 }
 .app-table__tr {
@@ -143,7 +143,7 @@ a:hover {
     border-right: 1px solid var(--light-gray);
     border-left: 1px solid var(--light-gray);
     border-top: 1px solid var(--light-gray);
-    padding: 8px;
+    padding: 1px;
     text-align: center;
     cursor: pointer;
 }
@@ -158,7 +158,7 @@ a:hover {
 }
 .app-table__td {
     border-right: 1px solid var(--light-gray);
-    padding: 4px;
+    padding: 1px;
     text-align: center;
 }
 .app-table__sorting-img{
