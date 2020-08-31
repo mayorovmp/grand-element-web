@@ -64,10 +64,10 @@ export class RequestsComponent implements OnInit {
 
   dateArray: any[] = [];
 
-  complitedRequestslimit = 20;
+  complitedRequestslimit = 25;
   complitedRequestsOffset = 0;
 
-  actualRequestslimit = 15;
+  actualRequestslimit = 25;
   actualRequestsOffset = 0;
 
   throttle = 300;
@@ -214,11 +214,11 @@ export class RequestsComponent implements OnInit {
       this.longTermRequests = [];
       this.dateArray = [];
       this.datePeriods = [];
-      this.actualRequestslimit = 15;
+      this.actualRequestslimit = 25;
       this.actualRequestsOffset = 0;
     } else if (status === 'completed') {
       this.completedRequests = [];
-      this.complitedRequestslimit = 20;
+      this.complitedRequestslimit = 25;
       this.complitedRequestsOffset = 0;
     } else if (status === 'all') {
       this.actualRequests = [];
@@ -227,9 +227,9 @@ export class RequestsComponent implements OnInit {
       this.longTermRequests = [];
       this.datePeriods = [];
       this.dateArray = [];
-      this.complitedRequestslimit = 20;
+      this.complitedRequestslimit = 25;
       this.complitedRequestsOffset = 0;
-      this.actualRequestslimit = 15;
+      this.actualRequestslimit = 25;
       this.actualRequestsOffset = 0;
     }
   }

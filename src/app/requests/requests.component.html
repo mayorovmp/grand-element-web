@@ -209,14 +209,14 @@
 
     <div class="half-container half-container--right-part">
         <div
-            class="search-results"
+            class="search-results search-results--finish"
             infiniteScroll
             [infiniteScrollDistance]="2"
             [infiniteScrollThrottle]="50"
             (scrolled)="onScrollComplitedRequests()"
             [scrollWindow]="false"
         >
-            <div class="orders-block">
+            <div class="orders-block orders-block--finishing">
                 <h2 class="block-title">
                     Завершенные заказы
                 </h2>
