@@ -49,7 +49,7 @@ export class RequestsComponent implements OnInit {
   complitedRequestslimit = 20;
   complitedRequestsOffset = 0;
 
-  actualRequestslimit = 20;
+  actualRequestslimit = 50;
   actualRequestsOffset = 0;
 
   throttle = 300;
