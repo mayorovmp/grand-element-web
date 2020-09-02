@@ -75,6 +75,12 @@ export class RequestEditorComponent implements OnInit {
   @Output() changed = new EventEmitter<any>();
 
   ngOnInit() {
+    // По умолчанию заявка на завтра.
+    this.curDate.setDate(this.curDate.getDate() + 1);
+    // Если завтра воскресенье, то заявка на понедельник.
+    if (!this.curDate.getDay()) {
+      this.curDate.setDate(this.curDate.getDate() + 1);
+    }
   }
 
   resetDate(dateType: string) {
@@ -111,9 +117,6 @@ export class RequestEditorComponent implements OnInit {
     const transferred = this.ngxSmartModalService.getModalData(RequestEditorComponent.MODAL_NAME);
     this.ngxSmartModalService.resetModalData(RequestEditorComponent.MODAL_NAME);
     await this.getCatalogs();
-    if (!this.curDate.getDay()) {
-      this.curDate.setDate(this.curDate.getDate() + 1);
-    }
     this.request.deliveryStart = this.curDate;
     this.request.deliveryEnd = this.curDate;
     this.goal = transferred.type;
