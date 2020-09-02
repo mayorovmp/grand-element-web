@@ -48,6 +48,8 @@ import { FinishReqModalComponent } from './requests/finishReqModal/finishReq.com
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.ballScaleMultiple,
   minTime: 100,
+  fgsSize: 0,
+  overlayColor: 'rgba(255,255,255,0)'
 };
 
 @NgModule({
