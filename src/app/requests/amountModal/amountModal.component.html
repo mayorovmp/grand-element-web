@@ -15,7 +15,7 @@
             type="text"
             class="form-block__input"
             [(ngModel)]="carOwnerText"
-            (keyup)="onChangeCarOwner()"
+            (keypress)="onSearch()"
             (click)="setFavoriteCars()"
             name="carOwnerText"
             id="carOwnerText"
@@ -28,7 +28,6 @@
                 *ngFor="let car of cars | carOwnerFilter: carOwnerText: 'car.owner'"
                 (click)="selectCarOwner(car)"
                 class="form-block__searching-list-item"
-                [ngValue]="car"
             >
                 {{car.owner}}
             </li>
@@ -40,15 +39,16 @@
         </label>
         <input 
             type="number"
+            (click)="clearAmount()"
             [(ngModel)]="request.amount" 
             id="amount"
             class="form-block__input"
         >
       </div>
     </div>
-    <div class="footer-modal-btns">
+    <div class="confirm-modal-btns">
       <button 
-        class="app-btn gray-btn footer-modal-btns__first-btn" 
+        class="app-btn gray-btn apply-btn" 
         (click)="apply()"
       >
         Ок

@@ -42,7 +42,7 @@ export class Request {
   clientId?: number;
   carCategoryId?: number;
   supplierId?: number;
-  requestStatus?: Status;
-  requestStatusId?: number;
+  requestStatus: Status;
+  requestStatusId: number;
 }
 

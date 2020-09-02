@@ -157,6 +157,22 @@
                 </option>
             </select>
         </div>
+        <div hidden class="form-block">
+            <label for="status" class="form-block__label">
+                Статус
+            </label>
+            <select
+                class="form-block__select"
+                id="status"
+                [compareWith]="byId"
+                [(ngModel)]="request.requestStatus"
+            >
+                <option [ngValue]="undefined"></option>
+                <option *ngFor="let status of statuses" [ngValue]="status">
+                    {{status.description}}
+                </option>
+            </select>
+        </div>
         <div class="form-block">
             <label for="longTermCheckbox" class="form-block__label">
                 Долгосрочная заявка
@@ -190,20 +206,12 @@
                 >
             </button>
         </div>
-        <div class="footer-modal-btns">
-            <button 
-                (click)="createOrUpdate(request, parentRequestId)"
-                class="app-btn gray-btn footer-modal-btns__first-btn"
-            >
-                Ок
-            </button>
-            <button 
-              class="app-btn gray-btn" 
-              (click)="onClose()"
-            >
-              Отмена
-            </button>
-          </div>
+        <button 
+            (click)="createOrUpdate(request, parentRequestId)"
+            class="app-btn gray-btn"
+        >
+            Сохранить
+        </button>
     </div>
 </ngx-smart-modal>
 <app-edit-product (changed)="onProductAdd($event)"></app-edit-product>

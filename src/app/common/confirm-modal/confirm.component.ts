@@ -13,6 +13,7 @@ export class ConfirmModalComponent implements OnInit {
   modalTitle = 'Подтвердить действие';
   modalActionTitle = 'подтвердить';
   modalBtnActionColor = 'gray';
+  modalAction: any = null;
 
   constructor( private ngxSmartModalService: NgxSmartModalService) { }
 
@@ -21,23 +22,20 @@ export class ConfirmModalComponent implements OnInit {
   async onOpen() {
     const transferred = this.ngxSmartModalService.getModalData('confirmModal');
     if (transferred) {
-      const { title, btnActionName, btnActionColor } = transferred;
+      const { title, btnAction, btnActionName, btnActionColor } = transferred;
       this.modalTitle = title;
+      this.modalAction = () => {
+        btnAction();
+        this.close();
+      };
       this.modalActionTitle = btnActionName;
       this.modalBtnActionColor = btnActionColor;
     }
   }
-  onClose() {
+  close() {
     this.ngxSmartModalService.close('confirmModal');
   }
-
-  modalAction() {
-    const transferred = this.ngxSmartModalService.getModalData('confirmModal');
-    if (transferred) {
-      const { btnAction } = transferred;
-      btnAction();
-      this.changed.emit();
-      this.onClose();
-    }
+  onClose() {
+    this.changed.emit();
   }
 }
