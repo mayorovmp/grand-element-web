@@ -48,6 +48,8 @@ import { ConfirmCompleteReqModalComponent } from './requests/confirmCompleteReqM
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.ballScaleMultiple,
   minTime: 100,
+  fgsSize: 0,
+  overlayColor: 'rgba(255,255,255,0)'
 };
 
 @NgModule({
