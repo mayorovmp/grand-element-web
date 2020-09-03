@@ -85,6 +85,7 @@ export class RequestsComponent implements OnInit {
 
   private async del(req: Request) {
     await this.http.del(req).toPromise();
+    this.reset();
   }
 
   onScrollActualRequests() {
