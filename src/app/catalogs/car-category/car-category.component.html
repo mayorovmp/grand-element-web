@@ -1,41 +1,72 @@
 <div class="app-container">
   <div class="app-row">
-    <div class="col-5">
-      <div class="catalogs-adding-block">
-        <button 
-            type="submit"
-            (click)="edit(defaultCategory)"
-            class="app-btn gray-btn catalogs-adding-block__btn"
-        >
-          Добавить
-        </button>
-        <small class="catalogs-adding-block__text">
-          Если не нашли нужную категорию, то добавьте ее.
-        </small>
-      </div>
+    <div class="catalogs-adding-block">
+      <button 
+          type="submit"
+          (click)="add()"
+          class="app-btn gray-btn catalogs-adding-block__btn"
+      >
+        Добавить
+      </button>
+      <p class="catalogs-adding-block__text">
+        Если не нашли нужную категорию, то добавьте ее.
+      </p>
     </div>
   </div>
   <div class="app-row">
-    <div class="col-5">
-      <h2>Категории машин</h2>
-      <table class="table table-bordered">
+    <h2 class="block-title">Категории машин</h2>
+    <div class="table-container">
+      <table class="app-table">
         <thead>
-          <tr>
-            <th></th>
-            <th>Название категории</th>
+          <tr class="app-table__tr">
+            <th 
+            class="app-table__th" 
+            (click)="sortedByName()"
+          >
+            <div class="app-table-heading-content">
+              Название категории
+              <img 
+                src="assets/img/icons/sort-{{nameSorting}}.svg"
+                class="app-table__sorting-img" 
+                alt=""
+              >
+            </div>
+          </th>
+            <th class="app-table__th"></th>
           </tr>
-
-        </thead>
-        <tbody>
-          <tr *ngFor="let category of categories">
-            <td class="text-center">
-              <i class="fa fa-edit mr-2" (click)="edit(category)" aria-hidden="true"></i>
-              <i class="fa fa-trash" (click)="deleteCategory(category)" aria-hidden="true"></i></td>
-            <td>{{category.name}}</td>
-          </tr>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of categories" class="app-table__tr">
+              <td class="app-table__td">{{category.name}}</td>
+              <td class="app-table__td">
+                <div class="btn-container btn-container--centered">
+                  <button
+                    (click)="edit(category)"
+                    class="edit-btn"
+                  >
+                    <img 
+                      class="edit-btn__img"
+                      src="assets/img/icons/edit.svg" 
+                      alt="изменить"
+                    >
+                  </button>
+                  <button
+                    (click)="confirm(category)"
+                    class="delete-btn"
+                  >
+                    <img 
+                      class="edit-btn__img"
+                      src="assets/img/icons/delete.svg" 
+                      alt="удалить"
+                    >
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 </div>
 <app-edit-car-category (changed)="getData()"></app-edit-car-category>
+<app-modal-confirm (changed)="getData()"></app-modal-confirm>

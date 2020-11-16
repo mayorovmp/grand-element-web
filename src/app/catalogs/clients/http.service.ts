@@ -27,7 +27,7 @@ export class HttpService {
     return this.http.delete<Client>(url);
   }
 
-  add(item: Client): Observable<any> {
+  add(item: Client): Observable<Client> {
     const url = this.baseUrl + `/client`;
     return this.http.post<Client>(url, item);
   }

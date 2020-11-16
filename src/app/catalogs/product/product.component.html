@@ -1,42 +1,74 @@
 <div class="app-container">
   <div class="app-row">
-    <div class="col-5">
-      <div class="catalogs-adding-block">
-        <button 
-            type="submit"
-            (click)="editProduct(defaultProduct)"
-            class="app-btn gray-btn catalogs-adding-block__btn"
-        >
-          Добавить
-        </button>
-        <small class="catalogs-adding-block__text">
-          Если не нашли нужнуй товар, то добавьте его.
-        </small>
-      </div>
+    <div class="catalogs-adding-block">
+      <button 
+          type="submit"
+          (click)="add()"
+          class="app-btn gray-btn catalogs-adding-block__btn"
+      >
+        Добавить
+      </button>
+      <p class="catalogs-adding-block__text">
+        Если не нашли нужнуй товар, то добавьте его.
+      </p>
     </div>
   </div>
   <div class="app-row">
-    <div class="col-8">
-      <h2>Товары</h2>
-      <table class="table table-bordered">
+    <h2 class="block-title">Товары</h2>
+    <div class="table-container">
+      <table class="app-table">
         <thead>
-          <tr>
-            <th style="width: 70px;"></th>
-            <th>Название</th>
+          <tr class="app-table__tr">
+            <th 
+              class="app-table__th"
+              (click)="sortedByName()"
+            >
+              <div class="app-table-heading-content">
+                Название
+                <img
+                  src="assets/img/icons/sort-{{nameSorting}}.svg"
+                  class="app-table__sorting-img" 
+                  alt=""
+                >
+              </div>
+            </th>
+            <th class="app-table__th"></th>
           </tr>
         </thead>
         <tbody>
           <ng-container *ngFor="let product of products">
-            <tr>
-              <td class="text-center">
-                <i class="fa fa-edit mr-2" (click)="editProduct(product)" aria-hidden="true"></i>
-                <i class="fa fa-trash" (click)="deleteProduct(product)" aria-hidden="true"></i></td>
-              <td>{{product.name}}</td>
+            <tr class="app-table__tr">
+              <td class="app-table__td">{{product.name}}</td>
+              <td class="app-table__td">
+                <div class="btn-container btn-container--centered">
+                  <button
+                    (click)="edit(product)"
+                    class="edit-btn"
+                  >
+                    <img 
+                      class="edit-btn__img"
+                      src="assets/img/icons/edit.svg" 
+                      alt="изменить"
+                    >
+                  </button>
+                  <button
+                    (click)="confirm(product)"
+                    class="delete-btn"
+                  >
+                    <img 
+                      class="edit-btn__img"
+                      src="assets/img/icons/delete.svg" 
+                      alt="удалить"
+                    >
+                  </button>
+                </div>
+              </td>
             </tr>
-          </ng-container>
-        </tbody>
-      </table>
+            </ng-container>
+          </tbody>
+        </table>
+    </div>
     </div>
   </div>
-</div>
 <app-edit-product (changed)="getData()"></app-edit-product>
+<app-modal-confirm (changed)="getData()"></app-modal-confirm>

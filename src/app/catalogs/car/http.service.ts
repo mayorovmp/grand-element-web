@@ -24,6 +24,11 @@ export class HttpService {
     return this.http.get<Car[]>(url);
   }
 
+  getFavoriteCars(days: number, limit: number): Observable<Car[]> {
+    const url = this.baseUrl + `/favorite?lastDays=${days}&limit=${limit}`;
+    return this.http.get<Car[]>(url);
+  }
+
   getCarCategories() {
     return this.httpCarCategorySrv.getCarCategories();
   }

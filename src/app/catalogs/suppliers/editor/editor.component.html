@@ -1,56 +1,120 @@
-<ngx-smart-modal #editSupplierModal identifier="editSupplierModal" (onOpen)="onOpen()" (onAnyCloseEvent)="onClose()">
-  <div>
-    <h1>Редактор</h1>
+<ngx-smart-modal 
+  #editSupplierModal 
+  identifier="editSupplierModal" 
+  (onOpen)="onOpen()" 
+  (onAnyCloseEvent)="onClose()"
+>
+  <div class="form-container">
+    <h2 class="form-title">Редактор</h2>
 
-    <div class="input-group input-group-sm mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-sm">
-          <div class="label">Рабочее наименование</div>
-        </span>
-      </div>
-      <input type="text" [(ngModel)]="supplier.name" class="form-control" aria-label="Small"
-        aria-describedby="inputGroup-sizing-sm">
+    <div class="form-block">
+      <label for="work-name" class="form-block__label">
+        Рабочее наименование
+      </label>
+      <input 
+        type="text" 
+        [(ngModel)]="supplier.name" 
+        class="form-block__input"
+        name="work-name"
+        id="work-name"
+      >
     </div>
 
-    <div class="input-group input-group-sm mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-sm">
-          <div class="label">Юридическое лицо</div>
-        </span>
-      </div>
-      <input type="text" [(ngModel)]="supplier.legalEntity" class="form-control" aria-label="Small"
-        aria-describedby="inputGroup-sizing-sm">
+    <div class="form-block">
+      <label for="entity" class="form-block__label">
+        Юридическое лицо
+      </label>
+      <input 
+        type="text" 
+        [(ngModel)]="supplier.legalEntity"
+        class="form-block__input"
+        name="entity"
+        id="entity"
+      >
+    </div>
+
+    <div class="form-block">
+      <label for="nds-value" class="form-block__label">
+        НДС
+      </label>
+      <input 
+        type="checkbox" 
+        [(ngModel)]="supplier.vat"
+        class="form-block__input"
+        name="nds-value"
+        id="nds-value"
+      >
+    </div>
+
+    <div class="form-block">
+      <label for="address" class="form-block__label">
+        Местоположение
+      </label>
+      <input 
+        type="text" 
+        [(ngModel)]="supplier.address"
+        class="form-block__input"
+        name="address"
+        id="address"
+      >
     </div>
 
 
-    <div class="input-group input-group-sm mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-sm">
-          <div class="label">Местоположение</div>
-        </span>
-      </div>
-      <input type="text" [(ngModel)]="supplier.address" class="form-control" aria-label="Small"
-        aria-describedby="inputGroup-sizing-sm">
-    </div>
-
-    <div *ngFor="let prod of supplier.products" class="border border-dark p-2 mt-2">
-      <div class="form-group">
-        <label for="selectCarCategory">Товар</label>
-        <select class="form-control" id="selectCarCategory" [(ngModel)]="prod.id">
+    <div *ngFor="let prod of supplier.products" class="form-block-adding-block">
+      
+      <div class="form-block">
+        <label for="selectCarCategory" class="form-block__label">
+          Товар
+        </label>
+        <select 
+          class="form-block__select"
+          id="selectCarCategory" 
+          [(ngModel)]="prod.id"
+        >
           <option [ngValue]="undefined"></option>
-          <option *ngFor="let opt of products" [ngValue]="opt.id">
-            {{opt.name}}</option>
+          <option 
+            *ngFor="let opt of products" 
+            [ngValue]="opt.id"
+          >
+            {{opt.name}}
+          </option>
         </select>
-
-        <input type="number" [(ngModel)]="prod.price" placeholder="цена" class="form-control" aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm">
-
-        <button (click)="delProd(supplier, prod)">удалить</button>
       </div>
-    </div>
-    <button (click)="addProd()">Добавить товар</button>
+  
+      <div class="form-block">
+        <label for="prod-price" class="form-block__label">
+          Цена
+        </label>
+        <input 
+          type="number" 
+          [(ngModel)]="prod.price" 
+          class="form-block__input"
+          name="prod-price"
+          id="prod-price"
+        >
+      </div>
 
+      <button 
+        (click)="delProd(supplier, prod)"
+        class="app-btn gray-btn"
+      >
+        Удалить
+      </button>
+    </div>
+    <button 
+      (click)="addProd()"
+      class="app-btn gray-btn" 
+    >
+      Добавить товар
+    </button>
+    <div class="additional-btn-container" >
+      <button 
+        class="app-btn gray-btn" 
+        (click)="createOrUpdate(supplier)"
+      >
+        Сохранить
+      </button>
+    </div>
   </div>
 
-  <button class="mt-3" (click)="createOrUpdate(supplier)">Сохранить</button>
 </ngx-smart-modal>

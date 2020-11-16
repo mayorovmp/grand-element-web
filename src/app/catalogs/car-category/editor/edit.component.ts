@@ -21,7 +21,13 @@ export class EditCarCategoryComponent implements OnInit {
   }
 
   onOpen() {
-    this.carCategory = this.ngxSmartModalService.getModalData(EditCarCategoryComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(EditCarCategoryComponent.MODAL_NAME);
+    this.ngxSmartModalService.resetModalData(EditCarCategoryComponent.MODAL_NAME);
+    if (transferred) {
+      this.carCategory = transferred;
+    } else {
+      this.carCategory = new CarCategory();
+    }
   }
 
   onClose() {

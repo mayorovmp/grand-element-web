@@ -1,0 +1,20 @@
+.req{
+    padding: 5px;
+    border: solid black 1px;
+}
+.add-entity-btn{
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin-left: 6px;
+}
+.add-entity-btn__icon{
+    width: 20px;
+    height: 20px;
+}
+@media (max-width: 520px){
+    .add-entity-btn{
+        position: absolute;
+        right: 0;
+    }
+}

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { 
+  Component, 
+  OnInit,
+} from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { Catalog } from '../models/Catalog';
@@ -6,11 +9,17 @@ import { Catalog } from '../models/Catalog';
 @Component({
   selector: 'app-navbar',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  host: {
+    '(window:resize)': 'onResize($event)'
+  }
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit{ 
 
-  logoSrc = require('./logo.svg');
+  logoSrc:string = 'assets/img/logo.svg';
+
+  mobileNavActive:boolean = false;
+  mobileBtnActive:boolean = false;
 
   catalogs: Catalog[] = [
     new Catalog('Клиенты', ['catalog/clients']),
@@ -20,12 +29,29 @@ export class NavbarComponent implements OnInit {
     new Catalog('Поставщики', ['catalog/suppliers'])
   ];
 
-  constructor(public auth: AuthService, private router: Router, ) { }
+  constructor(public auth: AuthService, private router: Router, ) { 
+    this.router.events.subscribe(route => {
+      this.mobileNavActive = false;
+      this.mobileBtnActive = false;
+  });
+  }
+   
+  ngOnInit() { }
 
-  ngOnInit() {
+  public toggleMenu = () => {
+    this.mobileNavActive = !this.mobileNavActive;
+    this.mobileBtnActive = !this.mobileBtnActive;
   }
 
   public logout() {
     this.auth.logout();
+  }
+  onResize = (event) =>{
+    if (this.mobileNavActive && 
+      event.target.innerWidth > 1000 && this.mobileBtnActive
+    ){
+      this.mobileNavActive = false;
+      this.mobileBtnActive = false;
+    }
   }
 }

@@ -12,9 +12,9 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
-export class EditorComponent implements OnInit {
+export class SupplierEditorComponent implements OnInit {
   static MODAL_NAME = 'editSupplierModal';
-  @Output() changed = new EventEmitter<any>();
+  @Output() changed = new EventEmitter<Supplier>();
 
   supplier: Supplier = new Supplier();
 
@@ -22,7 +22,8 @@ export class EditorComponent implements OnInit {
 
   constructor(
     private httpSrv: HttpService,
-    private productHttpService: ProductHttpService, private toastr: ToastrService,
+    private productHttpService: ProductHttpService,
+    private toastr: ToastrService,
     private ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
@@ -34,8 +35,8 @@ export class EditorComponent implements OnInit {
   }
 
   async onOpen() {
-    const transferred = this.ngxSmartModalService.getModalData(EditorComponent.MODAL_NAME);
-    this.ngxSmartModalService.resetModalData(EditorComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(SupplierEditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.resetModalData(SupplierEditorComponent.MODAL_NAME);
     if (transferred) {
       this.supplier = transferred;
     } else {
@@ -55,7 +56,6 @@ export class EditorComponent implements OnInit {
   }
 
   onClose() {
-    this.changed.emit();
   }
 
   byId(a: Product, b: Product) {
@@ -68,12 +68,15 @@ export class EditorComponent implements OnInit {
   }
 
   async createOrUpdate(item: Supplier) {
+    let supplier = new Supplier();
     if (item.id) {
-      await this.httpSrv.edit(item).toPromise();
+      supplier = await this.httpSrv.edit(item).toPromise();
+      this.toastr.info('Поставщик изменен');
     } else {
-      await this.httpSrv.add(item).toPromise();
+      supplier = await this.httpSrv.add(item).toPromise();
+      this.toastr.info('Поставщик создан');
     }
-    this.changed.emit();
-    this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
+    this.changed.emit(supplier);
+    this.ngxSmartModalService.toggle(SupplierEditorComponent.MODAL_NAME);
   }
 }

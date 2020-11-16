@@ -1,0 +1,149 @@
+.table-bordered td, .table-bordered th {
+  padding: 1px;
+}
+.export-order{
+  margin-bottom: 12px;
+}
+.export-order__button{
+  margin-right: 20px;
+  margin-bottom: 12px;
+}
+.longTerm-order,
+.orders-block{
+  overflow-x: scroll;
+  padding: 12px 0;
+}
+
+.additional-rows{
+  margin-bottom: 12px;
+}
+.all-rows{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.hidden-columns{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.all-rows__label{
+  margin-bottom: 0;
+}
+.hidden-column-block{
+  margin-right: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+.hidden-column-block__label{
+  margin-bottom: 0;
+}
+.hide-column-btn{
+  width: 100%;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-weight: 700;
+}
+.finish-order{
+  background-color: #fff;
+  border: 1px solid var(--light-gray);
+}
+.finish-order__icon{
+  width: 24px;
+}
+
+@media (max-width: 375px){
+  .refresh-btn{
+    margin-left: 10px;
+  }
+  .refresh-btn__icon{
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.requestContextMenu{
+  background-color: #fafafa;
+  padding: 8px;
+  z-index: 1000;
+  box-shadow: 0 0 12pt rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  animation: fadeIn 0.1s ease-out;
+  display:block;
+  position: absolute;
+  list-style-type: none;
+}
+.requestContextMenu__btn{
+  display: flex;
+  align-items: center;
+  padding: 7px;
+  background-color: transparent;
+  border: none;
+  width: 178px;
+  text-align: left;
+  transition: .4s;
+  border-radius: 6px;
+}
+.delete-btn__img,
+.edit-btn__img{
+  margin-right: 12px;
+}
+.requestContextMenu__btn:hover{
+  opacity: 1;
+  transition: .4s;
+  box-shadow: 0 0 12pt rgba(0, 0, 0, 0.25);
+}
+
+/* Animatinons */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1.0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1.0;
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  from {
+    opacity: 1.0;
+  }
+  to {
+    opacity: 0.0;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1.0;
+  }
+  to {
+    opacity: 0.0;
+  }
+}
+
+.is-fadingIn {
+  -webkit-animation: fadeIn 0.1s ease-out;
+  animation: fadeIn 0.1s ease-out;
+  opacity: 1.0;
+  display: block;
+}
+
+.is-fadingOut {
+  -webkit-animation: fadeOut 0.1s ease-out;
+  animation: fadeOut 0.1s ease-out;
+  opacity: 0.0;
+  display: block;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Product } from 'src/app/models/Product';
+import { ToastrService } from 'ngx-toastr';
 import { HttpService } from '../http.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 
@@ -11,8 +12,11 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 export class EditProductComponent implements OnInit {
   static MODAL_NAME = 'editProductModal';
 
-  @Output() changed = new EventEmitter<any>();
-  constructor(private httpSrv: HttpService, private ngxSmartModalService: NgxSmartModalService) { }
+  @Output() changed = new EventEmitter<Product>();
+  constructor(
+      private httpSrv: HttpService,
+      private toastr: ToastrService,
+      private ngxSmartModalService: NgxSmartModalService) { }
 
   product: Product = new Product();
 
@@ -20,20 +24,28 @@ export class EditProductComponent implements OnInit {
   }
 
   onOpen() {
-    this.product = this.ngxSmartModalService.getModalData(EditProductComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(EditProductComponent.MODAL_NAME);
+    this.ngxSmartModalService.resetModalData(EditProductComponent.MODAL_NAME);
+    if (transferred) {
+      this.product = transferred;
+    } else {
+      this.product = new Product();
+    }
   }
 
   onClose() {
-    this.changed.emit();
   }
 
-  async edit(product: Product) {
-    if (product.id) {
-      await this.httpSrv.editProduct(product).toPromise();
+  async createOrUpdate(item: Product) {
+    let product = new Product();
+    if (item.id) {
+      product = await this.httpSrv.editProduct(item).toPromise();
+      this.toastr.info('Товар изменен');
     } else {
-      await this.httpSrv.addProduct(product).toPromise();
+      product = await this.httpSrv.addProduct(item).toPromise();
+      this.toastr.info('Товар создан');
     }
-
+    this.changed.emit(product);
     this.ngxSmartModalService.toggle(EditProductComponent.MODAL_NAME);
   }
 

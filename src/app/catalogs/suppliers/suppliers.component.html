@@ -1,44 +1,119 @@
 <div class="app-container">
   <div class="app-row">
     <div class="catalogs-adding-block">
-      <button type="submit" (click)="add()" class="app-btn gray-btn catalogs-adding-block__btn">
+      <button 
+        type="submit" 
+        (click)="add()" 
+        class="app-btn gray-btn catalogs-adding-block__btn"
+      >
         Добавить
       </button>
-      <small class="catalogs-adding-block__text">
+      <p class="catalogs-adding-block__text">
         Если не нашли нужного поставщика, то добавьте его.
-      </small>
+      </p>
     </div>
   </div>
   <div class="app-row">
-    <div class="">
-      <h2>Поставщики</h2>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Рабочее наименование</th>
-            <th>Юр.лицо</th>
-            <th>Местоположение</th>
-            <th>Номенклатура</th>
-          </tr>
-
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let supplier of suppliers">
-            <tr>
-              <td><i (click)="edit(supplier)" class="fa fa-edit" aria-hidden="true"></i><i class="fa fa-trash"
-                  (click)="deleteSupplier(supplier.id)" aria-hidden="true"></i></td>
-              <td>{{supplier.name}}</td>
-              <td>{{supplier.legalEntity}}</td>
-              <td>{{supplier.address}}</td>
-              <td> <span *ngFor="let prod of supplier.products"><i>{{prod.name}} <b
-                      *ngIf="prod.price">({{prod.price}}р)</b>
-                  </i><br></span></td>
+      <h2 class="block-title">Поставщики</h2>
+      <div class="table-container">
+        <table class="app-table">
+          <thead>
+            <tr class="app-table__tr">
+              <th 
+                class="app-table__th" 
+                (click)="sortedByName()"
+              >
+                <div class="app-table-heading-content">
+                  Рабочее наименование
+                  <img
+                    src="assets/img/icons/sort-{{nameSorting}}.svg"
+                    class="app-table__sorting-img" 
+                    alt="Сортировка"
+                  >
+                </div>
+              </th>
+              <th 
+                class="app-table__th" 
+                (click)="sortedBylegalEntity()"
+              >
+                <div class="app-table-heading-content">
+                  Юр.лицо
+                  <img
+                    src="assets/img/icons/sort-{{legalEntitySorting}}.svg"
+                    class="app-table__sorting-img" 
+                    alt=""
+                  >
+                </div>
+              </th>
+              <th class="app-table__th">НДС</th>
+              <th 
+                class="app-table__th" 
+                (click)="sortedByAddress()"
+              >
+                <div class="app-table-heading-content">
+                  Местоположение
+                  <img
+                    src="assets/img/icons/sort-{{addressSorting}}.svg"
+                    class="app-table__sorting-img" 
+                    alt="Сортировка"
+                  >
+                </div>
+              </th>
+              <th class="app-table__th">Номенклатура</th>
+              <th class="app-table__th"></th>
             </tr>
-          </ng-container>
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let supplier of suppliers">
+              <tr class="app-table__tr">
+                <td class="app-table__td">{{supplier.name}}</td>
+                <td class="app-table__td">{{supplier.legalEntity}}</td>
+                <td class="app-table__td">
+                  <input 
+                    class="app-table__nds-checkbox"
+                    disabled 
+                    type="checkbox" 
+                    [ngModel]="supplier.vat"
+                  >
+                </td>
+                <td class="app-table__td">{{supplier.address}}</td>
+                <td class="app-table__td"> 
+                  <span *ngFor="let prod of supplier.products">
+                      {{prod.name}}
+                      <b *ngIf="prod.price">({{prod.price}}р)</b>
+                    <br>
+                  </span>
+                </td>
+                <td class="app-table__td">
+                  <div class="btn-container btn-container--centered">
+                    <button
+                      (click)="edit(supplier)"
+                      class="edit-btn"
+                    >
+                      <img 
+                        class="edit-btn__img"
+                        src="assets/img/icons/edit.svg" 
+                        alt="изменить"
+                      >
+                    </button>
+                    <button
+                      (click)="confirm(supplier.id)"
+                      class="delete-btn"
+                    >
+                      <img 
+                        class="edit-btn__img"
+                        src="assets/img/icons/delete.svg" 
+                        alt="удалить"
+                      >
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
   </div>
 </div>
 <app-supplier-editor (changed)="getData()"></app-supplier-editor>
+<app-modal-confirm (changed)="getData()"></app-modal-confirm>

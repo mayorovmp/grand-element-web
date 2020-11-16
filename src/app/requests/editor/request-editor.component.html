@@ -1,0 +1,220 @@
+<ngx-smart-modal 
+    #requestEditorModal 
+    [dismissable]=false
+    identifier="requestEditorModal" 
+    (onOpen)="onOpen()"
+>
+    <div class="form-container">
+        <h2 class="form-title">Редактор</h2>
+        <div class="form-block">
+            <label for="deliveryStart" class="form-block__label">
+                Дата
+            </label>
+            <input
+                type="date"
+                name="deliveryStart"
+                id="deliveryStart"
+                [ngModel]="request.deliveryStart | date:'yyyy-MM-dd'"
+                (ngModelChange)="request.deliveryStart = $event"
+                min="1000-01-01"
+                max="3000-12-31"
+                class="form-block__input date-input"
+            >
+            <button class="add-entity-btn" (click)="resetDate('start')">
+                <img src="assets/img/icons/refresh.svg"
+                    class="add-entity-btn__icon"
+                    alt="refresh"
+                >
+            </button>
+        </div>
+        <div class="form-block">
+            <label for="clients" class="form-block__label">
+              Клиент
+            </label>
+            <input
+                type="text"
+                class="form-block__input"
+                [(ngModel)]="clientNameText"
+                (keyup)="clientListVisible = true"
+                name="clientNameText"
+            >
+            <ul
+                class="form-block__searching-list"
+                *ngIf="clientNameText.length > 0 && clientListVisible"
+            >
+                <li 
+                    *ngFor="let client of clients | appFilter: clientNameText: 'client.name'"
+                    (click)="selectClient(client)"
+                    class="form-block__searching-list-item"
+                    [ngValue]="client"
+                >
+                    {{client.name}}
+                </li>
+            </ul>
+            <button class="add-entity-btn" (click)="addClient()">
+                <img src="assets/img/icons/add.svg"
+                    class="add-entity-btn__icon"
+                    alt="add"
+                >
+            </button>
+        </div>
+        <div class="form-block">
+            <label for="product" class="form-block__label">
+                Товар
+            </label>
+            <select 
+                [disabled]="hasParent" 
+                class="form-block__select" 
+                [(ngModel)]="request.product"
+                (ngModelChange)="onProductChange(request.product?.id)" 
+                id="product"
+                [compareWith]="byId"
+            >
+                <option [ngValue]="undefined"></option>
+                <option *ngFor="let product of products" [ngValue]="product">
+                    {{product.name}}
+                </option>
+            </select>
+            <button class="add-entity-btn" (click)="addProduct()">
+                <img src="assets/img/icons/add.svg"
+                    class="add-entity-btn__icon"
+                    alt="add"
+                >
+            </button>
+        </div>
+        <div *ngIf="!request.isLong" class="form-block">
+            <label for="supplier" class="form-block__label">
+                Поставщик
+            </label>
+            <select 
+                class="form-block__input" 
+                [(ngModel)]="request.supplier" 
+                id="exampleFormControlSelect1"
+                (ngModelChange)="onSupplierChange()" 
+                [compareWith]="byId"
+            >
+                <option [ngValue]="undefined"></option>
+                <option *ngFor="let supplier of suppliers" [ngValue]="supplier">
+                    {{supplier.name}}
+                </option>
+            </select>
+            <button class="add-entity-btn" (click)="addSupplier()">
+                <img src="assets/img/icons/add.svg"
+                    class="add-entity-btn__icon"
+                    alt="add"
+                >
+            </button>
+        </div>
+        <div class="form-block">
+            <label for="carOwner" class="form-block__label">
+                Перевозчик
+            </label>
+            <select 
+                class="form-block__input" 
+                id="carOwner"
+                [(ngModel)]="request.car" 
+                (change)="onCarChange()" 
+                [compareWith]="byId"
+            >
+                <option [ngValue]="undefined"></option>
+                <option *ngFor="let car of cars" [ngValue]="car">
+                    {{car.owner}}
+                </option>
+            </select>
+            <button class="add-entity-btn" (click)="addCarOwner()">
+                <img src="assets/img/icons/add.svg"
+                    class="add-entity-btn__icon"
+                    alt="add"
+                >
+            </button>
+        </div>
+        <div class="form-block">
+            <label for="amount" class="form-block__label">
+                Объем, тн
+            </label>
+            <input 
+                type="number" 
+                [(ngModel)]="request.amount" 
+                id="amount"
+                class="form-block__input"
+            >
+        </div>
+        <div class="form-block">
+            <label for="deliveryAddress" class="form-block__label">
+                Адрес доставки
+            </label>
+            <select 
+                [disabled]="!request.client || hasParent" 
+                class="form-block__select" 
+                [(ngModel)]="request.deliveryAddress"
+                id="deliveryAddress"
+                [compareWith]="byId"
+                (change)="onAddrChange()"
+            >
+                <option [ngValue]="undefined"></option>
+                <option *ngFor="let address of request.client?.addresses" [ngValue]="address">
+                    {{address.name}}
+                </option>
+            </select>
+        </div>
+        <div hidden class="form-block">
+            <label for="status" class="form-block__label">
+                Статус
+            </label>
+            <select
+                class="form-block__select"
+                id="status"
+                [compareWith]="byId"
+                [(ngModel)]="request.requestStatus"
+            >
+                <option [ngValue]="undefined"></option>
+                <option *ngFor="let status of statuses" [ngValue]="status">
+                    {{status.description}}
+                </option>
+            </select>
+        </div>
+        <div class="form-block">
+            <label for="longTermCheckbox" class="form-block__label">
+                Долгосрочная заявка
+            </label>
+            <input 
+                [disabled]="hasParent" 
+                type="checkbox" 
+                class="form-block__input" 
+                id="longTermCheckbox"
+                [(ngModel)]="request.isLong"
+            >
+        </div>
+        <div class="form-block" *ngIf="request.isLong">
+            <label for="deliveryEnd" class="form-block__label">
+                Дата окончания
+            </label>
+            <input
+                type="date"
+                name="deliveryEnd"
+                id="deliveryEnd"
+                [ngModel]="request.deliveryEnd | date:'yyyy-MM-dd'"
+                (ngModelChange)="request.deliveryEnd = $event"
+                min="1000-01-01"
+                max="3000-12-31"
+                class="form-block__input date-input"
+            >
+            <button class="add-entity-btn" (click)="resetDate('end')">
+                <img src="assets/img/icons/refresh.svg"
+                    class="add-entity-btn__icon"
+                    alt="refresh"
+                >
+            </button>
+        </div>
+        <button 
+            (click)="createOrUpdate(request, parentRequestId)"
+            class="app-btn gray-btn"
+        >
+            Сохранить
+        </button>
+    </div>
+</ngx-smart-modal>
+<app-edit-product (changed)="onProductAdd($event)"></app-edit-product>
+<app-client-editor (changed)="onClientAdd($event)"></app-client-editor>
+<app-car-editor (changed)="onCarOwnerAdd($event)"></app-car-editor>
+<app-supplier-editor (changed)="onSupplierAdd($event)"></app-supplier-editor>

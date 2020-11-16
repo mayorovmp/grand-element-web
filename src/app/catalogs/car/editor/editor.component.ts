@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import { ToastrService } from 'ngx-toastr';
 import { HttpService } from '../http.service';
 import { CarCategory } from 'src/app/models/CarCategory';
 import { Car } from 'src/app/models/Car';
@@ -9,22 +10,25 @@ import { Car } from 'src/app/models/Car';
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
-export class EditorComponent implements OnInit {
+export class CarEditorComponent implements OnInit {
   static MODAL_NAME = 'editCarModal';
-  @Output() changed = new EventEmitter<any>();
+  @Output() changed = new EventEmitter<Car>();
 
   car: Car = new Car();
 
   carCategories: CarCategory[] = [];
 
-  constructor(private httpSrv: HttpService, private ngxSmartModalService: NgxSmartModalService) { }
+  constructor(
+    private httpSrv: HttpService,
+    private toastr: ToastrService,
+    private ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
   }
 
   async onOpen() {
-    const transferred = this.ngxSmartModalService.getModalData(EditorComponent.MODAL_NAME);
-    this.ngxSmartModalService.resetModalData(EditorComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(CarEditorComponent.MODAL_NAME);
+    this.ngxSmartModalService.resetModalData(CarEditorComponent.MODAL_NAME);
     if (transferred) {
       this.car = transferred;
     } else {
@@ -45,7 +49,6 @@ export class EditorComponent implements OnInit {
   }
 
   onClose() {
-    this.changed.emit();
   }
 
   byId(a: Car, b: Car) {
@@ -53,11 +56,15 @@ export class EditorComponent implements OnInit {
   }
 
   async createOrUpdate(item: Car) {
+    let car = new Car();
     if (item.id) {
-      await this.httpSrv.edit(item).toPromise();
+      car = await this.httpSrv.edit(item).toPromise();
+      this.toastr.info('Перевозчик изменен');
     } else {
-      await this.httpSrv.add(item).toPromise();
+      car = await this.httpSrv.add(item).toPromise();
+      this.toastr.info('Перевозчик создан');
     }
-    this.ngxSmartModalService.toggle(EditorComponent.MODAL_NAME);
+    this.changed.emit(car);
+    this.ngxSmartModalService.toggle(CarEditorComponent.MODAL_NAME);
   }
 }

@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
     public password: string;
     public errorMessage?: string;
 
+    nameIconSrc:string = 'assets/img/icons/user.svg';
+    passwordIconSrc:string = 'assets/img/icons/password.svg';
 
     constructor(private auth: AuthService, private router: Router, private ngxLoader: NgxUiLoaderService, private toastr: ToastrService) { }
 
