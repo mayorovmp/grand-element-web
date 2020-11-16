@@ -51,6 +51,8 @@ export class RequestsComponent implements OnInit {
   throttle = 300;
   scrollDistance = 0.1;
 
+  complitedRequestsIsVisible = true;
+
   constructor(
     public http: HttpService,
     private toastr: ToastrService,
@@ -140,6 +142,7 @@ export class RequestsComponent implements OnInit {
         const bDate = new Date(b.deliveryStart);
         return bDate.getTime() - aDate.getTime();
       }
+      return 0;
     });
   }
 
@@ -309,5 +312,9 @@ export class RequestsComponent implements OnInit {
       this.overlayRef.dispose();
       this.overlayRef = null;
     }
+  }
+
+  toggleComplitedRequests() {
+    this.complitedRequestsIsVisible = !this.complitedRequestsIsVisible;
   }
 }

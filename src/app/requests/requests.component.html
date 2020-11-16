@@ -1,5 +1,8 @@
 <div class="app-container-fluid">
-  <div class="half-container half-container--left-part">
+  <div
+    class="half-container half-container--left-part"
+    [class.half-container--full]="!complitedRequestsIsVisible"
+  >
     <div class="export-order">
       <div class="export-order__buttons">
         <button (click)="add()" class="app-btn gray-btn">Добавить</button>
@@ -73,7 +76,7 @@
                 </td>
                 <td class="app-table__td">
                   Форс-мажор<br />
-                  {{ req.deliveryStart | date: "dd.MM.yyyy" }}
+                  {{ req.deliveryStart | date: 'dd.MM.yyyy' }}
                 </td>
               </tr>
               <tr
@@ -116,8 +119,8 @@
                 </td>
                 <td class="app-table__td">
                   Долгосрок <br />{{
-                    req.deliveryStart | date: "dd.MM.yyyy"
-                  }}-{{ req.deliveryEnd | date: "dd.MM.yyyy" }}
+                    req.deliveryStart | date: 'dd.MM.yyyy'
+                  }}-{{ req.deliveryEnd | date: 'dd.MM.yyyy' }}
                 </td>
               </tr>
               <ng-template #reqMenu let-req>
@@ -183,7 +186,7 @@
                 "
               >
                 <td align="center" colspan="8">
-                  <strong> {{ req.deliveryStart | date: "dd.MM.yyyy" }}</strong>
+                  <strong> {{ req.deliveryStart | date: 'dd.MM.yyyy' }}</strong>
                 </td>
               </tr>
               <tr
@@ -281,7 +284,10 @@
     </div>
   </div>
 
-  <div class="half-container half-container--right-part">
+  <div
+    class="half-container half-container--right-part"
+    [class.half-container--closed]="!complitedRequestsIsVisible"
+  >
     <div
       class="search-results"
       infiniteScroll
@@ -291,7 +297,13 @@
       [scrollWindow]="false"
     >
       <div class="orders-block">
-        <h2 class="block-title">Завершенные заказы</h2>
+        <h2
+          class="block-title block-title--cursor"
+          (click)="toggleComplitedRequests()"
+          [class.block-title--link]="!complitedRequestsIsVisible"
+        >
+          Завершенные заказы
+        </h2>
         <table class="app-table">
           <thead>
             <tr class="app-table__tr">
@@ -314,7 +326,7 @@
                 "
               >
                 <td align="center" colspan="8">
-                  <strong> {{ req.deliveryStart | date: "dd.MM.yyyy" }}</strong>
+                  <strong> {{ req.deliveryStart | date: 'dd.MM.yyyy' }}</strong>
                 </td>
               </tr>
               <tr
