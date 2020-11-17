@@ -136,14 +136,6 @@ export class RequestsComponent implements OnInit {
     newVals
       .filter((r) => r.isLong)
       .forEach((r) => this.longTermRequests.push(r));
-    this.actualRequests.sort((a, b) => {
-      if (a.deliveryStart && b.deliveryStart) {
-        const aDate = new Date(a.deliveryStart);
-        const bDate = new Date(b.deliveryStart);
-        return bDate.getTime() - aDate.getTime();
-      }
-      return 0;
-    });
   }
 
   async getActualRequests(limit: number, offset: number) {
