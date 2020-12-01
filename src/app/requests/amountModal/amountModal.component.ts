@@ -89,7 +89,6 @@ export class AmountModalComponent implements OnInit {
     this.carListVisible = false;
   }
   onClose() {
-    this.changed.emit();
     this.ngxSmartModalService.toggle(AmountModalComponent.MODAL_NAME);
   }
   async apply() {
