@@ -71,7 +71,7 @@ a:hover {
   width: 100%;
   max-width: 1200px;
   margin: auto;
-  padding: 48px 24px;
+  padding: 24px;
 }
 .search-results {
   overflow: scroll;
@@ -99,9 +99,9 @@ a:hover {
 }
 .app-btn {
   padding: 0 18px;
-  height: 44px;
-  line-height: 44px;
-  font-size: 16px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 14px;
   background: none;
   border-radius: 8px;
   transition: 0.4s;
@@ -224,7 +224,7 @@ a:hover {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   position: relative;
 }
 .form-block__label {
@@ -309,7 +309,7 @@ a:hover {
   max-width: 330px;
 }
 .additional-btn-container {
-  margin-top: 16px;
+  margin-top: 12px;
 }
 .form-block__select {
   width: calc(100% - 194px);
@@ -324,10 +324,13 @@ a:hover {
   background-color: #fff;
 }
 .form-block-adding-block {
-  margin: 16px 0;
+  margin: 12px 0;
   border: 1px solid var(--dark-gray);
   padding: 12px;
   border-radius: 6px;
+}
+.form-block-adding-block .form-block-adding-block {
+  margin-bottom: 0;
 }
 .label-icon-img {
   width: 20px;
