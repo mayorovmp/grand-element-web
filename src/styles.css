@@ -50,6 +50,8 @@ a:hover {
 .half-container.half-container--full {
   width: calc(100% - 90px);
 }
+.half-container.half-container--closed .search-results,
+.half-container.half-container--closed .orders-block,
 .half-container.half-container--closed {
   width: 90px;
   overflow: hidden;
