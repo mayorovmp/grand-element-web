@@ -19,6 +19,7 @@ import { Status } from 'src/app/models/Status';
 import { HttpService as ReqService } from 'src/app/requests/http.service';
 import { Address } from 'src/app/models/Address';
 import { Goal } from './Goal';
+import { ClientsGoal } from 'src/app/catalogs/clients/Goal';
 
 @Component({
   selector: 'app-request-editor',
@@ -32,6 +33,8 @@ export class RequestEditorComponent implements OnInit {
   goal: Goal; // Цель открытия формы(редактирование и тд).
 
   request: Request = new Request();
+
+  clientsGoal: ClientsGoal;
 
   clients: Client[] = [];
 
@@ -310,6 +313,16 @@ export class RequestEditorComponent implements OnInit {
     this.additionalCarOwners.push(newCarOwner);
   }
 
+  addAddress() {
+    this.clientsGoal = ClientsGoal.Edit;
+    this.ngxSmartModalService.setModalData(
+      { type: ClientsGoal.Edit, client: this.request.client },
+      ClientEditorComponent.MODAL_NAME,
+      true
+    );
+    this.ngxSmartModalService.getModal(ClientEditorComponent.MODAL_NAME).open();
+  }
+
   delCarOwnerFromReq(index: number) {
     this.additionalCarOwners.splice(index, 1);
   }
@@ -404,6 +417,10 @@ export class RequestEditorComponent implements OnInit {
     this.clientHttp.getClients().subscribe((x) => {
       this.clients = x;
       this.request.client = client;
+      if (this.clientsGoal) {
+        this.request.deliveryAddress =
+          client.addresses[client.addresses.length - 1];
+      }
     });
   }
 
