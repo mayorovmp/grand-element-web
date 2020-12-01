@@ -123,40 +123,6 @@
                   }}-{{ req.deliveryEnd | date: 'dd.MM.yyyy' }}
                 </td>
               </tr>
-              <ng-template #reqMenu let-req>
-                <div class="requestContextMenu">
-                  <button class="requestContextMenu__btn" (click)="edit(req)">
-                    <img
-                      class="edit-btn__img"
-                      src="assets/img/icons/edit.svg"
-                      alt="изменить"
-                    />
-                    Редактировать
-                  </button>
-                  <button
-                    (click)="confirm(req)"
-                    class="requestContextMenu__btn"
-                  >
-                    <img
-                      class="edit-btn__img"
-                      src="assets/img/icons/delete.svg"
-                      alt="удалить"
-                    />
-                    Удалить
-                  </button>
-                  <button
-                    (click)="closeContextMenu()"
-                    class="requestContextMenu__btn"
-                  >
-                    <img
-                      class="edit-btn__img"
-                      src="assets/img/icons/close.svg"
-                      alt="отмена"
-                    />
-                    Отмена
-                  </button>
-                </div>
-              </ng-template>
             </tbody>
           </table>
         </div>
@@ -241,42 +207,24 @@
                       {{ status.description }}
                     </option>
                   </select>
+                  <!-- <div class="status-box">
+                    <button
+                      class="status-box__btn"
+                      *ngFor="let status of statuses"
+                      (click)="onActualRequestStatusChange(req, status.id)"
+                      [title]="status.description"
+                      [ngClass]="{
+                        'status-box__btn--new': req.requestStatus.id === 1,
+                        'status-box__btn--executed': req.requestStatus.id === 2,
+                        'status-box__btn--onWork': req.requestStatus.id === 3,
+                        'status-box__btn--onWay': req.requestStatus.id === 4,
+                        'status-box__btn--incident': req.requestStatus.id === 5
+                      }"
+                    >
+                    </button>
+                  </div> -->
                 </td>
               </tr>
-              <ng-template #reqMenu let-req>
-                <div class="requestContextMenu">
-                  <button class="requestContextMenu__btn" (click)="edit(req)">
-                    <img
-                      class="edit-btn__img"
-                      src="assets/img/icons/edit.svg"
-                      alt="изменить"
-                    />
-                    Редактировать
-                  </button>
-                  <button
-                    (click)="confirm(req)"
-                    class="requestContextMenu__btn"
-                  >
-                    <img
-                      class="edit-btn__img"
-                      src="assets/img/icons/delete.svg"
-                      alt="удалить"
-                    />
-                    Удалить
-                  </button>
-                  <button
-                    (click)="closeContextMenu()"
-                    class="requestContextMenu__btn"
-                  >
-                    <img
-                      class="edit-btn__img"
-                      src="assets/img/icons/close.svg"
-                      alt="отмена"
-                    />
-                    Отмена
-                  </button>
-                </div>
-              </ng-template>
             </ng-container>
           </tbody>
         </table>
@@ -372,6 +320,14 @@
               </tr>
               <ng-template #reqMenu let-req>
                 <div class="requestContextMenu">
+                  <button class="requestContextMenu__btn" (click)="copy(req)">
+                    <img
+                      class="edit-btn__img"
+                      src="assets/img/icons/copy.svg"
+                      alt="изменить"
+                    />
+                    Копировать
+                  </button>
                   <button class="requestContextMenu__btn" (click)="edit(req)">
                     <img
                       class="edit-btn__img"
