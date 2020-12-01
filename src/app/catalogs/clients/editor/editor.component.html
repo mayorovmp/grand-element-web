@@ -1,24 +1,21 @@
-
-<ngx-smart-modal 
-  #editClientModal 
-  identifier="editClientModal" 
-  (onOpen)="onOpen()" 
+<ngx-smart-modal
+  #editClientModal
+  identifier="editClientModal"
+  (onOpen)="onOpen()"
   (onAnyCloseEvent)="onClose()"
 >
   <div class="form-container">
     <h2 class="form-title">Редактор</h2>
 
     <div class="form-block">
-      <label for="name" class="form-block__label">
-        Клиент
-      </label>
-      <input 
-        type="text" 
-        [(ngModel)]="client.name" 
+      <label for="name" class="form-block__label"> Клиент </label>
+      <input
+        type="text"
+        [(ngModel)]="client.name"
         class="form-block__input"
         name="name"
         id="name"
-      >
+      />
     </div>
 
     <div *ngFor="let addr of client.addresses" class="form-block-adding-block">
@@ -26,106 +23,82 @@
         <label for="address-name" class="form-block__label">
           Адрес доставки
         </label>
-        <input 
-          type="text" 
-          [(ngModel)]="addr.name" 
+        <input
+          type="text"
+          [(ngModel)]="addr.name"
           class="form-block__input"
           name="address-name"
           id="address-name"
-        >
+        />
       </div>
       <div class="form-block">
         <label for="freightPrice" class="form-block__label">
           Цена перевозки
         </label>
-        <input 
-          type="number" 
-          [(ngModel)]="addr.freightPrice" 
+        <input
+          type="number"
+          [(ngModel)]="addr.freightPrice"
           class="form-block__input"
           name="freightPrice"
           id="freightPrice"
-        >
+        />
       </div>
-
-      <button 
-        (click)="addContact(addr)"
-        class="app-btn gray-btn" 
-      >
-        Добавить контактное лицо
-      </button>
-      <div class="additional-btn-container" >
-
-        <button 
+      <div class="btns-container">
+        <button (click)="addContact(addr)" class="app-btn gray-btn">
+          Добавить контактное лицо
+        </button>
+        <button
           (click)="delAddr(client, addr)"
-          class="app-btn gray-btn"
+          class="app-btn app-btn--marginLeft gray-btn"
         >
           Удалить
         </button>
-
       </div>
-    
 
-      <div *ngFor="let contact of addr.contacts" class="form-block-adding-block">
-    
+      <div
+        *ngFor="let contact of addr.contacts"
+        class="form-block-adding-block"
+      >
         <div class="form-block">
           <label for="contact-name" class="form-block__label">
             Контактное лицо
           </label>
-          <input 
-            type="text" 
-            [(ngModel)]="contact.name" 
+          <input
+            type="text"
+            [(ngModel)]="contact.name"
             class="form-block__input"
             name="contact-name"
             id="contact-name"
-          >
+          />
         </div>
 
         <div class="form-block">
           <label for="communication" class="form-block__label">
             Средство связи
           </label>
-          <input 
-            type="text" 
-            [(ngModel)]="contact.communication" 
+          <input
+            type="text"
+            [(ngModel)]="contact.communication"
             class="form-block__input"
             name="communication"
             id="communication"
-          >
+          />
         </div>
 
-        <button 
-          (click)="delContact(addr, contact)"
-          class="app-btn gray-btn"
-        >
+        <button (click)="delContact(addr, contact)" class="app-btn gray-btn">
           Удалить
         </button>
       </div>
-      
     </div>
 
-      <button 
-        class="app-btn gray-btn" 
-        (click)="addAddress(client)"
-      >
-        Добавить адрес
+    <button class="app-btn gray-btn" (click)="addAddress(client)">
+      Добавить адрес
+    </button>
+
+    <div class="additional-btn-container">
+      <button class="app-btn gray-btn" (click)="createOrUpdate(client)">
+        Сохранить
       </button>
-
-      <div class="additional-btn-container" >
-
-        <button 
-          class="app-btn gray-btn" 
-          (click)="createOrUpdate(client)"
-        >
-          Сохранить
-        </button>
-
-      </div>
     </div>
-
+  </div>
 </ngx-smart-modal>
-
-
-
-
-
-

@@ -98,7 +98,7 @@ a:hover {
   color: blue;
 }
 .app-btn {
-  padding: 0 18px;
+  padding: 0 16px;
   height: 36px;
   line-height: 36px;
   font-size: 14px;
@@ -107,6 +107,9 @@ a:hover {
   transition: 0.4s;
   font-weight: 700;
   border: none;
+}
+.app-btn--marginLeft {
+  margin-left: 12px;
 }
 .white-btn {
   background-color: #fff;
@@ -497,6 +500,14 @@ a:hover {
   .add-entity-btn {
     position: absolute;
     right: 0;
+  }
+  .btns-container .app-btn {
+    display: block;
+    margin: auto;
+    margin-top: 12px;
+  }
+  .app-btn--marginLeft {
+    margin-left: 0;
   }
 }
 @media (max-width: 340px) {
