@@ -52,6 +52,7 @@ a:hover {
 }
 .half-container.half-container--closed {
   width: 90px;
+  overflow: hidden;
 }
 .half-container--closed .app-table {
   display: none;
