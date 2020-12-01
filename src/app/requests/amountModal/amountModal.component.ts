@@ -167,4 +167,11 @@ export class AmountModalComponent implements OnInit {
       this.selectCarOwner(car);
     });
   }
+  resetDate(dateType: string) {
+    if (dateType === 'start') {
+      this.request.deliveryStart = new Date();
+    } else {
+      this.request.deliveryEnd = new Date();
+    }
+  }
 }

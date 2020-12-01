@@ -9,6 +9,26 @@
     <h2 class="form-title">Разделить объем</h2>
     <div class="form-container">
       <div class="form-block">
+        <label for="deliveryStart" class="form-block__label"> Дата </label>
+        <input
+          type="date"
+          name="deliveryStart"
+          id="deliveryStart"
+          [ngModel]="request.deliveryStart | date: 'yyyy-MM-dd'"
+          (ngModelChange)="request.deliveryStart = $event"
+          min="1000-01-01"
+          max="3000-12-31"
+          class="form-block__input date-input"
+        />
+        <button class="add-entity-btn" (click)="resetDate('start')">
+          <img
+            src="assets/img/icons/refresh.svg"
+            class="add-entity-btn__icon"
+            alt="refresh"
+          />
+        </button>
+      </div>
+      <div class="form-block">
         <label for="carOwnerText" class="form-block__label"> Перевозчик </label>
         <input
           type="text"
