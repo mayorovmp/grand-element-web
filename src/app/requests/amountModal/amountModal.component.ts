@@ -4,12 +4,13 @@ import { Request } from 'src/app/models/Request';
 import { Car } from 'src/app/models/Car';
 import { HttpService as CarHttp } from 'src/app/catalogs/car/http.service';
 import { HttpService as ReqService } from 'src/app/requests/http.service';
+import { CarEditorComponent } from 'src/app/catalogs/car/editor/editor.component';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-modal-amount',
   templateUrl: './amountModal.component.html',
-  styleUrls: ['./amountModal.component.css']
+  styleUrls: ['./amountModal.component.css'],
 })
 export class AmountModalComponent implements OnInit {
   static readonly MODAL_NAME = 'amountModal';
@@ -30,16 +31,19 @@ export class AmountModalComponent implements OnInit {
     private carHttp: CarHttp,
     private reqService: ReqService,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   async onOpen() {
     this.reset();
-    this.carHttp.getCars().toPromise().then(cars => this.allCars = cars);
+    this.carHttp
+      .getCars()
+      .toPromise()
+      .then((cars) => (this.allCars = cars));
     this.carHttp.getFavoriteCars(30, 5).subscribe(
-      cars => this.favoriteCars = cars,
-      error => this.toastr.error(error.message)
+      (cars) => (this.favoriteCars = cars),
+      (error) => this.toastr.error(error.message)
     );
     const transferred = this.ngxSmartModalService.getModalData('amountModal');
     if (transferred) {
@@ -101,7 +105,10 @@ export class AmountModalComponent implements OnInit {
           await this.reqService.setStatus(this.parentReq.id, 3).toPromise();
         }
         this.ngxSmartModalService.close(AmountModalComponent.MODAL_NAME);
-      } else if (this.parentReq.amount && this.parentReq.amount > this.request.amount) {
+      } else if (
+        this.parentReq.amount &&
+        this.parentReq.amount > this.request.amount
+      ) {
         this.parentReq.amount -= this.request.amount;
         await this.reqService.edit(this.parentReq).toPromise();
         const newReq = await this.reqService.add(this.request).toPromise();
@@ -148,5 +155,16 @@ export class AmountModalComponent implements OnInit {
     }
     await this.reqService.edit(this.parentReq).toPromise();
     await this.reqService.add(this.request).toPromise();
+  }
+  addCarOwner() {
+    this.ngxSmartModalService.getModal(CarEditorComponent.MODAL_NAME).open();
+  }
+
+  onCarOwnerAdd(car: Car) {
+    this.cars = [];
+    this.carHttp.getCars().subscribe((x) => {
+      this.allCars = x;
+      this.selectCarOwner(car);
+    });
   }
 }

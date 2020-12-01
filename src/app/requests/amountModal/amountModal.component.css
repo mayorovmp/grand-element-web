@@ -1,10 +1,10 @@
-.form-block__searching-list{
+.form-block__searching-list {
   width: calc(100% - 194px);
 }
-.confirm-modal-btns{
+.confirm-modal-btns {
   display: flex;
   justify-content: flex-end;
 }
-.apply-btn{
+.apply-btn {
   margin-right: 12px;
 }
