@@ -410,6 +410,18 @@ a:hover {
 .footer-modal-btns__first-btn {
   margin-right: 12px;
 }
+
+.add-entity-btn {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin-left: 6px;
+}
+.add-entity-btn__icon {
+  width: 20px;
+  height: 20px;
+}
+
 @media (max-width: 996px) {
   .app-container-fluid {
     padding: 24px 0;
@@ -478,6 +490,10 @@ a:hover {
     top: 60px;
     left: 0;
     width: 100%;
+  }
+  .add-entity-btn {
+    position: absolute;
+    right: 0;
   }
 }
 @media (max-width: 340px) {
