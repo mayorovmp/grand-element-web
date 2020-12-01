@@ -9,7 +9,7 @@ import { Contact } from 'src/app/models/Contact';
 @Component({
   selector: 'app-client-editor',
   templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.css']
+  styleUrls: ['./editor.component.css'],
 })
 export class ClientEditorComponent implements OnInit {
   static MODAL_NAME = 'editClientModal';
@@ -19,24 +19,26 @@ export class ClientEditorComponent implements OnInit {
   client: Client = new Client();
 
   constructor(
-    private httpSrv: HttpService, private toastr: ToastrService,
-    private ngxSmartModalService: NgxSmartModalService) { }
+    private httpSrv: HttpService,
+    private toastr: ToastrService,
+    private ngxSmartModalService: NgxSmartModalService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async onOpen() {
-    const transferredClient = this.ngxSmartModalService.getModalData(ClientEditorComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(
+      ClientEditorComponent.MODAL_NAME
+    );
     this.ngxSmartModalService.resetModalData(ClientEditorComponent.MODAL_NAME);
-    if (transferredClient) {
-      this.client = transferredClient;
+    if (transferred.type) {
+      this.client = transferred.client;
     } else {
       this.client = new Client();
     }
   }
 
-  onClose() {
-  }
+  onClose() {}
 
   addContact(addr: Address) {
     addr.contacts.push(new Contact());
@@ -47,12 +49,12 @@ export class ClientEditorComponent implements OnInit {
   }
 
   delContact(addr: Address, contact: Contact) {
-    const delId = addr.contacts.findIndex(x => x.id === contact.id);
+    const delId = addr.contacts.findIndex((x) => x.id === contact.id);
     addr.contacts.splice(delId, 1);
   }
 
   delAddr(client: Client, addr: Address) {
-    const delId = client.addresses.findIndex(x => x.id === addr.id);
+    const delId = client.addresses.findIndex((x) => x.id === addr.id);
     client.addresses.splice(delId, 1);
   }
 

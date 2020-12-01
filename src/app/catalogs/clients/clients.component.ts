@@ -4,11 +4,12 @@ import { Client } from 'src/app/models/Client';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from 'src/app/catalogs/clients/http.service';
 import { ClientEditorComponent } from './editor/editor.component';
+import { ClientsGoal } from './Goal';
 
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.component.html',
-  styleUrls: ['../catalogs.component.css', './clients.component.css']
+  styleUrls: ['../catalogs.component.css', './clients.component.css'],
 })
 export class ClientsComponent implements OnInit {
   clients: Client[] = [];
@@ -16,9 +17,10 @@ export class ClientsComponent implements OnInit {
   constructor(
     private httpClient: HttpService,
     public ngxSmartModalService: NgxSmartModalService,
-    private title: Title) {
-      title.setTitle('Клиенты');
-    }
+    private title: Title
+  ) {
+    title.setTitle('Клиенты');
+  }
 
   ngOnInit() {
     this.getData();
@@ -30,11 +32,20 @@ export class ClientsComponent implements OnInit {
   }
 
   addClient() {
+    this.ngxSmartModalService.setModalData(
+      { type: ClientsGoal.New },
+      ClientEditorComponent.MODAL_NAME,
+      true
+    );
     this.ngxSmartModalService.toggle(ClientEditorComponent.MODAL_NAME);
   }
 
   edit(item: Client) {
-    this.ngxSmartModalService.setModalData(item, ClientEditorComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.setModalData(
+      { type: ClientsGoal.Edit, client: item },
+      ClientEditorComponent.MODAL_NAME,
+      true
+    );
     this.ngxSmartModalService.toggle(ClientEditorComponent.MODAL_NAME);
   }
 
@@ -44,7 +55,7 @@ export class ClientsComponent implements OnInit {
         title: 'Подтвердите действие',
         btnAction: () => this.delete(item),
         btnActionColor: 'red',
-        btnActionName: 'Удалить клиента'
+        btnActionName: 'Удалить клиента',
       },
       'confirmModal',
       true
@@ -60,21 +71,28 @@ export class ClientsComponent implements OnInit {
   }
 
   sortedByName = () => {
-    if (this.nameSorting === 'none' || this.nameSorting === 'reverse'){
+    if (this.nameSorting === 'none' || this.nameSorting === 'reverse') {
       this.clients.sort((a, b) => {
-        if (!a.name) { a.name = ''; }
-        if (!b.name) { b.name = ''; }
+        if (!a.name) {
+          a.name = '';
+        }
+        if (!b.name) {
+          b.name = '';
+        }
         return a.name.localeCompare(b.name);
       });
       this.nameSorting = 'direct';
     } else if (this.nameSorting === 'direct') {
       this.clients.sort((a, b) => {
-        if (!a.name) { a.name = ''; }
-        if (!b.name) { b.name = ''; }
+        if (!a.name) {
+          a.name = '';
+        }
+        if (!b.name) {
+          b.name = '';
+        }
         return b.name.localeCompare(a.name);
       });
       this.nameSorting = 'reverse';
     }
-  }
-
+  };
 }

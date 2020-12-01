@@ -154,6 +154,17 @@
           {{ address.name }}
         </option>
       </select>
+      <button
+        class="add-entity-btn"
+        (click)="addAddress()"
+        *ngIf="this.request.client && clientNameText"
+      >
+        <img
+          src="assets/img/icons/add.svg"
+          class="add-entity-btn__icon"
+          alt="add"
+        />
+      </button>
     </div>
     <div hidden class="form-block">
       <label for="status" class="form-block__label"> Статус </label>
