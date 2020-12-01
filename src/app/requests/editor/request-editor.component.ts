@@ -1,9 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService as CarCategoryHttp } from 'src/app/catalogs/car-category/http.service';
 import { CarEditorComponent } from 'src/app/catalogs/car/editor/editor.component';
@@ -28,7 +23,7 @@ import { Goal } from './Goal';
 @Component({
   selector: 'app-request-editor',
   templateUrl: './request-editor.component.html',
-  styleUrls: ['./request-editor.component.css']
+  styleUrls: ['./request-editor.component.css'],
 })
 export class RequestEditorComponent implements OnInit {
   static readonly MODAL_NAME = 'requestEditorModal';
@@ -70,7 +65,8 @@ export class RequestEditorComponent implements OnInit {
     private reqService: ReqService,
     private supplierHttp: SupplierHttp,
     private carCategoryHttp: CarCategoryHttp,
-    private carHttp: CarHttp) { }
+    private carHttp: CarHttp
+  ) {}
 
   @Output() changed = new EventEmitter<any>();
 
@@ -93,28 +89,56 @@ export class RequestEditorComponent implements OnInit {
 
   async getCatalogs(): Promise<any[]> {
     const promises: Promise<any>[] = [];
-    promises.push(this.clientHttp.getClients().toPromise().then(x => this.clients = x));
+    promises.push(
+      this.clientHttp
+        .getClients()
+        .toPromise()
+        .then((x) => (this.clients = x))
+    );
 
-    promises.push(this.productHttp.getProducts().toPromise().then(x => this.products = x));
+    promises.push(
+      this.productHttp
+        .getProducts()
+        .toPromise()
+        .then((x) => (this.products = x))
+    );
 
-    promises.push(this.supplierHttp.getSuppliers().toPromise().then(
-      x => this.suppliers = x));
+    promises.push(
+      this.supplierHttp
+        .getSuppliers()
+        .toPromise()
+        .then((x) => (this.suppliers = x))
+    );
 
-    promises.push(this.carCategoryHttp.getCarCategories().toPromise().then(
-      x => this.carCategories = x));
+    promises.push(
+      this.carCategoryHttp
+        .getCarCategories()
+        .toPromise()
+        .then((x) => (this.carCategories = x))
+    );
 
-    promises.push(this.carHttp.getCars().toPromise().then(
-      x => this.cars = x));
+    promises.push(
+      this.carHttp
+        .getCars()
+        .toPromise()
+        .then((x) => (this.cars = x))
+    );
 
-    promises.push(this.reqService.getStatuses().toPromise().then(
-      statuses => this.statuses = statuses));
+    promises.push(
+      this.reqService
+        .getStatuses()
+        .toPromise()
+        .then((statuses) => (this.statuses = statuses))
+    );
 
     return Promise.all(promises);
   }
 
   async onOpen() {
     this.reset();
-    const transferred = this.ngxSmartModalService.getModalData(RequestEditorComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(
+      RequestEditorComponent.MODAL_NAME
+    );
     this.ngxSmartModalService.resetModalData(RequestEditorComponent.MODAL_NAME);
     await this.getCatalogs();
     this.request.deliveryStart = this.curDate;
@@ -175,8 +199,6 @@ export class RequestEditorComponent implements OnInit {
         if (this.request.client?.name) {
           this.clientNameText = this.request.client.name;
         }
-
-        // await this.getSuppliersByProd(this.request.product?.id);
         break;
       }
       default: {
@@ -203,54 +225,56 @@ export class RequestEditorComponent implements OnInit {
   }
 
   async processLastReq(client: Client | undefined, addr: Address | undefined) {
-    const lastReq = await this.reqService.getLastRequest(client, addr).toPromise();
+    const lastReq = await this.reqService
+      .getLastRequest(client, addr)
+      .toPromise();
 
     if (lastReq) {
-          this.request.id = undefined;
-          this.request.deliveryStart = this.curDate;
-          this.request.deliveryEnd = this.curDate;
-          this.request.client = client;
-          this.request.deliveryAddress = lastReq.deliveryAddress;
-          this.request.isLong = lastReq.isLong;
-          this.request.amount = lastReq.amount;
-          this.request.sellingPrice = lastReq.sellingPrice;
-          this.request.product = lastReq.product;
-          this.request.supplier = lastReq.supplier;
-          this.request.supplierVat = lastReq.supplierVat;
-          this.request.purchasePrice = lastReq.purchasePrice;
-          this.request.car = lastReq.car;
-          this.request.carVat = lastReq.carVat;
-          this.request.freightPrice = lastReq.freightPrice;
-          this.request.amountIn = lastReq.amountIn;
-          this.request.amountOut = lastReq.amountOut;
-          this.request.freightCost = lastReq.freightCost;
-          this.request.sellingCost = lastReq.sellingCost;
-          this.request.profit = lastReq.profit;
-          this.request.income = lastReq.income;
-          this.request.comment = lastReq.comment;
-          this.request.unit = lastReq.unit;
-        } else {
-          this.request.client = client;
-          this.request.deliveryAddress = addr;
-          this.request.isLong = false;
-          this.request.amount = undefined;
-          this.request.sellingPrice = undefined;
-          this.request.product = undefined;
-          this.request.supplier = undefined;
-          this.request.supplierVat = undefined;
-          this.request.purchasePrice = undefined;
-          this.request.car = undefined;
-          this.request.carVat = undefined;
-          this.request.freightPrice = undefined;
-          this.request.amountIn = undefined;
-          this.request.amountOut = undefined;
-          this.request.freightCost = 0;
-          this.request.sellingCost = undefined;
-          this.request.profit = undefined;
-          this.request.income = undefined;
-          this.request.comment = undefined;
-          this.request.unit = undefined;
-        }
+      this.request.id = undefined;
+      this.request.deliveryStart = this.curDate;
+      this.request.deliveryEnd = this.curDate;
+      this.request.client = client;
+      this.request.deliveryAddress = lastReq.deliveryAddress;
+      this.request.isLong = lastReq.isLong;
+      this.request.amount = lastReq.amount;
+      this.request.sellingPrice = lastReq.sellingPrice;
+      this.request.product = lastReq.product;
+      this.request.supplier = lastReq.supplier;
+      this.request.supplierVat = lastReq.supplierVat;
+      this.request.purchasePrice = lastReq.purchasePrice;
+      this.request.car = lastReq.car;
+      this.request.carVat = lastReq.carVat;
+      this.request.freightPrice = lastReq.freightPrice;
+      this.request.amountIn = lastReq.amountIn;
+      this.request.amountOut = lastReq.amountOut;
+      this.request.freightCost = lastReq.freightCost;
+      this.request.sellingCost = lastReq.sellingCost;
+      this.request.profit = lastReq.profit;
+      this.request.income = lastReq.income;
+      this.request.comment = lastReq.comment;
+      this.request.unit = lastReq.unit;
+    } else {
+      this.request.client = client;
+      this.request.deliveryAddress = addr;
+      this.request.isLong = false;
+      this.request.amount = undefined;
+      this.request.sellingPrice = undefined;
+      this.request.product = undefined;
+      this.request.supplier = undefined;
+      this.request.supplierVat = undefined;
+      this.request.purchasePrice = undefined;
+      this.request.car = undefined;
+      this.request.carVat = undefined;
+      this.request.freightPrice = undefined;
+      this.request.amountIn = undefined;
+      this.request.amountOut = undefined;
+      this.request.freightCost = 0;
+      this.request.sellingCost = undefined;
+      this.request.profit = undefined;
+      this.request.income = undefined;
+      this.request.comment = undefined;
+      this.request.unit = undefined;
+    }
   }
 
   byId(a: any, b: any) {
@@ -270,7 +294,9 @@ export class RequestEditorComponent implements OnInit {
     this.ngxSmartModalService.getModal(ClientEditorComponent.MODAL_NAME).open();
   }
   addSupplier() {
-    this.ngxSmartModalService.getModal(SupplierEditorComponent.MODAL_NAME).open();
+    this.ngxSmartModalService
+      .getModal(SupplierEditorComponent.MODAL_NAME)
+      .open();
   }
   addProduct() {
     this.ngxSmartModalService.getModal(EditProductComponent.MODAL_NAME).open();
@@ -340,7 +366,9 @@ export class RequestEditorComponent implements OnInit {
     if (!prodId) {
       return;
     }
-    this.suppliers = await this.supplierHttp.getSuppliersByProdId(prodId).toPromise();
+    this.suppliers = await this.supplierHttp
+      .getSuppliersByProdId(prodId)
+      .toPromise();
   }
 
   async onClientChange() {
@@ -350,7 +378,6 @@ export class RequestEditorComponent implements OnInit {
 
   async onAddrChange() {
     // await this.processLastReq(this.request.client, this.request.deliveryAddress);
-
     // if (this.request.deliveryAddress) {
     //   this.request.freightPrice = this.request.deliveryAddress.freightPrice;
     // }
@@ -374,42 +401,34 @@ export class RequestEditorComponent implements OnInit {
   }
 
   onClientAdd(client: Client) {
-    this.clientHttp.getClients().subscribe(
-      x => {
-        this.clients = x;
-        this.request.client = client;
-      }
-    );
+    this.clientHttp.getClients().subscribe((x) => {
+      this.clients = x;
+      this.request.client = client;
+    });
   }
 
   onProductAdd(product: Product) {
-    this.productHttp.getProducts().subscribe(
-      x => {
-        this.products = x;
-        this.request.product = product;
-      }
-    );
+    this.productHttp.getProducts().subscribe((x) => {
+      this.products = x;
+      this.request.product = product;
+    });
   }
 
   onCarOwnerAdd(car: Car) {
-    this.carHttp.getCars().subscribe(
-      x => {
-        this.cars = x;
-        this.request.car = car;
-      }
-    );
+    this.carHttp.getCars().subscribe((x) => {
+      this.cars = x;
+      this.request.car = car;
+    });
   }
 
   onSupplierAdd(supplier: Supplier) {
-    this.supplierHttp.getSuppliers().subscribe(
-      x => {
-        this.suppliers = x;
-        this.request.supplier = supplier;
-        if (supplier.products.length) {
-          this.request.product = supplier.products[0];
-        }
+    this.supplierHttp.getSuppliers().subscribe((x) => {
+      this.suppliers = x;
+      this.request.supplier = supplier;
+      if (supplier.products.length) {
+        this.request.product = supplier.products[0];
       }
-    );
+    });
   }
 
   onAmountChange() {
@@ -436,7 +455,7 @@ export class RequestEditorComponent implements OnInit {
   calcFreigthCost() {
     if (this.request.amountOut && this.request.freightPrice) {
       const freightCost = this.request.amountOut * this.request.freightPrice;
-      this.request.freightCost = Number((freightCost).toFixed(2));
+      this.request.freightCost = Number(freightCost.toFixed(2));
     } else {
       this.request.freightCost = undefined;
     }
@@ -445,37 +464,43 @@ export class RequestEditorComponent implements OnInit {
   calcSellingCost() {
     if (this.request.sellingPrice && this.request.amountOut) {
       const sellingCost = this.request.sellingPrice * this.request.amountOut;
-      this.request.sellingCost = Number((sellingCost).toFixed(2));
+      this.request.sellingCost = Number(sellingCost.toFixed(2));
     } else {
       this.request.sellingCost = undefined;
     }
   }
 
   calcProfit() {
-    if (this.request.sellingCost !== undefined &&
+    if (
+      this.request.sellingCost !== undefined &&
       this.request.freightCost !== undefined &&
       this.request.reward !== undefined &&
       this.request.purchasePrice !== undefined &&
       this.request.amountOut !== undefined
     ) {
       // Для расчета прибыли, посчитаем доход.
-      let income = this.request.sellingCost
-                  - this.request.purchasePrice * this.request.amountOut
-                  - this.request.freightCost;
+      let income =
+        this.request.sellingCost -
+        this.request.purchasePrice * this.request.amountOut -
+        this.request.freightCost;
       const incomeVat = (income + this.request.reward) * this.ndsConst;
       let freightVat = 0; // НДС перевозки
       let purchaseVat = 0; // НДС закупки
-      if (!this.request.carVat) {// НДС не включен в стоимость перевозки.
+      if (!this.request.carVat) {
+        // НДС не включен в стоимость перевозки.
         freightVat = this.request.freightCost * this.ndsConst;
       }
-      if (!this.request.supplierVat) {// НДС не включен в стоимость товара.
-        purchaseVat = this.request.purchasePrice * this.request.amountOut * this.ndsConst;
+      if (!this.request.supplierVat) {
+        // НДС не включен в стоимость товара.
+        purchaseVat =
+          this.request.purchasePrice * this.request.amountOut * this.ndsConst;
       }
 
-      let profit = income - incomeVat - freightVat - purchaseVat - this.request.reward;
+      let profit =
+        income - incomeVat - freightVat - purchaseVat - this.request.reward;
 
-      profit = Number((profit).toFixed(2));
-      income = Number((income).toFixed(2));
+      profit = Number(profit.toFixed(2));
+      income = Number(income.toFixed(2));
 
       this.request.profit = profit;
       this.request.income = income;
@@ -540,7 +565,9 @@ export class RequestEditorComponent implements OnInit {
         }
       }
       case Goal.AddChildRequest: {
-        await this.reqService.addChildReq(req, this.parentRequestId).toPromise();
+        await this.reqService
+          .addChildReq(req, this.parentRequestId)
+          .toPromise();
         break;
       }
       case Goal.Edit: {
