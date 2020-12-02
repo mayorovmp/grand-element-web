@@ -193,36 +193,26 @@
                   {{ req.deliveryAddress?.name }}
                 </td>
                 <td class="app-table__td">
-                  <select
-                    class="app-table__select"
-                    (change)="
-                      onActualRequestStatusChange(req, $event.target.value)
-                    "
-                  >
-                    <option
-                      *ngFor="let status of statuses"
-                      [selected]="status.id == req.requestStatus.id"
-                      [value]="status.id"
-                    >
-                      {{ status.description }}
-                    </option>
-                  </select>
-                  <!-- <div class="status-box">
+                  <div class="status-box">
                     <button
                       class="status-box__btn"
                       *ngFor="let status of statuses"
                       (click)="onActualRequestStatusChange(req, status.id)"
                       [title]="status.description"
                       [ngClass]="{
-                        'status-box__btn--new': req.requestStatus.id === 1,
-                        'status-box__btn--executed': req.requestStatus.id === 2,
-                        'status-box__btn--onWork': req.requestStatus.id === 3,
-                        'status-box__btn--onWay': req.requestStatus.id === 4,
-                        'status-box__btn--incident': req.requestStatus.id === 5
+                        'status-box__btn--new': req.requestStatus.orderBy === 1,
+                        'status-box__btn--onWork':
+                          req.requestStatus.orderBy === 2,
+                        'status-box__btn--onWay':
+                          req.requestStatus.orderBy === 3,
+                        'status-box__btn--executed':
+                          req.requestStatus.orderBy === 4,
+                        'status-box__btn--incident':
+                          req.requestStatus.orderBy === 5
                       }"
                     >
                     </button>
-                  </div> -->
+                  </div>
                 </td>
               </tr>
             </ng-container>
@@ -302,7 +292,7 @@
                   {{ req.deliveryAddress?.name }}
                 </td>
                 <td class="app-table__td">
-                  <select
+                  <!-- <select
                     class="app-table__select"
                     (change)="
                       onActualRequestStatusChange(req, $event.target.value)
@@ -315,7 +305,27 @@
                     >
                       {{ status.description }}
                     </option>
-                  </select>
+                  </select> -->
+                  <div class="status-box">
+                    <button
+                      class="status-box__btn"
+                      *ngFor="let status of statuses"
+                      (click)="onActualRequestStatusChange(req, status.id)"
+                      [title]="status.description"
+                      [ngClass]="{
+                        'status-box__btn--new': req.requestStatus.orderBy === 1,
+                        'status-box__btn--onWork':
+                          req.requestStatus.orderBy === 2,
+                        'status-box__btn--onWay':
+                          req.requestStatus.orderBy === 3,
+                        'status-box__btn--executed':
+                          req.requestStatus.orderBy === 4,
+                        'status-box__btn--incident':
+                          req.requestStatus.orderBy === 5
+                      }"
+                    >
+                    </button>
+                  </div>
                 </td>
               </tr>
               <ng-template #reqMenu let-req>
