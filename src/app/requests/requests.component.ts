@@ -229,7 +229,8 @@ export class RequestsComponent implements OnInit {
 
   getStatuses() {
     this.http.getStatuses().subscribe(
-      (statuses) => (this.statuses = statuses),
+      (statuses) =>
+        (this.statuses = statuses.sort((a, b) => a.orderBy - b.orderBy)),
       (err) => {
         this.toastr.error(err.message);
       }
