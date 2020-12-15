@@ -1,4 +1,9 @@
-import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
@@ -8,12 +13,14 @@ import { Client } from '../models/Client';
 import { Address } from '../models/Address';
 import { Status } from '../models/Status';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpService {
-  constructor(private http: HttpClient, private httpCarCategorySrv: HttpCarCategoryService) { }
+  constructor(
+    private http: HttpClient,
+    private httpCarCategorySrv: HttpCarCategoryService
+  ) {}
 
   private baseUrl = environment.baseUrl;
 
@@ -74,7 +81,6 @@ export class HttpService {
     return this.http.put<Request>(url, request);
   }
 
-
   del(req: Request): Observable<any> {
     const url = this.baseUrl + `/request/${req.id}`;
     return this.http.delete<any>(url);
@@ -86,12 +92,14 @@ export class HttpService {
   }
 
   getActualRequests(limit: number, offset: number): Observable<Request[]> {
-    const url = this.baseUrl + `/Request/not_completed?limit=${limit}&offset=${offset}`;
+    const url =
+      this.baseUrl + `/Request/not_completed?limit=${limit}&offset=${offset}`;
     return this.http.get<Request[]>(url);
   }
 
   getCompletedRequests(limit: number, offset: number): Observable<Request[]> {
-    const url = this.baseUrl + `/Request/completed?limit=${limit}&offset=${offset}`;
+    const url =
+      this.baseUrl + `/Request/completed?limit=${limit}&offset=${offset}`;
     return this.http.get<Request[]>(url);
   }
 
@@ -110,7 +118,10 @@ export class HttpService {
     return this.http.get<Request[]>(url);
   }
 
-  getLastRequest(client: Client | undefined, deliveryAddress: Address | undefined): Observable<Request> {
+  getLastRequest(
+    client: Client | undefined,
+    deliveryAddress: Address | undefined
+  ): Observable<Request> {
     const url = this.baseUrl + `/request/last`;
 
     let params = new HttpParams();
@@ -132,7 +143,6 @@ export class HttpService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 

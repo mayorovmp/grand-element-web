@@ -24,7 +24,12 @@ import localeRu from '@angular/common/locales/ru';
 
 registerLocaleData(localeRu);
 
-import { NgxUiLoaderModule, NgxUiLoaderHttpModule, NgxUiLoaderConfig, SPINNER } from 'ngx-ui-loader';
+import {
+  NgxUiLoaderModule,
+  NgxUiLoaderHttpModule,
+  NgxUiLoaderConfig,
+  SPINNER,
+} from 'ngx-ui-loader';
 import { LoggerComponent } from './logger/logger.component';
 import { CatalogsComponent } from './catalogs/catalogs.component';
 import { CarCategoryComponent } from './catalogs/car-category/car-category.component';
@@ -42,6 +47,7 @@ import { RequestEditorComponent } from './requests/editor/request-editor.compone
 import { RequestsComponent } from './requests/requests.component';
 import { FilterPipe, CarOwnerPipe } from './core/pipes/filter.pipe';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AmountModalComponent } from './requests/amountModal/amountModal.component';
 import { ConfirmCompleteReqModalComponent } from './requests/confirmCompleteReqModal/amountModal/confirm-complete-req-modal.component';
@@ -49,7 +55,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.ballScaleMultiple,
   minTime: 100,
   fgsSize: 0,
-  overlayColor: 'rgba(255,255,255,0)'
+  overlayColor: 'rgba(255,255,255,0)',
 };
 
 @NgModule({
@@ -73,7 +79,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     FilterPipe,
     CarOwnerPipe,
     AmountModalComponent,
-    ConfirmCompleteReqModalComponent
+    ConfirmCompleteReqModalComponent,
   ],
   imports: [
     NgxSmartModalModule.forRoot(),
@@ -91,17 +97,18 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       closeButton: true,
-      timeOut: 50000
+      timeOut: 50000,
     }),
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    DragDropModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
