@@ -20,6 +20,11 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { take, filter } from 'rxjs/operators';
 import { AmountModalComponent } from './amountModal/amountModal.component';
 import { ConfirmCompleteReqModalComponent } from './confirmCompleteReqModal/amountModal/confirm-complete-req-modal.component';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-requests',
@@ -309,5 +314,26 @@ export class RequestsComponent implements OnInit {
 
   toggleComplitedRequests() {
     this.complitedRequestsIsVisible = !this.complitedRequestsIsVisible;
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    console.log('$event', event);
+    console.log('$event.item', event.item);
+
+    console.log('$event root', event.item.getRootElement());
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 }
