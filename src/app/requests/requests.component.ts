@@ -7,9 +7,8 @@ import {
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Request } from '../models/Request';
-import { Status } from '../models/Status';
-import { Subject, fromEvent, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/internal/operators';
+import { Status, StatusName } from '../models/Status';
+import { fromEvent, Subscription } from 'rxjs';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from './http.service';
 import { ToastrService } from 'ngx-toastr';
@@ -20,11 +19,7 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { take, filter } from 'rxjs/operators';
 import { AmountModalComponent } from './amountModal/amountModal.component';
 import { ConfirmCompleteReqModalComponent } from './confirmCompleteReqModal/amountModal/confirm-complete-req-modal.component';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-requests',
@@ -131,12 +126,11 @@ export class RequestsComponent implements OnInit {
   }
 
   handleActualRequests(newVals: Request[]) {
-    // TODO: Вынести 5 в константы
     newVals
-      .filter((r) => !r.isLong && r.requestStatus.id !== 5)
+      .filter((r) => !r.isLong && r.requestStatus.id !== StatusName.Incident)
       .forEach((r) => this.actualRequests.push(r));
     newVals
-      .filter((r) => r.requestStatus.id === 5)
+      .filter((r) => r.requestStatus.id === StatusName.Incident)
       .forEach((r) => this.incidentRequests.push(r));
     newVals
       .filter((r) => r.isLong)
@@ -159,8 +153,7 @@ export class RequestsComponent implements OnInit {
 
   onActualRequestStatusChange(req: Request, statusIdStr: string) {
     const statusId = Number(statusIdStr);
-    // TODO: Проверить установленный объем if(statusId == 2)
-    if (statusId === 2) {
+    if (statusId === StatusName.Executed) {
       this.ngxSmartModalService.setModalData(
         req,
         ConfirmCompleteReqModalComponent.MODAL_NAME,
@@ -326,18 +319,23 @@ export class RequestsComponent implements OnInit {
       if (dragItem.deliveryStart !== prevItem.deliveryStart) {
         dragItem.deliveryStart = prevItem.deliveryStart;
         await this.http.edit(dragItem).toPromise();
-        this.actualRequests = [];
-        this.longTermRequests = [];
-        this.actualRequestsOffset = 0;
-        await this.getActualRequests(
+        this.reset();
+        this.getActualRequests(
           this.actualRequestslimit,
           this.actualRequestsOffset
+        );
+        this.getCompletedRequests(
+          this.complitedRequestslimit,
+          this.complitedRequestsOffset
         );
       }
     } else {
       event.previousContainer.id === 'incident'
-        ? this.onActualRequestStatusChange(dragItem, '1')
-        : this.onActualRequestStatusChange(dragItem, '5');
+        ? this.onActualRequestStatusChange(dragItem, StatusName.New.toString())
+        : this.onActualRequestStatusChange(
+            dragItem,
+            StatusName.Incident.toString()
+          );
       if (dragItem.deliveryStart !== prevItem.deliveryStart) {
         dragItem.deliveryStart = prevItem.deliveryStart;
         await this.http.edit(dragItem).toPromise();
