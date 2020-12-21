@@ -8,10 +8,10 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
 import { environment } from 'src/environments/environment';
-import { Request } from '../models/Request';
-import { Client } from '../models/Client';
-import { Address } from '../models/Address';
-import { Status } from '../models/Status';
+import { Request } from '@models/Request';
+import { Client } from '@models/Client';
+import { Address } from '@models/Address';
+import { Status } from '@models/Status';
 
 @Injectable({
   providedIn: 'root',

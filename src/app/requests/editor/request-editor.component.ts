@@ -9,15 +9,15 @@ import { EditProductComponent } from 'src/app/catalogs/product/editor-product/ed
 import { HttpService as ProductHttp } from 'src/app/catalogs/product/http.service';
 import { SupplierEditorComponent } from 'src/app/catalogs/suppliers/editor/editor.component';
 import { HttpService as SupplierHttp } from 'src/app/catalogs/suppliers/http.service';
-import { Car } from 'src/app/models/Car';
-import { CarCategory } from 'src/app/models/CarCategory';
-import { Client } from 'src/app/models/Client';
-import { Product } from 'src/app/models/Product';
-import { Request } from 'src/app/models/Request';
-import { Supplier } from 'src/app/models/Supplier';
-import { Status } from 'src/app/models/Status';
+import { Car } from '@models/Car';
+import { CarCategory } from '@models/CarCategory';
+import { Client } from '@models/Client';
+import { Product } from '@models/Product';
+import { Request } from '@models/Request';
+import { Supplier } from '@models/Supplier';
+import { Status } from '@models/Status';
 import { HttpService as ReqService } from 'src/app/requests/http.service';
-import { Address } from 'src/app/models/Address';
+import { Address } from '@models/Address';
 import { Goal } from './Goal';
 import { ClientsGoal } from 'src/app/catalogs/clients/Goal';
 

@@ -1,6 +1,5 @@
-import { CarCategory } from 'src/app/models/CarCategory';
+import { CarCategory } from '@models/CarCategory';
 export class Car {
-
   constructor(
     public id?: number,
     public owner?: string,
@@ -9,8 +8,8 @@ export class Car {
     public contacts?: string,
     public comments?: string,
     public freightPrice?: number,
-    public carCategory?: CarCategory) {
-
+    public carCategory?: CarCategory
+  ) {
     // this.carCategory = new CarCategory();
   }
 }

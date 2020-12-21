@@ -1,4 +1,4 @@
-import { Product } from 'src/app/models/Product';
+import { Product } from '@models/Product';
 
 export class Supplier {
   id?: number;

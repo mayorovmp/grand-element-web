@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Product } from 'src/app/models/Product';
+import { Product } from '@models/Product';
 import { ToastrService } from 'ngx-toastr';
 import { HttpService } from '../http.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
@@ -7,24 +7,26 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
-  styleUrls: ['./edit-product.component.css']
+  styleUrls: ['./edit-product.component.css'],
 })
 export class EditProductComponent implements OnInit {
   static MODAL_NAME = 'editProductModal';
 
   @Output() changed = new EventEmitter<Product>();
   constructor(
-      private httpSrv: HttpService,
-      private toastr: ToastrService,
-      private ngxSmartModalService: NgxSmartModalService) { }
+    private httpSrv: HttpService,
+    private toastr: ToastrService,
+    private ngxSmartModalService: NgxSmartModalService
+  ) {}
 
   product: Product = new Product();
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onOpen() {
-    const transferred = this.ngxSmartModalService.getModalData(EditProductComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(
+      EditProductComponent.MODAL_NAME
+    );
     this.ngxSmartModalService.resetModalData(EditProductComponent.MODAL_NAME);
     if (transferred) {
       this.product = transferred;
@@ -33,8 +35,7 @@ export class EditProductComponent implements OnInit {
     }
   }
 
-  onClose() {
-  }
+  onClose() {}
 
   async createOrUpdate(item: Product) {
     let product = new Product();
@@ -48,5 +49,4 @@ export class EditProductComponent implements OnInit {
     this.changed.emit(product);
     this.ngxSmartModalService.toggle(EditProductComponent.MODAL_NAME);
   }
-
 }

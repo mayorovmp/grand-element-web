@@ -3,17 +3,17 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Product } from 'src/app/models/Product';
+import { Product } from '@models/Product';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   private baseUrl = environment.baseUrl + '/product';
 

@@ -6,8 +6,8 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Request } from '../models/Request';
-import { Status, StatusName } from '../models/Status';
+import { Request } from '@models/Request';
+import { Status, StatusName } from '@models/Status';
 import { fromEvent, Subscription } from 'rxjs';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from './http.service';

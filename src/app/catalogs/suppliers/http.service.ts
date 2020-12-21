@@ -4,20 +4,23 @@ import { Observable, of } from 'rxjs';
 import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
 import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Car } from 'src/app/models/Car';
-import { Supplier } from '../../models/Supplier';
-import { Product } from 'src/app/models/Product';
+import { Car } from '@models/Car';
+import { Supplier } from '@models/Supplier';
+import { Product } from '@models/Product';
 import { HttpService as ProductHttpService } from 'src/app/catalogs/product/http.service';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpService {
-  constructor(private http: HttpClient, private httpCarCategorySrv: HttpCarCategoryService) { }
+  constructor(
+    private http: HttpClient,
+    private httpCarCategorySrv: HttpCarCategoryService
+  ) {}
 
   private baseUrl = environment.baseUrl + '/supplier';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { HttpService } from './http.service';
-import { CarCategory } from '../../models/CarCategory';
+import { CarCategory } from '@models/CarCategory';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { EditCarCategoryComponent } from './editor/edit.component';
@@ -9,7 +9,7 @@ import { EditCarCategoryComponent } from './editor/edit.component';
 @Component({
   selector: 'app-car-category',
   templateUrl: './car-category.component.html',
-  styleUrls: ['../catalogs.component.css', './car-category.component.css']
+  styleUrls: ['../catalogs.component.css', './car-category.component.css'],
 })
 export class CarCategoryComponent implements OnInit {
   nameSorting = 'none';
@@ -19,8 +19,9 @@ export class CarCategoryComponent implements OnInit {
     private httpSrv: HttpService,
     private toastr: ToastrService,
     public ngxSmartModalService: NgxSmartModalService,
-    private title: Title) {
-      title.setTitle('Категории машин');
+    private title: Title
+  ) {
+    title.setTitle('Категории машин');
   }
   ngOnInit() {
     this.getData();
@@ -28,7 +29,7 @@ export class CarCategoryComponent implements OnInit {
 
   async getData() {
     this.nameSorting = 'none';
-    this.httpSrv.getCarCategories().subscribe(x => this.categories = x);
+    this.httpSrv.getCarCategories().subscribe((x) => (this.categories = x));
   }
 
   add() {
@@ -41,7 +42,7 @@ export class CarCategoryComponent implements OnInit {
         title: 'Подтвердите действие',
         btnAction: () => this.delete(category),
         btnActionColor: 'red',
-        btnActionName: 'Удалить категорию'
+        btnActionName: 'Удалить категорию',
       },
       'confirmModal',
       true
@@ -55,7 +56,11 @@ export class CarCategoryComponent implements OnInit {
   }
 
   async edit(item: CarCategory) {
-    this.ngxSmartModalService.setModalData(item, EditCarCategoryComponent.MODAL_NAME, true);
+    this.ngxSmartModalService.setModalData(
+      item,
+      EditCarCategoryComponent.MODAL_NAME,
+      true
+    );
     this.ngxSmartModalService.toggle(EditCarCategoryComponent.MODAL_NAME);
   }
 
@@ -70,18 +75,26 @@ export class CarCategoryComponent implements OnInit {
   sortedByName = () => {
     if (this.nameSorting === 'none' || this.nameSorting === 'reverse') {
       this.categories.sort((a, b) => {
-        if (!a.name) { a.name = ''; }
-        if (!b.name) { b.name = ''; }
+        if (!a.name) {
+          a.name = '';
+        }
+        if (!b.name) {
+          b.name = '';
+        }
         return a.name.localeCompare(b.name);
       });
       this.nameSorting = 'direct';
     } else if (this.nameSorting === 'direct') {
       this.categories.sort((a, b) => {
-        if (!a.name) { a.name = ''; }
-        if (!b.name) { b.name = ''; }
+        if (!a.name) {
+          a.name = '';
+        }
+        if (!b.name) {
+          b.name = '';
+        }
         return b.name.localeCompare(a.name);
       });
       this.nameSorting = 'reverse';
     }
-  }
+  };
 }

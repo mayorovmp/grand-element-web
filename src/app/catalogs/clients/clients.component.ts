@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Client } from 'src/app/models/Client';
+import { Client } from '@models/Client';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from 'src/app/catalogs/clients/http.service';
 import { ClientEditorComponent } from './editor/editor.component';

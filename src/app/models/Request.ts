@@ -1,11 +1,10 @@
-import { Car } from 'src/app/models/Car';
-import { Product } from 'src/app/models/Product';
+import { Car } from '@models/Car';
+import { Product } from '@models/Product';
 import { Address } from './Address';
 import { Supplier } from './Supplier';
 import { Client } from './Client';
 import { CarCategory } from './CarCategory';
 import { Status } from './Status';
-
 
 export class Request {
   id?: number;
@@ -45,4 +44,3 @@ export class Request {
   requestStatus: Status;
   requestStatusId: number;
 }
-

@@ -3,17 +3,17 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { CarCategory } from '../../models/CarCategory';
+import { CarCategory } from '@models/CarCategory';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   private baseUrl = environment.baseUrl;
   private categoryUrl = this.baseUrl + '/CarCategory';
@@ -21,12 +21,11 @@ export class HttpService {
   test(): Observable<CarCategory[]> {
     const url = encodeURI(`${this.baseUrl}/user`);
 
-    return this.http.get<CarCategory[]>(url)
-      .pipe(
-        // tap(_ => this.ngxLoader.stop()),
-        tap()
-        // catchError(this.handleError<Plot[]>('getPlot', []))
-      );
+    return this.http.get<CarCategory[]>(url).pipe(
+      // tap(_ => this.ngxLoader.stop()),
+      tap()
+      // catchError(this.handleError<Plot[]>('getPlot', []))
+    );
   }
 
   getCarCategories(): Observable<CarCategory[]> {
@@ -53,7 +52,6 @@ export class HttpService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 

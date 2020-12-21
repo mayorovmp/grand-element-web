@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Client } from 'src/app/models/Client';
+import { Client } from '@models/Client';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from '../http.service';
-import { Address } from 'src/app/models/Address';
-import { Contact } from 'src/app/models/Contact';
+import { Address } from '@models/Address';
+import { Contact } from '@models/Contact';
 
 @Component({
   selector: 'app-client-editor',

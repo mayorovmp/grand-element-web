@@ -2,13 +2,13 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { ToastrService } from 'ngx-toastr';
 import { HttpService } from '../http.service';
-import { CarCategory } from 'src/app/models/CarCategory';
-import { Car } from 'src/app/models/Car';
+import { CarCategory } from '@models/CarCategory';
+import { Car } from '@models/Car';
 
 @Component({
   selector: 'app-car-editor',
   templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.css']
+  styleUrls: ['./editor.component.css'],
 })
 export class CarEditorComponent implements OnInit {
   static MODAL_NAME = 'editCarModal';
@@ -21,13 +21,15 @@ export class CarEditorComponent implements OnInit {
   constructor(
     private httpSrv: HttpService,
     private toastr: ToastrService,
-    private ngxSmartModalService: NgxSmartModalService) { }
+    private ngxSmartModalService: NgxSmartModalService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async onOpen() {
-    const transferred = this.ngxSmartModalService.getModalData(CarEditorComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(
+      CarEditorComponent.MODAL_NAME
+    );
     this.ngxSmartModalService.resetModalData(CarEditorComponent.MODAL_NAME);
     if (transferred) {
       this.car = transferred;
@@ -41,15 +43,14 @@ export class CarEditorComponent implements OnInit {
   addDeletedCategory(car: Car) {
     const carCat = car.carCategory;
     if (carCat) {
-      const item = this.carCategories.find(x => x.id === carCat.id);
+      const item = this.carCategories.find((x) => x.id === carCat.id);
       if (!item) {
         this.carCategories.push(carCat);
       }
     }
   }
 
-  onClose() {
-  }
+  onClose() {}
 
   byId(a: Car, b: Car) {
     return a && b ? a.id === b.id : a === b;

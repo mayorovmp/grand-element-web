@@ -1,5 +1,10 @@
-import { Request } from '../models/Request';
-export const alphaBeticalSorting = (itemList: Request[], sortingCol: string, nested: number, sortingValueType: string) => {
+import { Request } from '@models/Request';
+export const alphaBeticalSorting = (
+  itemList: Request[],
+  sortingCol: string,
+  nested: number,
+  sortingValueType: string
+) => {
   itemList.sort((a, b) => {
     let aValue = a[sortingCol];
     let bValue = b[sortingCol];
@@ -10,8 +15,12 @@ export const alphaBeticalSorting = (itemList: Request[], sortingCol: string, nes
       aValue = aValue[splitedCol[1]];
       bValue = bValue[splitedCol[1]];
     }
-    if (!aValue) { aValue = ''; }
-    if (!bValue) { bValue = ''; }
+    if (!aValue) {
+      aValue = '';
+    }
+    if (!bValue) {
+      bValue = '';
+    }
     if (sortingValueType === 'direct') {
       return aValue.localeCompare(bValue);
     } else if (sortingValueType === 'reverse') {
@@ -20,7 +29,12 @@ export const alphaBeticalSorting = (itemList: Request[], sortingCol: string, nes
   });
 };
 
-export const numeralSorting = (itemList: Request[], sortingCol: string, nested: number, sortingValueType: string) => {
+export const numeralSorting = (
+  itemList: Request[],
+  sortingCol: string,
+  nested: number,
+  sortingValueType: string
+) => {
   itemList.sort((a, b): any => {
     let aValue = a[sortingCol];
     let bValue = b[sortingCol];
@@ -31,8 +45,12 @@ export const numeralSorting = (itemList: Request[], sortingCol: string, nested: 
       aValue = aValue[splitedCol[1]];
       bValue = bValue[splitedCol[1]];
     }
-    if (!aValue) { aValue = 0; }
-    if (!bValue) { bValue = 0; }
+    if (!aValue) {
+      aValue = 0;
+    }
+    if (!bValue) {
+      bValue = 0;
+    }
     if (sortingValueType === 'direct') {
       return aValue - bValue;
     } else if (sortingValueType === 'reverse') {

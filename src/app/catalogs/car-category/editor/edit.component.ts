@@ -1,28 +1,34 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CarCategory } from 'src/app/models/CarCategory';
+import { CarCategory } from '@models/CarCategory';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-edit-car-category',
   templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css']
+  styleUrls: ['./edit.component.css'],
 })
 export class EditCarCategoryComponent implements OnInit {
   static MODAL_NAME = 'editCarCategoryModal';
 
-  constructor(private httpSrv: HttpService, private ngxSmartModalService: NgxSmartModalService) { }
+  constructor(
+    private httpSrv: HttpService,
+    private ngxSmartModalService: NgxSmartModalService
+  ) {}
 
   carCategory: CarCategory = new CarCategory();
 
   @Output() changed = new EventEmitter<any>();
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onOpen() {
-    const transferred = this.ngxSmartModalService.getModalData(EditCarCategoryComponent.MODAL_NAME);
-    this.ngxSmartModalService.resetModalData(EditCarCategoryComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(
+      EditCarCategoryComponent.MODAL_NAME
+    );
+    this.ngxSmartModalService.resetModalData(
+      EditCarCategoryComponent.MODAL_NAME
+    );
     if (transferred) {
       this.carCategory = transferred;
     } else {
@@ -43,5 +49,4 @@ export class EditCarCategoryComponent implements OnInit {
 
     this.ngxSmartModalService.toggle(EditCarCategoryComponent.MODAL_NAME);
   }
-
 }

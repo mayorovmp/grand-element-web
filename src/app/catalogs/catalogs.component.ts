@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Catalog } from '../models/Catalog';
+import { Catalog } from '@models/Catalog';
 
 @Component({
   selector: 'app-catalogs',
   templateUrl: './catalogs.component.html',
-  styleUrls: ['./catalogs.component.css']
+  styleUrls: ['./catalogs.component.css'],
 })
 export class CatalogsComponent implements OnInit {
   catalogs: Catalog[] = [
@@ -12,11 +12,9 @@ export class CatalogsComponent implements OnInit {
     new Catalog('Категории машин', ['car-category']),
     new Catalog('Перевозчики', ['car']),
     new Catalog('Товары', ['product']),
-    new Catalog('Поставщики', ['suppliers'])
+    new Catalog('Поставщики', ['suppliers']),
   ];
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

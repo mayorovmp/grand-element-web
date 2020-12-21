@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { Request } from 'src/app/models/Request';
-import { Car } from 'src/app/models/Car';
+import { Request } from '@models/Request';
+import { Car } from '@models/Car';
 import { HttpService as CarHttp } from 'src/app/catalogs/car/http.service';
 import { HttpService as ReqService } from 'src/app/requests/http.service';
 import { CarEditorComponent } from 'src/app/catalogs/car/editor/editor.component';

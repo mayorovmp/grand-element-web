@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Supplier } from 'src/app/models/Supplier';
-import { Product } from 'src/app/models/Product';
+import { Supplier } from '@models/Supplier';
+import { Product } from '@models/Product';
 import { HttpService } from '../http.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpService as ProductHttpService } from 'src/app/catalogs/product/http.service';
@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-supplier-editor',
   templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.css']
+  styleUrls: ['./editor.component.css'],
 })
 export class SupplierEditorComponent implements OnInit {
   static MODAL_NAME = 'editSupplierModal';
@@ -24,19 +24,23 @@ export class SupplierEditorComponent implements OnInit {
     private httpSrv: HttpService,
     private productHttpService: ProductHttpService,
     private toastr: ToastrService,
-    private ngxSmartModalService: NgxSmartModalService) { }
+    private ngxSmartModalService: NgxSmartModalService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   delProd(supplier: Supplier, prod: Product) {
-    const delId = supplier.products.findIndex(x => x.id === prod.id);
+    const delId = supplier.products.findIndex((x) => x.id === prod.id);
     supplier.products.splice(delId, 1);
   }
 
   async onOpen() {
-    const transferred = this.ngxSmartModalService.getModalData(SupplierEditorComponent.MODAL_NAME);
-    this.ngxSmartModalService.resetModalData(SupplierEditorComponent.MODAL_NAME);
+    const transferred = this.ngxSmartModalService.getModalData(
+      SupplierEditorComponent.MODAL_NAME
+    );
+    this.ngxSmartModalService.resetModalData(
+      SupplierEditorComponent.MODAL_NAME
+    );
     if (transferred) {
       this.supplier = transferred;
     } else {
@@ -48,15 +52,14 @@ export class SupplierEditorComponent implements OnInit {
   }
 
   addRemovedProduct() {
-    this.supplier.products.forEach(p => {
-      if (this.products.find(x => x.id === p.id) === undefined) {
+    this.supplier.products.forEach((p) => {
+      if (this.products.find((x) => x.id === p.id) === undefined) {
         this.products.push(p);
       }
     });
   }
 
-  onClose() {
-  }
+  onClose() {}
 
   byId(a: Product, b: Product) {
     return a && b ? a.id === b.id : a === b;
