@@ -1,86 +1,43 @@
 <header class="main-header">
-  <a 
-    class="header-logo" 
-    routerLink="/" 
-    routerLinkActive="active"
-  >
-    <img 
-      src={{logoSrc}} 
-      alt="Гранд элемент" 
-      class="header-logo__img" />
+  <a class="header-logo" routerLink="/" routerLinkActive="active">
+    <img src="{{ logoSrc }}" alt="Гранд элемент" class="header-logo__img" />
   </a>
-  <button 
+  <button
     class="menu-toggle"
     (click)="toggleMenu()"
     id="mobile-menu"
     [class.is-active]="mobileBtnActive"
-    *ngIf='auth.authenticated' 
+    *ngIf="auth.authenticated"
   >
     <div class="menu-toggle__bar"></div>
     <div class="menu-toggle__bar"></div>
     <div class="menu-toggle__bar"></div>
   </button>
   <nav class="main-navigation">
-    <div 
-      *ngIf='auth.authenticated' 
-      class="header-nav" 
-    >
-      <ul 
-        class="navigation-list" 
-        [class.is-active]="mobileNavActive"
-      >
+    <div *ngIf="auth.authenticated" class="header-nav">
+      <ul class="navigation-list" [class.is-active]="mobileNavActive">
         <li class="navigation-list__item">
-          <a 
-            class="navigation-list__link" 
-            [routerLink]="['/requests']" 
+          <a
+            class="navigation-list__link"
+            [routerLink]="['/requests']"
             routerLinkActive="active"
           >
-            Заказы 
+            Заказы
           </a>
         </li>
-
-        <div class="nav-item dropdown">
-          <a 
-            hidden 
-            class="nav-link dropdown-toggle" 
-            href="#" 
-            id="navbarDropdown" 
-            role="button" 
-            data-toggle="dropdown"
-            aria-haspopup="true" 
-            aria-expanded="false"
-          >
-            Отчеты и аналитика
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" routerLink="#">Сводные отчеты</a>
-            <a class="dropdown-item" routerLink="/report/docs" routerLinkActive="active">Платежные документы</a>
-            <a class="dropdown-item" routerLink="#">Другие отчеты</a>
-          </div>
-        </div>
-        <li *ngFor='let catalog of catalogs' class="navigation-list__item">
-          <a 
+        <li *ngFor="let catalog of catalogs" class="navigation-list__item">
+          <a
             class="navigation-list__link"
             [routerLink]="catalog.route"
             routerLinkActive="active"
           >
-            {{catalog.name}} 
-          </a>
-        </li>
-        <li class="navigation-list__item">
-          <a 
-            hidden 
-            class="navigation-list__link" 
-            [routerLink]="['/catalog']" 
-            routerLinkActive="active"
-          >
-            Справочники 
+            {{ catalog.name }}
           </a>
         </li>
       </ul>
       <div class="user-block" [class.is-active]="mobileBtnActive">
-        <a class="user-block__user-name" href="#">{{auth.username}}</a>
-        <button 
+        <a class="user-block__user-name" href="#">{{ auth.username }}</a>
+        <button
           class="user-block___logIn-btn app-btn white-btn"
           (click)="logout()"
         >
