@@ -1,26 +1,14 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
-import { tap, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Car } from '@models/Car';
 import { Supplier } from '@models/Supplier';
-import { Product } from '@models/Product';
-import { HttpService as ProductHttpService } from 'src/app/catalogs/product/http.service';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
-  constructor(
-    private http: HttpClient,
-    private httpCarCategorySrv: HttpCarCategoryService
-  ) {}
+  constructor(private http: HttpClient) {}
 
   private baseUrl = environment.baseUrl + '/supplier';
 

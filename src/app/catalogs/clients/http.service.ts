@@ -1,13 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Client } from '@models/Client';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
 
 @Injectable({
   providedIn: 'root',
