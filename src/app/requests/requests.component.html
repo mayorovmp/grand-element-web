@@ -15,6 +15,7 @@
       [infiniteScrollThrottle]="50"
       (scrolled)="onScrollActualRequests()"
       [scrollWindow]="false"
+      cdkDropListGroup
     >
       <div
         class="orders-block"
@@ -22,7 +23,13 @@
       >
         <h2 class="block-title">Долгосроки и форс-мажоры</h2>
         <div>
-          <table class="app-table">
+          <table
+            class="app-table"
+            cdkDropList
+            id="incident"
+            [cdkDropListData]="incidentRequests"
+            (cdkDropListDropped)="drop($event)"
+          >
             <thead>
               <tr class="app-table__tr">
                 <th class="app-table__th"></th>
@@ -42,6 +49,8 @@
                   openContextMenu($event, req); $event.preventDefault()
                 "
                 *ngFor="let req of incidentRequests"
+                cdkDrag
+                [cdkDragData]="req"
               >
                 <td class="app-table__td">
                   <button
@@ -132,6 +141,7 @@
         <table
           class="app-table"
           cdkDropList
+          id="actual"
           [cdkDropListData]="actualRequests"
           (cdkDropListDropped)="drop($event)"
         >

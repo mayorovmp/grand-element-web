@@ -316,24 +316,32 @@ export class RequestsComponent implements OnInit {
     this.complitedRequestsIsVisible = !this.complitedRequestsIsVisible;
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    console.log('$event', event);
-    console.log('$event.item', event.item);
-
-    console.log('$event root', event.item.getRootElement());
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+  async drop(event: CdkDragDrop<string[]>) {
+    const dragItem = event.item.data;
+    const prevItem = this.actualRequests[event.currentIndex];
+    if (
+      event.previousContainer.id === event.container.id &&
+      event.previousContainer.id === 'actual'
+    ) {
+      if (dragItem.deliveryStart !== prevItem.deliveryStart) {
+        dragItem.deliveryStart = prevItem.deliveryStart;
+        await this.http.edit(dragItem).toPromise();
+        this.actualRequests = [];
+        this.longTermRequests = [];
+        this.actualRequestsOffset = 0;
+        await this.getActualRequests(
+          this.actualRequestslimit,
+          this.actualRequestsOffset
+        );
+      }
     } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      event.previousContainer.id === 'incident'
+        ? this.onActualRequestStatusChange(dragItem, '1')
+        : this.onActualRequestStatusChange(dragItem, '5');
+      if (dragItem.deliveryStart !== prevItem.deliveryStart) {
+        dragItem.deliveryStart = prevItem.deliveryStart;
+        await this.http.edit(dragItem).toPromise();
+      }
     }
   }
 }
