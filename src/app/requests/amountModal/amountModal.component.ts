@@ -119,6 +119,7 @@ export class AmountModalComponent implements OnInit {
         this.createReq();
         this.ngxSmartModalService.close('amountModal');
       }
+      this.changed.emit();
     }
   }
   async closeOldReq() {
