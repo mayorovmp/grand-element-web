@@ -336,7 +336,8 @@ export class RequestsComponent implements OnInit {
         );
       }
     } else {
-      event.previousContainer.id === 'incident'
+      event.previousContainer.id === 'incident' &&
+      event.container.id === 'actual'
         ? this.onActualRequestStatusChange(dragItem, StatusName.New.toString())
         : this.onActualRequestStatusChange(
             dragItem,
