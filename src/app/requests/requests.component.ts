@@ -282,12 +282,26 @@ export class RequestsComponent implements OnInit {
         $implicit: req,
       })
     );
-    (document.querySelector(
-      '.requestContextMenu'
-    ) as HTMLElement).style.left = `${x}px`;
-    (document.querySelector(
-      '.requestContextMenu'
-    ) as HTMLElement).style.top = `${y}px`;
+    if (window.innerHeight - y - 173 > 0) {
+      (document.querySelector(
+        '.requestContextMenu'
+      ) as HTMLElement).style.top = `${y}px`;
+    } else {
+      (document.querySelector(
+        '.requestContextMenu'
+      ) as HTMLElement).style.top = `${y - 173}px`;
+    }
+
+    if (window.innerWidth - x - 199 > 0) {
+      (document.querySelector(
+        '.requestContextMenu'
+      ) as HTMLElement).style.left = `${x}px`;
+    } else {
+      (document.querySelector(
+        '.requestContextMenu'
+      ) as HTMLElement).style.left = `${x - 199}px`;
+    }
+
     this.sub = fromEvent<MouseEvent>(document, 'click')
       .pipe(
         filter((event) => {
