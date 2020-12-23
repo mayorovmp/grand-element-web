@@ -131,7 +131,7 @@ export class RequestsComponent implements OnInit {
   handleActualRequests(newVals: Request[]) {
     newVals
       .filter((r) => !r.isLong && r.requestStatus.id !== StatusName.Incident)
-      .forEach((r) => this.actualRequests.unshift(r));
+      .forEach((r) => this.actualRequests.push(r));
     newVals
       .filter((r) => r.requestStatus.id === StatusName.Incident)
       .forEach((r) => this.incidentRequests.push(r));
