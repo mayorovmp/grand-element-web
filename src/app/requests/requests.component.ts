@@ -52,6 +52,7 @@ export class RequestsComponent implements OnInit {
   scrollDistance = 0.1;
 
   complitedRequestsIsVisible = true;
+  lastDraggedReqId: undefined | number = undefined;
 
   constructor(
     public http: HttpService,
@@ -65,6 +66,7 @@ export class RequestsComponent implements OnInit {
   }
 
   add() {
+    this.lastDraggedReqId = undefined;
     this.ngxSmartModalService.setModalData(
       { type: Goal.Add },
       RequestEditorComponent.MODAL_NAME,
@@ -75,6 +77,7 @@ export class RequestsComponent implements OnInit {
       .open();
   }
   edit(request: Request) {
+    this.lastDraggedReqId = undefined;
     this.ngxSmartModalService.setModalData(
       { type: Goal.Edit, request },
       RequestEditorComponent.MODAL_NAME,
@@ -168,6 +171,7 @@ export class RequestsComponent implements OnInit {
   }
 
   setStatus(reqId: number, statusId: number) {
+    this.lastDraggedReqId = undefined;
     this.http.setStatus(reqId, statusId).subscribe(
       (result) => {},
       (err) => {
@@ -197,6 +201,7 @@ export class RequestsComponent implements OnInit {
   }
 
   divideAmount(req: Request) {
+    this.lastDraggedReqId = undefined;
     this.ngxSmartModalService.setModalData(
       req,
       AmountModalComponent.MODAL_NAME,
@@ -259,6 +264,7 @@ export class RequestsComponent implements OnInit {
   }
 
   openContextMenu({ x, y }: MouseEvent, req) {
+    this.lastDraggedReqId = undefined;
     this.closeContextMenu();
     const positionStrategy = this.overlay
       .position()
@@ -341,5 +347,6 @@ export class RequestsComponent implements OnInit {
         await this.http.edit(dragItem).toPromise();
       }
     }
+    this.lastDraggedReqId = dragItem.id;
   }
 }

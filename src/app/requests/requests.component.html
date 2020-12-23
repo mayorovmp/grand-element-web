@@ -177,6 +177,7 @@
                 "
                 cdkDrag
                 [cdkDragData]="req"
+                [class.app-table__tr--dragged]="lastDraggedReqId === req.id"
               >
                 <td class="app-table__td">
                   <button

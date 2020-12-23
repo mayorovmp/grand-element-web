@@ -169,6 +169,11 @@ a:hover {
 .app-table__tr--editable:hover .finish-order {
   background-color: #fff;
 }
+.app-table__tr--dragged {
+  box-shadow: 1px 1px 15px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 1px 15px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 1px 15px 0px rgba(0, 0, 0, 0.75);
+}
 .app-table__th {
   border-right: 1px solid var(--light-gray);
   border-left: 1px solid var(--light-gray);
