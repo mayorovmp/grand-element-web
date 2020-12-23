@@ -54,7 +54,7 @@ export class RequestEditorComponent implements OnInit {
 
   parentRequestId = 0;
 
-  clientNameText = '';
+  clientNameText: string | undefined = '';
   clientListVisible = false;
 
   additionalCarOwners: Car[] = [];
@@ -417,6 +417,9 @@ export class RequestEditorComponent implements OnInit {
     this.clientHttp.getClients().subscribe((x) => {
       this.clients = x;
       this.request.client = client;
+      if (this.request.client) {
+        this.clientNameText = this.request.client.name;
+      }
       if (this.clientsGoal) {
         this.request.deliveryAddress =
           client.addresses[client.addresses.length - 1];

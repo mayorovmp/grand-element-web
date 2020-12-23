@@ -37,7 +37,7 @@
       />
       <ul
         class="form-block__searching-list"
-        *ngIf="clientNameText.length > 0 && clientListVisible"
+        *ngIf="clientNameText && clientNameText.length > 0 && clientListVisible"
       >
         <li
           *ngFor="
