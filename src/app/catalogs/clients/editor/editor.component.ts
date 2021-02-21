@@ -31,7 +31,7 @@ export class ClientEditorComponent implements OnInit {
       ClientEditorComponent.MODAL_NAME
     );
     this.ngxSmartModalService.resetModalData(ClientEditorComponent.MODAL_NAME);
-    if (transferred.type) {
+    if (transferred && transferred.type) {
       this.client = transferred.client;
     } else {
       this.client = new Client();

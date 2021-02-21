@@ -74,7 +74,7 @@ export class AmountModalComponent implements OnInit {
   }
   selectCarOwner(car: Car) {
     this.carListVisible = false;
-    if (car.owner) {
+    if (car && car.owner) {
       this.carOwnerText = car.owner;
     }
     this.request.car = car;
