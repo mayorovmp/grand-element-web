@@ -291,6 +291,10 @@ export class RequestEditorComponent implements OnInit {
     }
     this.request.client = client;
     // this.onClientChange();
+
+    if (this.request.client.addresses.length === 1) {
+      this.request.deliveryAddress = this.request.client.addresses[0];
+    }
   }
 
   addClient() {
