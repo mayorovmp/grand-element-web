@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
 
   catalogs: Catalog[] = [
     new Catalog('Клиенты', ['catalog/clients']),
-    new Catalog('Категории машин', ['catalog/car-category']),
+    // new Catalog('Категории машин', ['catalog/car-category']),
     new Catalog('Перевозчики', ['catalog/car']),
     new Catalog('Товары', ['catalog/product']),
     new Catalog('Поставщики', ['catalog/suppliers']),
