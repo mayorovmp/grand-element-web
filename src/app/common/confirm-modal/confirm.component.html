@@ -1,26 +1,20 @@
-<ngx-smart-modal 
+<ngx-smart-modal
   #confirmModal
-  identifier="confirmModal" 
-  (onOpen)="onOpen()" 
+  identifier="confirmModal"
+  (onOpen)="onOpen()"
   (onAnyCloseEvent)="onClose()"
 >
   <div class="form-container">
-    <h2 class="form-title">{{modalTitle}}</h2>
+    <h2 class="form-title">{{ modalTitle }}</h2>
 
     <div class="confirm-modal-btns">
-      <button 
-        class="app-btn {{modalBtnActionColor}}-btn confirm-modal-first-btn" 
+      <button
+        class="app-btn {{ modalBtnActionColor }}-btn confirm-modal-first-btn"
         (click)="modalAction()"
       >
-        {{modalActionTitle}}
+        {{ modalActionTitle }}
       </button>
-      <button 
-        class="app-btn gray-btn" 
-        (click)="close()"
-      >
-        Отмена
-      </button>
+      <button class="app-btn gray-btn" (click)="close()"> Отмена </button>
     </div>
   </div>
-
 </ngx-smart-modal>

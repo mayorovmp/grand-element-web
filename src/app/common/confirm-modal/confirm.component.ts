@@ -4,10 +4,9 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 @Component({
   selector: 'app-modal-confirm',
   templateUrl: './confirm.component.html',
-  styleUrls: ['./confirm.component.css']
+  styleUrls: ['./confirm.component.css'],
 })
 export class ConfirmModalComponent implements OnInit {
-
   @Output() changed = new EventEmitter<any>();
 
   modalTitle = 'Подтвердить действие';
@@ -15,17 +14,17 @@ export class ConfirmModalComponent implements OnInit {
   modalBtnActionColor = 'gray';
   modalAction: any = null;
 
-  constructor( private ngxSmartModalService: NgxSmartModalService) { }
+  constructor(private ngxSmartModalService: NgxSmartModalService) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   async onOpen() {
     const transferred = this.ngxSmartModalService.getModalData('confirmModal');
     if (transferred) {
       const { title, btnAction, btnActionName, btnActionColor } = transferred;
       this.modalTitle = title;
-      this.modalAction = () => {
-        btnAction();
+      this.modalAction = async () => {
+        await btnAction();
         this.close();
       };
       this.modalActionTitle = btnActionName;
