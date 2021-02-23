@@ -1,9 +1,9 @@
 <div class="app-container">
   <div class="app-row">
     <div class="catalogs-adding-block">
-      <button 
-        type="submit" 
-        (click)="add()" 
+      <button
+        type="submit"
+        (click)="add()"
         class="app-btn gray-btn catalogs-adding-block__btn"
       >
         Добавить
@@ -19,17 +19,14 @@
       <table class="app-table">
         <thead>
           <tr class="app-table__tr">
-            <th 
-              class="app-table__th" 
-              (click)="sortedByOwnerName()"
-            >
+            <th class="app-table__th" (click)="sortedByOwnerName()">
               <div class="app-table-heading-content">
                 Собственник
                 <img
-                  src="assets/img/icons/sort-{{ownerCarSorting}}.svg"
-                  class="app-table__sorting-img" 
+                  src="assets/img/icons/sort-{{ ownerCarSorting }}.svg"
+                  class="app-table__sorting-img"
                   alt=""
-                >
+                />
               </div>
             </th>
             <th class="app-table__th">Категория авто</th>
@@ -39,44 +36,37 @@
             <th class="app-table__th">Комментарий(гос.номер)</th>
             <th class="app-table__th"></th>
           </tr>
-  
         </thead>
         <tbody>
           <tr *ngFor="let car of cars" class="app-table__tr">
-            <td class="app-table__td">{{car.owner}}</td>
-            <td class="app-table__td">{{car.carCategory?.name}}</td>
+            <td class="app-table__td">{{ car.owner }}</td>
+            <td class="app-table__td">{{ car.carCategory?.name }}</td>
             <td class="app-table__td">
-              <input 
+              <input
                 class="app-table__nds-checkbox"
-                disabled 
-                type="checkbox" 
+                disabled
+                type="checkbox"
                 [ngModel]="car.vat"
-              >
+              />
             </td>
-            <td class="app-table__td">{{car.unit}}</td>
-            <td class="app-table__td">{{car.contacts}}</td>
-            <td class="app-table__td">{{car.comments}}</td>
+            <td class="app-table__td">{{ car.unit }}</td>
+            <td class="app-table__td">{{ car.contacts }}</td>
+            <td class="app-table__td">{{ car.comments }}</td>
             <td class="app-table__td">
               <div class="btn-container btn-container--centered">
-                <button
-                  (click)="edit(car)"
-                  class="edit-btn"
-                >
-                  <img 
+                <button (click)="edit(car)" class="edit-btn">
+                  <img
                     class="edit-btn__img"
-                    src="assets/img/icons/edit.svg" 
+                    src="assets/img/icons/edit.svg"
                     alt="изменить"
-                  >
+                  />
                 </button>
-                <button
-                  (click)="confirm(car)"
-                  class="delete-btn"
-                >
-                  <img 
+                <button (click)="confirm(car)" class="delete-btn">
+                  <img
                     class="edit-btn__img"
-                    src="assets/img/icons/delete.svg" 
+                    src="assets/img/icons/delete.svg"
                     alt="удалить"
-                  >
+                  />
                 </button>
               </div>
             </td>

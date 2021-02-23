@@ -439,6 +439,7 @@ export class RequestEditorComponent implements OnInit {
   }
 
   onCarOwnerAdd(car: Car) {
+    this.cars = [];
     this.carHttp.getCars().subscribe((x) => {
       this.cars = x;
       this.request.car = car;
