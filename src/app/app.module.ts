@@ -42,6 +42,7 @@ import { ClientEditorComponent } from './catalogs/clients/editor/editor.componen
 import { ProductComponent } from './catalogs/product/product.component';
 import { EditProductComponent } from './catalogs/product/editor-product/edit-product.component';
 import { CarEditorComponent } from './catalogs/car/editor/editor.component';
+import { CarEditorAmountComponent } from './catalogs/car/editor-amount/editor.component';
 import { ConfirmModalComponent } from './common/confirm-modal/confirm.component';
 import { RequestEditorComponent } from './requests/editor/request-editor.component';
 import { RequestsComponent } from './requests/requests.component';
@@ -75,6 +76,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ProductComponent,
     EditProductComponent,
     CarEditorComponent,
+    CarEditorAmountComponent,
     ConfirmModalComponent,
     FilterPipe,
     CarOwnerPipe,

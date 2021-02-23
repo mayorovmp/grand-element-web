@@ -4,7 +4,7 @@ import { Request } from '@models/Request';
 import { Car } from '@models/Car';
 import { HttpService as CarHttp } from 'src/app/catalogs/car/http.service';
 import { HttpService as ReqService } from 'src/app/requests/http.service';
-import { CarEditorComponent } from 'src/app/catalogs/car/editor/editor.component';
+import { CarEditorAmountComponent } from 'src/app/catalogs/car/editor-amount/editor.component';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -157,7 +157,9 @@ export class AmountModalComponent implements OnInit {
     await this.reqService.add(this.request).toPromise();
   }
   addCarOwner() {
-    this.ngxSmartModalService.getModal(CarEditorComponent.MODAL_NAME).open();
+    this.ngxSmartModalService
+      .getModal(CarEditorAmountComponent.MODAL_NAME)
+      .open();
   }
 
   onCarOwnerAdd(car: Car) {
