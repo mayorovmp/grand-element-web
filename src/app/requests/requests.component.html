@@ -80,7 +80,7 @@
                   {{ req.car?.owner }}
                 </td>
                 <td (click)="edit(req)" class="app-table__td">
-                  {{ req.amount }}
+                  {{ req.amount | number: '1.0-2' }}
                 </td>
                 <td (click)="edit(req)" class="app-table__td">
                   {{ req.deliveryAddress?.name }}
@@ -123,7 +123,7 @@
                   {{ req.car?.owner }}
                 </td>
                 <td (click)="edit(req)" class="app-table__td">
-                  {{ req.amount }}
+                  {{ req.amount | number: '1.0-2' }}
                 </td>
                 <td (click)="edit(req)" class="app-table__td">
                   {{ req.deliveryAddress?.name }}
@@ -208,7 +208,7 @@
                   {{ req.car?.owner }}
                 </td>
                 <td (click)="edit(req)" class="app-table__td">
-                  {{ req.amount }}
+                  {{ req.amount | number: '1.0-2' }}
                 </td>
                 <td (click)="edit(req)" class="app-table__td">
                   {{ req.deliveryAddress?.name }}
@@ -310,7 +310,7 @@
                   {{ req.car?.owner }}
                 </td>
                 <td (click)="edit(req)" class="app-table__td">
-                  {{ req.amount }}
+                  {{ req.amount | number: '1.0-2' }}
                 </td>
                 <td (click)="edit(req)" class="app-table__td">
                   {{ req.deliveryAddress?.name }}

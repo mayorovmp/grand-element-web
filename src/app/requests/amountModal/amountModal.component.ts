@@ -54,7 +54,7 @@ export class AmountModalComponent implements OnInit {
       this.request.client = req.client;
       this.request.deliveryAddress = req.deliveryAddress;
       this.request.isLong = false;
-      this.request.amount = req.amount;
+      this.request.amount = req.amount.toFixed(2);
       this.request.product = req.product;
       this.request.supplier = req.supplier;
       this.request.car = req.car;
@@ -101,7 +101,7 @@ export class AmountModalComponent implements OnInit {
         this.parentReq.isLong = false;
         await this.reqService.edit(this.parentReq).toPromise();
         if (this.parentReq.id) {
-          await this.reqService.setStatus(this.parentReq.id, 3).toPromise();
+          await this.reqService.setStatus(this.parentReq.id, 4).toPromise();
         }
         this.ngxSmartModalService.close(AmountModalComponent.MODAL_NAME);
       } else if (
@@ -112,7 +112,7 @@ export class AmountModalComponent implements OnInit {
         await this.reqService.edit(this.parentReq).toPromise();
         const newReq = await this.reqService.add(this.request).toPromise();
         if (newReq.id) {
-          await this.reqService.setStatus(newReq.id, 3).toPromise();
+          await this.reqService.setStatus(newReq.id, 4).toPromise();
         }
         this.ngxSmartModalService.close('amountModal');
       } else {

@@ -165,12 +165,17 @@
 }
 
 .status-box__btn:nth-child(1):hover,
+.status-box__btn.status-box__btn--onWork:nth-child(1):hover,
+.status-box__btn.status-box__btn--onWay:nth-child(1):hover,
+.status-box__btn.status-box__btn--executed:nth-child(1):hover,
 .status-box__btn.status-box__btn--new:nth-child(1) {
   background-color: #9c9c9c;
   transition: 0.3s;
 }
 .status-box__btn:nth-child(2):hover,
 .status-box__btn.status-box__btn--onWork:nth-child(1),
+.status-box__btn.status-box__btn--onWay:nth-child(2):hover,
+.status-box__btn.status-box__btn--executed:nth-child(2):hover,
 .status-box__btn.status-box__btn--onWork:nth-child(2) {
   background-color: #0099ff;
   transition: 0.3s;
@@ -178,6 +183,7 @@
 .status-box__btn:nth-child(3):hover,
 .status-box__btn.status-box__btn--onWay:nth-child(1),
 .status-box__btn.status-box__btn--onWay:nth-child(2),
+.status-box__btn.status-box__btn--executed:nth-child(3):hover,
 .status-box__btn.status-box__btn--onWay:nth-child(3) {
   background-color: var(--red);
   transition: 0.3s;
