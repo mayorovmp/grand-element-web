@@ -56,7 +56,8 @@ export class RequestsComponent implements OnInit {
 
   complitedRequestsIsVisible = true;
   lastDraggedReqId: undefined | number = undefined;
-  isDragActive = false;
+  isMobile = false;
+  isAllFieldsVisible = true;
 
   constructor(
     public http: HttpService,
@@ -370,5 +371,13 @@ export class RequestsComponent implements OnInit {
     this.lastDraggedReqId = dragItem.id;
   }
 
-  onResize = (width: number) => width > 992 ? this.isDragActive = true : this.isDragActive = false;
+  onResize = (width: number) => {
+    if(width > 992) {
+      this.isMobile = false;
+      this.isAllFieldsVisible = true;
+    } else {
+      this.isMobile = true;
+      this.isAllFieldsVisible = false;
+    }
+  }
 }

@@ -6,6 +6,17 @@
     <div class="export-order">
       <div class="export-order__buttons">
         <button (click)="add()" class="app-btn gray-btn">Добавить</button>
+        <div class="all-field-block">
+          <label for="isAllFieldsVisibleCheckbox" class="all-field-block__label">Все поля</label>
+          <input
+            class="all-field-block__input form-block__input"
+            type="checkbox"
+            name="isAllFieldsVisibleCheckbox"
+            id="isAllFieldsVisibleCheckbox"
+            *ngIf="isMobile"
+            [(ngModel)]="isAllFieldsVisible"
+          >
+        </div>
       </div>
     </div>
     <div
@@ -34,11 +45,11 @@
               <tr class="app-table__tr">
                 <th class="app-table__th"></th>
                 <th class="app-table__th">Клиент</th>
-                <th class="app-table__th">Товар</th>
-                <th class="app-table__th">Поставщик</th>
+                <th class="app-table__th" *ngIf="isAllFieldsVisible">Товар</th>
+                <th class="app-table__th" *ngIf="isAllFieldsVisible">Поставщик</th>
                 <th class="app-table__th">Перевозчик</th>
                 <th class="app-table__th">Объем, тн</th>
-                <th class="app-table__th">Адрес доставки</th>
+                <th class="app-table__th" *ngIf="isAllFieldsVisible">Адрес доставки</th>
                 <th class="app-table__th">Статус</th>
               </tr>
             </thead>
@@ -50,7 +61,7 @@
                 "
                 *ngFor="let req of incidentRequests"
                 cdkDrag
-                [cdkDragDisabled]="!isDragActive"
+                [cdkDragDisabled]="isMobile"
                 [cdkDragData]="req"
                 [class.app-table__tr--dragged]="lastDraggedReqId === req.id"
               >
@@ -70,10 +81,10 @@
                 <td (click)="edit(req)" class="app-table__td">
                   {{ req.client?.name }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.product?.name }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.supplier?.name }}
                 </td>
                 <td (click)="edit(req)" class="app-table__td">
@@ -82,7 +93,7 @@
                 <td (click)="edit(req)" class="app-table__td">
                   {{ req.amount | number: '1.0-2' }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.deliveryAddress?.name }}
                 </td>
                 <td class="app-table__td">
@@ -113,10 +124,10 @@
                 <td (click)="edit(req)" class="app-table__td">
                   {{ req.client?.name }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.product?.name }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.supplier?.name }}
                 </td>
                 <td (click)="edit(req)" class="app-table__td">
@@ -125,7 +136,7 @@
                 <td (click)="edit(req)" class="app-table__td">
                   {{ req.amount | number: '1.0-2' }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.deliveryAddress?.name }}
                 </td>
                 <td class="app-table__td">
@@ -151,11 +162,11 @@
             <tr class="app-table__tr">
               <th class="app-table__th"></th>
               <th class="app-table__th">Клиент</th>
-              <th class="app-table__th">Товар</th>
-              <th class="app-table__th">Поставщик</th>
+              <th class="app-table__th" *ngIf="isAllFieldsVisible">Товар</th>
+              <th class="app-table__th" *ngIf="isAllFieldsVisible">Поставщик</th>
               <th class="app-table__th">Перевозчик</th>
               <th class="app-table__th">Объем, тн</th>
-              <th class="app-table__th">Адрес доставки</th>
+              <th class="app-table__th" *ngIf="isAllFieldsVisible">Адрес доставки</th>
               <th class="app-table__th">Статус</th>
             </tr>
           </thead>
@@ -178,7 +189,7 @@
                   openContextMenu($event, req); $event.preventDefault()
                 "
                 cdkDrag
-                [cdkDragDisabled]="!isDragActive"
+                [cdkDragDisabled]="isMobile"
                 [cdkDragData]="req"
                 [class.app-table__tr--dragged]="lastDraggedReqId === req.id"
               >
@@ -198,10 +209,10 @@
                 <td (click)="edit(req)" class="app-table__td">
                   {{ req.client?.name }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.product?.name }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.supplier?.name }}
                 </td>
                 <td (click)="edit(req)" class="app-table__td">
@@ -210,7 +221,7 @@
                 <td (click)="edit(req)" class="app-table__td">
                   {{ req.amount | number: '1.0-2' }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.deliveryAddress?.name }}
                 </td>
                 <td class="app-table__td">
@@ -270,11 +281,11 @@
           <thead>
             <tr class="app-table__tr">
               <th class="app-table__th">Клиент</th>
-              <th class="app-table__th">Товар</th>
-              <th class="app-table__th">Поставщик</th>
+              <th class="app-table__th" *ngIf="isAllFieldsVisible">Товар</th>
+              <th class="app-table__th" *ngIf="isAllFieldsVisible">Поставщик</th>
               <th class="app-table__th">Перевозчик</th>
               <th class="app-table__th">Объем, тн</th>
-              <th class="app-table__th">Адрес доставки</th>
+              <th class="app-table__th" *ngIf="isAllFieldsVisible">Адрес доставки</th>
               <th class="app-table__th">Статус</th>
             </tr>
           </thead>
@@ -300,10 +311,10 @@
                 <td (click)="edit(req)" class="app-table__td">
                   {{ req.client?.name }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.product?.name }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.supplier?.name }}
                 </td>
                 <td (click)="edit(req)" class="app-table__td">
@@ -312,7 +323,7 @@
                 <td (click)="edit(req)" class="app-table__td">
                   {{ req.amount | number: '1.0-2' }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.deliveryAddress?.name }}
                 </td>
                 <td class="app-table__td">
