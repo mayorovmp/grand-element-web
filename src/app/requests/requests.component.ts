@@ -25,6 +25,9 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
   selector: 'app-requests',
   templateUrl: './requests.component.html',
   styleUrls: ['./requests.component.css'],
+  host: {
+    '(window:resize)': 'onResize($event.target.innerWidth)',
+  },
 })
 export class RequestsComponent implements OnInit {
   pickedDay = new Date(Date.now());
@@ -53,6 +56,7 @@ export class RequestsComponent implements OnInit {
 
   complitedRequestsIsVisible = true;
   lastDraggedReqId: undefined | number = undefined;
+  isDragActive = false;
 
   constructor(
     public http: HttpService,
@@ -218,6 +222,7 @@ export class RequestsComponent implements OnInit {
       this.complitedRequestsOffset
     );
     this.nextDay.setDate(new Date().getDate() + 1);
+    this.onResize(window.innerWidth);
   }
 
   DownloadFile(dt: Date): void {
@@ -364,4 +369,6 @@ export class RequestsComponent implements OnInit {
     }
     this.lastDraggedReqId = dragItem.id;
   }
+
+  onResize = (width: number) => width > 992 ? this.isDragActive = true : this.isDragActive = false;
 }

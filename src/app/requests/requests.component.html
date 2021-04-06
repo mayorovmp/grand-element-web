@@ -50,6 +50,7 @@
                 "
                 *ngFor="let req of incidentRequests"
                 cdkDrag
+                [cdkDragDisabled]="!isDragActive"
                 [cdkDragData]="req"
                 [class.app-table__tr--dragged]="lastDraggedReqId === req.id"
               >
@@ -177,6 +178,7 @@
                   openContextMenu($event, req); $event.preventDefault()
                 "
                 cdkDrag
+                [cdkDragDisabled]="!isDragActive"
                 [cdkDragData]="req"
                 [class.app-table__tr--dragged]="lastDraggedReqId === req.id"
               >
