@@ -172,14 +172,14 @@
 .status-box__btn:nth-child(2):hover,
 .status-box__btn.status-box__btn--onWork:nth-child(1),
 .status-box__btn.status-box__btn--onWork:nth-child(2) {
-  background-color: #f98900;
+  background-color: #0099ff;
   transition: 0.3s;
 }
 .status-box__btn:nth-child(3):hover,
 .status-box__btn.status-box__btn--onWay:nth-child(1),
 .status-box__btn.status-box__btn--onWay:nth-child(2),
 .status-box__btn.status-box__btn--onWay:nth-child(3) {
-  background-color: #0099ff;
+  background-color: var(--red);
   transition: 0.3s;
 }
 .status-box__btn:nth-child(4):hover,
@@ -188,15 +188,6 @@
 .status-box__btn.status-box__btn--executed:nth-child(3),
 .status-box__btn.status-box__btn--executed:nth-child(4) {
   background-color: #00cc33;
-  transition: 0.3s;
-}
-.status-box__btn:nth-child(5):hover,
-.status-box__btn.status-box__btn--incident:nth-child(1),
-.status-box__btn.status-box__btn--incident:nth-child(2),
-.status-box__btn.status-box__btn--incident:nth-child(3),
-.status-box__btn.status-box__btn--incident:nth-child(4),
-.status-box__btn.status-box__btn--incident:nth-child(5) {
-  background-color: var(--red);
   transition: 0.3s;
 }
 
