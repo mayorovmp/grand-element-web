@@ -6,14 +6,13 @@
     <div class="export-order">
       <div class="export-order__buttons">
         <button (click)="add()" class="app-btn gray-btn">Добавить</button>
-        <div class="all-field-block">
+        <div class="all-field-block" *ngIf="isMobile">
           <label for="isAllFieldsVisibleCheckbox" class="all-field-block__label">Все поля</label>
           <input
             class="all-field-block__input form-block__input"
             type="checkbox"
             name="isAllFieldsVisibleCheckbox"
             id="isAllFieldsVisibleCheckbox"
-            *ngIf="isMobile"
             [(ngModel)]="isAllFieldsVisible"
           >
         </div>

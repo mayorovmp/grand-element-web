@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import { ToastrService } from 'ngx-toastr';
 import { HttpService as CarCategoryHttp } from 'src/app/catalogs/car-category/http.service';
 import { CarEditorComponent } from 'src/app/catalogs/car/editor/editor.component';
 import { HttpService as CarHttp } from 'src/app/catalogs/car/http.service';
@@ -63,6 +64,7 @@ export class RequestEditorComponent implements OnInit {
 
   constructor(
     private ngxSmartModalService: NgxSmartModalService,
+    private toastr: ToastrService,
     private clientHttp: ClientHttp,
     private productHttp: ProductHttp,
     private reqService: ReqService,
@@ -227,58 +229,58 @@ export class RequestEditorComponent implements OnInit {
     this.clientNameText = '';
   }
 
-  async processLastReq(client: Client | undefined, addr: Address | undefined) {
-    const lastReq = await this.reqService
-      .getLastRequest(client, addr)
-      .toPromise();
+  // async processLastReq(client: Client | undefined, addr: Address | undefined) {
+  //   const lastReq = await this.reqService
+  //     .getLastRequest(client, addr)
+  //     .toPromise();
 
-    if (lastReq) {
-      this.request.id = undefined;
-      this.request.deliveryStart = this.curDate;
-      this.request.deliveryEnd = this.curDate;
-      this.request.client = client;
-      this.request.deliveryAddress = lastReq.deliveryAddress;
-      this.request.isLong = lastReq.isLong;
-      this.request.amount = lastReq.amount;
-      this.request.sellingPrice = lastReq.sellingPrice;
-      this.request.product = lastReq.product;
-      this.request.supplier = lastReq.supplier;
-      this.request.supplierVat = lastReq.supplierVat;
-      this.request.purchasePrice = lastReq.purchasePrice;
-      this.request.car = lastReq.car;
-      this.request.carVat = lastReq.carVat;
-      this.request.freightPrice = lastReq.freightPrice;
-      this.request.amountIn = lastReq.amountIn;
-      this.request.amountOut = lastReq.amountOut;
-      this.request.freightCost = lastReq.freightCost;
-      this.request.sellingCost = lastReq.sellingCost;
-      this.request.profit = lastReq.profit;
-      this.request.income = lastReq.income;
-      this.request.comment = lastReq.comment;
-      this.request.unit = lastReq.unit;
-    } else {
-      this.request.client = client;
-      this.request.deliveryAddress = addr;
-      this.request.isLong = false;
-      this.request.amount = undefined;
-      this.request.sellingPrice = undefined;
-      this.request.product = undefined;
-      this.request.supplier = undefined;
-      this.request.supplierVat = undefined;
-      this.request.purchasePrice = undefined;
-      this.request.car = undefined;
-      this.request.carVat = undefined;
-      this.request.freightPrice = undefined;
-      this.request.amountIn = undefined;
-      this.request.amountOut = undefined;
-      this.request.freightCost = 0;
-      this.request.sellingCost = undefined;
-      this.request.profit = undefined;
-      this.request.income = undefined;
-      this.request.comment = undefined;
-      this.request.unit = undefined;
-    }
-  }
+  //   if (lastReq) {
+  //     this.request.id = undefined;
+  //     this.request.deliveryStart = this.curDate;
+  //     this.request.deliveryEnd = this.curDate;
+  //     this.request.client = client;
+  //     this.request.deliveryAddress = lastReq.deliveryAddress;
+  //     this.request.isLong = lastReq.isLong;
+  //     this.request.amount = lastReq.amount;
+  //     this.request.sellingPrice = lastReq.sellingPrice;
+  //     this.request.product = lastReq.product;
+  //     this.request.supplier = lastReq.supplier;
+  //     this.request.supplierVat = lastReq.supplierVat;
+  //     this.request.purchasePrice = lastReq.purchasePrice;
+  //     this.request.car = lastReq.car;
+  //     this.request.carVat = lastReq.carVat;
+  //     this.request.freightPrice = lastReq.freightPrice;
+  //     this.request.amountIn = lastReq.amountIn;
+  //     this.request.amountOut = lastReq.amountOut;
+  //     this.request.freightCost = lastReq.freightCost;
+  //     this.request.sellingCost = lastReq.sellingCost;
+  //     this.request.profit = lastReq.profit;
+  //     this.request.income = lastReq.income;
+  //     this.request.comment = lastReq.comment;
+  //     this.request.unit = lastReq.unit;
+  //   } else {
+  //     this.request.client = client;
+  //     this.request.deliveryAddress = addr;
+  //     this.request.isLong = false;
+  //     this.request.amount = undefined;
+  //     this.request.sellingPrice = undefined;
+  //     this.request.product = undefined;
+  //     this.request.supplier = undefined;
+  //     this.request.supplierVat = undefined;
+  //     this.request.purchasePrice = undefined;
+  //     this.request.car = undefined;
+  //     this.request.carVat = undefined;
+  //     this.request.freightPrice = undefined;
+  //     this.request.amountIn = undefined;
+  //     this.request.amountOut = undefined;
+  //     this.request.freightCost = 0;
+  //     this.request.sellingCost = undefined;
+  //     this.request.profit = undefined;
+  //     this.request.income = undefined;
+  //     this.request.comment = undefined;
+  //     this.request.unit = undefined;
+  //   }
+  // }
 
   byId(a: any, b: any) {
     return a && b ? a.id === b.id : a === b;
@@ -290,7 +292,7 @@ export class RequestEditorComponent implements OnInit {
       this.clientNameText = client.name;
     }
     this.request.client = client;
-    // this.onClientChange();
+    this.onClientChange();
 
     if (this.request.client.addresses.length === 1) {
       this.request.deliveryAddress = this.request.client.addresses[0];
@@ -389,8 +391,18 @@ export class RequestEditorComponent implements OnInit {
   }
 
   async onClientChange() {
-    await this.processLastReq(this.request.client, undefined);
-    await this.getSuppliersByProd(this.request.product?.id);
+    if (this.request.client) {
+      const lastReq = await this.reqService
+      .getLastRequest({clientId: this.request.client.id})
+      .toPromise();
+      if (lastReq) {
+        lastReq.deliveryStart = this.curDate
+        lastReq.deliveryEnd = this.curDate;
+        this.request = JSON.parse(JSON.stringify(lastReq));
+      } else {
+        this.toastr.info('Последняя заявка не найдена');
+      }
+    }
   }
 
   async onAddrChange() {

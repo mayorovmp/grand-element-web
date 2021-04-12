@@ -44,3 +44,11 @@ export class Request {
   requestStatus: Status;
   requestStatusId: number;
 }
+
+export interface LastRequest {
+  clientId?: number;
+  addressId?: number;
+  productId?: number;
+  supplierId?: number;
+  carId?: number;
+}

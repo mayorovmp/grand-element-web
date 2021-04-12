@@ -1,6 +1,5 @@
 import {
   HttpClient,
-  HttpHeaders,
   HttpResponse,
   HttpParams,
 } from '@angular/common/http';
@@ -8,9 +7,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
 import { environment } from 'src/environments/environment';
-import { Request } from '@models/Request';
-import { Client } from '@models/Client';
-import { Address } from '@models/Address';
+import { Request, LastRequest } from '@models/Request';
 import { Status } from '@models/Status';
 
 @Injectable({
@@ -118,19 +115,12 @@ export class HttpService {
     return this.http.get<Request[]>(url);
   }
 
-  getLastRequest(
-    client: Client | undefined,
-    deliveryAddress: Address | undefined
-  ): Observable<Request> {
+  getLastRequest(reqParams: LastRequest): Observable<Request> {
     const url = this.baseUrl + `/request/last`;
 
     let params = new HttpParams();
-
-    if (client?.id) {
-      params = params.append('clientId', client.id.toString());
-    }
-    if (deliveryAddress?.id) {
-      params = params.append('addressId', deliveryAddress.id.toString());
+    for (let key in reqParams) {
+      params = params.append(key, reqParams[key]);
     }
 
     return this.http.get<Request>(url, { params });
