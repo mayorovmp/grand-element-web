@@ -44,7 +44,6 @@ export class ConfirmCompleteReqModalComponent implements OnInit {
     );
     if (transferred) {
       this.request = transferred;
-      console.log('this.request', this.request);
       if (!this.request.supplier) {
         this.isSupplierEmpty = true;
         this.supplierHttp

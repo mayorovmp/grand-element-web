@@ -43,6 +43,7 @@ export class Request {
   supplierId?: number;
   requestStatus: Status;
   requestStatusId: number;
+  parentId?: number;
 }
 
 export interface LastRequest {

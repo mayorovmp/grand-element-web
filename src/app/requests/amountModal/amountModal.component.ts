@@ -63,6 +63,7 @@ export class AmountModalComponent implements OnInit {
       this.request.comment = req.comment;
       this.request.unit = req.unit;
       this.request.requestStatusId = 3;
+      this.request.parentId = req.id;
     }
   }
   onSearch() {
