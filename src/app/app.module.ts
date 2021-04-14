@@ -9,7 +9,6 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 
-import { FooterModule } from './footer/footer.module';
 import { NavbarModule } from './header/header.module';
 import { LoginModule } from './login/login.module';
 
@@ -92,7 +91,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     BrowserAnimationsModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderHttpModule.forRoot({ showForeground: true }), // Показывать лоадер на все http запросы
-    FooterModule,
     OverlayModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',

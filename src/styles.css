@@ -422,13 +422,6 @@ a:hover {
 .app-table__select {
   padding: 4px;
 }
-.footer-modal-btns {
-  display: flex;
-  justify-content: flex-end;
-}
-.footer-modal-btns__first-btn {
-  margin-right: 12px;
-}
 
 .add-entity-btn {
   border: none;
