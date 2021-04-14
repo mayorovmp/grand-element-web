@@ -19,6 +19,48 @@
         >
       </div>
     </div>
+    <div *ngIf="isSupplierEmpty" class="form-block">
+      <label for="supplier" class="form-block__label"> Поставщик </label>
+      <select
+        class="form-block__input"
+        [(ngModel)]="request.supplier"
+        id="exampleFormControlSelect1"
+        [compareWith]="byId"
+      >
+        <option [ngValue]="undefined"></option>
+        <option *ngFor="let supplier of suppliers" [ngValue]="supplier">
+          {{ supplier.name }}
+        </option>
+      </select>
+      <button class="add-entity-btn" (click)="addSupplier()">
+        <img
+          src="assets/img/icons/add.svg"
+          class="add-entity-btn__icon"
+          alt="add"
+        />
+      </button>
+    </div>
+    <div *ngIf="isCarOwnerEmpty" class="form-block">
+      <label for="carOwner" class="form-block__label"> Перевозчик </label>
+      <select
+        class="form-block__input"
+        id="carOwner"
+        [(ngModel)]="request.car"
+        [compareWith]="byId"
+      >
+        <option [ngValue]="undefined"></option>
+        <option *ngFor="let car of cars" [ngValue]="car">
+          {{ car.owner }}
+        </option>
+      </select>
+      <button class="add-entity-btn" (click)="addCarOwner()">
+        <img
+          src="assets/img/icons/add.svg"
+          class="add-entity-btn__icon"
+          alt="add"
+        />
+      </button>
+    </div>
     <div class="confirm-modal-btns">
       <button 
         class="app-btn gray-btn apply-btn" 
@@ -36,3 +78,5 @@
   </div>
 
 </ngx-smart-modal>
+<app-car-editor (changed)="onCarOwnerAdd($event)"></app-car-editor>
+<app-supplier-editor (changed)="onSupplierAdd($event)"></app-supplier-editor>
