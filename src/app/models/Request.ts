@@ -52,3 +52,8 @@ export interface LastRequest {
   supplierId?: number;
   carId?: number;
 }
+
+export enum ActiveRequests {
+  Actual,
+  Complited,
+}

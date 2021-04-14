@@ -441,7 +441,7 @@ a:hover {
   height: 20px;
 }
 
-@media (max-width: 996px) {
+@media (max-width: 992px) {
   .app-container-fluid {
     padding: 24px 0;
     flex-direction: column;
@@ -450,9 +450,6 @@ a:hover {
   .half-container {
     width: 100%;
     padding: 0 12px;
-  }
-  .half-container--right-part {
-    display: none;
   }
   .app-container {
     padding: 24px;

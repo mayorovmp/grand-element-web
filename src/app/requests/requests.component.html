@@ -2,6 +2,7 @@
   <div
     class="half-container half-container--left-part"
     [class.half-container--full]="!complitedRequestsIsVisible"
+    *ngIf="!mobileToggler.activePart"
   >
     <div class="export-order">
       <div class="export-order__buttons">
@@ -259,6 +260,7 @@
   <div
     class="half-container half-container--right-part"
     [class.half-container--closed]="!complitedRequestsIsVisible"
+    *ngIf="!isMobile || mobileToggler.activePart"
   >
     <div
       class="search-results"
@@ -271,7 +273,7 @@
       <div class="orders-block">
         <h2
           class="block-title block-title--cursor"
-          (click)="toggleComplitedRequests()"
+          (click)="!mobileToggler.activePart && toggleComplitedRequests()"
           [class.block-title--link]="!complitedRequestsIsVisible"
         >
           Завершенные заказы
@@ -393,6 +395,9 @@
       </button>
     </div>
   </ng-template>
+  <button *ngIf="isMobile" class="app-btn gray-btn app-btn--toggle" (click)="toggleRequests()">
+    Переключиться на {{mobileToggler.text}}
+  </button>
 </div>
 <app-request-editor (changed)="onModalChange()"></app-request-editor>
 <app-modal-confirm (changed)="onModalChange()"></app-modal-confirm>

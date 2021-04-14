@@ -6,7 +6,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Request } from '@models/Request';
+import { Request, ActiveRequests } from '@models/Request';
 import { Status, StatusName } from '@models/Status';
 import { fromEvent, Subscription } from 'rxjs';
 import { NgxSmartModalService } from 'ngx-smart-modal';
@@ -58,6 +58,10 @@ export class RequestsComponent implements OnInit {
   lastDraggedReqId: undefined | number = undefined;
   isMobile = false;
   isAllFieldsVisible = true;
+  mobileToggler = {
+    text: 'завершенные',
+    activePart: ActiveRequests.Actual
+  }
 
   constructor(
     public http: HttpService,
@@ -375,9 +379,31 @@ export class RequestsComponent implements OnInit {
     if(width > 992) {
       this.isMobile = false;
       this.isAllFieldsVisible = true;
+      this.mobileToggler = {
+        text: 'завершенные',
+        activePart: ActiveRequests.Actual
+      }
     } else {
       this.isMobile = true;
       this.isAllFieldsVisible = false;
+      this.mobileToggler = {
+        text: 'завершенные',
+        activePart: ActiveRequests.Actual
+      }
+    }
+  }
+
+  toggleRequests = () => {
+    if (this.mobileToggler.activePart) {
+      this.mobileToggler = {
+        text: 'завершенные',
+        activePart: ActiveRequests.Actual
+      }
+    } else {
+      this.mobileToggler = {
+        text: 'актуальные',
+        activePart: ActiveRequests.Complited
+      }
     }
   }
 }
