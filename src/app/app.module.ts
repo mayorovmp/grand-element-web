@@ -31,7 +31,6 @@ import {
   SPINNER,
 } from 'ngx-ui-loader';
 import { LoggerComponent } from './logger/logger.component';
-import { CatalogsComponent } from './catalogs/catalogs.component';
 import { CarCategoryComponent } from './catalogs/car-category/car-category.component';
 import { CarComponent } from './catalogs/car/car.component';
 import { EditCarCategoryComponent } from './catalogs/car-category/editor/edit.component';
@@ -65,7 +64,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     SupplierEditorComponent,
     AppComponent,
     LoggerComponent,
-    CatalogsComponent,
     CarCategoryComponent,
     CarComponent,
     EditCarCategoryComponent,

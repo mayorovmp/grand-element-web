@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth/auth.guard';
-import { CatalogsComponent } from './catalogs/catalogs.component';
 import { CarCategoryComponent } from './catalogs/car-category/car-category.component';
 import { CarComponent } from './catalogs/car/car.component';
 import { ClientsComponent } from './catalogs/clients/clients.component';
@@ -19,7 +18,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'catalog/car', component: CarComponent, canActivate: [AuthGuard] },
   { path: '', component: RequestsComponent, canActivate: [AuthGuard] },
-  { path: 'catalog', component: CatalogsComponent, canActivate: [AuthGuard] },
   { path: 'catalog/car-category', component: CarCategoryComponent, canActivate: [AuthGuard] },
   { path: 'catalog/product', component: ProductComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '', canActivate: [AuthGuard] },
