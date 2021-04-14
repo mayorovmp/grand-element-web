@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['../catalogs.component.css', './product.component.css'],
+  styleUrls: ['../catalogs.component.css'],
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];

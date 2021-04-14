@@ -9,7 +9,7 @@ import { ClientsGoal } from './Goal';
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.component.html',
-  styleUrls: ['../catalogs.component.css', './clients.component.css'],
+  styleUrls: ['../catalogs.component.css'],
 })
 export class ClientsComponent implements OnInit {
   clients: Client[] = [];

@@ -9,7 +9,7 @@ import { EditCarCategoryComponent } from './editor/edit.component';
 @Component({
   selector: 'app-car-category',
   templateUrl: './car-category.component.html',
-  styleUrls: ['../catalogs.component.css', './car-category.component.css'],
+  styleUrls: ['../catalogs.component.css'],
 })
 export class CarCategoryComponent implements OnInit {
   nameSorting = 'none';

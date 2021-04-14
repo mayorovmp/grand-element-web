@@ -10,7 +10,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-supplier-editor',
   templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.css'],
 })
 export class SupplierEditorComponent implements OnInit {
   static MODAL_NAME = 'editSupplierModal';

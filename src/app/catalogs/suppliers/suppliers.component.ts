@@ -8,7 +8,7 @@ import { SupplierEditorComponent } from './editor/editor.component';
 @Component({
   selector: 'app-suppliers',
   templateUrl: './suppliers.component.html',
-  styleUrls: ['../catalogs.component.css', './suppliers.component.css'],
+  styleUrls: ['../catalogs.component.css'],
 })
 export class SuppliersComponent implements OnInit {
   suppliers: Supplier[] = [];

@@ -9,7 +9,7 @@ import { CarEditorComponent } from './editor/editor.component';
 @Component({
   selector: 'app-car',
   templateUrl: './car.component.html',
-  styleUrls: ['../catalogs.component.css', './car.component.css'],
+  styleUrls: ['../catalogs.component.css'],
 })
 export class CarComponent implements OnInit {
   cars: Car[] = [];

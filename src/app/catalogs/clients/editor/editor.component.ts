@@ -9,7 +9,6 @@ import { Contact } from '@models/Contact';
 @Component({
   selector: 'app-client-editor',
   templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.css'],
 })
 export class ClientEditorComponent implements OnInit {
   static MODAL_NAME = 'editClientModal';

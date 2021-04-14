@@ -8,7 +8,6 @@ import { Car } from '@models/Car';
 @Component({
   selector: 'app-car-editor',
   templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.css'],
 })
 export class CarEditorComponent implements OnInit {
   static MODAL_NAME = 'editCarModal';

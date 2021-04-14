@@ -6,7 +6,6 @@ import { HttpService } from '../http.service';
 @Component({
   selector: 'app-edit-car-category',
   templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css'],
 })
 export class EditCarCategoryComponent implements OnInit {
   static MODAL_NAME = 'editCarCategoryModal';
