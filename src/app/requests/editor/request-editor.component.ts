@@ -580,6 +580,10 @@ export class RequestEditorComponent implements OnInit {
     if (req.supplier) {
       req.supplierId = req.supplier.id;
     }
+
+    if (req.amount) {
+      req.amount = Number(req.amount.toFixed(2))
+    }
     switch (this.goal) {
       case Goal.Copy:
       case Goal.Add: {

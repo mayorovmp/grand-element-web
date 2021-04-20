@@ -54,7 +54,7 @@ export class AmountModalComponent implements OnInit {
       this.request.client = req.client;
       this.request.deliveryAddress = req.deliveryAddress;
       this.request.isLong = false;
-      this.request.amount = req.amount.toFixed(2);
+      this.request.amount = Number(req.amount.toFixed(2));
       this.request.product = req.product;
       this.request.supplier = req.supplier;
       this.request.car = req.car;
