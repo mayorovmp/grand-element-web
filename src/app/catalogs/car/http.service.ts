@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
 import { environment } from 'src/environments/environment';
 import { Car } from '@models/Car';
 
@@ -11,7 +10,6 @@ import { Car } from '@models/Car';
 export class HttpService {
   constructor(
     private http: HttpClient,
-    private httpCarCategorySrv: HttpCarCategoryService
   ) {}
 
   private baseUrl = environment.baseUrl + '/car';
@@ -24,10 +22,6 @@ export class HttpService {
   getFavoriteCars(days: number, limit: number): Observable<Car[]> {
     const url = this.baseUrl + `/favorite?lastDays=${days}&limit=${limit}`;
     return this.http.get<Car[]>(url);
-  }
-
-  getCarCategories() {
-    return this.httpCarCategorySrv.getCarCategories();
   }
 
   add(car: Car): Observable<Car> {

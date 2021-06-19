@@ -1,4 +1,3 @@
-import { CarCategory } from '@models/CarCategory';
 export class Car {
   constructor(
     public id?: number,
@@ -8,8 +7,5 @@ export class Car {
     public contacts?: string,
     public comments?: string,
     public freightPrice?: number,
-    public carCategory?: CarCategory
-  ) {
-    // this.carCategory = new CarCategory();
-  }
+  ) {}
 }

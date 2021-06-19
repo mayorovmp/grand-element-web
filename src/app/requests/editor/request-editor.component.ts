@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { ToastrService } from 'ngx-toastr';
-import { HttpService as CarCategoryHttp } from 'src/app/catalogs/car-category/http.service';
 import { CarEditorComponent } from 'src/app/catalogs/car/editor/editor.component';
 import { HttpService as CarHttp } from 'src/app/catalogs/car/http.service';
 import { ClientEditorComponent } from 'src/app/catalogs/clients/editor/editor.component';
@@ -11,7 +10,6 @@ import { HttpService as ProductHttp } from 'src/app/catalogs/product/http.servic
 import { SupplierEditorComponent } from 'src/app/catalogs/suppliers/editor/editor.component';
 import { HttpService as SupplierHttp } from 'src/app/catalogs/suppliers/http.service';
 import { Car } from '@models/Car';
-import { CarCategory } from '@models/CarCategory';
 import { Client } from '@models/Client';
 import { Product } from '@models/Product';
 import { Request } from '@models/Request';
@@ -45,8 +43,6 @@ export class RequestEditorComponent implements OnInit {
 
   suppliers: Supplier[] = [];
 
-  carCategories: CarCategory[] = [];
-
   isLong = false;
 
   hasParent = false;
@@ -69,7 +65,6 @@ export class RequestEditorComponent implements OnInit {
     private productHttp: ProductHttp,
     private reqService: ReqService,
     private supplierHttp: SupplierHttp,
-    private carCategoryHttp: CarCategoryHttp,
     private carHttp: CarHttp
   ) {}
 
@@ -113,13 +108,6 @@ export class RequestEditorComponent implements OnInit {
         .getSuppliers()
         .toPromise()
         .then((x) => (this.suppliers = x))
-    );
-
-    promises.push(
-      this.carCategoryHttp
-        .getCarCategories()
-        .toPromise()
-        .then((x) => (this.carCategories = x))
     );
 
     promises.push(
@@ -565,10 +553,6 @@ export class RequestEditorComponent implements OnInit {
       req.clientId = req.client.id;
     }
 
-    if (req.carCategory) {
-      req.carCategoryId = req.carCategory.id;
-    }
-
     if (req.requestStatus?.id) {
       req.requestStatusId = req.requestStatus.id;
     } else {
@@ -593,8 +577,6 @@ export class RequestEditorComponent implements OnInit {
             const newReq = JSON.parse(JSON.stringify(this.request));
             newReq.car = car;
             newReq.carId = car.id;
-            newReq.carCategoryId = car.carCategory?.id;
-            newReq.carCategory = car.carCategory;
             newReq.unit = car.unit;
             newReq.supplierVat = car.vat;
             await this.reqService.add(newReq).toPromise();

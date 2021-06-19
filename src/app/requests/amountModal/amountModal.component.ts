@@ -148,10 +148,6 @@ export class AmountModalComponent implements OnInit {
       this.parentReq.clientId = this.parentReq.client.id;
     }
 
-    if (this.parentReq.carCategory) {
-      this.parentReq.carCategoryId = this.parentReq.carCategory.id;
-    }
-
     if (this.parentReq.supplier) {
       this.parentReq.supplierId = this.parentReq.supplier.id;
     }

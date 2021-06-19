@@ -29,7 +29,6 @@
                 />
               </div>
             </th>
-            <th class="app-table__th">Категория авто</th>
             <th class="app-table__th">НДС</th>
             <th class="app-table__th">Еденица измерения</th>
             <th class="app-table__th">Контакты</th>
@@ -40,7 +39,6 @@
         <tbody>
           <tr *ngFor="let car of cars" class="app-table__tr">
             <td class="app-table__td">{{ car.owner }}</td>
-            <td class="app-table__td">{{ car.carCategory?.name }}</td>
             <td class="app-table__td">
               <input
                 class="app-table__nds-checkbox"

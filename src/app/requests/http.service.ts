@@ -5,7 +5,6 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpService as HttpCarCategoryService } from 'src/app/catalogs/car-category/http.service';
 import { environment } from 'src/environments/environment';
 import { Request, LastRequest } from '@models/Request';
 import { Status } from '@models/Status';
@@ -15,8 +14,7 @@ import { Status } from '@models/Status';
 })
 export class HttpService {
   constructor(
-    private http: HttpClient,
-    private httpCarCategorySrv: HttpCarCategoryService
+    private http: HttpClient
   ) {}
 
   private baseUrl = environment.baseUrl;
@@ -37,9 +35,6 @@ export class HttpService {
     }
     if (r.deliveryAddress) {
       r.deliveryAddressId = r.deliveryAddress.id;
-    }
-    if (r.carCategory) {
-      r.carCategoryId = r.carCategory.id;
     }
     return this.http.post<any>(url, r);
   }
@@ -65,9 +60,6 @@ export class HttpService {
     }
     if (r.deliveryAddress) {
       r.deliveryAddressId = r.deliveryAddress.id;
-    }
-    if (r.carCategory) {
-      r.carCategoryId = r.carCategory.id;
     }
     return this.http.put<any>(url, r);
   }

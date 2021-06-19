@@ -3,7 +3,6 @@ import { Product } from '@models/Product';
 import { Address } from './Address';
 import { Supplier } from './Supplier';
 import { Client } from './Client';
-import { CarCategory } from './CarCategory';
 import { Status } from './Status';
 
 export class Request {
@@ -30,7 +29,6 @@ export class Request {
   reward = 0;
   supplierVat?: boolean;
   carVat?: boolean;
-  carCategory?: CarCategory;
   status?: string;
   comment?: string;
   isLong?: boolean;
@@ -39,7 +37,6 @@ export class Request {
   productId?: number;
   deliveryAddressId?: number;
   clientId?: number;
-  carCategoryId?: number;
   supplierId?: number;
   requestStatus: Status;
   requestStatusId: number;

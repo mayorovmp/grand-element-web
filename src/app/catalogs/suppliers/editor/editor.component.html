@@ -63,12 +63,12 @@
     <div *ngFor="let prod of supplier.products" class="form-block-adding-block">
       
       <div class="form-block">
-        <label for="selectCarCategory" class="form-block__label">
+        <label for="selectProduct" class="form-block__label">
           Товар
         </label>
         <select 
           class="form-block__select"
-          id="selectCarCategory" 
+          id="selectProduct" 
           [(ngModel)]="prod.id"
         >
           <option [ngValue]="undefined"></option>
