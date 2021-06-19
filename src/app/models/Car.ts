@@ -4,7 +4,6 @@ export class Car {
     public owner?: string,
     public vat?: boolean,
     public contacts?: string,
-    public comments?: string,
     public freightPrice?: number,
   ) {}
 }
