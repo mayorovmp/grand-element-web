@@ -378,14 +378,17 @@ export class RequestEditorComponent implements OnInit {
   }
 
   async onClientChange() {
+    const prevDate = this.request.deliveryStart;
     if (this.request.client) {
       const lastReq = await this.reqService
       .getLastRequest({clientId: this.request.client.id})
       .toPromise();
       if (lastReq) {
-        lastReq.deliveryStart = this.curDate
-        lastReq.deliveryEnd = this.curDate;
         this.request = JSON.parse(JSON.stringify(lastReq));
+        if (prevDate) {
+          this.request.deliveryStart = prevDate;
+          this.request.deliveryEnd = prevDate;
+        }
       } else {
         this.toastr.info('Последняя заявка не найдена');
       }
