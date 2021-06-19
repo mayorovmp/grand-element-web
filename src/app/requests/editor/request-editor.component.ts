@@ -213,7 +213,6 @@ export class RequestEditorComponent implements OnInit {
     this.cars = [];
     this.products = [];
     this.suppliers = [];
-    this.carCategories = [];
     this.clientNameText = '';
   }
 
@@ -577,7 +576,6 @@ export class RequestEditorComponent implements OnInit {
             const newReq = JSON.parse(JSON.stringify(this.request));
             newReq.car = car;
             newReq.carId = car.id;
-            newReq.unit = car.unit;
             newReq.supplierVat = car.vat;
             await this.reqService.add(newReq).toPromise();
             this.changed.emit();
