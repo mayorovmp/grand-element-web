@@ -1,12 +1,19 @@
 <div class="app-container-fluid">
   <div
     class="half-container half-container--left-part"
-    [class.half-container--full]="!complitedRequestsIsVisible"
+    [class.half-container--closed]="requestDisplay === 'actual'"
+    [class.half-container--full]="requestDisplay === 'complited'"
     *ngIf="!mobileToggler.activePart"
   >
     <div class="export-order">
       <div class="export-order__buttons">
-        <button (click)="add()" class="app-btn gray-btn">Добавить</button>
+        <button
+          (click)="add()"
+          class="app-btn gray-btn"
+          *ngIf="requestDisplay !== 'actual'"
+        >
+          Добавить
+        </button>
         <div class="all-field-block" *ngIf="isMobile">
           <label for="isAllFieldsVisibleCheckbox" class="all-field-block__label">Все поля</label>
           <input
@@ -149,7 +156,13 @@
           </table>
         </div>
       </div>
-      <h2 class="block-title">Актуальные</h2>
+      <h2
+        class="block-title block-title--cursor"
+        (click)="!mobileToggler.activePart && toggleActualRequests()"
+        [class.block-title--link]="requestDisplay === 'actual'"
+      >
+        Актуальные
+      </h2>
       <div class="orders-block">
         <table
           class="app-table"
@@ -167,6 +180,7 @@
               <th class="app-table__th">Перевозчик</th>
               <th class="app-table__th">Объем, тн</th>
               <th class="app-table__th" *ngIf="isAllFieldsVisible">Адрес доставки</th>
+              <th class="app-table__th" *ngIf="requestDisplay !== 'dual'">Гос.номер</th>
               <th class="app-table__th">Статус</th>
             </tr>
           </thead>
@@ -224,6 +238,11 @@
                 <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.deliveryAddress?.name }}
                 </td>
+                <td (click)="edit(req)" class="app-table__td" *ngIf="requestDisplay !== 'dual'">
+                  <ng-container *ngFor="let number of req.car.carNumbers; let i = index">
+                    <span class="car-number">{{number.name}}</span>
+                  </ng-container>
+                </td>
                 <td class="app-table__td">
                   <div class="status-box">
                     <button
@@ -259,7 +278,8 @@
 
   <div
     class="half-container half-container--right-part"
-    [class.half-container--closed]="!complitedRequestsIsVisible"
+    [class.half-container--closed]="requestDisplay === 'complited'"
+    [class.half-container--full]="requestDisplay === 'actual'"
     *ngIf="!isMobile || mobileToggler.activePart"
   >
     <div
@@ -274,7 +294,7 @@
         <h2
           class="block-title block-title--cursor"
           (click)="!mobileToggler.activePart && toggleComplitedRequests()"
-          [class.block-title--link]="!complitedRequestsIsVisible"
+          [class.block-title--link]="requestDisplay === 'complited'"
         >
           Завершенные заказы
         </h2>
@@ -287,6 +307,7 @@
               <th class="app-table__th">Перевозчик</th>
               <th class="app-table__th">Объем, тн</th>
               <th class="app-table__th" *ngIf="isAllFieldsVisible">Адрес доставки</th>
+              <th class="app-table__th" *ngIf="requestDisplay !== 'dual'">Гос.номер</th>
               <th class="app-table__th">Статус</th>
             </tr>
           </thead>
@@ -326,6 +347,11 @@
                 </td>
                 <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.deliveryAddress?.name }}
+                </td>
+                <td (click)="edit(req)" class="app-table__td" *ngIf="requestDisplay !== 'dual'">
+                  <ng-container *ngFor="let number of req.car.carNumbers; let i = index">
+                    <span class="car-number">{{number.name}}</span>
+                  </ng-container>
                 </td>
                 <td class="app-table__td">
                   <div class="status-box">

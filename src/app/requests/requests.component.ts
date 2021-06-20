@@ -54,7 +54,7 @@ export class RequestsComponent implements OnInit {
   throttle = 300;
   scrollDistance = 0.1;
 
-  complitedRequestsIsVisible = true;
+  requestDisplay = 'dual';
   lastDraggedReqId: undefined | number = undefined;
   isMobile = false;
   isAllFieldsVisible = true;
@@ -336,7 +336,10 @@ export class RequestsComponent implements OnInit {
   }
 
   toggleComplitedRequests() {
-    this.complitedRequestsIsVisible = !this.complitedRequestsIsVisible;
+    this.requestDisplay === 'dual' ? this.requestDisplay = 'complited' : this.requestDisplay = 'dual';
+  }
+  toggleActualRequests() {
+    this.requestDisplay === 'dual' ? this.requestDisplay = 'actual' : this.requestDisplay = 'dual';
   }
 
   async drop(event: CdkDragDrop<string[]>) {
