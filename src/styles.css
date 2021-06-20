@@ -81,7 +81,7 @@ a:hover {
   padding: 24px;
 }
 .search-results {
-  overflow: scroll;
+  overflow: auto;
   max-height: calc(100vh - 86px - 74px);
 }
 .search-results--finish {
@@ -345,9 +345,13 @@ a:hover {
 }
 .form-block-adding-block {
   margin: 12px 0;
-  border: 1px solid var(--dark-gray);
+  border: 1px solid #ced4da;
   padding: 12px;
   border-radius: 6px;
+  position: relative;
+}
+.form-block-adding-block--icons {
+  padding-bottom: 36px;
 }
 .form-block-adding-block .form-block-adding-block {
   margin-bottom: 0;
@@ -411,7 +415,7 @@ a:hover {
   border-radius: 4px;
   padding: 0;
   max-height: 300px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .form-block__searching-list-item {
   cursor: pointer;
@@ -443,6 +447,12 @@ a:hover {
   margin: 0 2px;
   padding: 2px;
   border-radius: 4px;
+}
+
+.form-block-adding-block__adding-btn{
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 @media (max-width: 992px) {
@@ -481,12 +491,19 @@ a:hover {
   .edit-btn {
     padding: 4px;
   }
+  .form-title {
+    margin-bottom: 12px;
+    font-size: 20px;
+  }
+  .form-block-adding-block--icons {
+    padding-bottom: 28px;
+  }
 }
 
 @media (max-width: 520px) {
   .form-block {
     flex-direction: column;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
   .form-block__label {
     background: transparent;
@@ -522,6 +539,15 @@ a:hover {
   }
   .app-btn--marginLeft {
     margin-left: 0;
+  }
+  .form-block-adding-block__adding-btn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: auto;
+  }
+  .form-block-adding-block--icons {
+    padding-bottom: 12px;
   }
 }
 @media (max-width: 340px) {

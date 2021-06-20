@@ -60,7 +60,7 @@
     </div>
 
 
-    <div *ngFor="let prod of supplier.products" class="form-block-adding-block">
+    <div *ngFor="let prod of supplier.products" class="form-block-adding-block form-block-adding-block--icons">
       
       <div class="form-block">
         <label for="selectProduct" class="form-block__label">
@@ -96,9 +96,14 @@
 
       <button 
         (click)="delProd(supplier, prod)"
-        class="app-btn gray-btn"
+        class="delete-btn form-block-adding-block__adding-btn"
+        title="удалить"
       >
-        Удалить
+        <img
+          class="edit-btn__img btn-icon"
+          src="assets/img/icons/delete.svg"
+          alt="удалить"
+        />
       </button>
     </div>
     <button 

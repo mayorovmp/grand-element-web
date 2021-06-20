@@ -8,7 +8,7 @@
 }
 .longTerm-order,
 .orders-block {
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .additional-rows {
