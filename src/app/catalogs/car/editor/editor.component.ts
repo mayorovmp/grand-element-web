@@ -3,6 +3,7 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 import { ToastrService } from 'ngx-toastr';
 import { HttpService } from '../http.service';
 import { Car } from '@models/Car';
+import { CarNumber } from '@models/CarNumber';
 
 @Component({
   selector: 'app-car-editor',
@@ -13,6 +14,7 @@ export class CarEditorComponent implements OnInit {
   @Output() changed = new EventEmitter<Car>();
 
   car: Car = new Car();
+  carNumbers: CarNumber[] = [];
 
   constructor(
     private httpSrv: HttpService,
@@ -38,6 +40,16 @@ export class CarEditorComponent implements OnInit {
 
   byId(a: Car, b: Car) {
     return a && b ? a.id === b.id : a === b;
+  }
+
+  addCarNumber() {
+    const newCarNumber = new CarNumber();
+    this.car.carNumbers.push(newCarNumber);
+  }
+
+  delCarNumber(carNumberId: number) {
+    const delId = this.car.carNumbers.findIndex((x) => x.id === carNumberId);
+    this.car.carNumbers.splice(delId, 1);
   }
 
   async createOrUpdate(item: Car) {

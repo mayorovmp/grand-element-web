@@ -45,26 +45,42 @@
         id="contacts"
       >
     </div>
+    <div *ngFor="let carNumber of car.carNumbers" class="form-block-adding-block">
+      <div class="form-block">
+        <label for="car-number" class="form-block__label">
+          Гос.номер
+        </label>
+        <input 
+          type="string" 
+          [(ngModel)]="carNumber.name" 
+          class="form-block__input"
+          name="car-number"
+          id="car-number"
+        >
+      </div>
 
-    <!-- <div class="form-block">
-      <label for="comments" class="form-block__label">
-        Комментарий
-      </label>
-      <input 
-        type="text" 
-        [(ngModel)]="car.comments" 
-        class="form-block__input"
-        name="comments"
-        id="comments"
+      <button 
+        (click)="delCarNumber(carNumber.id)"
+        class="app-btn gray-btn"
       >
-    </div> -->
-
+        Удалить
+      </button>
+    </div>
     <button 
-      type="submit" 
+      (click)="addCarNumber()"
       class="app-btn gray-btn" 
-      (click)="createOrUpdate(car)"
     >
-      Сохранить
+      Добавить гос.номер
     </button>
+
+    <div class="additional-btn-container">
+      <button 
+        type="submit" 
+        class="app-btn gray-btn" 
+        (click)="createOrUpdate(car)"
+      >
+        Сохранить
+      </button>
+    </div>
   </div>
 </ngx-smart-modal>
