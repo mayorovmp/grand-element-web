@@ -31,7 +31,7 @@
             </th>
             <th class="app-table__th">НДС</th>
             <th class="app-table__th">Контакты</th>
-            <!-- <th class="app-table__th">Комментарий(гос.номер)</th> -->
+            <th class="app-table__th">Гос.номер</th>
             <th class="app-table__th"></th>
           </tr>
         </thead>
@@ -47,7 +47,11 @@
               />
             </td>
             <td class="app-table__td">{{ car.contacts }}</td>
-            <!-- <td class="app-table__td">{{ car.comments }}</td> -->
+            <td class="app-table__td">
+              <ng-container *ngFor="let number of car.carNumbers; let i = index">
+                <span class="car-number">{{number.name}}</span>
+              </ng-container>
+            </td>
             <td class="app-table__td">
               <div class="btn-container btn-container--centered">
                 <button (click)="edit(car)" class="edit-btn">
