@@ -16,7 +16,7 @@ import { Request } from '@models/Request';
 import { Supplier } from '@models/Supplier';
 import { Status } from '@models/Status';
 import { HttpService as ReqService } from 'src/app/requests/http.service';
-import { Address } from '@models/Address';
+import { CarNumber } from '@models/CarNumber';
 import { Goal } from './Goal';
 import { ClientsGoal } from 'src/app/catalogs/clients/Goal';
 
@@ -38,6 +38,10 @@ export class RequestEditorComponent implements OnInit {
   clients: Client[] = [];
 
   cars: Car[] = [];
+
+  carNumbers: CarNumber[] = [];
+
+  selectedCarNumber: CarNumber = {id: 0, name: ''};
 
   products: Product[] = [];
 
@@ -336,17 +340,10 @@ export class RequestEditorComponent implements OnInit {
     // }
   }
   onCarChange() {
-    // if (this.request.car) {
-    //   const newCar = this.request.car;
-    //   this.request.carCategory = newCar.carCategory;
-    //   this.request.unit = newCar.unit;
-    //   this.request.carVat = newCar.vat;
-    //   this.calcFreigthCost();
-    // } else {
-    //   this.request.carCategory = undefined;
-    //   this.request.unit = undefined;
-    //   this.request.carVat = undefined;
-    // }
+    const {car} = this.request
+    if (car && car.carNumbers) {
+      this.carNumbers = car.carNumbers;
+    }
   }
   onAdditionalCarChange(event: any, index: number) {
     // let elem = new Car();
@@ -541,6 +538,13 @@ export class RequestEditorComponent implements OnInit {
   async createOrUpdate(req: Request, parentId: number) {
     if (req.car) {
       req.carId = req.car.id;
+      const {carNumbers} = req.car;
+      if (this.selectedCarNumber && this.selectedCarNumber.id) {
+        req.carNumberId = this.selectedCarNumber.id;
+      }
+      else if (carNumbers.length === 1) {
+        req.carNumberId = carNumbers[0].id;
+      }
     }
 
     if (req.product) {

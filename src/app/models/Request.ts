@@ -41,6 +41,7 @@ export class Request {
   requestStatus: Status;
   requestStatusId: number;
   parentId?: number;
+  carNumberId?: number;
 }
 
 export interface LastRequest {

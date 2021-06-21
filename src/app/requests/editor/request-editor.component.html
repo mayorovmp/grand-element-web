@@ -125,6 +125,20 @@
         />
       </button>
     </div>
+    <div class="form-block" *ngIf="request.car && request.car.carNumbers && request.car.carNumbers.length > 1">
+      <label for="carOwnerNumber" class="form-block__label">Гос.номер</label>
+      <select
+        class="form-block__input"
+        id="carOwnerNumber"
+        [(ngModel)]="selectedCarNumber"
+        [compareWith]="byId"
+      >
+        <option [ngValue]="undefined"></option>
+        <option *ngFor="let carNumber of carNumbers" [ngValue]="carNumber">
+          {{ carNumber.name }}
+        </option>
+      </select>
+    </div>
     <div class="form-block">
       <label for="amount" class="form-block__label"> Объем, тн </label>
       <input

@@ -351,7 +351,7 @@ a:hover {
   position: relative;
 }
 .form-block-adding-block--icons {
-  padding-bottom: 36px;
+  padding-top: 36px;
 }
 .form-block-adding-block .form-block-adding-block {
   margin-bottom: 0;
@@ -451,8 +451,8 @@ a:hover {
 
 .form-block-adding-block__adding-btn{
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 0;
+  right: -6px;
 }
 
 @media (max-width: 992px) {
@@ -496,7 +496,7 @@ a:hover {
     font-size: 20px;
   }
   .form-block-adding-block--icons {
-    padding-bottom: 28px;
+    padding-top: 28px;
   }
 }
 
@@ -543,11 +543,9 @@ a:hover {
   .form-block-adding-block__adding-btn{
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: auto;
   }
   .form-block-adding-block--icons {
-    padding-bottom: 12px;
+    padding-top: 12px;
   }
 }
 @media (max-width: 340px) {
