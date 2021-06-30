@@ -1,7 +1,7 @@
 <div class="app-container-fluid">
   <div
     class="half-container half-container--left-part"
-    [ngClass]="{'half-container--closed': requestDisplay === 'actual', 'half-container--full': requestDisplay === 'complited'}"
+    [ngClass]="{'half-container--closed': actualRequestDisplay === 'closed', 'half-container--full': actualRequestDisplay === 'full'}"
 
     *ngIf="!mobileToggler.activePart"
   >
@@ -10,7 +10,7 @@
         <button
           (click)="add()"
           class="app-btn gray-btn"
-          *ngIf="requestDisplay !== 'actual'"
+          *ngIf="actualRequestDisplay !== 'closed'"
         >
           Добавить
         </button>
@@ -37,7 +37,7 @@
     >
       <div
         class="orders-block"
-        *ngIf="requestDisplay !== 'actual' && (incidentRequests.length || longTermRequests.length)"
+        *ngIf="actualRequestDisplay !== 'closed' && (incidentRequests.length || longTermRequests.length)"
       >
         <h2 class="block-title">Долгосроки и форс-мажоры</h2>
         <div>
@@ -57,7 +57,7 @@
                 <th class="app-table__th">Перевозчик</th>
                 <th class="app-table__th">Объем, тн</th>
                 <th class="app-table__th" *ngIf="isAllFieldsVisible">Адрес доставки</th>
-                <th class="app-table__th" *ngIf="isAllFieldsVisible && requestDisplay !== 'dual'">Гос.номер</th>
+                <th class="app-table__th" *ngIf="isAllFieldsVisible && actualRequestDisplay === 'full'">Гос.номер</th>
                 <th class="app-table__th">Статус</th>
               </tr>
             </thead>
@@ -104,7 +104,7 @@
                 <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.deliveryAddress?.name }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td" *ngIf="requestDisplay !== 'dual'">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="actualRequestDisplay === 'full'">
                   <ng-container *ngFor="let number of req.car.carNumbers; let i = index">
                     <span *ngIf="req.carNumberId === number.id">{{number.name}}</span>
                   </ng-container>
@@ -152,7 +152,7 @@
                 <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.deliveryAddress?.name }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td" *ngIf="requestDisplay !== 'dual'">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="actualRequestDisplay === 'full'">
                   <ng-container *ngFor="let number of req.car.carNumbers; let i = index">
                     <span *ngIf="req.carNumberId === number.id">{{number.name}}</span>
                   </ng-container>
@@ -170,7 +170,7 @@
       <h2
         class="block-title block-title--cursor"
         (click)="!mobileToggler.activePart && toggleActualRequests()"
-        [class.block-title--link]="requestDisplay === 'actual'"
+        [class.block-title--link]="actualRequestDisplay === 'closed'"
       >
         Актуальные
       </h2>
@@ -191,7 +191,7 @@
               <th class="app-table__th">Перевозчик</th>
               <th class="app-table__th">Объем, тн</th>
               <th class="app-table__th" *ngIf="isAllFieldsVisible">Адрес доставки</th>
-              <th class="app-table__th" *ngIf="isAllFieldsVisible && requestDisplay !== 'dual'">Гос.номер</th>
+              <th class="app-table__th" *ngIf="isAllFieldsVisible && actualRequestDisplay === 'full'">Гос.номер</th>
               <th class="app-table__th">Статус</th>
             </tr>
           </thead>
@@ -249,7 +249,7 @@
                 <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.deliveryAddress?.name }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td" *ngIf="requestDisplay !== 'dual'">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="actualRequestDisplay === 'full'">
                   <ng-container *ngFor="let number of req.car.carNumbers; let i = index">
                     <span *ngIf="req.carNumberId === number.id">{{number.name}}</span>
                   </ng-container>
@@ -289,7 +289,7 @@
 
   <div
     class="half-container half-container--right-part"
-    [ngClass]="{'half-container--closed': requestDisplay === 'complited', 'half-container--full': requestDisplay === 'actual'}"
+    [ngClass]="{'half-container--closed': complitedRequestDisplay === 'closed', 'half-container--full': complitedRequestDisplay === 'full'}"
     *ngIf="!isMobile || mobileToggler.activePart"
   >
     <div
@@ -304,7 +304,7 @@
         <h2
           class="block-title block-title--cursor"
           (click)="!mobileToggler.activePart && toggleComplitedRequests()"
-          [class.block-title--link]="requestDisplay === 'complited'"
+          [class.block-title--link]="complitedRequestDisplay === 'closed'"
         >
           Завершенные заказы
         </h2>
@@ -317,7 +317,7 @@
               <th class="app-table__th">Перевозчик</th>
               <th class="app-table__th">Объем, тн</th>
               <th class="app-table__th" *ngIf="isAllFieldsVisible">Адрес доставки</th>
-              <th class="app-table__th" *ngIf="requestDisplay !== 'dual'">Гос.номер</th>
+              <th class="app-table__th" *ngIf="complitedRequestDisplay === 'full'">Гос.номер</th>
               <th class="app-table__th">Статус</th>
             </tr>
           </thead>
@@ -358,7 +358,7 @@
                 <td (click)="edit(req)" class="app-table__td" *ngIf="isAllFieldsVisible">
                   {{ req.deliveryAddress?.name }}
                 </td>
-                <td (click)="edit(req)" class="app-table__td" *ngIf="requestDisplay !== 'dual'">
+                <td (click)="edit(req)" class="app-table__td" *ngIf="complitedRequestDisplay === 'full'">
                   <ng-container *ngFor="let number of req.car.carNumbers; let i = index">
                     <span *ngIf="req.carNumberId === number.id">{{number.name}}</span>
                   </ng-container>
