@@ -1,8 +1,8 @@
 <div class="app-container-fluid">
   <div
     class="half-container half-container--left-part"
-    [ngClass]="{'half-container--closed': actualRequestDisplay === 'closed', 'half-container--full': actualRequestDisplay === 'full'}"
-
+    [class.half-container--closed]="actualRequestDisplay === 'closed'"
+    [class.half-container--full]="actualRequestDisplay === 'full'"
     *ngIf="!mobileToggler.activePart"
   >
     <div class="export-order">
@@ -289,7 +289,8 @@
 
   <div
     class="half-container half-container--right-part"
-    [ngClass]="{'half-container--closed': complitedRequestDisplay === 'closed', 'half-container--full': complitedRequestDisplay === 'full'}"
+    [class.half-container--closed]="complitedRequestDisplay === 'closed'"
+    [class.half-container--full]="complitedRequestDisplay === 'full'"
     *ngIf="!isMobile || mobileToggler.activePart"
   >
     <div
